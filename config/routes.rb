@@ -69,62 +69,6 @@ Pathfinder::Application.routes.draw do
   end
 
   namespace 'api' do
-    scope '/users', controller: 'users' do
-      get '/', action: 'index'
-      post '/login', action: 'login'
-      post '/track_point', action: 'track_point'
-    end
-    scope '/objects', controller: 'objects' do
-      get '/', action: 'index'
-      get '/lines', action: 'lines'
-      get '/pathlines', action: 'pathlines'
-      get '/offices', action: 'offices'
-      get '/substations', action: 'substations'
-      get '/towers', action: 'towers'
-    end
-    scope '/paths', controller: 'paths' do
-      get '/show', action: 'show'
-      post '/new',  action: 'new'
-      post '/edit', action: 'edit'
-      post '/delete', action: 'delete'
-      get '/details', action: 'details'
-    end
-    scope '/lines', controller: 'lines' do
-      get '/show', action: 'show'
-      post '/new',  action: 'new'
-      post '/edit', action: 'edit'
-      post '/delete', action: 'delete'
-    end
-    scope 'towers', controller: 'towers' do
-      get '/show', action: 'show'
-      post '/new',  action: 'new'
-      post '/edit', action: 'edit'
-      post '/delete', action: 'delete'
-      post '/upload_photo', action: 'upload_photo'
-    end
-    scope 'offices', controller: 'offices' do
-      get '/show', action: 'show'
-      post '/new',  action: 'new'
-      post '/edit', action: 'edit'
-      post '/delete', action: 'delete'
-    end
-    scope 'substations', controller: 'substations' do
-      get '/show', action: 'show'
-      post '/new',  action: 'new'
-      post '/edit', action: 'edit'
-      post '/delete', action: 'delete'
-    end
-    scope 'shortestpath', controller: 'shortestpath' do
-      get '/', action: 'index'
-    end
-    scope 'tasks', controller: 'tasks' do
-      match '/', action: 'index', via: ['get', 'post']
-      post '/new', action: 'new'
-      post '/begin_task', action: 'begin_task'
-      post '/complete_task', action: 'complete_task'
-      post '/cancel_task', action: 'cancel_task'
-      post '/add_note', action: 'add_note'
-    end
   end
 
   root 'site#index'
