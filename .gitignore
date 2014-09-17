@@ -18,3 +18,4 @@
 
 # public/uploads
 /public/uploads/**/**
+client/node_modules
