@@ -66,63 +66,6 @@ Pathfinder::Application.routes.draw do
       get '/viewer', action: 'viewer', as: 'map_viewer'
       match 'generate_images', action: 'generate_images', as: 'generate_images', via: ['get', 'post']
     end
-    scope '/path' do
-      scope '/lines', controller: 'path_lines' do
-        get '/', action: 'index', as: 'path_lines'
-        get '/show/:id', action: 'show', as: 'path_line'
-        match '/upload', action: 'upload', via: ['get','post'], as: 'upload_path_lines'
-      end
-      scope '/types', controller: 'path_types' do
-        get '/', action: 'index', as: 'path_types'
-        get '/show/:id', action: 'show', as: 'path_type'
-        match '/new', action: 'new', as: 'new_path_type', via: ['get','post']
-        match '/edit/:id', action: 'edit', as: 'edit_path_type', via: ['get', 'post']
-        delete '/delete/:id', action: 'delete', as: 'delete_path_type'
-        post '/up/:id', action: 'up', as: 'up_path_type'
-        post '/down/:id', action: 'down', as: 'down_path_type'
-      end
-      scope '/surfaces', controller: 'path_surfaces' do
-        get '/', action: 'index', as: 'path_surfaces'
-        get '/show/:id', action: 'show', as: 'path_surface'
-        match '/new', action: 'new', as: 'new_path_surface', via: ['get','post']
-        match '/edit/:id', action: 'edit', as: 'edit_path_surface', via: ['get', 'post']
-        delete '/delete/:id', action: 'delete', as: 'delete_path_surface'
-        post '/up/:id', action: 'up', as: 'up_path_surface'
-        post '/down/:id', action: 'down', as: 'down_path_surface'
-      end
-      scope '/details', controller: 'path_details' do
-        get '/', action: 'index', as: 'path_details'
-        get '/show/:id', action: 'show', as: 'path_detail'
-        match '/new', action: 'new', as: 'new_path_detail', via: ['get','post']
-        match '/edit/:id', action: 'edit', as: 'edit_path_detail', via: ['get', 'post']
-        delete '/delete/:id', action: 'delete', as: 'delete_path_detail'
-        post '/up/:id', action: 'up', as: 'up_path_detail'
-        post '/down/:id', action: 'down', as: 'down_path_detail'
-      end
-    end
-    scope '/photos', controller: 'photos' do
-      get '/', action: 'index', as: 'photos'
-      get '/all', action: 'all', as: 'all_photos'
-      post '/confirm/:id', action: 'confirm', as: 'confirm_photo'
-    end
-  end
-
-  namespace 'tasks' do
-    scope '/', controller: 'base' do
-      get '/open', action: 'open', as: 'open'
-      get '/all', action: 'all', as: 'all'
-      get '/show/:id', action: 'show', as: 'task'
-      match '/edit/:id', action: 'edit', as: 'edit_task', via: ['get', 'post']
-      delete '/delete/:id', action: 'destroy', as: 'delete_task'
-      post '/begin/:id', action: 'begin_task', as: 'begin_task'
-      post '/cancel/:id', action: 'cancel_task', as: 'cancel_task'
-      post '/complete/:id', action: 'complete_task', as: 'complete_task'
-    end
-    scope 'tracking', controller: 'tracking' do
-      get '/', action: 'index', as: 'tracking'
-      get '/user/:id', action: 'user', as: 'tracking_user'
-      get '/track/:id', action: 'track', as: 'tracking_track'
-    end
   end
 
   namespace 'api' do

@@ -3,46 +3,12 @@
     <a class="btn btn-success btn-lg" href="<%=objects_map_viewer_url%>" data-no-turbolink>
       <i class="fa fa-globe"></i> ობიექტების რუკა
     </a>
-    <% if current_user.editor %>
-      <a class="btn btn-warning btn-lg" href="<%=objects_map_editor_url%>" data-no-turbolink>
-        <i class="fa fa-pencil"></i> ობიექტების რედაქტირება
-      </a>
-    <% end %>
   </p>
 </div>
+
+
 <div class="row">
-  <div class="col-sm-6">
-    <div>
-      <div class="page-header">
-        <div class="pull-right">
-          <span class="label label-info">ღია</span>
-          <span class="label label-danger">სულ</span>
-        </div>
-        <h3>
-          <i class="fa fa-tasks"></i>
-          დავალებები
-        </h3>
-      </div>
-      <p>
-        <i class="fa fa-tasks"></i>
-        <%= link_to 'დავალებები', tasks_open_url %>
-        <span class="label label-info"><%= Task.open_tasks.count %></span>
-        <span class="label label-danger"><%= Task.count %></span>
-      </p>
-      <p>
-        <i class="fa fa-image"></i>
-        <%=link_to 'ფოტოგალერეა', objects_photos_url, data: { 'no-turbolink' => true }%>
-        <span class="label label-info"><%= Objects::Photo.not_confirmed.count %></span>
-        <span class="label label-danger"><%= Objects::Photo.count %></span>
-      </p>
-      <p>
-        <i class="fa fa-users"></i>
-        <%=link_to 'მომხმარებელთა ტრეკინგი', tasks_tracking_url, data: { 'no-turbolink' => true }%>
-        <span class="label label-info"><%=Tracking::Path.open_tracks.count%></span>
-        <span class="label label-danger"><%=Tracking::Path.count%></span>
-      </p>
-    </div>
-  </div>
+
   <div class="col-sm-6">
     <div>
       <h3 class="page-header">
@@ -73,14 +39,14 @@
             <%=link_to 'გადამცემი ხაზები', objects_lines_url%>
             <span class="label label-info"><%=Objects::Line.count%></span>
           </p>
-          <p>
-            <i class="fa fa-road"></i>
-            <%= link_to 'მარშუტები', objects_path_lines_url%>
-            <span class="label label-info"><%=Objects::Path::Line.count%></span>
-          </p>
         </div>
       </div>
     </div>
   </div>
+
+  <div class="col-sm-6">
+    <%= render partial: 'layouts/admin' if sys_admin? %>
+  </div>
+
+
 </div>
-<%= render partial: 'layouts/admin' if sys_admin? %>

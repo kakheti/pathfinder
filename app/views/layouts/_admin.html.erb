@@ -1,11 +1,8 @@
 <div>
-  <h4 class="page-header">
+  <h3 class="page-header">
     <i class="fa fa-wrench"></i>
     სისტემის ადმინისტრირება
-  </h4>
-  <p class="text-muted" style="padding-bottom: 16px;">
-    სისტემური ადმინისტირების მენიუზე წვდომა აქვთს მხოლოდ <strong>სისტემური ადმინისტრატორებს</strong>.
-  </p>
+  </h3>
   <div class="row">
     <div class="col-sm-6">
       <p>
@@ -17,31 +14,6 @@
         <i class="fa fa-users"></i>
         <%= link_to t('pages.application.layout.admin_users'), admin_users_url %>
         <label class="label label-info"><%= Sys::User.count %></label>
-      </p>
-      <p>
-        <i class="fa fa-image"></i>
-        <%= link_to 'გამოსახულებების გენერაცია', objects_generate_images_url %>
-      </p>
-      <p>
-        <i class="fa fa-clock-o"></i>
-        <%= link_to 'მიმდინარე დავალებები', '/sidekiq/busy', target: 'sidekiq' %>
-      </p>
-    </div>
-    <div class="col-sm-6">
-      <p>
-        <i class="fa fa-wrench"></i>
-        <%= link_to 'გზის სახეობები', objects_path_types_url %>
-        <span class="label label-info"><%=Objects::Path::Type.count%></span>
-      </p>
-      <p>
-        <i class="fa fa-wrench"></i>
-        <%= link_to 'გზის საფარი', objects_path_surfaces_url %>
-        <span class="label label-info"><%=Objects::Path::Surface.count%></span>
-      </p>
-      <p>
-        <i class="fa fa-wrench"></i>
-        <%= link_to 'საფარის დეტალები', objects_path_details_url %>
-        <span class="label label-info"><%=Objects::Path::Detail.count%></span>
       </p>
     </div>
   </div>
