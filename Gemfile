@@ -28,7 +28,5 @@ gem 'roo'
 gem 'geokit'
 gem 'geoutm'
 
-gem 'shortest-path', path: '../shortest-path'
-gem 'rmagick'
 gem 'sidekiq'
 gem 'sinatra', '>= 1.3.0', :require => nil
