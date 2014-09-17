@@ -1,14 +1,16 @@
 require=(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 var Promise = require('bluebird');
 
-var HOST = 'https://maps.googleapis.com/maps/api/js';
+var API_URL = 'https://maps.googleapis.com/maps/api/js';
+var DEFAULT_ZOOM = 8;
+var DEFAULT_LAT = 41.9;
+var DEFAULT_LNG = 44.8;
 
-module.exports = function(opts) {
-
+var loadAPI = function(opts) {
   return new Promise(function(resolve, reject) {
     var script = document.createElement('script');
     script.type = 'text/javascript';
-    var baseUrl = HOST + '?v=3.ex&sensor=false&callback=onGoogleMapLoaded&libraries=geometry';
+    var baseUrl = API_URL + '?v=3.ex&sensor=false&callback=onGoogleMapLoaded&libraries=geometry';
 
     if ( opts && opts.apikey ) {
       script.src = baseUrl+'&key=' + opts.apikey;
@@ -19,7 +21,24 @@ module.exports = function(opts) {
     document.body.appendChild(script);
     window.onGoogleMapLoaded = resolve ;
   });
+};
 
+var createMap = function(opts) {
+  var zoom = ( opts && opts.zoom ) || DEFAULT_ZOOM;
+  var lat  = ( opts && opts.center && opts.center.lat ) || DEFAULT_LAT;
+  var lng  = ( opts && opts.center && opts.center.lng ) || DEFAULT_LNG;
+  var mapOptions = {
+    zoom: zoom,
+    center: new google.maps.LatLng(lat, lng),
+    mapTypeId: google.maps.MapTypeId.ROADMAP,
+  };
+  var mapElement=document.getElementById(( opts && opts.mapid ) || 'mapregion');
+  return new google.maps.Map( mapElement, mapOptions );
+};
+
+module.exports = {
+  start  : loadAPI,
+  create : createMap,
 };
 
 },{"bluebird":4}],2:[function(require,module,exports){
@@ -5300,10 +5319,9 @@ process.chdir = function (dir) {
 },{}],"kedmaps":[function(require,module,exports){
 var googlemaps = require('./googlemaps');
 
-// loading google maps
 
-googlemaps().then(function() {
-  console.log('maps loaded');
+googlemaps.start().then(googlemaps.create).then(function(map) {
+  console.log('google map initialized');
 });
 
 

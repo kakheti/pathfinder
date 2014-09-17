@@ -1,6 +1,7 @@
 module.exports = function(grunt) {
 
   grunt.loadNpmTasks('grunt-browserify');
+  grunt.loadNpmTasks('grunt-contrib-watch');
 
   grunt.initConfig({
 
@@ -12,7 +13,12 @@ module.exports = function(grunt) {
           alias: ['./main.js:kedmaps']
         }
       }
-    }
+    },
+
+    watch: {
+      files: '**/*.js',
+      tasks: 'browserify'
+    },
 
   });
 
