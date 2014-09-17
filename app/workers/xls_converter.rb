@@ -7,29 +7,11 @@ class XLSConverter
     case type
     when 'Objects::Line' then lines_converter(sheet)
     when 'Objects::Tower' then towers_converter(sheet)
-    when 'Objects::Path::Line' then pathlines_converter(sheet)
     end
     Sys::Cache.clear_map_objects
   end
 
   private
-
-  def get_detail(typename, surfacename, detailname)
-    type = Objects::Path::Type.get_type(typename)
-    surface = Objects::Path::Surface.get_surface(type, surfacename)
-    Objects::Path::Detail.get_detail(surface, detailname)
-  end
-
-  def pathlines_converter(sheet)
-    (2..sheet.last_row).each do |row|
-      id = sheet.cell('A', row) ; line = Objects::Path::Line.find(id)
-      name = sheet.cell('B', row) ; line.name = name.is_a?(Float) ? name.to_i : name.to_s
-      line.detail = get_detail(sheet.cell('C', row), sheet.cell('D', row), sheet.cell('E', row))
-      regionname = sheet.cell('F',row) ; line.region = Region.get_by_name(regionname)
-      description = sheet.cell('H', row) ; line.description = description
-      line.save
-    end
-  end
 
   def lines_converter(sheet)
     (2..sheet.last_row).each do |row|
