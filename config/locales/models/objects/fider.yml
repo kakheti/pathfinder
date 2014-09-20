@@ -1,0 +1,11 @@
+ka:
+  models:
+    objects_fider:
+      kmlid: kmlID
+      name: "დასახელება"
+      region: რაიონი
+      description: შენიშვნა
+      direction: მიმართულება
+      position: მდებარეობა რუკაზე
+      points: წერტილების რაოდ.
+      length: სიგრძე
