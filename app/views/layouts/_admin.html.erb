@@ -6,11 +6,6 @@
   <div class="row">
     <div class="col-sm-6">
       <p>
-        <i class="fa fa-globe"></i>
-        <%=link_to 'რაიონების მართვა', regions_url%>
-        <span class="label label-info"><%=Region.count%></span>
-      </p>
-      <p>
         <i class="fa fa-users"></i>
         <%= link_to t('pages.application.layout.admin_users'), admin_users_url %>
         <label class="label label-info"><%= Sys::User.count %></label>

@@ -1,3 +1,9 @@
+<style type="text/css">
+  h4.page-header {
+    margin: 16px 0 4px;
+  }
+</style>
+
 <div>
   <p style="padding-top: 48px;" class="text-center">
     <a class="btn btn-success btn-lg" href="<%=objects_map_viewer_url%>" data-no-turbolink>
@@ -16,11 +22,18 @@
       </h3>
       <div class="row">
         <div class="col-xs-6">
+          <h4 class="page-header">ადმინისტრაციული</h4>
+          <p>
+            <i class="fa fa-globe"></i>
+            <%=link_to 'რაიონების მართვა', regions_url%>
+            <span class="label label-info"><%=Region.count%></span>
+          </p>
           <p>
             <i class="fa fa-building"></i>
             <%=link_to 'ოფისები', objects_offices_url%>
             <span class="label label-info"><%=Objects::Office.count%></span>
           </p>
+          <h4 class="page-header">მაღალი ძაბვა</h4>
           <p>
             <i class="fa fa-bolt"></i>
             <%=link_to 'ქვესადგურები', objects_substations_url%>
@@ -31,13 +44,15 @@
             <%=link_to 'ანძები', objects_towers_url%>
             <span class="label label-info"><%=Objects::Tower.count%></span>
           </p>
-        </div>
-        <div class="col-xs-6">
           <p>
             <i class="fa fa-bolt"></i>
             <%=link_to 'გადამცემი ხაზები', objects_lines_url%>
             <span class="label label-info"><%=Objects::Line.count%></span>
           </p>
+        </div>
+        <div class="col-xs-6">
+          <h4 class="page-header">დაბალი ძაბვა</h4>
+          TODO: dabali zabva
         </div>
       </div>
     </div>
