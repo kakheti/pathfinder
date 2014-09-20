@@ -1,4 +1,6 @@
 # -*- encoding : utf-8 -*-
+require 'xml'
+
 class Objects::Tp
   include Mongoid::Document
   include Objects::Coordinate
@@ -16,31 +18,30 @@ class Objects::Tp
   belongs_to :region
 
   def self.from_kml(xml)
-    # parser=XML::Parser.string xml
-    # doc=parser.parse ; root=doc.child
-    # kmlns="kml:#{KMLNS}"
-    # placemarks=doc.child.find '//kml:Placemark',kmlns
-    # placemarks.each do |placemark|
-    #   id=placemark.attributes['id']
-    #   name=placemark.find('./kml:name',kmlns).first.content
-    #   # description content
-    #   descr=placemark.find('./kml:description',kmlns).first.content
-    #   s1='<td>რაიონი</td>'
-    #   s2='<td>მისამართი</td>'
-    #   idx1=descr.index(s1)+s1.length
-    #   idx2=descr.index(s2)+s2.length
-    #   regname=descr[idx1..-1].match(/<td>([^<])*<\/td>/)[0][4..-6].strip
-    #   address=descr[idx2..-1].match(/<td>([^<])*<\/td>/)[0][4..-6].strip
-    #   region=Region.get_by_name(regname)
-    #   # end of description section
-    #   coord=placemark.find('./kml:Point/kml:coordinates',kmlns).first.content
-    #   obj=Objects::Tp.where(kmlid:id).first || Objects::Tp.create(kmlid:id)
-    #   obj.name=name
-    #   obj.region=region
-    #   obj.address=address
-    #   obj.set_coordinate(coord)
-    #   obj.save
-    # end
+    parser=XML::Parser.string xml
+    doc=parser.parse ; root=doc.child
+    kmlns="kml:#{KMLNS}"
+    placemarks=doc.child.find '//kml:Placemark',kmlns
+    placemarks.each do |placemark|
+      id=placemark.attributes['id']
+      obj=Objects::Tp.where(kmlid:id).first || Objects::Tp.create(kmlid:id)
+      # name=placemark.find('./kml:name',kmlns).first.content
+      # start description section
+      descr=placemark.find('./kml:description',kmlns).first.content
+      obj.name = Objects::Kml.get_property(descr, 'ტრანსფორმატორის ნომერი')
+      obj.picture_id = Objects::Kml.get_property(descr, 'სურათის ნომერი')
+      obj.power = Objects::Kml.get_property(descr, 'სიმძლავრე').to_f
+      obj.owner = Objects::Kml.get_property(descr, 'მესაკუთრე')
+      obj.fider = Objects::Kml.get_property(descr, 'ფიდერი')
+      obj.address_code = Objects::Kml.get_property(descr, 'საკადასტრო კოდი')
+      obj.address = Objects::Kml.get_property(descr, 'მთლიანი მისამართი').to_ka(:all)
+      obj.description = Objects::Kml.get_property(descr, 'შენიშვნა')
+      obj.region=Region.get_by_name('დედოფლისწყარო') # TODO
+      # end of description section
+      coord=placemark.find('./kml:Point/kml:coordinates',kmlns).first.content
+      obj.set_coordinate(coord)
+      obj.save
+    end
   end
 
   def to_kml(xml)

@@ -1,0 +1,9 @@
+ka:
+  models:
+    objects_tp:
+      kmlid: kmlID
+      name: "ჯიხურის #"
+      region: რაიონი
+      description: შენიშვნა
+      address: მისამართი
+      address_code: საკად.კოდი

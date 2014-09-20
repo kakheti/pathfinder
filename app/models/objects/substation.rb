@@ -1,4 +1,6 @@
 # -*- encoding : utf-8 -*-
+require 'xml'
+
 class Objects::Substation
   include Mongoid::Document
   include Objects::Coordinate

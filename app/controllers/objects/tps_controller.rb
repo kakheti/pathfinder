@@ -60,7 +60,7 @@ class Objects::TpsController < ApplicationController
   end
 
   def upload_kml(file)
-    kml=file.get_input_stream.read
+    kml = file.get_input_stream.read
     Objects::Tp.from_kml(kml)
   end
 

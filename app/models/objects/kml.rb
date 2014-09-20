@@ -41,4 +41,12 @@ module Objects::Kml
       temp_file.unlink
     end
   end
+
+  def get_property(description, propertyName)
+    s1 = "<td>#{propertyName}</td>"
+    idx1 = description.index(s1) + s1.length
+    description[idx1..-1].match(/<td>([^<])*<\/td>/)[0][4..-6].strip
+  end
+
+  module_function :get_property
 end
