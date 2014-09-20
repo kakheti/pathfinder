@@ -59,10 +59,15 @@ Pathfinder::Application.routes.draw do
       get '/show/:id', action: 'show', as: 'line'
       match '/upload', action: 'upload', via: ['get','post'], as: 'upload_lines'
     end
+    scope '/tps', controller: 'tps' do
+      get '/', action: 'index', as: 'tps'
+      get '/show/:id', action: 'show', as: 'tp'
+      match '/upload', action: 'upload', via: ['get','post'], as: 'upload_tps'
+    end
     scope '/maps', controller: 'maps' do
-      get '/editor', action: 'editor', as: 'map_editor'
+      #get '/editor', action: 'editor', as: 'map_editor'
       get '/viewer', action: 'viewer', as: 'map_viewer'
-      match 'generate_images', action: 'generate_images', as: 'generate_images', via: ['get', 'post']
+      #match 'generate_images', action: 'generate_images', as: 'generate_images', via: ['get', 'post']
     end
   end
 
