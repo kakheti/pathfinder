@@ -58,7 +58,11 @@
         <%=link_to 'ბოძები', objects_poles_url%>
         <span class="label label-info"><%= Objects::Pole.count %></span>
       </p>
-      <p>TODO: ფიდერები</p>
+      <p>
+        <i class="fa fa-bolt"></i>
+        <%=link_to 'ფიდერები', objects_fiders_url%>
+        <span class="label label-info"><%= Objects::Fider.count %></span>
+      </p>
     </div>
   </div>
 </div>
