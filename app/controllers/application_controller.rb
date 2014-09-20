@@ -19,7 +19,6 @@ class ApplicationController < ActionController::Base
 
   protected
   def nav; @nav = {t('pages.site.index.title') => home_url} end
-  def clear_cache; Sys::Cache.clear_map_objects end
 
   def login_required; false end
   def permission_required; false end
