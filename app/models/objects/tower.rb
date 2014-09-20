@@ -6,7 +6,6 @@ class Objects::Tower
   include Mongoid::Document
   include Objects::Coordinate
   include Objects::Kml
-  include Objects::PhotoOwner
 
   field :kmlid, type: String
   field :name, type: String

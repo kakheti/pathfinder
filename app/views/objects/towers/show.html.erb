@@ -1,5 +1,4 @@
 <%=view_for @tower, title: @title, icon: '/icons/tower.png', collapsible: true do |f|
-  f.title_action objects_upload_tower_photo_url(id: @tower.id), label: 'ფოტოს დამატება', icon: '/icons/image--plus.png'
   f.text_field 'kmlid', tag: 'code'
   f.text_field 'name'
   f.text_field 'category'
@@ -12,17 +11,3 @@
   f.text_field 'description'
   f.map_field 'position', height: 500
 end%>
-<% if @tower.has_images? %>
-  <h4 class="page-header">ამ ანძის გამოსახულებები</h4>
-  <div>
-    <%
-      larges = @tower.larges
-      @tower.thumbnails.each_with_index do |thumb, index|
-    %>
-      <div class="img-thumbnail">
-        <a href="<%=larges[index]%>"><img src="<%= thumb %>" alt="tower"></a>
-        <a href="<%= objects_delete_tower_photo_url(id: @tower.id, basename: File.basename(thumb)) %>" data-confirm="ნამდვილად გინდათ ამ გამოსახულების წაშლა?" data-method="delete"><i class="fa fa-trash-o"></i></a>
-    </div>
-    <% end %>
-  </div>
-<% end %>
