@@ -69,6 +69,11 @@ Pathfinder::Application.routes.draw do
       get '/show/:id', action: 'show', as: 'pole'
       match '/upload', action: 'upload', via: ['get','post'], as: 'upload_poles'
     end
+    scope '/fiders', controller: 'fiders' do
+      get '/', action: 'index', as: 'fiders'
+      get '/show/:id', action: 'show', as: 'fider'
+      match '/upload', action: 'upload', via: ['get','post'], as: 'upload_fiders'
+    end
     scope '/maps', controller: 'maps' do
       #get '/editor', action: 'editor', as: 'map_editor'
       get '/viewer', action: 'viewer', as: 'map_viewer'
