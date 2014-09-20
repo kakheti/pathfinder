@@ -7,3 +7,5 @@ ka:
       description: შენიშვნა
       address: მისამართი
       address_code: საკად.კოდი
+      position: მდებარეობა რუკაზე
+      fider: ფიდერი

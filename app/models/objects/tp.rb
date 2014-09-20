@@ -17,6 +17,8 @@ class Objects::Tp
   field :address, type: String
   belongs_to :region
 
+  def picture; "/tps/#{self.picture_id}.jpg" end
+
   def self.from_kml(xml)
     parser=XML::Parser.string xml
     doc=parser.parse ; root=doc.child
