@@ -1,6 +1,0 @@
-<%= search_form @search do |s|
-  s.text_field 'number', label: 'ნომერი'
-  s.combo_field 'status', label: 'სტატუსი',  empty: '-- ყველა სტატუსი --', collection: {'საწყისი' => Task::START, 'დამუშავებაში' => Task::IN_PROGRESS, 'შესრულებული' => Task::COMPLETED, 'გაუქმებული' => Task::CANCELED}
-  s.combo_field 'assignee_id', label: 'მომხმარებელი', empty: '-- ყველა მომხმარებელი --', collection: Sys::User.asc(:username)
-end %>
-<%= tasks_table @tasks, title: @title %>
