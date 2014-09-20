@@ -24,7 +24,7 @@ class Objects::Tower
       name=placemark.find('./kml:name',kmlns).first.content
       # description content
       descr=placemark.find('./kml:description',kmlns).first.content
-      s1='<td>რეგიონი</td>'
+      s1='<td>რაიონი</td>'
       s2='<td>ანძის ტიპი</td>'
       s3='<td>გადამცემი ხაზი</td>'
       idx1=descr.index(s1)+s1.length
@@ -56,7 +56,7 @@ class Objects::Tower
       'ანძის ტიპი' => category,
       'შენიშვნა' => description,
       'გადამცემი ხაზი' => linename,
-      'რეგიონი' => region.to_s
+      'რაიონი' => region.to_s
     )
     xml.Placemark do
       xml.name self.name

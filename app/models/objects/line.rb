@@ -34,7 +34,7 @@ class Objects::Line
       coords=placemark.find('./kml:MultiGeometry/kml:LineString/kml:coordinates',kmlns).first.content
       # description content
       descr=placemark.find('./kml:description',kmlns).first.content
-      s1='<td>რეგიონი</td>'
+      s1='<td>რაიონი</td>'
       s2='<td>მიმართულება</td>'
       idx1=descr.index(s1)+s1.length
       idx2=descr.index(s2)+s2.length
@@ -59,7 +59,7 @@ class Objects::Line
     extra = extra_data('დასახელება' => name,
       'მიმართულება' => direction,
       'შენიშვნა' => description,
-      'რეგიონი' => region.to_s,
+      'რაიონი' => region.to_s,
       'სიგრძე' => length
     )
     xml.Placemark(id: "ID_#{self.id.to_s}") do |xml|

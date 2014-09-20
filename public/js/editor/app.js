@@ -190,7 +190,7 @@ var initFilterbar=function(){
     router.filterChanged();
   };
 
-  regionCombo=ui.form.comboField('filter_region', {collection_url: '/regions.json', text_property: 'name', empty: '-- ყველა რეგიონი --'});
+  regionCombo=ui.form.comboField('filter_region', {collection_url: '/regions.json', text_property: 'name', empty: '-- ყველა რაიონი --'});
   regionCombo.addChangeListener(resetMapStyle);
 
   chkOffice=filterCheckbox('ოფისი', { onchange: resetMapStyle, checked: true });

@@ -10,7 +10,7 @@ class RegionsController < ApplicationController
     if request.post?
       @region=Region.new(region_params)
       if @region.save(user:current_user)
-        redirect_to region_url(id:@region.id), notice: 'რეგიონი შექმნილია'
+        redirect_to region_url(id:@region.id), notice: 'რაიონი შექმნილია'
       end
     else
       @region=Region.new
@@ -22,7 +22,7 @@ class RegionsController < ApplicationController
     @region=Region.find(params[:id])
     if request.post?
       if @region.update_attributes(region_params.merge({user:current_user}))
-        redirect_to region_url(id:@region.id), notice: 'რეგიონი განახლებულია'
+        redirect_to region_url(id:@region.id), notice: 'რაიონი განახლებულია'
       end
     end
   end

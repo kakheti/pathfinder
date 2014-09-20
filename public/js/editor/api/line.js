@@ -15,7 +15,7 @@ var save=function(id,model,callback){
 
   if(path.getLength()>1){
     if(!region_id){
-      utils.addError(model,'region_id','აარჩიეთ რეგიონი');
+      utils.addError(model,'region_id','აარჩიეთ რაიონი');
       return false;
     }
     var points=utils.pointsFromPath(path);

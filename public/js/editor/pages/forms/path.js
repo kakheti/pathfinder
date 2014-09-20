@@ -13,7 +13,7 @@ exports.form=function(opts){
   var detailsCombo=ui.form.comboField('detail_id', {label: 'საფარის დეტალები', collection_url: '/objects/path/details.json', text_property: 'name', parent_combo: surfaceCombo, parent_key: 'surface_id'});
   var nameText=ui.form.textField('name', {label: 'სახელი'});
   var descriptionText=ui.form.textArea('description', {label: 'შენიშვნა'});
-  var regionsCombo=ui.form.comboField('region_id', {label: 'რეგიონი', collection_url: '/regions.json', text_property: 'name'});
+  var regionsCombo=ui.form.comboField('region_id', {label: 'რაიონი', collection_url: '/regions.json', text_property: 'name'});
 
   var fields=[typeCombo, surfaceCombo, detailsCombo,nameText,descriptionText,regionsCombo];
   var actions=[saveAction,cancelAction];

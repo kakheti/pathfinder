@@ -9,7 +9,7 @@ exports.form=function(opts){
   var cancelAction={label:'გაუმება', icon:'times-circle', action: cancel_f};
 
   var nameText=ui.form.textField('name', {label: 'დასახელება'});
-  var regionsCombo=ui.form.comboField('region_id', {label: 'რეგიონი', collection_url: '/regions.json', text_property: 'name'});
+  var regionsCombo=ui.form.comboField('region_id', {label: 'რაიონი', collection_url: '/regions.json', text_property: 'name'});
   var descriptionText=ui.form.textArea('description', {label: 'შენიშვნა'});
 
   var fields=[nameText, regionsCombo, descriptionText];

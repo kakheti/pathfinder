@@ -20,7 +20,7 @@ class Objects::Office
       name=placemark.find('./kml:name',kmlns).first.content
       # description content
       descr=placemark.find('./kml:description',kmlns).first.content
-      s1='<td>რეგიონი</td>'
+      s1='<td>რაიონი</td>'
       s2='<td>მისამართი</td>'
       idx1=descr.index(s1)+s1.length
       idx2=descr.index(s2)+s2.length
@@ -43,7 +43,7 @@ class Objects::Office
     extra = extra_data( 'დასახელება' => name,
       'შენიშვნა' => description,
       'მისამართი' => address,
-      'რეგიონი' => region.to_s
+      'რაიონი' => region.to_s
     )
     xml.Placemark do
       xml.name self.name

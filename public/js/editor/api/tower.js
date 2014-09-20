@@ -15,7 +15,7 @@ var save=function(id,model,callback){
     ;
 
   if(!region_id){
-    utils.addError(model,'region_id','აარჩიეთ რეგიონი');
+    utils.addError(model,'region_id','აარჩიეთ რაიონი');
     return false;
   }
 

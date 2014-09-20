@@ -109,7 +109,7 @@ var lineDescription=function(map,f){
     property('დასახელება',f.getProperty('name')),
     property('მიმართულება',f.getProperty('direction')),
     property('სიგრძე','<code>'+exports.calcFeatureDistance(map,f).toFixed(3)+'</code> კმ'),
-    property('რეგიონი',f.getProperty('region')),
+    property('რაიონი',f.getProperty('region')),
     property('შენიშვნა',f.getProperty('description')),
   ].join('');
 };
@@ -122,7 +122,7 @@ var pathDescription=function(map, f){
     property('დასახელება',f.getProperty('name')),
     property('გზის სახეობა', detailText),
     property('სიგრძე','<code>'+exports.calcFeatureDistance(map,f).toFixed(3)+'</code> კმ'),
-    property('რეგიონი',f.getProperty('region')),
+    property('რაიონი',f.getProperty('region')),
     property('შენიშვნა',f.getProperty('description')),
   ].join('');
 };
@@ -132,7 +132,7 @@ var towerDescription=function(map,f){
   return [
     property('ანძის#',f.getProperty('name')),
     property('ტიპი',f.getProperty('category')),
-    property('რეგიონი',f.getProperty('region')),
+    property('რაიონი',f.getProperty('region')),
     property('ხაზი',f.getProperty('linename')),
     //property('განედი','<code>'+point.lat()+'</code>'),
     //property('გრძედი','<code>'+point.lng()+'</code>'),
@@ -145,7 +145,7 @@ var officeDescription=function(map,f){
   var point=f.getGeometry().get();
   return [
     property('დასახელება',f.getProperty('name')),
-    property('რეგიონი',f.getProperty('region')),
+    property('რაიონი',f.getProperty('region')),
     property('მისამართი',f.getProperty('address')),
     // property('განედი','<code>'+point.lat()+'</code>'),
     // property('გრძედი','<code>'+point.lng()+'</code>'),
@@ -158,7 +158,7 @@ var substationDescription=function(map,f){
   var point=f.getGeometry().get();
   return [
     property('დასახელება',f.getProperty('name')),
-    property('რეგიონი',f.getProperty('region')),
+    property('რაიონი',f.getProperty('region')),
     // property('განედი','<code>'+point.lat()+'</code>'),
     // property('გრძედი','<code>'+point.lng()+'</code>'),
     property('კოორდინატი', 'E: <code>' + f.getProperty('easting') + '</code>; N: <code>' + f.getProperty('northing') + '</code>'),

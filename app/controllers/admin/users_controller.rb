@@ -40,11 +40,11 @@ class Admin::UsersController < ApplicationController
 
   def add_region
     @user = Sys::User.find(params[:id])
-    @title = 'რეგიონის დამატება'
+    @title = 'რაიონის დამატება'
     if request.post?
       region = Region.find(params[:region_id])
       @user.regions << region unless @user.regions.include?(region)
-      redirect_to admin_user_url(id: @user.id, tab: 'regions'), notice: 'რეგიონი დამატებულია'
+      redirect_to admin_user_url(id: @user.id, tab: 'regions'), notice: 'რაიონი დამატებულია'
     end
   end
 

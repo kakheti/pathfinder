@@ -3,7 +3,7 @@ wb.add_worksheet(name: "substations") do |sheet|
   sheet.add_row [
     'ID',
     'დასახელება',
-    'რეგიონი',
+    'რაიონი',
     'შენიშვნა' ]
   @substations.each do |substation|
     sheet.add_row [

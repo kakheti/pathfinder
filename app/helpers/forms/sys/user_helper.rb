@@ -35,11 +35,11 @@ module Forms::Sys::UserHelper
         f.boolean_field 'editor', required: true
         f.boolean_field 'all_regions', required: true
       end
-      table_opts={ title: "რეგიონები &mdash; <strong>#{user.regions.count}</strong>".html_safe, icon:'/icons/region.png' }
+      table_opts={ title: "რაიონები &mdash; <strong>#{user.regions.count}</strong>".html_safe, icon:'/icons/region.png' }
       f.tab table_opts do |t|
         t.table_field :regions, table: table_opts do |tbl|
           tbl.table do |t|
-            t.title_action admin_user_add_region_url(id:user.id), label: 'რეგიონის დამატება', icon: '/icons/plus.png'
+            t.title_action admin_user_add_region_url(id:user.id), label: 'რაიონის დამატება', icon: '/icons/plus.png'
             t.delete_action ->(x){ admin_user_remove_region_url(id:user.id,role_id:x.id) }
             t.text_field 'name', url:->(x){ region_url(id: x.id) }
             t.text_field 'description', class:'text-muted'

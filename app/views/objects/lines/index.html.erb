@@ -1,7 +1,7 @@
 <%= search_form @search do |s|
   s.text_field 'kmlid', label: 'kmlID'
   s.text_field 'name', label: 'დასახელება'
-  s.combo_field 'region', collection: Region.all.asc('name'), text: ->(x) {x.name}, label: 'რეგიონი', empty: '-- ყველა რეგიონი --'
+  s.combo_field 'region', collection: Region.all.asc('name'), text: ->(x) {x.name}, label: 'რაიონი', empty: '-- ყველა რაიონი --'
   s.text_field 'direction', label: 'მიმართულება'
 end %>
 

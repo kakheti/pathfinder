@@ -9,7 +9,7 @@ ka:
       mobile: მობილური
       active: აქტიური?
       admin: სისადმინი?
-      all_regions: ყველა რეგიონი?
+      all_regions: ყველა რაიონი?
       editor: 'რედაქტირების უფლება?'
       _errors:
         username_is_taken: ასეთი მომხმარებელი უკვე არსებობს

@@ -10,7 +10,7 @@ exports.form=function(opts){
 
   var nameText=ui.form.textField('name', {label: 'სახელი'});
   var categoryText=ui.form.textField('category', {label: 'ტიპი'});
-  var regionsCombo=ui.form.comboField('region_id', {label: 'რეგიონი', collection_url: '/regions.json', text_property: 'name'});
+  var regionsCombo=ui.form.comboField('region_id', {label: 'რაიონი', collection_url: '/regions.json', text_property: 'name'});
   var descriptionText=ui.form.textArea('description', {label: 'შენიშვნა'});
 
   var fields=[nameText,categoryText,regionsCombo,descriptionText];

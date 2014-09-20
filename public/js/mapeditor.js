@@ -33,7 +33,7 @@ var save=function(id,model,callback){
 
   if(path.getLength()>1){
     if(!region_id){
-      utils.addError(model,'region_id','აარჩიეთ რეგიონი');
+      utils.addError(model,'region_id','აარჩიეთ რაიონი');
       return false;
     }
     var points=utils.pointsFromPath(path);
@@ -81,7 +81,7 @@ var save=function(id,model,callback){
     utils.addError(model,'name',' ჩაწერეთ დასახელება');
     return false;
   } else if(!region_id){
-    utils.addError(model,'region_id','აარჩიეთ რეგიონი');
+    utils.addError(model,'region_id','აარჩიეთ რაიონი');
     return false;
   }
 
@@ -129,7 +129,7 @@ exports.newPath=function(model,callback){
       return false;
     }
     if(!region_id){
-      utils.addError(model,'region_id','აარჩიეთ რეგიონი');
+      utils.addError(model,'region_id','აარჩიეთ რაიონი');
       return false;
     }
     var points=utils.pointsFromPath(path);
@@ -160,7 +160,7 @@ exports.editPath=function(id,model,callback){
       return false;
     }
     if(!region_id){
-      utils.addError(model,'region_id','აარჩიეთ რეგიონი');
+      utils.addError(model,'region_id','აარჩიეთ რაიონი');
       return false;
     }
     var points=utils.pointsFromPath(path);
@@ -220,7 +220,7 @@ var save=function(id,model,callback){
     utils.addError(model,'name',' ჩაწერეთ დასახელება');
     return false;
   } else if(!region_id){
-    utils.addError(model,'region_id','აარჩიეთ რეგიონი');
+    utils.addError(model,'region_id','აარჩიეთ რაიონი');
     return false;
   }
 
@@ -292,7 +292,7 @@ var save=function(id,model,callback){
     ;
 
   if(!region_id){
-    utils.addError(model,'region_id','აარჩიეთ რეგიონი');
+    utils.addError(model,'region_id','აარჩიეთ რაიონი');
     return false;
   }
 
@@ -542,7 +542,7 @@ var initFilterbar=function(){
     router.filterChanged();
   };
 
-  regionCombo=ui.form.comboField('filter_region', {collection_url: '/regions.json', text_property: 'name', empty: '-- ყველა რეგიონი --'});
+  regionCombo=ui.form.comboField('filter_region', {collection_url: '/regions.json', text_property: 'name', empty: '-- ყველა რაიონი --'});
   regionCombo.addChangeListener(resetMapStyle);
 
   chkOffice=filterCheckbox('ოფისი', { onchange: resetMapStyle, checked: true });
@@ -930,7 +930,7 @@ exports.form=function(opts){
 
   var nameText=ui.form.textField('name', {label: 'სახელი'});
   var directionText=ui.form.textField('direction', {label: 'მიმართულება'});
-  var regionsCombo=ui.form.comboField('region_id', {label: 'რეგიონი', collection_url: '/regions.json', text_property: 'name'});
+  var regionsCombo=ui.form.comboField('region_id', {label: 'რაიონი', collection_url: '/regions.json', text_property: 'name'});
   var descriptionText=ui.form.textArea('description', {label: 'შენიშვნა'});
 
   var fields=[nameText,directionText,regionsCombo,descriptionText];
@@ -952,7 +952,7 @@ exports.form=function(opts){
 
   var nameText=ui.form.textField('name', {label: 'დასახელება'});
   var addressText=ui.form.textField('address', {label: 'მისამართი'});
-  var regionsCombo=ui.form.comboField('region_id', {label: 'რეგიონი', collection_url: '/regions.json', text_property: 'name'});
+  var regionsCombo=ui.form.comboField('region_id', {label: 'რაიონი', collection_url: '/regions.json', text_property: 'name'});
   var descriptionText=ui.form.textArea('description', {label: 'შენიშვნა'});
 
   var fields=[nameText, addressText, regionsCombo, descriptionText];
@@ -978,7 +978,7 @@ exports.form=function(opts){
   var detailsCombo=ui.form.comboField('detail_id', {label: 'საფარის დეტალები', collection_url: '/objects/path/details.json', text_property: 'name', parent_combo: surfaceCombo, parent_key: 'surface_id'});
   var nameText=ui.form.textField('name', {label: 'სახელი'});
   var descriptionText=ui.form.textArea('description', {label: 'შენიშვნა'});
-  var regionsCombo=ui.form.comboField('region_id', {label: 'რეგიონი', collection_url: '/regions.json', text_property: 'name'});
+  var regionsCombo=ui.form.comboField('region_id', {label: 'რაიონი', collection_url: '/regions.json', text_property: 'name'});
 
   var fields=[typeCombo, surfaceCombo, detailsCombo,nameText,descriptionText,regionsCombo];
   var actions=[saveAction,cancelAction];
@@ -998,7 +998,7 @@ exports.form=function(opts){
   var cancelAction={label:'გაუმება', icon:'times-circle', action: cancel_f};
 
   var nameText=ui.form.textField('name', {label: 'დასახელება'});
-  var regionsCombo=ui.form.comboField('region_id', {label: 'რეგიონი', collection_url: '/regions.json', text_property: 'name'});
+  var regionsCombo=ui.form.comboField('region_id', {label: 'რაიონი', collection_url: '/regions.json', text_property: 'name'});
   var descriptionText=ui.form.textArea('description', {label: 'შენიშვნა'});
 
   var fields=[nameText, regionsCombo, descriptionText];
@@ -1042,7 +1042,7 @@ exports.form=function(opts){
 
   var nameText=ui.form.textField('name', {label: 'სახელი'});
   var categoryText=ui.form.textField('category', {label: 'ტიპი'});
-  var regionsCombo=ui.form.comboField('region_id', {label: 'რეგიონი', collection_url: '/regions.json', text_property: 'name'});
+  var regionsCombo=ui.form.comboField('region_id', {label: 'რაიონი', collection_url: '/regions.json', text_property: 'name'});
   var descriptionText=ui.form.textArea('description', {label: 'შენიშვნა'});
 
   var fields=[nameText,categoryText,regionsCombo,descriptionText];
@@ -1164,7 +1164,7 @@ var lineDescription=function(map,f){
     property('დასახელება',f.getProperty('name')),
     property('მიმართულება',f.getProperty('direction')),
     property('სიგრძე','<code>'+exports.calcFeatureDistance(map,f).toFixed(3)+'</code> კმ'),
-    property('რეგიონი',f.getProperty('region')),
+    property('რაიონი',f.getProperty('region')),
     property('შენიშვნა',f.getProperty('description')),
   ].join('');
 };
@@ -1177,7 +1177,7 @@ var pathDescription=function(map, f){
     property('დასახელება',f.getProperty('name')),
     property('გზის სახეობა', detailText),
     property('სიგრძე','<code>'+exports.calcFeatureDistance(map,f).toFixed(3)+'</code> კმ'),
-    property('რეგიონი',f.getProperty('region')),
+    property('რაიონი',f.getProperty('region')),
     property('შენიშვნა',f.getProperty('description')),
   ].join('');
 };
@@ -1187,7 +1187,7 @@ var towerDescription=function(map,f){
   return [
     property('ანძის#',f.getProperty('name')),
     property('ტიპი',f.getProperty('category')),
-    property('რეგიონი',f.getProperty('region')),
+    property('რაიონი',f.getProperty('region')),
     property('ხაზი',f.getProperty('linename')),
     //property('განედი','<code>'+point.lat()+'</code>'),
     //property('გრძედი','<code>'+point.lng()+'</code>'),
@@ -1200,7 +1200,7 @@ var officeDescription=function(map,f){
   var point=f.getGeometry().get();
   return [
     property('დასახელება',f.getProperty('name')),
-    property('რეგიონი',f.getProperty('region')),
+    property('რაიონი',f.getProperty('region')),
     property('მისამართი',f.getProperty('address')),
     // property('განედი','<code>'+point.lat()+'</code>'),
     // property('გრძედი','<code>'+point.lng()+'</code>'),
@@ -1213,7 +1213,7 @@ var substationDescription=function(map,f){
   var point=f.getGeometry().get();
   return [
     property('დასახელება',f.getProperty('name')),
-    property('რეგიონი',f.getProperty('region')),
+    property('რაიონი',f.getProperty('region')),
     // property('განედი','<code>'+point.lat()+'</code>'),
     // property('გრძედი','<code>'+point.lng()+'</code>'),
     property('კოორდინატი', 'E: <code>' + f.getProperty('easting') + '</code>; N: <code>' + f.getProperty('northing') + '</code>'),

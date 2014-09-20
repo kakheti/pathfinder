@@ -19,7 +19,7 @@ exports.newPath=function(model,callback){
       return false;
     }
     if(!region_id){
-      utils.addError(model,'region_id','აარჩიეთ რეგიონი');
+      utils.addError(model,'region_id','აარჩიეთ რაიონი');
       return false;
     }
     var points=utils.pointsFromPath(path);
@@ -50,7 +50,7 @@ exports.editPath=function(id,model,callback){
       return false;
     }
     if(!region_id){
-      utils.addError(model,'region_id','აარჩიეთ რეგიონი');
+      utils.addError(model,'region_id','აარჩიეთ რაიონი');
       return false;
     }
     var points=utils.pointsFromPath(path);
