@@ -1,0 +1,10 @@
+<%=table_for @poles, title: @title, icon: '/icons/substation.png', collapsible: true do |t|
+  t.title_action objects_upload_poles_url, label: 'ფაილის ატვირთვა', icon: '/icons/upload-cloud.png'
+  # t.title_action objects_poles_url(format:'xlsx'), label: 'Excel ფორმატში', icon: '/icons/document-excel.png'
+  # t.title_action objects_poles_url(format:'kmz'), label: 'KMZ ფორმატში', icon: '/icons/kmz.png'
+  t.item_action ->(x){objects_pole_url(id:x.id)}, icon: '/icons/eye.png'
+  t.text_field 'kmlid', tag: 'code'
+  t.text_field 'name', url: ->(x){objects_pole_url(id:x.id)}
+  t.text_field 'region.name', i18n: 'region'
+  t.paginate records: 'ჩანაწერი'
+end%>

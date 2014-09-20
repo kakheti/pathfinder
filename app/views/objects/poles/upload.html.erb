@@ -1,0 +1,17 @@
+<h2 class="page-header"><%=@title%></h2>
+
+<div class="text-muted" style="margin-bottom:16px;">
+  ბოძის შესახებ ინფორმაცია უნდა იყოს მოცემული <code>KMZ</code>
+  ან <code>XLSX</code> ფაილის სახით.
+</div>
+
+<%=form_tag request.url, multipart: true do%>
+  <div class="form-group">
+    <label>აარჩიეთ ფაილი:</label>
+    <%=file_field_tag 'data'%>
+  </div>
+  <div>
+    <button class="btn btn-primary" type="submit">შენახვა</button>
+    <%=link_to 'გაუქმება', objects_poles_url, class: ['btn','btn-default']%>
+  </div>
+<%end%>

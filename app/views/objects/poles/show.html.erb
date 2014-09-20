@@ -1,0 +1,13 @@
+<%=view_for @pole, title: @title, icon: '/icons/substation.png', collapsible: true do |f|
+  f.text_field 'kmlid', tag: 'code'
+  f.text_field 'name', tag: 'code'
+  f.number_field 'height', after: 'მეტრი'
+  f.text_field 'fider'
+  f.text_field 'region.name', i18n: 'region', url: region_url(id:@pole.region.id)
+  f.complex_field label: 'კოორდინატები' do |c|
+    c.text_field 'easting', tag: 'code', before: 'E:'
+    c.text_field 'northing', tag: 'code', before: 'N:'
+  end
+  f.text_field 'description'
+  f.map_field 'position'
+end%>
