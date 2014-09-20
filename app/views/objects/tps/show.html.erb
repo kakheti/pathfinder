@@ -1,6 +1,6 @@
 <%=view_for @tp, title: @title, icon: '/icons/substation.png', collapsible: true do |f|
   f.text_field 'kmlid', tag: 'code'
-  f.text_field 'region'
+  #f.text_field 'region'
   f.text_field 'name', tag: 'code'
   f.number_field 'power', after: 'MW'
   f.text_field 'fider'
@@ -8,7 +8,7 @@
     c.text_field 'address_code', tag: 'code'
     c.text_field 'address'
   end
-  #f.text_field 'region.name', i18n: 'region', url: region_url(id:@office.region.id)
+  f.text_field 'region.name', i18n: 'region', url: region_url(id:@tp.region.id)
   f.complex_field label: 'კოორდინატები' do |c|
     c.text_field 'easting', tag: 'code', before: 'E:'
     c.text_field 'northing', tag: 'code', before: 'N:'
