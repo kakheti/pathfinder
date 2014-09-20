@@ -1,5 +1,6 @@
 <%=view_for @tp, title: @title, icon: '/icons/substation.png', collapsible: true do |f|
   f.text_field 'kmlid', tag: 'code'
+  f.text_field 'region'
   f.text_field 'name', tag: 'code'
   f.number_field 'power', after: 'MW'
   f.text_field 'fider'
