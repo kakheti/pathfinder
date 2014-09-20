@@ -1,0 +1,10 @@
+ka:
+  models:
+    objects_pole:
+      kmlid: kmlID
+      name: "ბოძის #"
+      region: რაიონი
+      description: შენიშვნა
+      position: მდებარეობა რუკაზე
+      fider: ფიდერი
+      height: სიმაღლე
