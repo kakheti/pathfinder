@@ -18,4 +18,5 @@
 
 # public/uploads
 /public/uploads/**/**
+/public/tps/**/**
 client/node_modules
