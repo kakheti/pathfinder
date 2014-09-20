@@ -4,8 +4,11 @@
   # t.title_action objects_fiders_url({format:'kmz'}.merge(search: @search)), label: 'KMZ ფორმატში', icon: '/icons/kmz.png'
   t.item_action ->(x){objects_fider_url(id:x.id)}, icon: '/icons/eye.png', turbolink: false
   t.text_field 'kmlid', tag: 'code'
-  t.text_field 'name', url: ->(x){objects_line_url(id:x.id)}, turbolink: false
-  t.text_field 'direction'
+  t.text_field 'name', url: ->(x){objects_fider_url(id:x.id)}, turbolink: false
+  t.complex_field i18n: 'direction' do |c|
+    c.text_field 'start', after: '&rarr;'.html_safe, tag: 'code'
+    c.text_field 'end', tag: 'code'
+  end
   t.text_field 'region.name', i18n: 'region'
   t.number_field 'length', after: 'კმ'
   t.paginate records: 'ჩანაწერი'
