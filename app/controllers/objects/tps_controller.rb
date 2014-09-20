@@ -1,11 +1,11 @@
 # -*- encoding : utf-8 -*-
 require 'zip'
 
-class Objects::OfficesController < ApplicationController
+class Objects::TpsController < ApplicationController
   include Objects::Kml
 
   def index
-    rel=Objects::Office.asc(:kmlid)
+    rel=Objects::Tp.asc(:kmlid)
     respond_to do |format|
       format.html{ @title='სატრანსფორმატორო ჯიხურები'; @tps=rel.paginate(per_page:10, page: params[:page]) }
       format.xlsx{ @tps=rel }
