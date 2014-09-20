@@ -1,12 +1,12 @@
 # -*- encoding : utf-8 -*-
 class RegionsController < ApplicationController
   def index
-    @title='რეგიონები'
+    @title='რაიონები'
     @regions=Region.asc(:name)
   end
 
   def new
-    @title='ახალი რეგიონი'
+    @title='ახალი რაიონი'
     if request.post?
       @region=Region.new(region_params)
       if @region.save(user:current_user)
@@ -18,7 +18,7 @@ class RegionsController < ApplicationController
   end
 
   def edit
-    @title='რეგიონის შეცვლა'
+    @title='რაიონის შეცვლა'
     @region=Region.find(params[:id])
     if request.post?
       if @region.update_attributes(region_params.merge({user:current_user}))
@@ -36,7 +36,7 @@ class RegionsController < ApplicationController
     region=Region.find(params[:id])
     if region.can_delete?
       region.destroy
-      redirect_to regions_url, notice: 'რეგიონი წაშლილია'
+      redirect_to regions_url, notice: 'რაიონი წაშლილია'
     else
       redirect_to region_url(id:region.id), notice: 'წაშლა დაუშვებელია: დაკავშირებული ობიექტები'
     end
@@ -45,7 +45,7 @@ class RegionsController < ApplicationController
   protected
   def nav
     @nav=super
-    @nav['რეგიონები']=regions_url
+    @nav['რაიონები']=regions_url
     if @region
       @nav[@region.name]=region_url(id:@region.id) if action_name=='edit'
       @nav[@title]=nil

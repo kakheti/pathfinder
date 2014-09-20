@@ -1,5 +1,5 @@
 <%=table_for @regions, title:@title, icon: '/icons/region.png', collapsible: true do |t|
-  t.title_action new_region_url, label: 'ახალი რეგიონი', icon: '/icons/region--plus.png'
+  t.title_action new_region_url, label: 'ახალი რაიონი', icon: '/icons/region--plus.png'
   t.edit_action ->(x){edit_region_url(id:x.id)}
   t.delete_action ->(x){delete_region_url(id:x.id)}
   t.text_field 'name', url: ->(x){region_url(id:x.id)}
