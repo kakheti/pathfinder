@@ -15,6 +15,8 @@ var loadObjects = function(type, message) {
 
 API.loadTowers = function() { return loadObjects('towers', 'ანძების ჩამოტვირთვა...'); };
 API.loadSubstations = function() { return loadObjects('substations', 'ქვესადგურების ჩამოტვირთვა...'); };
+API.loadTps = function() { return loadObjects('tps', 'ჯიხურების ჩამოტვირთვა...'); };
+API.loadPoles = function() { return loadObjects('poles', 'ბოძების ჩამოტვირთვა...'); };
 
 API.loadObjectInfo = function(id, type) {
   logger('იტვირთება...');
@@ -69,9 +71,7 @@ var createMap = function(opts) {
   var map = new google.maps.Map( mapElement, mapOptions );
   infoWindow = new google.maps.InfoWindow({ content: '' });
 
-  // new methods for map
-
-  // map.clearObjects = markerClusterer.clearMarkers;
+  ///////////////////////////////////////////////////////////////////////////////
 
   var markerClickListener = function() {
     var contentToString = function(content) {
@@ -102,7 +102,8 @@ var createMap = function(opts) {
       var obj = objects[i];
       var latLng = new google.maps.LatLng(obj.lat, obj.lng);
       var marker = new google.maps.Marker({ position: latLng, icon: icon });
-      marker.id = obj.id; marker.type = type;
+      marker.id = obj.id;
+      marker.type = type;
       google.maps.event.addListener(marker, 'click', markerClickListener);
       markers.push(marker);
     }
@@ -114,18 +115,10 @@ var createMap = function(opts) {
 
   map.showTowers = function(towers) { map.showPointlike(towers, 'towers', '/map/tower.png'); };
   map.showSubstations = function(substations) { map.showPointlike(substations, 'substations', '/map/substation.png'); };
+  map.showTps = function(tps) { map.showPointlike(tps, 'tps', '/map/tp.png') };
+  map.showPoles = function(poles) { map.showPointlike(poles, 'poles', '/map/pole.png') };
 
-  // map.showTowers = function(towers) {
-  //   var markers = [];
-  //   for (var i = 0, l = towers.length; i < l; ++i) {
-  //     var latLng = new google.maps.LatLng(towers[i].lat, towers[i].lng);
-  //     var marker = new google.maps.Marker({ position: latLng, icon: '/map/tower.png' });
-  //     marker.id = towers[i].id; marker.type = 'towers';
-  //     google.maps.event.addListener(marker, 'click', markerClickListener);
-  //     markers.push(marker);
-  //   }
-  //   markerClusterer.addMarkers(markers);
-  // };
+  ///////////////////////////////////////////////////////////////////////////////  
 
   return map;
 };
@@ -16267,7 +16260,11 @@ googlemaps.start().then(googlemaps.create).then(function(map) {
   api.loadTowers()
     .then(map.showTowers)
     .then(api.loadSubstations)
-    .then(map.showSubstations);
+    .then(map.showSubstations)
+    .then(api.loadTps)
+    .then(map.showTps)
+    .then(api.loadPoles)
+    .then(map.showPoles);
 });
 
 },{"./api":1,"./googlemaps":2}]},{},["kedmaps"]);

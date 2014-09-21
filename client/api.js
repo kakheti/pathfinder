@@ -14,6 +14,8 @@ var loadObjects = function(type, message) {
 
 API.loadTowers = function() { return loadObjects('towers', 'ანძების ჩამოტვირთვა...'); };
 API.loadSubstations = function() { return loadObjects('substations', 'ქვესადგურების ჩამოტვირთვა...'); };
+API.loadTps = function() { return loadObjects('tps', 'ჯიხურების ჩამოტვირთვა...'); };
+API.loadPoles = function() { return loadObjects('poles', 'ბოძების ჩამოტვირთვა...'); };
 
 API.loadObjectInfo = function(id, type) {
   logger('იტვირთება...');
