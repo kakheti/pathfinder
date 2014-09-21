@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 require 'geokit'
 
 Geokit::default_units = :kms

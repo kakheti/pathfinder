@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 module DownloadsHelper
   def android_button
     version = Pathfinder::LATEST_APK_VERSION

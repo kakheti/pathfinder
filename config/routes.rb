@@ -82,6 +82,9 @@ Pathfinder::Application.routes.draw do
   end
 
   namespace 'api' do
+    scope '/towers', controller: 'towers' do
+      get '/', action: 'index', as: 'towers'
+    end
   end
 
   root 'site#index'

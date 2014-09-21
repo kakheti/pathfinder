@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 module SearchHelper
   def search_form(search, opts = {})
     has_search = search.present? && search.values.any? { |x| x.present? and x != 'nil' }
