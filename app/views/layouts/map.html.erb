@@ -6,6 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title><%if @title.present?%><%=@title%> &mdash; <%end%>pathfinder</title>
 <%= favicon_link_tag('/favicon.jpg') %>
+<%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
 <%= csrf_meta_tags %>
 </head>
 <body>

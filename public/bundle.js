@@ -6,7 +6,7 @@ var API = {};
 
 var logger = function(message) { if (API.logger) { API.logger(message); } };
 
-API.loadTowers = function(opts) {
+API.loadTowers = function() {
   logger('ანძების ჩატვირთვა...');
   return new Promise(function(resolve, reject) {
     $.get('/api/towers').done(function(data) {
@@ -17,11 +17,29 @@ API.loadTowers = function(opts) {
   });
 };
 
+API.getTowerInfo = function(id) {
+  logger('ინფორმაციის მიღება...');
+  return new Promise(function(resolve, reject) {
+    $.get('/api/towers/' + id).done(function(data) {
+      logger(); resolve(data);
+    }).fail(function(err) {
+      logger(); reject(err);
+    });
+  });
+};
+
+API.getInfo = function(type, id) {
+  if ('tower' === type) {
+    return API.getTowerInfo(id);
+  }
+};
+
 module.exports = API;
 
 },{"bluebird":5,"jquery":39}],2:[function(require,module,exports){
 var Promise = require('bluebird');
 var clusterer = require('lib/markerclusterer');
+var api = require('./api');
 
 var API_URL = 'https://maps.googleapis.com/maps/api/js';
 var DEFAULT_ZOOM = 8;
@@ -29,6 +47,7 @@ var DEFAULT_LAT = 41.9;
 var DEFAULT_LNG = 44.8;
 
 var markerClusterer;
+var infoWindow;
 
 var loadAPI = function(opts) {
   return new Promise(function(resolve, reject) {
@@ -57,22 +76,38 @@ var createMap = function(opts) {
     mapTypeId: google.maps.MapTypeId.ROADMAP,
   };
   var mapElement=document.getElementById(( opts && opts.mapid ) || 'mapregion');
+
   var map = new google.maps.Map( mapElement, mapOptions );
   markerClusterer = new clusterer.MarkerClusterer(map);
+  infoWindow = new google.maps.InfoWindow({ content: '' });
 
   // new methods for map
 
   map.clearObjects = markerClusterer.clearMarkers;
 
+  var markerClickListener = function() {
+    var marker = this;
+    if (marker.content) {
+      infoWindow.setContent(marker.content);
+      infoWindow.open(map, marker);
+    } else {
+      api.getInfo(marker.type, marker.id).then(function(content) {
+        marker.content = content;
+        infoWindow.setContent(marker.content);
+        infoWindow.open(map, marker);
+      });
+    }
+  };
+
   map.showTowers = function(towers) {
     var markers = [];
     for (var i = 0, l = towers.length; i < l; ++i) {
       var latLng = new google.maps.LatLng(towers[i].lat, towers[i].lng);
-      var marker = new google.maps.Marker({
-        position: latLng,
-        draggable: false,
-        icon: '/map/tower.png'
-      });
+      var marker = new google.maps.Marker({ position: latLng, icon: '/map/tower.png' });
+      marker.id = towers[i].id; marker.type = 'tower';
+
+      google.maps.event.addListener(marker, 'click', markerClickListener);
+
       markers.push(marker);
     }
     markerClusterer.addMarkers(markers);
@@ -87,7 +122,7 @@ module.exports = {
   create : createMap,
 };
 
-},{"bluebird":5,"lib/markerclusterer":40}],3:[function(require,module,exports){
+},{"./api":1,"bluebird":5,"lib/markerclusterer":40}],3:[function(require,module,exports){
 /**
  * Copyright (c) 2014 Petka Antonov
  * 

@@ -6,4 +6,9 @@ class Api::TowersController < ApiController
       { id: tower.id.to_s, lat: tower.lat, lng: tower.lng }
     end)
   end
+
+  def info
+    @tower = Objects::Tower.find(params[:id])
+    render layout: false
+  end
 end

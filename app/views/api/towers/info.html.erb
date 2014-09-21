@@ -1,0 +1,22 @@
+<h3>ანძა #<%= @tower.name %></h3>
+<table class="table">
+  <tr>
+    <td><strong>გადამცემი ხაზი</strong></td>
+    <td><%= @tower.linename %></td>
+  </tr>
+  <tr>
+    <td><strong>რაიონი</strong></td>
+    <td><%= @tower.region %></td>
+  </tr>
+  <tr>
+    <td><strong>კოორდინატები</strong></td>
+    <td>
+      E:<code><%= @tower.easting %></code>
+      N:<code><%= @tower.northing %></code>
+    </td>
+  </tr>
+  <tr>
+    <td><strong>შენიშვნა</strong></td>
+    <td><%= @tower.description || '<span class="text-muted">(none)</span>'.html_safe %></td>
+  </tr>
+</table>
