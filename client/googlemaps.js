@@ -1,4 +1,7 @@
 var Promise = require('bluebird');
+var clusterer = require('lib/markerclusterer');
+
+console.log(clusterer);
 
 var API_URL = 'https://maps.googleapis.com/maps/api/js';
 var DEFAULT_ZOOM = 8;
@@ -32,7 +35,23 @@ var createMap = function(opts) {
     mapTypeId: google.maps.MapTypeId.ROADMAP,
   };
   var mapElement=document.getElementById(( opts && opts.mapid ) || 'mapregion');
-  return new google.maps.Map( mapElement, mapOptions );
+  var map = new google.maps.Map( mapElement, mapOptions );
+
+  map.showTowers = function(towers) {
+    var markers = [];
+    for (var i = 0, l = towers.length; i < l; ++i) {
+      var latLng = new google.maps.LatLng(towers[i].lat, towers[i].lng);
+      var marker = new google.maps.Marker({
+        position: latLng,
+        draggable: false,
+        //icon: markerImage
+      });
+      markers.push(marker);
+    }
+    var markerClusterer = new clusterer.MarkerClusterer(map, markers);
+  };
+
+  return map;
 };
 
 module.exports = {
