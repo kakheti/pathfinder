@@ -71,7 +71,7 @@ var createMap = function(opts) {
     for (var i = 0, l = objects.length; i < l; ++i) {
       var obj = objects[i];
       var latLng = new google.maps.LatLng(obj.lat, obj.lng);
-      var marker = new google.maps.Marker({ position: latLng, icon: icon });
+      var marker = new google.maps.Marker({ position: latLng, icon: icon, title: obj.name });
       marker.id = obj.id;
       marker.type = type;
       google.maps.event.addListener(marker, 'click', markerClickListener);

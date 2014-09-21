@@ -3,7 +3,7 @@ class Api::PolesController < ApiController
   def index
     poles = Objects::Pole.all
     render json: (poles.map do |pole|
-      { id: pole.id.to_s, lat: pole.lat, lng: pole.lng }
+      { id: pole.id.to_s, lat: pole.lat, lng: pole.lng, name: pole.name }
     end)
   end
 
