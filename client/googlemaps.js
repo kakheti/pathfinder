@@ -1,8 +1,6 @@
 var Promise = require('bluebird');
 var clusterer = require('lib/markerclusterer');
 
-console.log(clusterer);
-
 var API_URL = 'https://maps.googleapis.com/maps/api/js';
 var DEFAULT_ZOOM = 8;
 var DEFAULT_LAT = 41.9;

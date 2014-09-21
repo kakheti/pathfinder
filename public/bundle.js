@@ -2,25 +2,26 @@ require=(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof requ
 var Promise = require('bluebird');
 var $ = require('jquery');
 
-var loadTowers = function() {
+var API = {};
+
+var logger = function(message) { if (API.logger) { API.logger(message); } };
+
+API.loadTowers = function(opts) {
+  logger('ანძების ჩატვირთვა...');
   return new Promise(function(resolve, reject) {
     $.get('/api/towers').done(function(data) {
-      resolve(data);
+      logger(); resolve(data);
     }).fail(function(err) {
-      reject(err);
+      logger(); reject(err);
     });
   });
 };
 
-module.exports = {
-  loadTowers: loadTowers,
-};
+module.exports = API;
 
 },{"bluebird":5,"jquery":39}],2:[function(require,module,exports){
 var Promise = require('bluebird');
 var clusterer = require('lib/markerclusterer');
-
-console.log(clusterer);
 
 var API_URL = 'https://maps.googleapis.com/maps/api/js';
 var DEFAULT_ZOOM = 8;
@@ -16197,11 +16198,21 @@ module.exports = {
 var googlemaps = require('./googlemaps');
 var api = require('./api');
 
+var logger = function(message) {
+  var el = document.getElementById('messages');
+  if( message ) { el.innerHTML = '<span>' + message + '</span>'; }
+  else { el.innerHTML = ''; }
+};
+
+logger('იტვირთება...');
+
 googlemaps.start().then(googlemaps.create).then(function(map) {
-  console.log('google map initialized');
-  api.loadTowers().then(map.showTowers).catch(function(err) {
-    console.log(err);
-  });
+  map.logger = api.logger = logger;
+  api.loadTowers()
+    .then(map.showTowers)
+    .catch(function(err) {
+      console.log(err);
+    });
 });
 
 },{"./api":1,"./googlemaps":2}]},{},["kedmaps"]);

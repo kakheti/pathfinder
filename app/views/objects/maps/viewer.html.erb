@@ -1,14 +1,29 @@
 <style type="text/css">
+  #mapwrapper {
+    position: absolute;
+    left: 0; right: 0; top: 0; bottom: 0;
+
+  }
   #mapregion {
     position: absolute;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
+    left: 0; right: 0; top: 0; bottom: 0;
+  }
+  #messages {
+    position: relative;
+    text-align: center;
+    z-index: 99;
+  }
+  #messages span {
+    margin: 4px 0 0 0;
+    background: #fce853;
+    padding: 4px 8px;
+    border: 1px solid #ffcc88;
   }
 </style>
 
-<div id="mapregion">
+<div id="mapwrapper">
+  <div id="mapregion"></div>
+  <div id="messages"><span>loading...</span></div>
 </div>
 
 <script type="text/javascript" src="/bundle.js"></script>

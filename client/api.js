@@ -1,16 +1,19 @@
 var Promise = require('bluebird');
 var $ = require('jquery');
 
-var loadTowers = function() {
+var API = {};
+
+var logger = function(message) { if (API.logger) { API.logger(message); } };
+
+API.loadTowers = function(opts) {
+  logger('ანძების ჩატვირთვა...');
   return new Promise(function(resolve, reject) {
     $.get('/api/towers').done(function(data) {
-      resolve(data);
+      logger(); resolve(data);
     }).fail(function(err) {
-      reject(err);
+      logger(); reject(err);
     });
   });
 };
 
-module.exports = {
-  loadTowers: loadTowers,
-};
+module.exports = API;

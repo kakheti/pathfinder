@@ -1,9 +1,19 @@
 var googlemaps = require('./googlemaps');
 var api = require('./api');
 
+var logger = function(message) {
+  var el = document.getElementById('messages');
+  if( message ) { el.innerHTML = '<span>' + message + '</span>'; }
+  else { el.innerHTML = ''; }
+};
+
+logger('იტვირთება...');
+
 googlemaps.start().then(googlemaps.create).then(function(map) {
-  console.log('google map initialized');
-  api.loadTowers().then(map.showTowers).catch(function(err) {
-    console.log(err);
-  });
+  map.logger = api.logger = logger;
+  api.loadTowers()
+    .then(map.showTowers)
+    .catch(function(err) {
+      console.log(err);
+    });
 });
