@@ -75,15 +75,18 @@ Pathfinder::Application.routes.draw do
       match '/upload', action: 'upload', via: ['get','post'], as: 'upload_fiders'
     end
     scope '/maps', controller: 'maps' do
-      #get '/editor', action: 'editor', as: 'map_editor'
       get '/viewer', action: 'viewer', as: 'map_viewer'
-      #match 'generate_images', action: 'generate_images', as: 'generate_images', via: ['get', 'post']
     end
   end
 
   namespace 'api' do
     scope '/towers', controller: 'towers' do
-      get '/', action: 'index', as: 'towers'
+      get '/', action: 'index'
+      get '/:id', action: 'info'
+    end
+    scope '/substations', controller: 'substations' do
+      get '/', action: 'index'
+      get '/:id', action: 'info'
     end
   end
 

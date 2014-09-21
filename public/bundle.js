@@ -6,32 +6,21 @@ var API = {};
 
 var logger = function(message) { if (API.logger) { API.logger(message); } };
 
-API.loadTowers = function() {
-  logger('ანძების ჩატვირთვა...');
+var loadObjects = function(type, message) {
+  logger(message);
   return new Promise(function(resolve, reject) {
-    $.get('/api/towers').done(function(data) {
-      logger(); resolve(data);
-    }).fail(function(err) {
-      logger(); reject(err);
-    });
+    $.get('/api/' + type).done(function(data) { logger(); resolve(data); }).fail(function(err) { logger(); reject(err); });
   });
 };
 
-API.getTowerInfo = function(id) {
-  logger('ინფორმაციის მიღება...');
-  return new Promise(function(resolve, reject) {
-    $.get('/api/towers/' + id).done(function(data) {
-      logger(); resolve(data);
-    }).fail(function(err) {
-      logger(); reject(err);
-    });
-  });
-};
+API.loadTowers = function() { return loadObjects('towers', 'ანძების ჩამოტვირთვა...'); };
+API.loadSubstations = function() { return loadObjects('substations', 'ქვესადგურების ჩამოტვირთვა...'); };
 
-API.getInfo = function(type, id) {
-  if ('tower' === type) {
-    return API.getTowerInfo(id);
-  }
+API.loadObjectInfo = function(id, type) {
+  logger('იტვირთება...');
+  return new Promise(function(resolve, reject) {
+    $.get('/api/' + type + '/' + id).done(function(data){ logger(); resolve(data); }).fail(function(err){ logger(); reject(err); });
+  });
 };
 
 module.exports = API;
@@ -86,33 +75,55 @@ var createMap = function(opts) {
   map.clearObjects = markerClusterer.clearMarkers;
 
   var markerClickListener = function() {
+    var contentToString = function(content) {
+      if (typeof content === 'string') {
+        return content
+      } else if (typeof content.error === 'string') {
+        return content.error;
+      } else {
+        return content.toString();
+      }
+    };
     var marker = this;
     if (marker.content) {
-      infoWindow.setContent(marker.content);
+      infoWindow.setContent(contentToString(marker.content));
       infoWindow.open(map, marker);
     } else {
-      api.getInfo(marker.type, marker.id).then(function(content) {
+      api.loadObjectInfo(marker.id, marker.type).then(function(content) {
         marker.content = content;
-        infoWindow.setContent(marker.content);
+        infoWindow.setContent(contentToString(marker.content));
         infoWindow.open(map, marker);
       });
     }
   };
 
-  map.showTowers = function(towers) {
+  map.showPointlike = function(objects, type, icon) {
     var markers = [];
-    for (var i = 0, l = towers.length; i < l; ++i) {
-      var latLng = new google.maps.LatLng(towers[i].lat, towers[i].lng);
-      var marker = new google.maps.Marker({ position: latLng, icon: '/map/tower.png' });
-      marker.id = towers[i].id; marker.type = 'tower';
-
+    for (var i = 0, l = objects.length; i < l; ++i) {
+      var obj = objects[i];
+      var latLng = new google.maps.LatLng(obj.lat, obj.lng);
+      var marker = new google.maps.Marker({ position: latLng, icon: icon });
+      marker.id = obj.id; marker.type = type;
       google.maps.event.addListener(marker, 'click', markerClickListener);
-
       markers.push(marker);
     }
     markerClusterer.addMarkers(markers);
-    window.clusterer = markerClusterer;
   };
+
+  map.showTowers = function(towers) { map.showPointlike(towers, 'towers', '/map/tower.png'); };
+  map.showSubstations = function(substations) { map.showPointlike(substations, 'substations', '/map/substation.png'); };
+
+  // map.showTowers = function(towers) {
+  //   var markers = [];
+  //   for (var i = 0, l = towers.length; i < l; ++i) {
+  //     var latLng = new google.maps.LatLng(towers[i].lat, towers[i].lng);
+  //     var marker = new google.maps.Marker({ position: latLng, icon: '/map/tower.png' });
+  //     marker.id = towers[i].id; marker.type = 'towers';
+  //     google.maps.event.addListener(marker, 'click', markerClickListener);
+  //     markers.push(marker);
+  //   }
+  //   markerClusterer.addMarkers(markers);
+  // };
 
   return map;
 };
@@ -16253,6 +16264,8 @@ googlemaps.start().then(googlemaps.create).then(function(map) {
   map.logger = api.logger = logger;
   api.loadTowers()
     .then(map.showTowers)
+    .then(api.loadSubstations)
+    .then(map.showSubstations)
     .catch(function(err) {
       console.log(err);
     });

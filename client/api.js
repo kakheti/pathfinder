@@ -5,32 +5,21 @@ var API = {};
 
 var logger = function(message) { if (API.logger) { API.logger(message); } };
 
-API.loadTowers = function() {
-  logger('ანძების ჩატვირთვა...');
+var loadObjects = function(type, message) {
+  logger(message);
   return new Promise(function(resolve, reject) {
-    $.get('/api/towers').done(function(data) {
-      logger(); resolve(data);
-    }).fail(function(err) {
-      logger(); reject(err);
-    });
+    $.get('/api/' + type).done(function(data) { logger(); resolve(data); }).fail(function(err) { logger(); reject(err); });
   });
 };
 
-API.getTowerInfo = function(id) {
-  logger('ინფორმაციის მიღება...');
-  return new Promise(function(resolve, reject) {
-    $.get('/api/towers/' + id).done(function(data) {
-      logger(); resolve(data);
-    }).fail(function(err) {
-      logger(); reject(err);
-    });
-  });
-};
+API.loadTowers = function() { return loadObjects('towers', 'ანძების ჩამოტვირთვა...'); };
+API.loadSubstations = function() { return loadObjects('substations', 'ქვესადგურების ჩამოტვირთვა...'); };
 
-API.getInfo = function(type, id) {
-  if ('tower' === type) {
-    return API.getTowerInfo(id);
-  }
+API.loadObjectInfo = function(id, type) {
+  logger('იტვირთება...');
+  return new Promise(function(resolve, reject) {
+    $.get('/api/' + type + '/' + id).done(function(data){ logger(); resolve(data); }).fail(function(err){ logger(); reject(err); });
+  });
 };
 
 module.exports = API;

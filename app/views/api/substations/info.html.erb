@@ -1,0 +1,18 @@
+<h3>ქ/ს &mdash; <%= @substation.name %></h3>
+<table class="table">
+  <tr>
+    <td><strong>რაიონი</strong></td>
+    <td><%= @substation.region %></td>
+  </tr>
+  <tr>
+    <td><strong>კოორდინატები</strong></td>
+    <td>
+      E:<code><%= @substation.easting %></code>
+      N:<code><%= @substation.northing %></code>
+    </td>
+  </tr>
+  <tr>
+    <td><strong>შენიშვნა</strong></td>
+    <td><%= @substation.description || '<span class="text-muted">(none)</span>'.html_safe %></td>
+  </tr>
+</table>
