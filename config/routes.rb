@@ -88,6 +88,14 @@ Pathfinder::Application.routes.draw do
       get '/', action: 'index'
       get '/:id', action: 'info'
     end
+    scope '/tps', controller: 'tps' do
+      get '/', action: 'index'
+      get '/:id', action: 'info'
+    end
+    scope '/poles', controller: 'poles' do
+      get '/', action: 'index'
+      get '/:id', action: 'info'
+    end
   end
 
   root 'site#index'
