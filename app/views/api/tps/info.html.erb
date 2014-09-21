@@ -1,0 +1,28 @@
+<h3>სატრ. ჯიხური #<%= @tp.name %></h3>
+<table class="table">
+  <tr>
+    <td><strong>რაიონი</strong></td>
+    <td><%= @tp.region %></td>
+  </tr>
+  <tr>
+    <td><strong>ფიდერი</strong></td>
+    <td><%= @tp.fider %></td>
+  </tr>
+  <tr>
+    <td><strong>სიმძლავრე</strong></td>
+    <td><code><%= @tp.power %></code> მეტრი</td>
+  </tr>
+  <tr>
+    <td><strong>კოორდინატები</strong></td>
+    <td>
+      E:<code><%= @tp.easting %></code>
+      N:<code><%= @tp.northing %></code>
+    </td>
+  </tr>
+  <tr>
+    <td><strong>შენიშვნა</strong></td>
+    <td><%= @tp.description || '<span class="text-muted">(none)</span>'.html_safe %></td>
+  </tr>
+</table>
+
+<img src="<%= @tp.picture %>" height="200" />
