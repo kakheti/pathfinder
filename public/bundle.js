@@ -28,6 +28,8 @@ var DEFAULT_ZOOM = 8;
 var DEFAULT_LAT = 41.9;
 var DEFAULT_LNG = 44.8;
 
+var markerClusterer;
+
 var loadAPI = function(opts) {
   return new Promise(function(resolve, reject) {
     var script = document.createElement('script');
@@ -56,6 +58,11 @@ var createMap = function(opts) {
   };
   var mapElement=document.getElementById(( opts && opts.mapid ) || 'mapregion');
   var map = new google.maps.Map( mapElement, mapOptions );
+  markerClusterer = new clusterer.MarkerClusterer(map);
+
+  // new methods for map
+
+  map.clearObjects = markerClusterer.clearMarkers;
 
   map.showTowers = function(towers) {
     var markers = [];
@@ -64,11 +71,12 @@ var createMap = function(opts) {
       var marker = new google.maps.Marker({
         position: latLng,
         draggable: false,
-        //icon: markerImage
+        icon: '/map/tower.png'
       });
       markers.push(marker);
     }
-    var markerClusterer = new clusterer.MarkerClusterer(map, markers);
+    markerClusterer.addMarkers(markers);
+    window.clusterer = markerClusterer;
   };
 
   return map;
