@@ -1,0 +1,26 @@
+<h3>ბოძი #<%= @pole.name %></h3>
+<table class="table">
+  <tr>
+    <td><strong>რაიონი</strong></td>
+    <td><%= @pole.region %></td>
+  </tr>
+  <tr>
+    <td><strong>ფიდერი</strong></td>
+    <td><%= @pole.fider %></td>
+  </tr>
+  <tr>
+    <td><strong>სიმაღლე</strong></td>
+    <td><code><%= @pole.height %></code> მეტრი</td>
+  </tr>
+  <tr>
+    <td><strong>კოორდინატები</strong></td>
+    <td>
+      E:<code><%= @pole.easting %></code>
+      N:<code><%= @pole.northing %></code>
+    </td>
+  </tr>
+  <tr>
+    <td><strong>შენიშვნა</strong></td>
+    <td><%= @pole.description || '<span class="text-muted">(none)</span>'.html_safe %></td>
+  </tr>
+</table>
