@@ -35,7 +35,7 @@ var DEFAULT_ZOOM = 8;
 var DEFAULT_LAT = 41.9;
 var DEFAULT_LNG = 44.8;
 
-var markerClusterer;
+var markerClusterers = {};
 var infoWindow;
 
 var loadAPI = function(opts) {
@@ -67,12 +67,11 @@ var createMap = function(opts) {
   var mapElement=document.getElementById(( opts && opts.mapid ) || 'mapregion');
 
   var map = new google.maps.Map( mapElement, mapOptions );
-  markerClusterer = new clusterer.MarkerClusterer(map);
   infoWindow = new google.maps.InfoWindow({ content: '' });
 
   // new methods for map
 
-  map.clearObjects = markerClusterer.clearMarkers;
+  // map.clearObjects = markerClusterer.clearMarkers;
 
   var markerClickListener = function() {
     var contentToString = function(content) {
@@ -107,7 +106,10 @@ var createMap = function(opts) {
       google.maps.event.addListener(marker, 'click', markerClickListener);
       markers.push(marker);
     }
-    markerClusterer.addMarkers(markers);
+    if ( !markerClusterers[type] ) {
+      markerClusterers[type] = new clusterer.MarkerClusterer(map);
+    }
+    markerClusterers[type].addMarkers(markers);
   };
 
   map.showTowers = function(towers) { map.showPointlike(towers, 'towers', '/map/tower.png'); };
@@ -16265,10 +16267,7 @@ googlemaps.start().then(googlemaps.create).then(function(map) {
   api.loadTowers()
     .then(map.showTowers)
     .then(api.loadSubstations)
-    .then(map.showSubstations)
-    .catch(function(err) {
-      console.log(err);
-    });
+    .then(map.showSubstations);
 });
 
 },{"./api":1,"./googlemaps":2}]},{},["kedmaps"]);

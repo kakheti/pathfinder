@@ -14,8 +14,5 @@ googlemaps.start().then(googlemaps.create).then(function(map) {
   api.loadTowers()
     .then(map.showTowers)
     .then(api.loadSubstations)
-    .then(map.showSubstations)
-    .catch(function(err) {
-      console.log(err);
-    });
+    .then(map.showSubstations);
 });
