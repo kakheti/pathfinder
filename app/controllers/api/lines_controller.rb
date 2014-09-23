@@ -11,7 +11,10 @@ class Api::LinesController < ApiController
             type: 'LineString',
             coordinates: line.points.map{|p| [p.lng,p.lat] }
           },
-          id: line.id.to_s
+          id: line.id.to_s,
+          properties: {
+            class: line.class.name
+          }
         }
       end
     }

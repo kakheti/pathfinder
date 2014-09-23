@@ -123,9 +123,23 @@ var createMap = function(opts) {
     map.data.loadGeoJson('/api/lines');
   };
 
+  map.data.setStyle(styleFunction);
+
   ///////////////////////////////////////////////////////////////////////////////  
 
   return map;
+};
+
+var styleFunction = function(f) {
+  var clazz = f.getProperty('class');
+  console.log(clazz);
+  if (clazz === 'Objects::Fider') {
+    return {
+      strokeColor: '#FFA504',
+      strokeWeight: 3,
+      strokeOpacity: 0.5
+    };
+  }
 };
 
 module.exports = {
