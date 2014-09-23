@@ -96,6 +96,9 @@ Pathfinder::Application.routes.draw do
       get '/', action: 'index'
       get '/:id', action: 'info'
     end
+    scope '/lines', controller: 'lines' do
+      get '/', action: 'index'
+    end
   end
 
   root 'site#index'
