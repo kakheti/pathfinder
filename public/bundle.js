@@ -108,7 +108,8 @@ var createMap = function(opts) {
       markers.push(marker);
     }
     if ( !markerClusterers[type] ) {
-      markerClusterers[type] = new clusterer.MarkerClusterer(map);
+      markerClusterers[type] = new clusterer.MarkerClusterer(map, {});
+      markerClusterers[type].setMinimumClusterSize(30);
     }
     markerClusterers[type].addMarkers(markers);
   };
@@ -117,6 +118,10 @@ var createMap = function(opts) {
   map.showSubstations = function(substations) { map.showPointlike(substations, 'substations', '/map/substation.png'); };
   map.showTps = function(tps) { map.showPointlike(tps, 'tps', '/map/tp.png') };
   map.showPoles = function(poles) { map.showPointlike(poles, 'poles', '/map/pole.png') };
+  map.loadLines = function() {
+    console.log('loading loadGeoJson');
+    map.data.loadGeoJson('/api/lines');
+  };
 
   ///////////////////////////////////////////////////////////////////////////////  
 
@@ -16264,7 +16269,8 @@ googlemaps.start().then(googlemaps.create).then(function(map) {
     .then(api.loadTps)
     .then(map.showTps)
     .then(api.loadPoles)
-    .then(map.showPoles);
+    .then(map.showPoles)
+    .then(map.loadLines);
 });
 
 },{"./api":1,"./googlemaps":2}]},{},["kedmaps"]);
