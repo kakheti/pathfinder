@@ -139,6 +139,12 @@ var styleFunction = function(f) {
       strokeWeight: 3,
       strokeOpacity: 0.5
     };
+  } else if (clazz === 'Objects::Line') {
+    return {
+      strokeColor: '#FF0000',
+      strokeWeight: 5,
+      strokeOpacity: 0.5
+    };
   }
 };
 
