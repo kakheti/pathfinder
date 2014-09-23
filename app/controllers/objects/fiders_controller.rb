@@ -42,7 +42,7 @@ class Objects::FidersController < ApplicationController
   protected
   def nav
     @nav=super
-    @nav['ჯიხურები']=objects_fiders_url
+    @nav['ფიდერები']=objects_fiders_url
     @nav[@title]=nil unless ['index'].include?(action_name)
   end
 
