@@ -1,5 +1,4 @@
 # -*- encoding : utf-8 -*-
-require 'RMagick'
 require 'xml'
 
 class Objects::Tower
