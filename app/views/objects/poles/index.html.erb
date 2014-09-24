@@ -5,6 +5,7 @@
   t.item_action ->(x){objects_pole_url(id:x.id)}, icon: '/icons/eye.png'
   t.text_field 'kmlid', tag: 'code'
   t.text_field 'name', url: ->(x){objects_pole_url(id:x.id)}
+  t.text_field 'fider'
   t.text_field 'region.name', i18n: 'region'
   t.paginate records: 'ჩანაწერი'
 end%>
