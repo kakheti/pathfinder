@@ -21,9 +21,7 @@ class Objects::Substation
       name=placemark.find('./kml:name',kmlns).first.content
       # description content
       descr=placemark.find('./kml:description',kmlns).first.content
-      s1='<td>რაიონი</td>'
-      idx1=descr.index(s1)+s1.length
-      regname=descr[idx1..-1].match(/<td>([^<])*<\/td>/)[0][4..-6].strip
+      regname = Objects::Kml.get_property(descr, 'რეგიონი')
       region=Region.get_by_name(regname)
       # end of description section
       coord=placemark.find('./kml:Point/kml:coordinates',kmlns).first.content
