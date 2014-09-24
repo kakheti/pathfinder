@@ -87,6 +87,7 @@ class Objects::TowersController < ApplicationController
   end
 
   def upload_kml(file)
+    Objects::Tower.delete_all
     kml = file.get_input_stream.read
     Objects::Tower.from_kml(kml)
   end

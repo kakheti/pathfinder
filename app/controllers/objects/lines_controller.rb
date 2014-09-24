@@ -67,6 +67,7 @@ class Objects::LinesController < ApplicationController
   end
 
   def upload_kml(file)
+    Objects::Line.delete_all
     kml = file.get_input_stream.read
     Objects::Line.from_kml(kml)
   end

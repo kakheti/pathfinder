@@ -66,6 +66,7 @@ class Objects::SubstationsController < ApplicationController
   end
 
   def upload_kml(file)
+    Objects::Substation.delete_all
     kml = file.get_input_stream.read
     Objects::Substation.from_kml(kml)
   end
