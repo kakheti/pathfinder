@@ -135,7 +135,6 @@ var createMap = function(opts) {
   map.showTps = function(tps) { map.showPointlike(tps, 'tps', '/map/tp.png') };
   map.showPoles = function(poles) { map.showPointlike(poles, 'poles', '/map/pole.png') };
   map.loadLines = function() {
-    console.log('loading loadGeoJson');
     map.data.loadGeoJson('/api/lines');
   };
 
@@ -165,7 +164,6 @@ var styleFunction = function(f) {
 
 var markerZoomer = function() {
   var zoom = map.getZoom();
-  console.log(map.getZoom());
   for(prop in MIN_ZOOM) {
     var clust = markerClusterers[prop];
     var min_zoom = MIN_ZOOM[prop]
