@@ -100,15 +100,11 @@ var createMap = function(opts) {
 
   google.maps.event.addListener(map, 'zoom_changed', markerZoomer);
 
-  var poleImage = new google.maps.MarkerImage('/map/pole.png', null, new google.maps.Point(0,0));
-
   map.showTowers = function(towers) { map.showPointlike(towers, 'towers', '/map/tower.png'); };
   map.showSubstations = function(substations) { map.showPointlike(substations, 'substations', '/map/substation.png'); };
   map.showTps = function(tps) { map.showPointlike(tps, 'tps', '/map/tp.png') };
-  map.showPoles = function(poles) { map.showPointlike(poles, 'poles', poleImage) };
-  map.loadLines = function() {
-    map.data.loadGeoJson('/api/lines');
-  };
+  map.showPoles = function(poles) { map.showPointlike(poles, 'poles', '/map/pole.png') };
+  map.loadLines = function() { map.data.loadGeoJson('/api/lines'); };
 
   map.data.setStyle(styleFunction);
 
