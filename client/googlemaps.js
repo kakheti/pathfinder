@@ -8,12 +8,19 @@ var DEFAULT_LAT = 41.9;
 var DEFAULT_LNG = 45.1;
 
 var MIN_CLUSER_SIZES = {
-  towers: 20,
-  substations: 50,
-  tps: 50,
-  poles: 100,
+  towers: 30,
+  substations: 10,
+  tps: 30,
+  poles: 50,
 };
 
+var MIN_ZOOM = {
+  towers: 13,
+  tps: 14,
+  poles: 16,
+};
+
+var map;
 var markerClusterers = {};
 var infoWindow;
 
@@ -45,7 +52,7 @@ var createMap = function(opts) {
   };
   var mapElement=document.getElementById(( opts && opts.mapid ) || 'mapregion');
 
-  var map = new google.maps.Map( mapElement, mapOptions );
+  map = new google.maps.Map( mapElement, mapOptions );
   infoWindow = new google.maps.InfoWindow({ content: '' });
 
   ///////////////////////////////////////////////////////////////////////////////
@@ -85,15 +92,13 @@ var createMap = function(opts) {
       markers.push(marker);
     }
     if ( !markerClusterers[type] ) {
-      markerClusterers[type] = new clusterer.MarkerClusterer(map, {});
+      markerClusterers[type] = new clusterer.MarkerClusterer(map);
       markerClusterers[type].setMinimumClusterSize(MIN_CLUSER_SIZES[type]);
     }
     markerClusterers[type].addMarkers(markers);
   };
 
-  // google.maps.event.addListener(map, 'zoom_changed', function() {
-  //   // TODO:
-  // });
+  google.maps.event.addListener(map, 'zoom_changed', markerZoomer);
 
   map.showTowers = function(towers) { map.showPointlike(towers, 'towers', '/map/tower.png'); };
   map.showSubstations = function(substations) { map.showPointlike(substations, 'substations', '/map/substation.png'); };
@@ -125,6 +130,26 @@ var styleFunction = function(f) {
       strokeWeight: 5,
       strokeOpacity: 0.5
     };
+  }
+};
+
+var markerZoomer = function() {
+  var zoom = map.getZoom();
+  console.log(map.getZoom());
+  for(prop in MIN_ZOOM) {
+    var clust = markerClusterers[prop];
+    var min_zoom = MIN_ZOOM[prop]
+    if (min_zoom <= zoom) {
+      if (clust.savedMarkers) {
+        clust.addMarkers(clust.savedMarkers);
+        clust.savedMarkers = null;
+      }
+    } else {
+      if (!clust.savedMarkers) {
+        clust.savedMarkers = clust.getMarkers();
+        clust.clearMarkers();
+      }
+    }
   }
 };
 
