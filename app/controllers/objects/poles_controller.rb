@@ -60,6 +60,7 @@ class Objects::PolesController < ApplicationController
   end
 
   def upload_kml(file)
+    Objects::Pole.delete_all
     kml = file.get_input_stream.read
     Objects::Pole.from_kml(kml)
   end
