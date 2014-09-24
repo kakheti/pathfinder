@@ -61,6 +61,7 @@ class Objects::FidersController < ApplicationController
 
   def upload_kml(file)
     kml = file.get_input_stream.read
+    Objects::Fider.destroy_all
     Objects::Fider.from_kml(kml)
   end
 

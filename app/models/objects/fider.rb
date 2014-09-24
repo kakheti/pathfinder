@@ -6,8 +6,11 @@ class Objects::Fider
   include Objects::Kml
   include Objects::LengthProperty
 
+  field :kmlid, type: String
   field :name, type: String
   field :description, type: String
+  field :start, type: String
+  field :end, type: String
   belongs_to :region
   embeds_many :points, class_name: 'Objects::FiderPoint'
 
@@ -21,33 +24,29 @@ class Objects::Fider
     end
   end
 
-  def self.by_name(name); Objects::Fider.where(name: name).first || Objects::Fider.create(name: name) end
-
   def self.from_kml(xml)
     parser=XML::Parser.string xml
     doc=parser.parse ; root=doc.child
     kmlns="kml:#{KMLNS}"
     placemarks=doc.child.find '//kml:Placemark',kmlns
-    fider = nil
     placemarks.each do |placemark|
       id = placemark.attributes['id']
+      obj=Objects::Fider.where(kmlid:id).first || Objects::Fider.create(kmlid:id)
       coords=placemark.find('./kml:MultiGeometry/kml:LineString/kml:coordinates',kmlns).first.content
       # description content
       descr=placemark.find('./kml:description',kmlns).first.content
-      name = Objects::Kml.get_property(descr, 'ფიდერის დასახელება')
-      region=Region.get_by_name('დედოფლისწყარო') # TODO
+      obj.name = Objects::Kml.get_property(descr, 'ფიდერის დასახელება')
+      obj.start = Objects::Kml.get_property(descr, 'საწყისი ბოძი')
+      obj.end = Objects::Kml.get_property(descr, 'ბოძამდე')
+      obj.region=Region.get_by_name('დედოფლისწყარო') # TODO
       # end of description section
-      if fider.blank? or fider.name != name
-        fider = Objects::Fider.by_name(name)
-      end
-      fider.region = region
-      fider.save
+      obj.points.destroy_all
       coords.split(' ').each do |coord|
-        point = Objects::FiderPoint.new(fider: fider)
+        point=obj.points.new(fider: obj)
         point.set_coordinate(coord)
         point.save
       end
-      fider.calc_length!
+      obj.calc_length!
     end
   end
 
