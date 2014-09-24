@@ -107,6 +107,8 @@ GEM
     prawn_rails (0.0.11)
       prawn (>= 0.11.1)
       railties (>= 3.0.0)
+    puma (2.9.1)
+      rack (>= 1.1, < 2.0)
     rack (1.5.2)
     rack-protection (1.5.3)
       rack
@@ -131,7 +133,6 @@ GEM
     redis (3.1.0)
     redis-namespace (1.5.1)
       redis (~> 3.0, >= 3.0.4)
-    rmagick (2.13.3)
     roo (1.13.2)
       nokogiri
       rubyzip
@@ -203,8 +204,8 @@ DEPENDENCIES
   mongoid (~> 4.0)
   prawn
   prawn_rails
+  puma
   rails (~> 4.0)
-  rmagick
   roo
   rubyzip
   sass-rails (~> 4.0.2)

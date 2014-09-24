@@ -33,9 +33,16 @@ var clusterer = require('lib/markerclusterer');
 var api = require('./api');
 
 var API_URL = 'https://maps.googleapis.com/maps/api/js';
-var DEFAULT_ZOOM = 8;
+var DEFAULT_ZOOM = 9;
 var DEFAULT_LAT = 41.9;
-var DEFAULT_LNG = 44.8;
+var DEFAULT_LNG = 45.1;
+
+var MIN_CLUSER_SIZES = {
+  towers: 20,
+  substations: 50,
+  tps: 50,
+  poles: 100,
+};
 
 var markerClusterers = {};
 var infoWindow;
@@ -109,10 +116,14 @@ var createMap = function(opts) {
     }
     if ( !markerClusterers[type] ) {
       markerClusterers[type] = new clusterer.MarkerClusterer(map, {});
-      markerClusterers[type].setMinimumClusterSize(30);
+      markerClusterers[type].setMinimumClusterSize(MIN_CLUSER_SIZES[type]);
     }
     markerClusterers[type].addMarkers(markers);
   };
+
+  // google.maps.event.addListener(map, 'zoom_changed', function() {
+  //   // TODO:
+  // });
 
   map.showTowers = function(towers) { map.showPointlike(towers, 'towers', '/map/tower.png'); };
   map.showSubstations = function(substations) { map.showPointlike(substations, 'substations', '/map/substation.png'); };
@@ -132,7 +143,6 @@ var createMap = function(opts) {
 
 var styleFunction = function(f) {
   var clazz = f.getProperty('class');
-  console.log(clazz);
   if (clazz === 'Objects::Fider') {
     return {
       strokeColor: '#FFA504',
