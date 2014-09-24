@@ -23,15 +23,9 @@ class Objects::Tower
       name=placemark.find('./kml:name',kmlns).first.content
       # description content
       descr=placemark.find('./kml:description',kmlns).first.content
-      s1='<td>რაიონი</td>'
-      s2='<td>ანძის ტიპი</td>'
-      s3='<td>გადამცემი ხაზი</td>'
-      idx1=descr.index(s1)+s1.length
-      idx2=descr.index(s2)+s2.length
-      idx3=descr.index(s3)+s3.length
-      regname=descr[idx1..-1].match(/<td>([^<])*<\/td>/)[0][4..-6].strip
-      category=descr[idx2..-1].match(/<td>([^<])*<\/td>/)[0][4..-6].strip
-      linename=descr[idx3..-1].match(/<td>([^<])*<\/td>/)[0][4..-6].strip
+      regname = Objects::Kml.get_property(descr, 'რეგიონი')
+      category = Objects::Kml.get_property(descr, 'ანძის ტიპი')
+      linename = Objects::Kml.get_property(descr, 'გადამცემი ხაზი')
       region=Region.get_by_name(regname)
       # end of description section
       coord=placemark.find('./kml:Point/kml:coordinates',kmlns).first.content
