@@ -42,7 +42,7 @@ class Objects::PolesController < ApplicationController
   protected
   def nav
     @nav=super
-    @nav['ჯიხურები']=objects_poles_url
+    @nav['ბოძები']=objects_poles_url
     @nav[@title]=nil unless ['index'].include?(action_name)
   end
 
