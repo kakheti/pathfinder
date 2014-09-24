@@ -34,7 +34,7 @@ class Objects::Line
       coords=placemark.find('./kml:MultiGeometry/kml:LineString/kml:coordinates',kmlns).first.content
       # description content
       descr=placemark.find('./kml:description',kmlns).first.content
-      s1='<td>რაიონი</td>'
+      s1='<td>რეგიონი</td>'
       s2='<td>მიმართულება</td>'
       idx1=descr.index(s1)+s1.length
       idx2=descr.index(s2)+s2.length

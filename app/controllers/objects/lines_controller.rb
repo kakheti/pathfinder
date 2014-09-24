@@ -61,15 +61,15 @@ class Objects::LinesController < ApplicationController
   def upload_kmz(file)
     Zip::File.open file do |zip_file|
       zip_file.each do |entry|
-        if entry.name == 'doc.kml'
-          tempfile = Tempfile.new(entry.name)
-          zip_file.extract(entry, tempfile){ true }
-          upload_kml(tempfile)
-        end
+        upload_kml(entry) if 'kml'==entry.name[-3..-1]
       end
     end
   end
 
-  def upload_kml(file); KMLConverter.perform_async('Objects::Line', file.path.to_s) end
+  def upload_kml(file)
+    kml = file.get_input_stream.read
+    Objects::Line.from_kml(kml)
+  end
+
   def upload_xlsx(file); XLSConverter.perform_async('Objects::Line', file.path.to_s) end
 end
