@@ -126,6 +126,7 @@ var createMap = function(opts) {
       markerClusterers[type].setMinimumClusterSize(MIN_CLUSER_SIZES[type]);
     }
     markerClusterers[type].addMarkers(markers);
+    markerZoomer();
   };
 
   google.maps.event.addListener(map, 'zoom_changed', markerZoomer);
@@ -166,12 +167,12 @@ var markerZoomer = function() {
     var clust = markerClusterers[prop];
     var min_zoom = MIN_ZOOM[prop]
     if (min_zoom <= zoom) {
-      if (clust.savedMarkers) {
+      if (clust && clust.savedMarkers) {
         clust.addMarkers(clust.savedMarkers);
         clust.savedMarkers = null;
       }
     } else {
-      if (!clust.savedMarkers) {
+      if (clust && !clust.savedMarkers) {
         clust.savedMarkers = clust.getMarkers();
         clust.clearMarkers();
       }
