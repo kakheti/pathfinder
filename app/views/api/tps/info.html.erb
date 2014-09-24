@@ -5,12 +5,16 @@
     <td><%= @tp.region %></td>
   </tr>
   <tr>
+    <td><strong>მფლობელი</strong></td>
+    <td><%= @tp.owner %></td>
+  </tr>
+  <tr>
     <td><strong>ფიდერი</strong></td>
     <td><%= @tp.fider %></td>
   </tr>
   <tr>
     <td><strong>სიმძლავრე</strong></td>
-    <td><code><%= @tp.power %></code> მეტრი</td>
+    <td><code><%= @tp.power %></code> კვტ</td>
   </tr>
   <tr>
     <td><strong>კოორდინატები</strong></td>
@@ -18,6 +22,10 @@
       E:<code><%= @tp.easting %></code>
       N:<code><%= @tp.northing %></code>
     </td>
+  </tr>
+  <tr>
+    <td><strong>მისამართი</strong></td>
+    <td><%= @tp.address %></td>
   </tr>
   <tr>
     <td><strong>შენიშვნა</strong></td>

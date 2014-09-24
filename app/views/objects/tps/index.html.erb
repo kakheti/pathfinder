@@ -4,8 +4,9 @@
   # t.title_action objects_tps_url(format:'kmz'), label: 'KMZ ფორმატში', icon: '/icons/kmz.png'
   t.item_action ->(x){objects_tp_url(id:x.id)}, icon: '/icons/eye.png'
   t.text_field 'kmlid', tag: 'code'
+  t.text_field 'owner'
   t.text_field 'name', url: ->(x){objects_tp_url(id:x.id)}
   t.text_field 'address'
-  t.text_field 'region.name', i18n: 'region'
+  #t.text_field 'region.name', i18n: 'region'
   t.paginate records: 'ჩანაწერი'
 end%>
