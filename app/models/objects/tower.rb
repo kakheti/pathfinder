@@ -24,15 +24,17 @@ class Objects::Tower
       # description content
       descr=placemark.find('./kml:description',kmlns).first.content
       regname = Objects::Kml.get_property(descr, 'რეგიონი')
-      category = Objects::Kml.get_property(descr, 'ანძის ტიპი')
-      linename = Objects::Kml.get_property(descr, 'გადამცემი ხაზი')
-      region=Region.get_by_name(regname)
-      # end of description section
-      coord=placemark.find('./kml:Point/kml:coordinates',kmlns).first.content
-      obj=Objects::Tower.where(kmlid:id).first || Objects::Tower.create(kmlid:id)
-      obj.name=name ; obj.region=region ; obj.set_coordinate(coord)
-      obj.category=category ; obj.linename=linename
-      obj.save
+      if 'კახეთი' == regname
+        category = Objects::Kml.get_property(descr, 'ანძის ტიპი')
+        linename = Objects::Kml.get_property(descr, 'გადამცემი ხაზი')
+        region=Region.get_by_name(regname)
+        # end of description section
+        coord=placemark.find('./kml:Point/kml:coordinates',kmlns).first.content
+        obj=Objects::Tower.where(kmlid:id).first || Objects::Tower.create(kmlid:id)
+        obj.name=name ; obj.region=region ; obj.set_coordinate(coord)
+        obj.category=category ; obj.linename=linename
+        obj.save
+      end
     end
   end
 
