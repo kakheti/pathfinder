@@ -3,3 +3,6 @@ ka:
     region:
       name: დასახელება
       description: აღწერილობა
+      residential_count: საყოფაცხოვრებო
+      comercial_count: არა საყოფაცხ.
+      usage_average: საშუალო მოხმარება

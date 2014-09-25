@@ -85,6 +85,7 @@ class Objects::TpsController < ApplicationController
         tp.save
       end
     end
+    Region.each {|region| region.make_summaries }
   end
 
   def upload_xlsx(file)

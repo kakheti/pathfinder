@@ -5,6 +5,9 @@ class Region
   include Sys::Userstamps
   field :name, type: String
   field :description, type: String
+  field :residential_count, type: Integer, default: 0
+  field :comercial_count, type: Integer, default: 0
+  field :usage_average, type: Float, default: 0
   has_many :lines, class_name: 'Objects::Line'
   has_many :towers, class_name: 'Objects::Tower'
   has_many :offices, class_name: 'Objects::Office'
@@ -21,4 +24,11 @@ class Region
   def poles_limited; self.poles.paginate(per_page:50) end
   def fiders_limited; self.fiders.paginate(per_page:50) end
   def to_s; self.name end
+
+  def make_summaries
+    self.residential_count = self.tps.sum(:residential_count)
+    self.comercial_count = self.tps.sum(:comercial_count)
+    self.usage_average = self.tps.sum(:usage_average)
+    self.save
+  end
 end

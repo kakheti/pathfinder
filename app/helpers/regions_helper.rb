@@ -29,6 +29,9 @@ module RegionsHelper
       v.tab title: 'ზოგადი', icon:icon do |v|
         v.text_field 'name', required: true
         v.text_field 'description'
+        v.text_field 'residential_count', tag: 'code', after: 'აბონენტი'
+        v.text_field 'comercial_count', tag: 'code', after: 'აბონენტი'
+        v.number_field 'usage_average', tag: 'code', after: 'კვტ.სთ.'
         v.timestamps
       end
       v.tab title: "ოფისები &mdash; <strong>#{region.offices.count}</strong>".html_safe, icon: '/icons/office.png' do |v|
