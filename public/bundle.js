@@ -35,7 +35,7 @@ var api = require('./api');
 var API_URL = 'https://maps.googleapis.com/maps/api/js';
 var DEFAULT_ZOOM = 9;
 var DEFAULT_LAT = 41.9;
-var DEFAULT_LNG = 45.1;
+var DEFAULT_LNG = 45.8;
 
 var MIN_CLUSER_SIZES = {
   towers: 30,
