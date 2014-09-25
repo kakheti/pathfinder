@@ -41,7 +41,7 @@ class Objects::Tp
       obj.address_code = Objects::Kml.get_property(descr, 'საკადასტრო კოდი')
       obj.address = Objects::Kml.get_property(descr, 'მთლიანი მისამართი').to_ka(:all)
       obj.description = Objects::Kml.get_property(descr, 'შენიშვნა')
-      obj.region=Region.get_by_name(Objects::Kml.get_property(descr, 'მუნიციპალიტეტი').to_ka(:all))
+      obj.region = Region.get_by_name(Objects::Kml.get_property(descr, 'მუნიციპალიტეტი').to_ka(:all))
       # end of description section
       coord=placemark.find('./kml:Point/kml:coordinates',kmlns).first.content
       obj.set_coordinate(coord)

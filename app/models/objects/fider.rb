@@ -38,7 +38,7 @@ class Objects::Fider
       obj.name = Objects::Kml.get_property(descr, 'ფიდერის დასახელება')
       obj.start = Objects::Kml.get_property(descr, 'საწყისი ბოძი')
       obj.end = Objects::Kml.get_property(descr, 'ბოძამდე')
-      obj.region=Region.get_by_name('დედოფლისწყარო') # TODO
+      obj.region = Region.get_by_name(Objects::Kml.get_property(descr, 'მუნიციპალიტეტი').to_ka(:all))
       # end of description section
       obj.points.destroy_all
       coords.split(' ').each do |coord|

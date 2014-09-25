@@ -28,7 +28,7 @@ class Objects::Pole
       obj.height = Objects::Kml.get_property(descr, 'ბოძის სიმაღლე').to_f
       obj.fider = Objects::Kml.get_property(descr, 'ფიდერის დასახელება').to_ka(:all)
       # obj.description = Objects::Kml.get_property(descr, 'შენიშვნა')
-      obj.region=Region.get_by_name('დედოფლისწყარო') # TODO
+      obj.region = Region.get_by_name(Objects::Kml.get_property(descr, 'მუნიციპალიტეტი').to_ka(:all))
       # end of description section
       coord=placemark.find('./kml:Point/kml:coordinates',kmlns).first.content
       obj.set_coordinate(coord)
