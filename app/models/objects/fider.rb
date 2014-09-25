@@ -35,7 +35,7 @@ class Objects::Fider
       coords=placemark.find('./kml:MultiGeometry/kml:LineString/kml:coordinates',kmlns).first.content
       # description content
       descr=placemark.find('./kml:description',kmlns).first.content
-      obj.name = Objects::Kml.get_property(descr, 'ფიდერის დასახელება')
+      obj.name = Objects::Kml.get_property(descr, 'ფიდერის დასახელება').to_ka(:all)
       obj.start = Objects::Kml.get_property(descr, 'საწყისი ბოძი')
       obj.end = Objects::Kml.get_property(descr, 'ბოძამდე')
       obj.region = Region.get_by_name(Objects::Kml.get_property(descr, 'მუნიციპალიტეტი').to_ka(:all))
