@@ -19,7 +19,9 @@ module RegionsHelper
         when 'substations' then 2
         when 'towers' then 3
         when 'lines' then 4
-        when 'sys' then 5
+        when 'tps' then 5
+        when 'poles' then 6
+        when 'fiders' then 7
         else 0 end
     view_for region, title: title, collapsible: true, icon: icon, selected_tab: idx do |v|
       v.edit_action edit_region_url(id:region.id)
@@ -27,6 +29,7 @@ module RegionsHelper
       v.tab title: 'ზოგადი', icon:icon do |v|
         v.text_field 'name', required: true
         v.text_field 'description'
+        v.timestamps
       end
       v.tab title: "ოფისები &mdash; <strong>#{region.offices.count}</strong>".html_safe, icon: '/icons/office.png' do |v|
         v.table_field 'offices', table: {title:'ოფისები', icon: '/icons/office.png'} do |field|
@@ -66,9 +69,36 @@ module RegionsHelper
           end
         end
       end
-      v.tab title: 'სისტემური',icon:'/icons/traffic-cone.png' do |v|
-        v.timestamps
-        v.userstamps
+      v.tab title: "სატრ.ჯიხურები &mdash; <strong>#{region.tps.count}</strong>".html_safe, icon: '/icons/substation.png' do |v|
+        v.table_field 'tps', table: {title:'სატრანსფორმატორი ჯიხურები', icon: '/icons/substation.png'} do |field|
+          field.table do |t|
+            t.text_field 'kmlid', tag: 'code'
+            t.text_field 'owner'
+            t.text_field 'name', url: ->(x){objects_tp_url(id:x.id)}
+            t.text_field 'address'
+            t.item_action ->(x){objects_tp_url(id:x.id)}, icon: '/icons/eye.png'
+          end
+        end
+      end
+      v.tab title: "ბოძები &mdash; <strong>#{region.poles.count}</strong>".html_safe, icon: '/icons/substation.png' do |v|
+        v.table_field 'poles_limited', table: {title:'ბოძები', icon: '/icons/substation.png'} do |field|
+          field.table do |t|
+            t.text_field 'kmlid', tag: 'code'
+            t.text_field 'name', url: ->(x){objects_pole_url(id:x.id)}
+            t.text_field 'fider'
+            t.item_action ->(x){objects_pole_url(id:x.id)}, icon: '/icons/eye.png'
+          end
+        end
+      end
+      v.tab title: "ფიდერები &mdash; <strong>#{region.fiders.count}</strong>".html_safe, icon: '/icons/substation.png' do |v|
+        v.table_field 'fiders_limited', table: {title:'ფიდერები', icon: '/icons/substation.png'} do |field|
+          field.table do |t|
+            t.text_field 'kmlid', tag: 'code'
+            t.text_field 'name', url: ->(x){objects_fider_url(id:x.id)}
+            t.number_field 'length', after: 'კმ'
+            t.item_action ->(x){objects_fider_url(id:x.id)}, icon: '/icons/eye.png'
+          end
+        end
       end
     end
   end
