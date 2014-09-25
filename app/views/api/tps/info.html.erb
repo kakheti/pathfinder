@@ -9,6 +9,18 @@
     <td><%= @tp.owner %></td>
   </tr>
   <tr>
+    <td><strong>საყოფაცხოვრებო</strong></td>
+    <td><code><%= number_with_precision @tp.residential_count, separator:'.', delimiter: ',', precision: 0 %></code> აბონენტი</td>
+  </tr>
+  <tr>
+    <td><strong>არა საყოფაცხოვრებო</strong></td>
+    <td><code><%= number_with_precision @tp.comercial_count, separator:'.', delimiter: ',', precision: 0 %></code> აბონენტი</td>
+  </tr>
+  <tr>
+    <td><strong>საშ.მოხმარება</strong></td>
+    <td><code><%= number_with_precision @tp.usage_average, separator:'.', delimiter: ',', precision: 2 %></code> კვტ.საათი</td>
+  </tr>
+  <tr>
     <td><strong>ფიდერი</strong></td>
     <td><%= @tp.fider %></td>
   </tr>
