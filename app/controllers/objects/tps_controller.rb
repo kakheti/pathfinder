@@ -34,6 +34,14 @@ class Objects::TpsController < ApplicationController
     end
   end
 
+  def upload_stat
+    @title = 'ტპ-ს სტატისტიკის ატვირთვა'
+    if request.post?
+      uploadstat_xlsx(params[:data].tempfile)
+      redirect_to objects_tps_url, notice: 'მონაცემები ატვირთულია'
+    end
+  end
+
   def show
     @title='სატრანსფორმატორო ჯიხური'
     @tp=Objects::Tp.find(params[:id])
@@ -63,6 +71,20 @@ class Objects::TpsController < ApplicationController
     Objects::Tp.destroy_all
     kml = file.get_input_stream.read
     Objects::Tp.from_kml(kml)
+  end
+
+  def uploadstat_xlsx(file)
+    sheet=Roo::Spreadsheet.open(file.path, extension: 'xlsx')
+    (2..sheet.last_row).each do |row|
+      tpname = sheet.cell('A', row)
+      tp = Objects::Tp.where(name: tpname).first
+      if tp
+        tp.residential_count = sheet.cell('B', row).to_i rescue 0
+        tp.comercial_count = sheet.cell('C', row).to_i rescue 0
+        tp.usage_average = sheet.cell('D', row).to_f rescue 0
+        tp.save
+      end
+    end
   end
 
   def upload_xlsx(file)

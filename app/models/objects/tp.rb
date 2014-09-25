@@ -15,6 +15,9 @@ class Objects::Tp
   field :fider, type: String
   field :address_code, type: String
   field :address, type: String
+  field :residential_count, type: Integer, default: 0
+  field :comercial_count, type: Integer, default: 0
+  field :usage_average, type: Float, default: 0
   belongs_to :region
 
   def picture; "/tps/#{self.picture_id}.jpg" end

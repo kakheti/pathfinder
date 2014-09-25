@@ -4,6 +4,9 @@
   f.text_field 'name', tag: 'code'
   f.number_field 'power', after: 'MW'
   f.text_field 'fider'
+  f.text_field 'residential_count', tag: 'code', after: 'აბონენტი'
+  f.text_field 'comercial_count', tag: 'code', after: 'აბონენტი'
+  f.number_field 'usage_average', after: 'კვტ.საათი'
   f.complex_field i18n: 'address' do |c|
     c.text_field 'address_code', tag: 'code'
     c.text_field 'address'

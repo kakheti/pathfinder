@@ -12,3 +12,6 @@ ka:
       power: სიმძლავრე
       picture: გამოსახულება
       owner: მფლობელი
+      residential_count: საყოფაცხოვრებო
+      comercial_count: კომერციული
+      usage_average: საშუალო მოხმარება

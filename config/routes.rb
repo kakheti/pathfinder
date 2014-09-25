@@ -63,6 +63,7 @@ Pathfinder::Application.routes.draw do
       get '/', action: 'index', as: 'tps'
       get '/show/:id', action: 'show', as: 'tp'
       match '/upload', action: 'upload', via: ['get','post'], as: 'upload_tps'
+      match '/upload_stat', action: 'upload_stat', via: ['get', 'post'], as: 'upload_tpstat'
     end
     scope '/poles', controller: 'poles' do
       get '/', action: 'index', as: 'poles'
