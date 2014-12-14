@@ -12,7 +12,7 @@ class Objects::Fider
   embeds_many :lines, class_name: 'Objects::FiderLine'
 
   def self.from_kml(xml)
-    parser=XML::Parser.string xml
+    # parser=XML::Parser.string xml
     # doc=parser.parse ; root=doc.child
     # kmlns="kml:#{KMLNS}"
     # placemarks=doc.child.find '//kml:Placemark',kmlns
@@ -34,7 +34,7 @@ class Objects::Fider
     #     point.save
     #   end
     #   obj.calc_length!
-    end
+    # end
   end
 
   def to_kml(xml)

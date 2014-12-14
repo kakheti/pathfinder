@@ -37,6 +37,11 @@
       </p>
       <p>
         <i class="fa fa-bolt"></i>
+        <%=link_to 'ფიდერები', objects_fiders_url%>
+        <span class="label label-info"><%= Objects::Fider.count %></span>
+      </p>
+      <p>
+        <i class="fa fa-bolt"></i>
         <%=link_to 'ანძები', objects_towers_url%>
         <span class="label label-info"><%= Objects::Tower.count %></span>
       </p>
@@ -58,17 +63,12 @@
         <%=link_to 'ბოძები', objects_poles_url%>
         <span class="label label-info"><%= Objects::Pole.count %></span>
       </p>
-      <p>
-        <i class="fa fa-bolt"></i>
-        <%=link_to 'ფიდერები', objects_fiders_url%>
-        <span class="label label-info"><%= Objects::Fider.count %></span>
-      </p>
     </div>
   </div>
 </div>
 
+<div class="row">
   <div class="col-sm-6">
     <%= render partial: 'layouts/admin' if sys_admin? %>
   </div>
-
 </div>
