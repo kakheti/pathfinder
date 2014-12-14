@@ -37,11 +37,6 @@
       </p>
       <p>
         <i class="fa fa-bolt"></i>
-        <%=link_to 'ფიდერები', objects_fiders_url%>
-        <span class="label label-info"><%= Objects::Fider.count %></span>
-      </p>
-      <p>
-        <i class="fa fa-bolt"></i>
         <%=link_to 'ანძები', objects_towers_url%>
         <span class="label label-info"><%= Objects::Tower.count %></span>
       </p>
@@ -49,6 +44,11 @@
         <i class="fa fa-bolt"></i>
         <%=link_to 'გადამცემი ხაზები', objects_lines_url%>
         <span class="label label-info"><%= Objects::Line.count %></span>
+      </p>
+      <p>
+        <i class="fa fa-bolt"></i>
+        <%=link_to 'ფიდერები', objects_fiders_url%>
+        <span class="label label-info"><%= Objects::Fider.count %></span>
       </p>
     </div>
     <div class="col-xs-4">
