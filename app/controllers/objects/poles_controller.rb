@@ -7,7 +7,7 @@ class Objects::PolesController < ApplicationController
   def index
     rel=Objects::Pole.asc(:kmlid)
     respond_to do |format|
-      format.html{ @title='ბოძები'; @poles=rel.paginate(per_page:10, page: params[:page]) }
+      format.html{ @title='6-10კვ ბოძები'; @poles=rel.paginate(per_page:10, page: params[:page]) }
       format.xlsx{ @poles=rel }
       format.kmz do
         @poles=rel
@@ -22,7 +22,7 @@ class Objects::PolesController < ApplicationController
   end
 
   def upload
-    @title='ფაილის ატვირთვა: ბოძები'
+    @title='ფაილის ატვირთვა: 6-10კვ ბოძები'
     if request.post?
       f=params[:data].original_filename
       case File.extname(f).downcase
@@ -35,14 +35,14 @@ class Objects::PolesController < ApplicationController
   end
 
   def show
-    @title='ბოძი'
+    @title='6-10კვ ბოძი'
     @pole=Objects::Pole.find(params[:id])
   end
 
   protected
   def nav
     @nav=super
-    @nav['ბოძები']=objects_poles_url
+    @nav['6-10კვ ბოძები']=objects_poles_url
     @nav[@title]=nil unless ['index'].include?(action_name)
   end
 
