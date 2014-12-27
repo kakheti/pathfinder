@@ -11,30 +11,36 @@ class Objects::Fider
   belongs_to :region
   embeds_many :lines, class_name: 'Objects::FiderLine'
 
+  index({ name: 1 })
+  index({ region_id: 1 })
+
+  def self.by_name(name); Objects::Fider.where(name: name).first || Objects::Fider.create(name: name) end
+
   def self.from_kml(xml)
-    # parser=XML::Parser.string xml
-    # doc=parser.parse ; root=doc.child
-    # kmlns="kml:#{KMLNS}"
-    # placemarks=doc.child.find '//kml:Placemark',kmlns
-    # placemarks.each do |placemark|
-    #   id = placemark.attributes['id']
-    #   obj=Objects::Fider.where(kmlid:id).first || Objects::Fider.create(kmlid:id)
-    #   coords=placemark.find('./kml:MultiGeometry/kml:LineString/kml:coordinates',kmlns).first.content
-    #   # description content
-    #   descr=placemark.find('./kml:description',kmlns).first.content
-    #   obj.name = Objects::Kml.get_property(descr, 'ფიდერის დასახელება').to_ka(:all)
-    #   obj.start = Objects::Kml.get_property(descr, 'საწყისი ბოძი')
-    #   obj.end = Objects::Kml.get_property(descr, 'ბოძამდე')
-    #   obj.region = Region.get_by_name(Objects::Kml.get_property(descr, 'მუნიციპალიტეტი').to_ka(:all))
-    #   # end of description section
-    #   obj.points.destroy_all
-    #   coords.split(' ').each do |coord|
-    #     point=obj.points.new(fider: obj)
-    #     point.set_coordinate(coord)
-    #     point.save
-    #   end
-    #   obj.calc_length!
-    # end
+    parser=XML::Parser.string xml
+    doc=parser.parse ; root=doc.child
+    kmlns="kml:#{KMLNS}"
+    placemarks=doc.child.find '//kml:Placemark',kmlns
+    placemarks.each do |placemark|
+      id = placemark.attributes['id']
+      descr=placemark.find('./kml:description',kmlns).first.content
+      fider = Objects::Fider.by_name(Objects::Kml.get_property(descr, 'ფიდერის დასახელება').to_ka(:all))
+      # add line
+      line = Objects::FiderLine.create(fider: fider)
+      line.start = Objects::Kml.get_property(descr, 'საწყისი ბოძი')
+      line.end = Objects::Kml.get_property(descr, 'ბოძამდე')
+      coords = placemark.find('./kml:MultiGeometry/kml:LineString/kml:coordinates',kmlns).first.content
+      coords.split(' ').each do |coord|
+        point = line.points.new(line: line)
+        point.set_coordinate(coord)
+        point.save
+      end
+      line.region = Region.get_by_name(Objects::Kml.get_property(descr, 'მუნიციპალიტეტი').to_ka(:all))
+      line.calc_length!
+      line.save
+      fider.region = line.region
+      fider.save
+    end
   end
 
   def to_kml(xml)
@@ -56,6 +62,8 @@ class Objects::Fider
     #   end
     # end
   end
+
+  def length; self.lines.sum(:length) end
 end
 
 class Objects::FiderLine
