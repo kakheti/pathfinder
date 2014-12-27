@@ -1,12 +1,22 @@
-<%=view_for @fider, title: @title, icon: '/icons/line.png', collapsible: true do |f|
-  f.text_field 'name', required: true
-  f.text_field 'region.name', i18n: 'region', url: region_url(id:@fider.region.id), required: true
-  # f.complex_field i18n: 'direction' do |c|
-  #   c.text_field 'start', after: '&rarr;'.html_safe, tag: 'code'
-  #   c.text_field 'end', tag: 'code'
-  # end
-  f.text_field 'description'
-  f.text_field 'lines.count', i18n: 'lines', tag: 'code'
-  f.number_field 'length', after: 'კმ'
+<%=view_for @fider, title: @title, icon: '/icons/line2.png', collapsible: true do |f|
+  f.tab title: 'ძირითადი', icon: '/icons/line2.png' do |f|
+    f.text_field 'name', required: true
+    f.text_field 'region.name', i18n: 'region', url: region_url(id:@fider.region.id), required: true
+    
+    f.text_field 'description'
+    f.text_field 'lines.count', i18n: 'lines', tag: 'code'
+    f.number_field 'length', after: 'კმ'
+  end
+  f.tab title: "ხაზები &mdash; <strong>#{@fider.lines.size}</strong>".html_safe, icon: '/icons/line.png' do |f|
+    f.table_field 'lines' do |lines|
+      lines.table do |t|
+        t.complex_field label: 'მიმამრთულება' do |c|
+          c.text_field 'start', after: '&rarr;'.html_safe, tag: 'code'
+          c.text_field 'end', tag: 'code'
+        end
+        t.number_field 'length', after: 'კმ', label: 'სიგრძე'
+      end
+    end
+  end
 end%>
 <%= render partial: '/layouts/paths', locals: {paths: @fider.lines, direction: false} %>
