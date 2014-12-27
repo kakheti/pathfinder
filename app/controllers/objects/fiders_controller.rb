@@ -39,6 +39,16 @@ class Objects::FidersController < ApplicationController
     @fider=Objects::Fider.find(params[:id])
   end
 
+  def find
+    @title = 'ფიდერი'
+    @fider = Objects::Fider.where(name: params[:name]).first
+    if @fider
+      render action: 'show'
+    else
+      render text: "ფიდერი \"#{params[:name]}\" ვერ მოიძებნა"
+    end
+  end
+
   protected
   def nav
     @nav=super
