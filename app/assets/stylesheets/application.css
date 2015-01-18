@@ -4,6 +4,10 @@
  *= require_tree .
  */
 
+#content {
+  margin-top: 64px;
+}
+
 @media print {
   a[href]:after {
     content: none !important;
