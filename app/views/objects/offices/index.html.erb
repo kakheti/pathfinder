@@ -1,11 +1,27 @@
-<%=table_for @offices, title: @title, icon: '/icons/office.png', collapsible: true do |t|
-  t.title_action objects_upload_offices_url, label: 'ფაილის ატვირთვა', icon: '/icons/upload-cloud.png'
-  t.title_action objects_offices_url(format:'xlsx'), label: 'Excel ფორმატში', icon: '/icons/document-excel.png'
-  t.title_action objects_offices_url(format:'kmz'), label: 'KMZ ფორმატში', icon: '/icons/kmz.png'
-  t.item_action ->(x){objects_office_url(id:x.id)}, icon: '/icons/eye.png'
-  t.text_field 'kmlid', tag: 'code'
-  t.text_field 'name', url: ->(x){objects_office_url(id:x.id)}
-  t.text_field 'address'
-  t.text_field 'region.name', i18n: 'region'
-  t.paginate records: 'ჩანაწერი'
-end%>
+<div class="page-header">
+  <div class="pull-right">
+    <a href="<%= objects_upload_offices_url %>" class="btn btn-default"><i class="fa fa-upload"></i> ფაილის ატვირთვა</a>
+  </div>
+  <h2><%= @title %> <code><%= @offices.total_entries %></code></h2>
+</div>
+<% if @offices.any? %>
+  <table class="table table-bordered table-hover">
+    <% @offices.each do |office| %>
+      <tr>
+        <td>
+          <strong><%= link_to office.name, objects_office_url(office) %></strong>
+          <% if office.address %>
+            &mdash;
+            <span class="text-muted"><%= office.address %></span>
+          <% end %>
+        </td>
+        <td>
+          <%= link_to office.region.name, region_url(office.region, tab: 'offices') %>
+        </td>
+      </tr>
+    <% end %>
+  </table>
+  <%= will_paginate @offices %>
+<% else %>
+  <%= render partial: '/data/no_data' %>
+<% end %>

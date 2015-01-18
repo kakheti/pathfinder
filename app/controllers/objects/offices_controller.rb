@@ -7,7 +7,7 @@ class Objects::OfficesController < ApplicationController
   def index
     rel=Objects::Office.asc(:kmlid)
     respond_to do |format|
-      format.html{ @title='ოფისები'; @offices=rel.paginate(per_page:10, page: params[:page]) }
+      format.html{ @title='ოფისები'; @offices=rel.paginate(per_page:15, page: params[:page]) }
       format.xlsx{ @offices=rel }
       format.kmz do
         @offices=rel

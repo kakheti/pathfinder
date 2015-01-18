@@ -45,6 +45,8 @@ module DataHelper
     case tab
     when 'substations'
       render partial: '/objects/substations/table', locals: { data: data }
+    when 'offices'
+      render partial: '/objects/offices/table', locals: { data: data }
     else
       render partial: '/data/no_template'
     end
