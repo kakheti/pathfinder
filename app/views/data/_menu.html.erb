@@ -1,4 +1,3 @@
-<% current_tab = params[:tab] || 'main' %>
 <ul class="nav nav-pills nav-stacked">
   <% menu_data.each do |m| %>
     <li class="<%= m[:tab] == current_tab ? 'active' : 'common' %>">
