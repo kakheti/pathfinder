@@ -11,7 +11,7 @@
     <% data.each do |substation| %>
       <tr>
         <td>
-          <%= link_to substation.name, objects_substations_url(substation) %>
+          <%= link_to substation.name, objects_substation_url(substation) %>
           <span class="text-muted"><%= substation.description %></span>
         </td>
       </tr>

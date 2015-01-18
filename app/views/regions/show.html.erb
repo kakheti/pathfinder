@@ -7,11 +7,11 @@
 </div>
 
 <div class="row">
-  <div class="col-sm-9">
-    <%= render_data(@region) %>
-  </div>
   <div class="col-sm-3">
     <%= render_data_menu(@region, ['offices', 'substations', 'towers', 'lines', 'tps', 'poles', 'fiders']) %>
+  </div>
+  <div class="col-sm-9">
+    <%= render_data(@region) %>
   </div>
 </div>
 
