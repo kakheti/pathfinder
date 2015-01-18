@@ -1,0 +1,22 @@
+<div>
+  <div class="pull-right compact-pagination">
+    <%= will_paginate data %>
+  </div>
+  <h3>
+    ქვესადგურები <code><%= data.total_entries %></code>
+  </h3>
+</div>
+<% if data.present? %>
+  <table class="table">
+    <% data.each do |substation| %>
+      <tr>
+        <td>
+          <%= link_to substation.name, objects_substations_url(substation) %>
+          <span class="text-muted"><%= substation.description %></span>
+        </td>
+      </tr>
+    <% end %>
+  </table>
+<% else %>
+  <%= render partial: '/data/no_data' %>
+<% end %>

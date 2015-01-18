@@ -41,10 +41,10 @@ module DataHelper
   end
 
   def subobject_render(main_object, tab)
-    data = main_object.send(tab.to_sym)
+    data = main_object.send(tab.to_sym).paginate(per_page: 15, page: params[:page])
     case tab
     when 'substations'
-      render partial: '/objects/substations/table', data: main_object.substations
+      render partial: '/objects/substations/table', locals: { data: data }
     else
       render partial: '/data/no_template'
     end
