@@ -1,0 +1,23 @@
+<% region = data %>
+<table class="table table-bordered table-hover">
+  <tr>
+    <td class="text-muted" width="100">დასახელება</td>
+    <td><%= region.name %></td>
+  </tr>
+  <tr>
+    <td class="text-muted">შენიშვნა</td>
+    <td class="text-muted"><%= region.description %></td>
+  </tr>
+  <tr>
+    <td class="text-muted">საყოფაცხოვრებო</td>
+    <td><code><%= region.residential_count %></code> აბონენტი</td>
+  </tr>
+  <tr>
+    <td class="text-muted">არა საყოფაცხ.</td>
+    <td><code><%= region.comercial_count %></code> აბონენტი</td>
+  </tr>
+  <tr>
+    <td class="text-muted">საშ. მოხმარება</td>
+    <td><code><%= region.usage_average %></code> კვტ.სთ.</td>
+  </tr>
+</table>
