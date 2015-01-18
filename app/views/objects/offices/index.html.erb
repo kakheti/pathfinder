@@ -6,6 +6,12 @@
 </div>
 <% if @offices.any? %>
   <table class="table table-bordered table-hover">
+    <thead>
+      <tr>
+        <th>ოფისი</th>
+        <th>რაიონი</th>
+      </tr>
+    </thead>
     <% @offices.each do |office| %>
       <tr>
         <td>
