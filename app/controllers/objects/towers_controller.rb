@@ -15,8 +15,8 @@ class Objects::TowersController < ApplicationController
       # rel = rel.where(linename: @search[:linename].mongonize) if @search[:linename].present?
     end
     respond_to do |format|
-      format.html { @title='ანძები' ; @towers=rel.asc(:name).paginate(per_page:10, page: params[:page]) }
-      format.xlsx{ @towers= rel.asc(:name) }
+      format.html { @title='ანძები' ; @towers=rel.asc(:line_id, :name).paginate(per_page:10, page: params[:page]) }
+      format.xlsx{ @towers= rel.asc(:line_id, :name) }
       format.kmz do
         @towers=rel
         kml = kml_document do |xml|
