@@ -1,11 +1,26 @@
-<%=view_for @substation, title: @title, icon: '/icons/substation.png', collapsible: true do |f|
-  f.text_field 'kmlid', tag: 'code'
-  f.text_field 'name'
-  f.text_field 'region.name', i18n: 'region', url: region_url(id:@substation.region.id)
-  f.complex_field label: 'კოორდინატები' do |c|
-    c.text_field 'easting', tag: 'code', before: 'E:'
-    c.text_field 'northing', tag: 'code', before: 'N:'
-  end
-  f.text_field 'description'
-  f.map_field 'position'
-end%>
+<h2 class="page-header"><%= @substation.name %></h2>
+
+<table class="table table-bordered table-hover">
+  <tr>
+    <td class="text-muted" width="150">დასახელება</td>
+    <td><%= @substation.name %></td>
+  </tr>
+  <tr>
+    <td class="text-muted">შენიშვნა</td>
+    <td><%= @substation.description %></td>
+  </tr>
+  <tr>
+    <td class="text-muted">რაიონი</td>
+    <td><%= link_to @substation.region.name, region_url(@substation.region, tab: 'substations') %></td>
+  </tr>
+  <tr>
+    <td class="text-muted">კოორდინატები</td>
+    <td>
+      E: <code><%= @substation.easting %></code>;
+      N: <code><%= @substation.northing %></code>
+    </td>
+  </tr>
+</table>
+
+<h3 class="page-header">მდებარეობა რუკაზე</h3>
+<%= render partial: '/data/points_map', locals: { points: [ @substation.location ] } %>
