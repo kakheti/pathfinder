@@ -7,4 +7,4 @@
   f.text_field 'points.count', i18n: 'points', tag: 'code'
   f.number_field 'length', after: 'კმ'
 end%>
-<%= render partial: '/layouts/paths', locals: {paths: [ @line ], direction: false} %>
+<%= render partial: '/data/paths_map', locals: { paths: [ @line ], direction: false } %>
