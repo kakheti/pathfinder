@@ -13,7 +13,7 @@ module DataHelper
     current_tab = params[:tab] || 'main'
     if current_tab == 'main'
       class_name = main_object.class.name.downcase.pluralize
-      render partial: "/#{class_name}/main", locals: { data: main_object }
+      render partial: "/#{class_name.gsub('::','/')}/main", locals: { data: main_object }
     else
       subobject_render(main_object, current_tab)
     end
@@ -24,6 +24,8 @@ module DataHelper
   def tab_url(main_object, tab)
     if main_object.is_a?(Region)
       region_url(main_object, tab: tab)
+    elsif main_object.is_a?(Objects::Line)
+      objects_line_url(main_object, tab: tab)
     end
   end
 
@@ -47,6 +49,8 @@ module DataHelper
       render partial: '/objects/substations/table', locals: { data: data }
     when 'offices'
       render partial: '/objects/offices/table', locals: { data: data }
+    when 'lines'
+      render partial: '/objects/lines/table', locals: { data: data }
     else
       render partial: '/data/no_template'
     end

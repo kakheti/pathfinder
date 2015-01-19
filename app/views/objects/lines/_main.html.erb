@@ -1,31 +1,30 @@
-<h2 class="page-header"><%= @line.name %></h2>
-
+<% line = data %>
 <table class="table table-hover table-bordered">
   <tr>
     <td width="150" class="text-muted">დასახელება</td>
-    <td><%= @line.name %></td>
+    <td><%= line.name %></td>
   </tr>
   <tr>
     <td class="text-muted">მიმართულება</td>
-    <td><%= @line.direction %></td>
+    <td><%= line.direction %></td>
   </tr>
   <tr>
     <td class="text-muted">შენიშვნა</td>
-    <td><%= @line.description %></td>
+    <td><%= line.description %></td>
   </tr>
   <tr>
     <td class="text-muted">რაიონი</td>
-    <td><%= link_to @line.region.name, region_url(@line.region, tab: 'lines') %></td>
+    <td><%= link_to line.region.name, region_url(line.region, tab: 'lines') %></td>
   </tr>
   <tr>
     <td class="text-muted">წერტილები</td>
-    <td><code><%= @line.points.count %></code> წერტილი</td>
+    <td><code><%= line.points.count %></code> წერტილი</td>
   </tr>
   <tr>
     <td class="text-muted">სიგრძე</td>
-    <td><code><%= number_with_precision @line.length %></code> კმ</td>
+    <td><code><%= number_with_precision line.length %></code> კმ</td>
   </tr>
 </table>
 
 <h3 class="page-header">მდებარეობა რუკაზე</h3>
-<%= render partial: '/data/paths_map', locals: { paths: [ @line ], direction: false } %>
+<%= render partial: '/data/paths_map', locals: { paths: [ line ], direction: false } %>

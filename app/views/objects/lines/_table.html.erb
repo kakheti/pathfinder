@@ -1,0 +1,22 @@
+<% lines = data %>
+<div>
+  <div class="pull-right compact-pagination">
+    <%= will_paginate lines %>
+  </div>
+  <h3>გადამცემი ხაზები <code><%= lines.total_entries %></code></h3>
+</div>
+<% if lines.any? %>
+  <table class="table table-bordered table-hover">
+    <% lines.each do |line| %>
+      <tr>
+        <td>
+          <strong><%= link_to line.name, objects_line_url(line) %></strong>
+          <span class="text-muted"><%= line.direction %></span> &mdash;
+          <code><%= number_with_precision line.length %></code> კმ
+        </td>
+      </tr>
+    <% end %>
+  </table>
+<% else %>
+  <%= render partial: '/data/no_data' %>
+<% end %>
