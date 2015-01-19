@@ -14,7 +14,13 @@
   </tr>
   <tr>
     <td class="text-muted">რაიონი</td>
-    <td><%= link_to line.region.name, region_url(line.region, tab: 'lines') %></td>
+    <td>
+      <% if line.region %>
+        <%= link_to line.region.name, region_url(line.region, tab: 'lines') %>
+      <% else %>
+        <span class="text-muted">(რაიონის გარეშე)</span>
+      <% end %>
+    </td>
   </tr>
   <tr>
     <td class="text-muted">წერტილები</td>

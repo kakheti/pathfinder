@@ -51,6 +51,8 @@ module DataHelper
       render partial: '/objects/offices/table', locals: { data: data }
     when 'lines'
       render partial: '/objects/lines/table', locals: { data: data }
+    when 'towers'
+      render partial: '/objects/towers/table', locals: { data: data }
     else
       render partial: '/data/no_template'
     end

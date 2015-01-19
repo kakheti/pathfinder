@@ -1,0 +1,17 @@
+<% towers = data %>
+<% if towers.any? %>
+  <table class="table table-bordered table-hover">
+    <% towers.each do |tower| %>
+      <tr>
+        <td>
+          <%= link_to tower.line.name, objects_line_url(tower.line, tab: 'towers') %> &rarr;
+          <strong><%= link_to "ანძა ##{tower.name}", objects_tower_url(tower) %></strong>
+          <span class="text-muted"><%= tower.category %></span>
+        </td>
+      </tr>
+    <% end %>
+  </table>
+  <%= will_paginate towers %>
+<% else %>
+  <%= render partial: '/data/no_data' %>
+<% end %>
