@@ -1,13 +1,36 @@
-<%=view_for @tower, title: @title, icon: '/icons/tower.png', collapsible: true do |f|
-  f.text_field 'kmlid', tag: 'code'
-  f.text_field 'name'
-  f.text_field 'category'
-  f.text_field 'region.name', i18n: 'region', url: region_url(id:@tower.region.id)
-  f.text_field 'linename'
-  f.complex_field label: 'კოორდინატები' do |c|
-    c.text_field 'easting', tag: 'code', before: 'E:'
-    c.text_field 'northing', tag: 'code', before: 'N:'
-  end
-  f.text_field 'description'
-  f.map_field 'position', height: 500
-end%>
+<h2 class="page-header">ანძა #<%= @tower.name %></h2>
+
+<table class="table table-bordered table-hover">
+  <tr>
+    <td class="text-muted" width="150">ანძის #</td>
+    <td>ანძა #<%= @tower.name %></td>
+  </tr>
+  <tr>
+    <td class="text-muted">ანძის ტიპი</td>
+    <td><%= @tower.category %></td>
+  </tr>
+  <tr>
+    <td class="text-muted">რაიონი</td>
+    <td><%= link_to @tower.region.name, region_url(@tower.region, tab: 'towers') %></td>
+  </tr>
+  <tr>
+    <td class="text-muted">გადამცემი ხაზი</td>
+    <td><%= link_to @tower.line.name, objects_line_url(@tower.line, tab: 'towers') %></td>
+  </tr>
+  <tr>
+    <td class="text-muted">კოორდინატები</td>
+    <td>
+      E: <code><%= @tower.easting %></code>;
+      N: <code><%= @tower.northing %></code>
+    </td>
+  </tr>
+  <tr>
+    <td class="text-muted">შენიშვნა</td>
+    <td><%= @tower.description %></td>
+  </tr>
+</table>
+
+<h3 class="page-header">
+  ანძის მდებარეობა
+</h3>
+<%= render partial: 'data/points_map', locals: { points: [ @tower.location ] } %>
