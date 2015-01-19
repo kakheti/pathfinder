@@ -14,8 +14,8 @@ class Objects::LinesController < ApplicationController
       rel = rel.where(direction: @search[:direction].mongonize) if @search[:direction].present?
     end
     respond_to do |format|
-      format.html { @title='ხაზები'; @lines = rel.asc(:kmlid).paginate(per_page:10, page: params[:page]) }
-      format.xlsx { @lines = rel.asc(:kmlid) }
+      format.html { @title='ხაზები'; @lines = rel.asc(:name).paginate(per_page:10, page: params[:page]) }
+      format.xlsx { @lines = rel.asc(:name) }
       format.kmz do
         @lines = rel
         kml = kml_document do |xml|
