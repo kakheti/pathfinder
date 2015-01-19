@@ -35,7 +35,7 @@ class Objects::FidersController < ApplicationController
   end
 
   def show
-    @title='ფიდერი'
+    @title='ფიდერის თვისებები'
     @fider=Objects::Fider.find(params[:id])
   end
 
