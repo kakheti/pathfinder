@@ -16,7 +16,7 @@ class Region
   has_many :poles, class_name: 'Objects::Pole'
   has_many :fiders, class_name: 'Objects::Fider'
   has_and_belongs_to_many :users, class_name: 'Sys::User'
-  validates :name, presence: {message: 'ჩაწერეთ სახელი'}
+  validates :name, presence: { message: 'ჩაწერეთ სახელი' }
 
   index({ name: 1 })
 

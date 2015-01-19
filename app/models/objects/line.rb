@@ -35,18 +35,13 @@ class Objects::Line
       name = placemark.find('./kml:name',kmlns).first.content
       coords = placemark.find('./kml:MultiGeometry/kml:LineString/kml:coordinates',kmlns).first.content
       # description content
-      descr = placemark.find('./kml:description',kmlns).first.content
-      s1 = '<td>რეგიონი</td>'
-      s2 = '<td>მიმართულება</td>'
-      idx1 = descr.index(s1)+s1.length
-      idx2 = descr.index(s2)+s2.length
-      regname = descr[idx1..-1].match(/<td>([^<])*<\/td>/)[0][4..-6].strip
+      descr = placemark.find('./kml:description', kmlns).first.content
+      regname = Objects::Kml.get_property(descr, 'რეგიონი')
+      direction = Objects::Kml.get_property(descr, 'მიმართულება')
+      # end of description section
       if regname == 'კახეთი'
-        direction = descr[idx2..-1].match(/<td>([^<])*<\/td>/)[0][4..-6].strip
-        region = Region.where(name:regname).first
-        region = Region.create(name:regname) if region.blank?
-        # end of description section
-        line = Objects::Line.where(kmlid:id).first || Objects::Line.create(kmlid:id)
+        region = Region.get_by_name(regname)
+        line = Objects::Line.where(kmlid: id).first || Objects::Line.create(kmlid: id)
         line.direction = direction
         line.region = region
         line.name = name
