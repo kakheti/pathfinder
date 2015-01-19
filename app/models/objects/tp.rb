@@ -20,6 +20,10 @@ class Objects::Tp
   belongs_to :region
   belongs_to :fider, class_name: 'Objects::Fider'
 
+  index({ name: 1 })
+  index({ region_id: 1 })
+  index({ fider_id: 1 })
+
   def picture; "/tps/#{self.picture_id}.jpg" end
 
   def self.from_kml(xml)

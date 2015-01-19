@@ -10,6 +10,7 @@ class Objects::Fider
   field :description, type: String
   belongs_to :region
   embeds_many :lines, class_name: 'Objects::FiderLine'
+  has_many :tps, class_name: 'Objects::Tp'
 
   index({ name: 1 })
   index({ region_id: 1 })
