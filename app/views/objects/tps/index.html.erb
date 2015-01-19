@@ -20,7 +20,7 @@
           <img src="<%= tp.picture %>" style="max-height: 50px; max-width: 50px;" />
         </td>
         <td>
-          ჯიხური #<strong><%= link_to tp.name, objects_tp_url(tp) %></strong>
+          <a href="<%= objects_tp_url(tp) %>">ჯიხური #<strong><%= tp.name %></strong></a>
           <% if tp.owner.present? %><code><%= tp.owner %></code><% end %>
           <span class="text-muted"><%= tp.address %></span>
         </td>
@@ -40,6 +40,7 @@
   $(function() {
     $('img').error(function() {
       $(this).hide();
+      $(this).parent().append('<span class="text-muted">no-image</span>');
     })
   });
 </script>
