@@ -12,6 +12,7 @@ class Objects::Tower
   field :description, type: String
   field :linename, type: String
   belongs_to :region
+  belongs_to :line, class_name: 'Objects::Line'
 
   def self.from_kml(xml)
     parser=XML::Parser.string xml
@@ -26,6 +27,7 @@ class Objects::Tower
       regname = Objects::Kml.get_property(descr, 'რეგიონი')
       if 'კახეთი' == regname
         category = Objects::Kml.get_property(descr, 'ანძის ტიპი')
+        category = nil if category == '&lt;Null&gt;'
         linename = Objects::Kml.get_property(descr, 'გადამცემი ხაზი')
         region=Region.get_by_name(regname)
         # end of description section
