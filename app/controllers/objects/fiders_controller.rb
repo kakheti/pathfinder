@@ -5,12 +5,12 @@ class Objects::FidersController < ApplicationController
   include Objects::Kml
 
   def index
-    rel=Objects::Fider.asc(:kmlid)
+    rel = Objects::Fider.asc(:name)
     respond_to do |format|
-      format.html{ @title='ფიდერები'; @fiders=rel.paginate(per_page:10, page: params[:page]) }
-      format.xlsx{ @fiders=rel }
+      format.html{ @title = 'ფიდერები'; @fiders = rel.paginate(per_page:10, page: params[:page]) }
+      format.xlsx{ @fiders = rel }
       format.kmz do
-        @fiders=rel
+        @fiders = rel
         kml = kml_document do |xml|
           xml.Document(id: 'fiders') do
             @fiders.each { |fider| to.to_kml(xml) }

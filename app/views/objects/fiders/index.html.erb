@@ -1,15 +1,31 @@
-<%=table_for @fiders, title: @title, icon: '/icons/line.png', collapsible: true do |t|
-  t.title_action objects_upload_fiders_url, label: 'ფაილის ატვირთვა', icon: '/icons/upload-cloud.png'
-  # t.title_action objects_fiders_url({ format:'xlsx' }.merge(search: @search)), label: 'Excel ფორმატში', icon: '/icons/document-excel.png'
-  # t.title_action objects_fiders_url({format:'kmz'}.merge(search: @search)), label: 'KMZ ფორმატში', icon: '/icons/kmz.png'
-  t.item_action ->(x){objects_fider_url(id:x.id)}, icon: '/icons/eye.png', turbolink: false
-  # t.text_field 'kmlid', tag: 'code'
-  t.text_field 'name', url: ->(x){objects_fider_url(id:x.id)}, turbolink: false
-  # t.complex_field i18n: 'direction' do |c|
-  #   c.text_field 'start', after: '&rarr;'.html_safe, tag: 'code'
-  #   c.text_field 'end', tag: 'code'
-  # end
-  t.text_field 'region.name', i18n: 'region'
-  t.number_field 'length', after: 'კმ'
-  t.paginate records: 'ჩანაწერი'
-end%>
+<div class="page-header">
+  <div class="pull-right">
+    <a href="<%= objects_upload_fiders_url %>" class="btn btn-default"><i class="fa fa-upload"></i> ფაილის ატვირთვა</a>
+  </div>
+  <h2>ფიდერები <code><%= @fiders.total_entries %></code></h2>
+</div>
+
+<% if @fiders.any? %>
+  <table class="table table-bordered table-hover">
+    <thead>
+      <tr>
+        <th>ფიდერი</th>
+        <th width="200">რაიონი</th>
+      </tr>
+    </thead>
+    <% @fiders.each do |fider| %>
+      <tr>
+        <td>
+          <strong><%= link_to fider.name, objects_fider_url(fider) %></strong> &mdash;
+          <code><%= number_with_precision fider.length %></code> კმ
+        </td>
+        <td>
+          <%= link_to fider.region.name, region_url(fider.region, tab: 'fiders') %>
+        </td>
+      </tr>
+    <% end %>
+  </table>
+  <%= will_paginate @fiders %>
+<% else %>
+  <%= render partial: '/data/no_data' %>
+<% end %>
