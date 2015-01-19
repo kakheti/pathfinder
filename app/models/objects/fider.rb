@@ -35,7 +35,7 @@ class Objects::Fider
         point.set_coordinate(coord)
         point.save
       end
-      line.region = Region.get_by_name(Objects::Kml.get_property(descr, 'მუნიციპალიტეტი').to_ka(:all))
+      line.region = Region.get_by_name(Objects::Kml.get_property(descr, 'მუნიციპალიტეტი'))
       line.calc_length!
       line.save
       fider.region = line.region

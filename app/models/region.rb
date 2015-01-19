@@ -20,7 +20,12 @@ class Region
 
   index({ name: 1 })
 
-  def self.get_by_name(name); Region.where(name:name).first || Region.create(name:name) end
+  def self.get_by_name(name)
+    if name.present?
+      name = name.to_ka(:all)
+      Region.where(name:name).first || Region.create(name:name)
+    end
+  end
   def can_delete?; lines.empty? and  towers.empty? and offices.empty? and substations.empty? end
   def towers_limited; self.towers.paginate(per_page:50) end
   def poles_limited; self.poles.paginate(per_page:50) end
