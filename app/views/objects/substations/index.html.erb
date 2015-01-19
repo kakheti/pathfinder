@@ -6,8 +6,8 @@
 </div>
 
 <%= search_form @search do |s|
-  s.text_field 'name', label: 'დასახელება'
   s.combo_field 'region', collection: Region.all.asc('name'), text: ->(x){ x.name }, label: 'რაიონი', empty: '-- ყველა რაიონი --'
+  s.text_field 'name', label: 'დასახელება'
 end %>
 
 <% if @substations.any? %>
