@@ -32,7 +32,7 @@ module DataHelper
     when 'offices' then 'ოფისები'
     when 'substations' then 'ქვესადგურები'
     when 'towers' then 'ანძები'
-    when 'lines' then  'ხაზები'
+    when 'lines' then  'გადამცემი ხაზები'
     when 'tps' then 'სატრ.ჯიხურები'
     when 'poles' then 'ბოძები'
     when 'fiders' then 'ფიდერები'

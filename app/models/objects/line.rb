@@ -14,6 +14,9 @@ class Objects::Line
   has_many :towers, class_name: 'Objects::Tower'
   embeds_many :points, class_name: 'Objects::LinePoint'
 
+  def to_s; self.name end
+  def self.by_name(name); Objects::Line.where(name: name).first || Objects::Line.create(name: name) end
+
   def set_points(points)
     self.points.destroy_all
     points.each do |p|

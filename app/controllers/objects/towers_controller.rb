@@ -11,11 +11,12 @@ class Objects::TowersController < ApplicationController
       rel = rel.where(name: @search[:name].mongonize) if @search[:name].present?
       rel = rel.where(region_id: @search[:region]) if @search[:region].present?
       rel = rel.where(kmlid: @search[:kmlid].mongonize) if @search[:kmlid].present?
-      rel = rel.where(linename: @search[:linename].mongonize) if @search[:linename].present?
+      rel = rel.where(line_id: @search[:line]) if @search[:line].present?
+      # rel = rel.where(linename: @search[:linename].mongonize) if @search[:linename].present?
     end
     respond_to do |format|
-      format.html { @title='ანძები' ; @towers=rel.asc(:kmlid).paginate(per_page:10, page: params[:page]) }
-      format.xlsx{ @towers= rel.asc(:kmlid) }
+      format.html { @title='ანძები' ; @towers=rel.asc(:name).paginate(per_page:10, page: params[:page]) }
+      format.xlsx{ @towers= rel.asc(:name) }
       format.kmz do
         @towers=rel
         kml = kml_document do |xml|

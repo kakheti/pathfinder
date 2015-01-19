@@ -1,20 +1,38 @@
+<div class="page-header">
+  <div class="pull-right">
+    <a href="<%= objects_upload_towers_url %>" class="btn btn-default"><i class="fa fa-upload"></i> ფაილის ატვირთვა</a>
+  </div>
+  <h2>ანძები <code><%= @towers.total_entries %></code></h2>
+</div>
 <%= search_form @search do |s|
-  s.text_field 'kmlid', label: 'kmlID'
+  s.combo_field 'region', collection: Region.all.asc('name'), text: ->(x) { x.name }, label: 'რაიონი', empty: '-- ყველა რაიონი --'
+  s.combo_field 'line', collection: Objects::Line.asc('name'), text: ->(x) { x.name }, label: 'გადამცემი ხაზი', empty: '-- ყველა ხაზი --'
   s.text_field 'name', label: 'ანძის #'
   s.text_field 'category', label: 'ანძის ტიპი'
-  s.combo_field 'region', collection: Region.all.asc('name'), text: ->(x) {x.name}, label: 'რაიონი', empty: '-- ყველა რაიონი --'
-  s.text_field 'linename', label: 'გადამცემი ხაზი'
 end %>
 
-<%= table_for @towers, title: @title, icon: '/icons/tower.png', collapsible: true do |t|
-  t.title_action objects_upload_towers_url, label: 'ფაილის ატვირთვა', icon: '/icons/upload-cloud.png'
-  # t.title_action objects_towers_url({format:'xlsx'}.merge(search: @search)), label: 'Excel ფორმატში', icon: '/icons/document-excel.png'
-  # t.title_action objects_towers_url({format:'kmz'}.merge(search: @search)), label: 'KMZ ფორმატში', icon: '/icons/kmz.png'
-  t.item_action ->(x){objects_tower_url(id:x.id)}, icon: '/icons/eye.png'
-  t.text_field 'kmlid', tag: 'code'
-  t.text_field 'category'
-  t.text_field 'name', url: ->(x){ objects_tower_url(id:x.id) }
-  t.text_field 'linename'
-  t.text_field 'region.name', i18n: 'region'
-  t.paginate records: 'ჩანაწერი'
-end %>
+<% if @towers.any? %>
+  <table class="table table-bordered table-hover">
+    <thead>
+      <tr>
+        <th>გადამცემი ხაზი &rarr; ანძა</th>
+        <th width="200">რაიონი</th>
+      </tr>
+    </thead>
+    <% @towers.each do |tower| %>
+      <tr>
+        <td>
+          <%= link_to tower.line.name, objects_line_url(tower.line, tab: 'towers') %> &rarr;
+          <strong><%= link_to "ანძა ##{tower.name}", objects_tower_url(tower) %></strong>
+          <span class="text-muted"><%= tower.category %></span>
+        </td>
+        <td>
+          <%= link_to tower.region.name, region_url(tower.region, tab: 'towers') %>
+        </td>
+      </tr>
+    <% end %>
+  </table>
+  <%= will_paginate @towers %>
+<% else %>
+  <%= render partial: '/data/no_data' %>
+<% end %>
