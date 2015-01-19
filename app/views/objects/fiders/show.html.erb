@@ -11,7 +11,13 @@
   </tr>
   <tr>
     <td class="text-muted">რაიონი</td>
-    <td><%= link_to @fider.region.name, region_url(@fider.region, tab: 'fiders') %></td>
+    <td>
+      <% if @fider.region %>
+        <%= link_to @fider.region.name, region_url(@fider.region, tab: 'fiders') %>
+      <% else %>
+        <span class="text-muted">(რაიონის გარეშე)</span>
+      <% end %>
+    </td>
   </tr>
   <tr>
     <td class="text-muted">ხაზების რაოდ.</td>

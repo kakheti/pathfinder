@@ -41,7 +41,8 @@ class Objects::Tp
       obj.picture_id = Objects::Kml.get_property(descr, 'სურათის ნომერი')
       obj.power = Objects::Kml.get_property(descr, 'სიმძლავრე').to_f
       obj.owner = Objects::Kml.get_property(descr, 'მესაკუთრე')
-      obj.fider = Objects::Fider.by_name(Objects::Kml.get_property(descr, 'ფიდერი'))
+      fidername = Objects::Kml.get_property(descr, 'ფიდერი')
+      obj.fider = Objects::Fider.by_name(fidername) if fidername.present?
       obj.address_code = Objects::Kml.get_property(descr, 'საკადასტრო კოდი')
       address = Objects::Kml.get_property(descr, 'მთლიანი მისამართი')
       obj.address = address.to_ka(:all) if address
