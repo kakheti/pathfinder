@@ -12,13 +12,13 @@ class Objects::Tp
   field :picture_id, type: String
   field :power, type: Float
   field :owner, type: String
-  field :fider, type: String
   field :address_code, type: String
   field :address, type: String
   field :residential_count, type: Integer, default: 0
   field :comercial_count, type: Integer, default: 0
   field :usage_average, type: Float, default: 0
   belongs_to :region
+  belongs_to :fider, class_name: 'Objects::Fider'
 
   def picture; "/tps/#{self.picture_id}.jpg" end
 
@@ -37,11 +37,13 @@ class Objects::Tp
       obj.picture_id = Objects::Kml.get_property(descr, 'სურათის ნომერი')
       obj.power = Objects::Kml.get_property(descr, 'სიმძლავრე').to_f
       obj.owner = Objects::Kml.get_property(descr, 'მესაკუთრე')
-      obj.fider = Objects::Kml.get_property(descr, 'ფიდერი')
+      obj.fider = Objects::Fider.by_name(Objects::Kml.get_property(descr, 'ფიდერი'))
       obj.address_code = Objects::Kml.get_property(descr, 'საკადასტრო კოდი')
-      obj.address = Objects::Kml.get_property(descr, 'მთლიანი მისამართი').to_ka(:all)
+      address = Objects::Kml.get_property(descr, 'მთლიანი მისამართი')
+      obj.address = address.to_ka(:all) if address
       obj.description = Objects::Kml.get_property(descr, 'შენიშვნა')
-      obj.region = Region.get_by_name(Objects::Kml.get_property(descr, 'მუნიციპალიტეტი').to_ka(:all))
+      regname = Objects::Kml.get_property(descr, 'მუნიციპალიტეტი') || 'კახეთი'
+      obj.region = Region.get_by_name(regname.to_ka(:all))
       # end of description section
       coord=placemark.find('./kml:Point/kml:coordinates',kmlns).first.content
       obj.set_coordinate(coord)
