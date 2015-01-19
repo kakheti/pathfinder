@@ -1,11 +1,13 @@
+div.pagination, ul.pagination {
+  margin: 0;
+}
+
+ul.pagination {
+  margin: 0;
+}
+
 .compact-pagination {
-  div.pagination {
-    margin: 0;
-    ul.pagination {
-      margin: 0;
-      li a {
-        padding: 3px 10px;
-      }
-    }
+  div.pagination ul.pagination li a {
+    padding: 3px 10px;
   }
 }
