@@ -5,6 +5,11 @@
   <h2>ფიდერები <code><%= @fiders.total_entries %></code></h2>
 </div>
 
+<%= search_form @search do |s|
+  s.combo_field 'region', collection: Region.all.asc('name'), label: 'რაიონი', empty: '-- ყველა რაიონი --'
+  s.text_field 'name', label: 'დასახელება'
+end %>
+
 <% if @fiders.any? %>
   <table class="table table-bordered table-hover">
     <thead>

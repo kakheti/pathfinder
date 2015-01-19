@@ -6,6 +6,11 @@ class Objects::FidersController < ApplicationController
 
   def index
     rel = Objects::Fider.asc(:name)
+    @search = search_params
+    if @search.present?
+      rel = rel.where(name: @search[:name].mongonize) if @search[:name].present?
+      rel = rel.where(region_id: @search[:region]) if @search[:region].present?
+    end
     respond_to do |format|
       format.html{ @title = 'ფიდერები'; @fiders = rel.paginate(per_page:10, page: params[:page]) }
       format.xlsx{ @fiders = rel }
