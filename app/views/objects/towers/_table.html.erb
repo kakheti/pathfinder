@@ -1,4 +1,10 @@
 <% towers = data %>
+<div>
+  <div class="pull-right compact-pagination">
+    <%= will_paginate towers %>
+  </div>
+  <h3>ანძები <code><%= towers.total_entries %></code></h3>
+</div>
 <% if towers.any? %>
   <table class="table table-bordered table-hover">
     <% towers.each do |tower| %>
@@ -11,7 +17,6 @@
       </tr>
     <% end %>
   </table>
-  <%= will_paginate towers %>
 <% else %>
   <%= render partial: '/data/no_data' %>
 <% end %>
