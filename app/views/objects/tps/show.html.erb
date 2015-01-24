@@ -66,6 +66,7 @@
   $(function() {
     $('img').error(function() {
       $(this).hide();
+      $(this).parent().append('<p class="text-muted no-image no-image-large">no-image</p>');
     })
   });
 </script>
