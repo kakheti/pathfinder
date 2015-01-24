@@ -11,6 +11,7 @@ class Objects::Fider
   belongs_to :region
   embeds_many :lines, class_name: 'Objects::FiderLine'
   has_many :tps, class_name: 'Objects::Tp'
+  has_many :poles, class_name: 'Objects::Pole'
 
   index({ name: 1 })
   index({ region_id: 1 })

@@ -26,6 +26,8 @@ module DataHelper
       region_url(main_object, tab: tab)
     elsif main_object.is_a?(Objects::Line)
       objects_line_url(main_object, tab: tab)
+    elsif main_object.is_a?(Objects::Fider)
+      objects_fider_url(main_object, tab: tab)
     end
   end
 

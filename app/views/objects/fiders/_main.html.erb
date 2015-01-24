@@ -1,11 +1,10 @@
-<h2 class="page-header"><%= @fider.name %></h2>
-
+<% fider = data %>
 <table class="table table-bordered table-hover">
   <tr>
     <td class="text-muted" width="150">დასახელება</td>
     <td>
-      <% if @fider.name.present? %>
-        <%= @fider.name %>
+      <% if fider.name.present? %>
+        <%= fider.name %>
       <% else %>
         <span class="text-muted">(დასახელების გარეშე)</span>
       <% end %>
@@ -13,13 +12,13 @@
   </tr>
   <tr>
     <td class="text-muted">შენიშვნა</td>
-    <td><%= @fider.description %></td>
+    <td><%= fider.description %></td>
   </tr>
   <tr>
     <td class="text-muted">რაიონი</td>
     <td>
-      <% if @fider.region %>
-        <%= link_to @fider.region.name, region_url(@fider.region, tab: 'fiders') %>
+      <% if fider.region %>
+        <%= link_to fider.region.name, region_url(fider.region, tab: 'fiders') %>
       <% else %>
         <span class="text-muted">(რაიონის გარეშე)</span>
       <% end %>
@@ -27,12 +26,12 @@
   </tr>
   <tr>
     <td class="text-muted">ხაზების რაოდ.</td>
-    <td><code><%= @fider.lines.count %></code> ხაზი</td>
+    <td><code><%= fider.lines.count %></code> ხაზი</td>
   </tr>
   <tr>
     <td class="text-muted">სიგრძე</td>
-    <td><code><%= number_with_precision @fider.length %></code> კმ</td>
+    <td><code><%= number_with_precision fider.length %></code> კმ</td>
   </tr>
 </table>
 
-<%= render partial: '/data/paths_map', locals: { paths: @fider.lines, direction: false } %>
+<%= render partial: '/data/paths_map', locals: { paths: fider.lines, direction: false } %>
