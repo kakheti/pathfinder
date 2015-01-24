@@ -3,7 +3,13 @@
 <table class="table table-bordered table-hover">
   <tr>
     <td class="text-muted" width="150">დასახელება</td>
-    <td><%= @fider.name %></td>
+    <td>
+      <% if @fider.name.present? %>
+        <%= @fider.name %>
+      <% else %>
+        <span class="text-muted">(დასახელების გარეშე)</span>
+      <% end %>
+    </td>
   </tr>
   <tr>
     <td class="text-muted">შენიშვნა</td>

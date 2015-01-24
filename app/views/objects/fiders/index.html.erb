@@ -21,11 +21,24 @@ end %>
     <% @fiders.each do |fider| %>
       <tr>
         <td>
-          <strong><%= link_to fider.name, objects_fider_url(fider) %></strong> &mdash;
+          <strong>
+            <a href="<%= objects_fider_url(fider) %>">
+              <% if fider.name.present? %>
+                <%= fider.name %>
+              <% else %>
+                <span class="text-muted">(დასახელების გარეშე)</span>
+              <% end %>
+            </a>
+          </strong>
+          &mdash;
           <code><%= number_with_precision fider.length %></code> კმ
         </td>
         <td>
-          <%= link_to fider.region.name, region_url(fider.region, tab: 'fiders') %>
+          <% if fider.region %>
+            <%= link_to fider.region.name, region_url(fider.region, tab: 'fiders') %>
+          <% else %>
+            <span class="text-muted">(რაიონის გარეშე)</span>
+          <% end %>
         </td>
       </tr>
     <% end %>
