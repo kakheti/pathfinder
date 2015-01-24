@@ -5,6 +5,12 @@
   <h2>სატრ. ჯიხურები <code><%= @tps.total_entries %></code></h2>
 </div>
 
+<%= search_form @search do |s|
+  s.combo_field 'region', collection: Region.all.asc('name'), label: 'რაიონი', empty: '-- ყველა რაიონი --'
+  s.text_field 'name', label: 'ჯიხურის #'
+  s.text_field 'owner', label: 'მფლობელი'
+end %>
+
 <% if @tps.any? %>
   <table class="table table-bordered table-hover">
     <thead>
