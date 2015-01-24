@@ -1,11 +1,41 @@
-<%=table_for @poles, title: @title, icon: '/icons/substation.png', collapsible: true do |t|
-  t.title_action objects_upload_poles_url, label: 'ფაილის ატვირთვა', icon: '/icons/upload-cloud.png'
-  # t.title_action objects_poles_url(format:'xlsx'), label: 'Excel ფორმატში', icon: '/icons/document-excel.png'
-  # t.title_action objects_poles_url(format:'kmz'), label: 'KMZ ფორმატში', icon: '/icons/kmz.png'
-  t.item_action ->(x){objects_pole_url(id:x.id)}, icon: '/icons/eye.png'
-  t.text_field 'kmlid', tag: 'code'
-  t.text_field 'name', url: ->(x){objects_pole_url(id:x.id)}
-  t.text_field 'fider'
-  t.text_field 'region.name', i18n: 'region'
-  t.paginate records: 'ჩანაწერი'
-end%>
+<div class="page-header">
+  <div class="pull-right">
+    <a href="<%= objects_upload_poles_url %>" class="btn btn-default">
+      <i class="fa fa-upload"></i> ფაილის ატვირთვა
+    </a>
+  </div>
+  <h2>6-10კვ ბოძები <code><%= @poles.total_entries %></code></h2>
+</div>
+
+<% if @poles.any? %>
+  <table class="table table-bordered table-hover">
+    <thead>
+      <tr>
+        <th>ბოძის #</th>
+        <th width="200">ფიდერი</th>
+        <th width="200">რაიონი</th>
+      </tr>
+    </thead>
+    <% @poles.each do |pole| %>
+      <tr>
+        <td><a href="<%= objects_pole_url(pole) %>">ბოძი #<strong><%= pole.name %></strong></a></td>
+        <td>
+          <% if pole.fider %>
+            <%= link_to pole.fider.name, objects_fider_url(pole.fider, tab: 'poles') %></td>
+          <% else %>
+            <span class="text-muted">(ფიდერის გარეშე)</span>
+          <% end %>
+        <td>
+          <% if pole.region %>
+            <%= link_to pole.region.name, region_url(pole.region, tab: 'poles') %>
+          <% else %>
+            <span class="text-muted">(რაიონის გარეშე)</span>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </table>
+  <%= will_paginate @poles %>
+<% else %>
+  <%= render partial: '/data/no_data' %>
+<% end %>
