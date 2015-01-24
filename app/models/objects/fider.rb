@@ -15,6 +15,7 @@ class Objects::Fider
   index({ name: 1 })
   index({ region_id: 1 })
 
+  def to_s; self.name end
   def self.by_name(name); Objects::Fider.where(name: name).first || Objects::Fider.create(name: name) end
 
   def self.from_kml(xml)

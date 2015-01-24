@@ -7,6 +7,12 @@
   <h2>6-10კვ ბოძები <code><%= @poles.total_entries %></code></h2>
 </div>
 
+<%= search_form @search do |s|
+  s.combo_field 'region', collection: Region.all.asc('name'), label: 'რაიონი', empty: '-- ყველა რაიონი --'
+  s.combo_field 'fider', collection: Objects::Fider.all.asc('name'), label: 'ფიდერი', empty: '-- ყველა ფიდერი --'
+  s.text_field 'name', label: 'ბოძის #'
+end %>
+
 <% if @poles.any? %>
   <table class="table table-bordered table-hover">
     <thead>
