@@ -59,6 +59,8 @@ module DataHelper
       render partial: '/objects/fiders/table', locals: { data: data }
     when 'tps'
       render partial: '/objects/tps/table', locals: { data: data }
+    when 'poles'
+      render partial: '/objects/poles/table', locals: { data: data }
     else
       render partial: '/data/no_template'
     end
