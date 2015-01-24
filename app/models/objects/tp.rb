@@ -42,7 +42,7 @@ class Objects::Tp
       obj.power = Objects::Kml.get_property(descr, 'სიმძლავრე').to_f
       obj.owner = Objects::Kml.get_property(descr, 'მესაკუთრე')
       fidername = Objects::Kml.get_property(descr, 'ფიდერი')
-      obj.fider = Objects::Fider.by_name(fidername) if fidername.present?
+      obj.fider = Objects::Fider.by_name(fidername.to_ka(:all)) if fidername.present?
       obj.address_code = Objects::Kml.get_property(descr, 'საკადასტრო კოდი')
       address = Objects::Kml.get_property(descr, 'მთლიანი მისამართი')
       obj.address = address.to_ka(:all) if address
