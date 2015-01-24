@@ -57,7 +57,14 @@
     </table>
   </div>
   <div class="col-sm-4">
-    <img class="thumbnail" src="<%= @tp.picture %>" style="max-width:100%;"></img>
+    <p>
+      <img class="thumbnail" src="<%= @tp.picture %>" style="max-width:100%;"></img>
+    </p>
+    <p class="text-center">
+      <a href="<%= @tp.picture %>" target="fider-image" class="btn btn-default">
+        <i class="fa fa-image"></i> ნახვა სრულ ზომაში
+      </a>
+    </p>
   </div>
 </div>
 
@@ -66,7 +73,8 @@
   $(function() {
     $('img').error(function() {
       $(this).hide();
-      $(this).parent().append('<p class="text-muted no-image no-image-large">no-image</p>');
+      var $parent = $(this).parent().parent();
+      $parent.html('<p class="text-muted no-image no-image-large">no-image</p>');
     })
   });
 </script>
