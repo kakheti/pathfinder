@@ -6,6 +6,14 @@
     <td><%= @substation.name %></td>
   </tr>
   <tr>
+    <td class="text-muted">ნომერი</td>
+    <td>
+      <% if @substation.number.present? %>
+        #<code><%= @substation.number %></code>
+      <% end %>
+    </td>
+  </tr>
+  <tr>
     <td class="text-muted">შენიშვნა</td>
     <td><%= @substation.description %></td>
   </tr>

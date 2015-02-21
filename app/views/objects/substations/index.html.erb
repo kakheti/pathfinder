@@ -22,6 +22,9 @@ end %>
       <tr>
         <td>
           <strong><%= link_to sub.name, objects_substation_url(sub) %></strong>
+          <% if sub.number.present? %>
+            <code>#<%= sub.number %></code>
+          <% end %>
         </td>
         <td>
           <%= link_to sub.region.name, region_url(sub.region, tab: 'substations') %>
