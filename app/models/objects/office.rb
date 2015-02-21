@@ -22,16 +22,17 @@ class Objects::Office
       name = placemark.find('./kml:name',kmlns).first.content
       # description content
       descr = placemark.find('./kml:description',kmlns).first.content
-      # regname = Objects::Kml.get_property(descr, 'რაიონი') ----> ???
-      regname = Objects::Kml.get_property(descr, 'რეგიონი')
-      address = Objects::Kml.get_property(descr, 'მისამართი')
+      regname = Objects::Kml.get_property(descr, 'მუნიციპალიტეტი')
+      address = Objects::Kml.get_property(descr, 'ოფისის მისამართები')
+      description = Objects::Kml.get_property(descr, 'შენიშვნა')
       # end of description section
       region = Region.get_by_name(regname)
       coord = placemark.find('./kml:Point/kml:coordinates',kmlns).first.content
       obj = Objects::Office.where(kmlid:id).first || Objects::Office.create(kmlid:id)
-      obj.name = name
+      obj.name = name.to_ka(:all)
       obj.region = region
-      obj.address = address
+      obj.address = address.to_ka(:all)
+      obj.description = description.to_ka(:all)
       obj.set_coordinate(coord)
       obj.save
     end
