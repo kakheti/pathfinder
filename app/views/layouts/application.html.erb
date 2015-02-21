@@ -1,26 +1,28 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta name="Author" content="Dimitri Kurashvili <dimakura@gmail.com>">
-<meta name="Keywords" content="Kakheti,Electricity,Maps,GIS">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title><%if @title.present?%><%=@title%> &mdash; <%end%>pathfinder</title>
-<%= favicon_link_tag('/favicon.jpg') %>
-<%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
-<%= javascript_include_tag "application", "data-turbolinks-track" => true %>
-<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=true"></script>
-<script type="text/javascript" src="/map/markerwithlabel.js"></script>
-<%= csrf_meta_tags %>
+  <meta name="Author" content="Dimitri Kurashvili <dimakura@gmail.com>">
+  <meta name="Keywords" content="Kakheti,Electricity,Maps,GIS">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%if @title.present?%><%=@title%> &mdash; <%end%>pathfinder</title>
+  <%= favicon_link_tag('/favicon.jpg') %>
+  <%= stylesheet_link_tag    "application", media: "all" %>
+  <link href="//maxcdn.bootstrapcdn.com/bootswatch/3.3.1/cosmo/bootstrap.min.css" rel="stylesheet">
+  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+  <%= javascript_include_tag "application" %>
+  <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=true"></script>
+  <script type="text/javascript" src="/map/markerwithlabel.js"></script>
+  <%= csrf_meta_tags %>
 </head>
 <body>
-<div id="content">
-  <div class="container">
-    <%= render partial: 'layouts/user' %>
-    <%= render partial: 'layouts/notice' %>
-    <%= nav_menu %>
-    <%= yield %>
-    <%= render partial: 'layouts/footer' %>
+  <%= render partial: 'layouts/header' %>
+  <div id="content">
+    <div class="container">
+      <%= render partial: 'layouts/notice' %>
+      <%= nav_menu %>
+      <%= yield %>
+      <%= render partial: 'layouts/footer' %>
+    </div>
   </div>
-</div>
 </body>
 </html>

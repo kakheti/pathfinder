@@ -1,0 +1,65 @@
+<%
+  url = request.path
+  if url.index('/regions') == 0 then group = 'administrative'
+  elsif url.index('/objects/offices') == 0 then group = 'administrative'
+  elsif url.index('/objects/substations') == 0 then group = '110-220'
+  elsif url.index('/objects/towers') == 0 then group = '110-220'
+  elsif url.index('/objects/lines') == 0 then group = '110-220'
+  elsif url.index('/objects/fiders') == 0 then group = '110-220'
+  elsif url.index('/objects/tps') == 0 then group = '6-10'
+  elsif url.index('/objects/poles') == 0 then group = '6-10'
+  elsif url.index('/account') == 0 then group = 'account'
+  else group = 'unknown'
+  end
+%>
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="container">
+
+    <div class="navbar-header">
+      <a href="/" class="navbar-brand">Pathfinder</a>
+      <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+
+    <% if current_user %>
+      <div class="navbar-collapse collapse" id="navbar-main">
+        <ul class="nav navbar-nav">
+          <li class="dropdown <%= group == 'administrative' ? 'active' : 'passive' %>">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="administrative" aria-expanded="false">ადმინისტრაციული <span class="caret"></span></a>
+            <ul class="dropdown-menu" aria-labelledby="administrative">
+              <li><a href="<%= regions_url %>">რაიონები <span class="badge"><%= Region.count %></span></a></li>
+              <li><a href="<%= objects_offices_url %>">ოფისები <span class="badge"><%= Objects::Office.count %></span></a></li>
+            </ul>
+          </li>
+          <li class="dropdown <%= group == '110-220' ? 'active' : 'passive' %>">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="110-220" aria-expanded="false">110-220 კვ <span class="caret"></span></a>
+            <ul class="dropdown-menu" aria-labelledby="110-220">
+              <li><a href="<%= objects_substations_url %>">ქვესადგურები <span class="badge"><%= Objects::Substation.count %></span></a></li>
+              <li><a href="<%= objects_lines_url %>">გადამცემი ხაზები <span class="badge"><%= Objects::Line.count %></span></a></li>
+              <li><a href="<%= objects_towers_url %>">ანძები <span class="badge"><%= Objects::Tower.count %></span></a></li>
+              <li><a href="<%= objects_fiders_url %>">ფიდერები <span class="badge"><%= Objects::Fider.count %></span></a></li>
+            </ul>
+          </li>
+          <li class="dropdown <%= group == '6-10' ? 'active' : 'passive' %>">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="6-10" aria-expanded="false">6-10 კვ<span class="caret"></span></a>
+            <ul class="dropdown-menu" aria-labelledby="6-10">
+              <li><a href="<%= objects_tps_url %>">სატრ. ჯიხურები <span class="badge"><%= Objects::Tp.count %></span></a></li>
+              <li><a href="<%= objects_poles_url %>">6-10კვ ბოძები <span class="badge"><%= Objects::Pole.count %></span></a></li>
+            </ul>
+          </li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li class="<%= group == 'account' ? 'active' : 'passive' %>"><%= link_to current_user.full_name, account_profile_url %></li>
+          <li><%= link_to 'გასვლა', logout_url, data: { confirm: 'ნამდვილად გინდათ გასვლა?' } %></li>
+        </ul>
+      </div>
+    <% else %>
+      <div class="navbar-collapse collapse" id="navbar-main">
+      </div>
+    <% end %>
+
+  </div>
+</div>

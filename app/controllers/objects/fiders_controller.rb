@@ -6,11 +6,16 @@ class Objects::FidersController < ApplicationController
 
   def index
     rel = Objects::Fider.asc(:name)
+    @search = search_params
+    if @search.present?
+      rel = rel.where(name: @search[:name].mongonize) if @search[:name].present?
+      rel = rel.where(region_id: @search[:region]) if @search[:region].present?
+    end
     respond_to do |format|
-      format.html{ @title='ფიდერები'; @fiders = rel.paginate(per_page:10, page: params[:page]) }
-      format.xlsx{ @fiders=rel }
+      format.html{ @title = 'ფიდერები'; @fiders = rel.paginate(per_page:10, page: params[:page]) }
+      format.xlsx{ @fiders = rel }
       format.kmz do
-        @fiders=rel
+        @fiders = rel
         kml = kml_document do |xml|
           xml.Document(id: 'fiders') do
             @fiders.each { |fider| to.to_kml(xml) }
@@ -35,7 +40,7 @@ class Objects::FidersController < ApplicationController
   end
 
   def show
-    @title='ფიდერი'
+    @title='ფიდერის თვისებები'
     @fider=Objects::Fider.find(params[:id])
   end
 

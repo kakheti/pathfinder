@@ -1,0 +1,12 @@
+<ul class="nav nav-pills nav-stacked">
+  <% menu_data.each do |m| %>
+    <li class="<%= m[:tab] == current_tab ? 'active' : 'common' %>">
+      <a href="<%= m[:url] %>">
+        <%= m[:label] %>
+        <% if m[:count].present? %>
+          <span class="badge"><%= m[:count] %></span>
+        <% end %>
+      </a>
+    </li>
+  <% end %>
+</ul>

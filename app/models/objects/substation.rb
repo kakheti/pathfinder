@@ -17,18 +17,18 @@ class Objects::Substation
     kmlns="kml:#{KMLNS}"
     placemarks=doc.child.find '//kml:Placemark',kmlns
     placemarks.each do |placemark|
-      id=placemark.attributes['id']
-      name=placemark.find('./kml:name',kmlns).first.content
+      id = placemark.attributes['id']
+      name = placemark.find('./kml:name',kmlns).first.content
       # description content
-      descr=placemark.find('./kml:description',kmlns).first.content
+      descr = placemark.find('./kml:description',kmlns).first.content
       regname = Objects::Kml.get_property(descr, 'რეგიონი')
       if regname == 'კახეთი'
         region=Region.get_by_name(regname)
         # end of description section
-        coord=placemark.find('./kml:Point/kml:coordinates',kmlns).first.content
-        obj=Objects::Substation.where(kmlid:id).first || Objects::Substation.create(kmlid:id)
-        obj.name=name
-        obj.region=region
+        coord = placemark.find('./kml:Point/kml:coordinates',kmlns).first.content
+        obj = Objects::Substation.where(kmlid:id).first || Objects::Substation.create(kmlid:id)
+        obj.name = name
+        obj.region = region
         obj.set_coordinate(coord)
         obj.save
       end

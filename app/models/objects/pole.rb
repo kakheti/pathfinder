@@ -10,8 +10,12 @@ class Objects::Pole
   field :name, type: String
   field :description, type: String
   field :height, type: Float
-  field :fider, type: String
   belongs_to :region
+  belongs_to :fider, class_name: 'Objects::Fider'
+
+  index({ name: 1 })
+  index({ region_id: 1 })
+  index({ fider_id: 1 })
 
   def self.from_kml(xml)
     parser=XML::Parser.string xml
@@ -19,18 +23,19 @@ class Objects::Pole
     kmlns="kml:#{KMLNS}"
     placemarks=doc.child.find '//kml:Placemark',kmlns
     placemarks.each do |placemark|
-      id=placemark.attributes['id']
-      obj=Objects::Pole.where(kmlid:id).first || Objects::Pole.create(kmlid:id)
-      # name=placemark.find('./kml:name',kmlns).first.content
+      id = placemark.attributes['id']
+      obj = Objects::Pole.where(kmlid:id).first || Objects::Pole.create(kmlid:id)
       # start description section
-      descr=placemark.find('./kml:description',kmlns).first.content
+      descr = placemark.find('./kml:description',kmlns).first.content
       obj.name = Objects::Kml.get_property(descr, 'ბოძის ნომერი')
       obj.height = Objects::Kml.get_property(descr, 'ბოძის სიმაღლე').to_f
-      obj.fider = Objects::Kml.get_property(descr, 'ფიდერის დასახელება').to_ka(:all)
+      fidername = Objects::Kml.get_property(descr, 'ფიდერის დასახელება')
+      obj.fider = Objects::Fider.by_name(fidername.to_ka(:all)) if fidername.present?
       # obj.description = Objects::Kml.get_property(descr, 'შენიშვნა')
-      obj.region = Region.get_by_name(Objects::Kml.get_property(descr, 'მუნიციპალიტეტი').to_ka(:all))
+      regname = Objects::Kml.get_property(descr, 'მუნიციპალიტეტი')
+      obj.region = Region.get_by_name(regname.to_ka(:all)) if regname.present?
       # end of description section
-      coord=placemark.find('./kml:Point/kml:coordinates',kmlns).first.content
+      coord = placemark.find('./kml:Point/kml:coordinates',kmlns).first.content
       obj.set_coordinate(coord)
       obj.save
     end

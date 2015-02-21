@@ -1,16 +1,35 @@
+<div class="page-header">
+  <div class="pull-right">
+    <a href="<%= objects_upload_substations_url %>" class="btn btn-default"><i class="fa fa-upload"></i> ფაილის ატვირთვა</a>
+  </div>
+  <h2>ქვესადგურები <code><%= @substations.total_entries %></code></h2>
+</div>
+
 <%= search_form @search do |s|
-  s.text_field 'kmlid', label: 'kmlID'
+  s.combo_field 'region', collection: Region.all.asc('name'), text: ->(x){ x.name }, label: 'რაიონი', empty: '-- ყველა რაიონი --'
   s.text_field 'name', label: 'დასახელება'
-  s.combo_field 'region', collection: Region.all.asc('name'), text: ->(x) {x.name}, label: 'რაიონი', empty: '-- ყველა რაიონი --'
 end %>
 
-<%= table_for @substations, title: @title, icon: '/icons/substation.png', collapsible: true do |t|
-  t.title_action objects_upload_substations_url, label: 'ფაილის ატვირთვა', icon: '/icons/upload-cloud.png'
-  # t.title_action objects_substations_url({format:'xlsx'}.merge(search: @search)), label: 'Excel ფორმატში', icon: '/icons/document-excel.png'
-  # t.title_action objects_substations_url({format:'kmz'}.merge(search: @search)), label: 'KMZ ფორმატში', icon: '/icons/kmz.png'
-  t.item_action ->(x){objects_substation_url(id:x.id)}, icon: '/icons/eye.png'
-  t.text_field 'kmlid', tag: 'code'
-  t.text_field 'name', url: ->(x){objects_substation_url(id:x.id)}
-  t.text_field 'region.name', i18n: 'region'
-  t.paginate records: 'ჩანაწერი'
-end %>
+<% if @substations.any? %>
+  <table class="table table-bordered table-striped">
+    <thead>
+      <tr>
+        <th>ქვესადგური</th>
+        <th class="200">რაიონი</th>
+      </tr>
+    </thead>
+    <% @substations.each do |sub| %>
+      <tr>
+        <td>
+          <strong><%= link_to sub.name, objects_substation_url(sub) %></strong>
+        </td>
+        <td>
+          <%= link_to sub.region.name, region_url(sub.region, tab: 'substations') %>
+        </td>
+      </tr>
+    <% end %>
+  </table>
+  <%= will_paginate @substations %>
+<% else %>
+  <%= render partial: '/data/no_data' %>
+<% end %>

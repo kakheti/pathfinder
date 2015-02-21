@@ -1,19 +1,42 @@
+<div class="page-header">
+  <div class="pull-right">
+    <a href="<%= objects_upload_lines_url %>" class="btn btn-default"><i class="fa fa-upload"></i> ფაილის ატვირთვა</a>
+  </div>
+  <h2>ხაზები <code><%= @lines.total_entries %></code></h2>
+</div>
+
 <%= search_form @search do |s|
-  s.text_field 'kmlid', label: 'kmlID'
-  s.text_field 'name', label: 'დასახელება'
   s.combo_field 'region', collection: Region.all.asc('name'), text: ->(x) {x.name}, label: 'რაიონი', empty: '-- ყველა რაიონი --'
+  s.text_field 'name', label: 'დასახელება'
   s.text_field 'direction', label: 'მიმართულება'
 end %>
 
-<%=table_for @lines, title: @title, icon: '/icons/line.png', collapsible: true do |t|
-  t.title_action objects_upload_lines_url, label: 'ფაილის ატვირთვა', icon: '/icons/upload-cloud.png'
-  # t.title_action objects_lines_url({ format:'xlsx' }.merge(search: @search)), label: 'Excel ფორმატში', icon: '/icons/document-excel.png'
-  # t.title_action objects_lines_url({format:'kmz'}.merge(search: @search)), label: 'KMZ ფორმატში', icon: '/icons/kmz.png'
-  t.item_action ->(x){objects_line_url(id:x.id)}, icon: '/icons/eye.png', turbolink: false
-  t.text_field 'kmlid', tag: 'code'
-  t.text_field 'name', url: ->(x){objects_line_url(id:x.id)}, turbolink: false
-  t.text_field 'direction'
-  t.text_field 'region.name', i18n: 'region'
-  t.number_field 'length', after: 'კმ'
-  t.paginate records: 'ჩანაწერი'
-end%>
+<% if @lines.any? %>
+  <table class="table table-bordered table-hover">
+    <thead>
+      <tr>
+        <th>გადამცემი ხაზი</th>
+        <th width="200">რაიონი</th>
+      </tr>
+    </thead>
+    <% @lines.each do |line| %>
+      <tr>
+        <td>
+          <strong><%= link_to line.name, objects_line_url(line) %></strong>
+          <span class="text-muted"><%= line.direction %></span> &mdash;
+          <code><%= number_with_precision line.length %></code> კმ
+        </td>
+        <td>
+          <% if line.region %>
+            <%= link_to line.region.name, region_url(line.region, tab: 'lines') %>
+          <% else %>
+            <span class="text-muted">(რაიონის გარეშე)</span>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </table>
+  <%= will_paginate @lines %>
+<% else %>
+  <%= render partial: '/data/no_data' %>
+<% end %>

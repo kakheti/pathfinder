@@ -1,14 +1,38 @@
-<%=view_for @pole, title: @title, icon: '/icons/substation.png', collapsible: true do |f|
-  f.text_field 'kmlid', tag: 'code'
-  f.text_field 'name', tag: 'code'
-  f.text_field 'fider', url: objects_find_fider_url(name: @pole.fider)
-  # XXX substation
-  f.text_field 'region.name', i18n: 'region', url: region_url(id:@pole.region.id)
-  f.number_field 'height', after: 'მეტრი'
-  f.complex_field label: 'კოორდინატები' do |c|
-    c.text_field 'easting', tag: 'code', before: 'E:'
-    c.text_field 'northing', tag: 'code', before: 'N:'
-  end
-  f.text_field 'description'
-  f.map_field 'position'
-end%>
+<h2 class="page-header">ბოძი #<%= @pole.name %></h2>
+
+<table class="table table-bordered table-hover">
+  <tr>
+    <td class="text-muted" width="150">ბოძის #</td>
+    <td>ბოძი #<%= @pole.name %></td>
+  </tr>
+  <tr>
+    <td class="text-muted">ფიდერი</td>
+    <td>
+      <% if @pole.fider %>
+        <%= link_to @pole.fider.name, objects_fider_url(@pole.fider, tab: 'poles') %>
+      <% else %>
+        <span class="text-muted">(ფიდერის გარეშე)</span>
+      <% end %>
+    </td>
+  </tr>
+  <tr>
+    <td class="text-muted">სიმაღლე</td>
+    <td><code><%= number_with_precision @pole.height, precision: 2 %></code> მეტრი</td>
+  </tr>
+  <tr>
+    <td class="text-muted">კოორდინატები</td>
+    <td>
+      E: <code><%= @pole.easting %></code>,
+      N: <code><%= @pole.northing %></code>
+    </td>
+  </tr>
+  <tr>
+    <td class="text-muted">შენიშვნა</td>
+    <td><%= @pole.description%></td>
+  </tr>
+</table>
+
+<h3 class="page-header">
+  ბოძის მდებარეობა
+</h3>
+<%= render partial: 'data/points_map', locals: { points: [ @pole.location ] } %>

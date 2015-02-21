@@ -1,1 +1,16 @@
-<%=region_view @region, tab: params[:tab]%>
+<div class="page-header">
+  <div class="pull-right">
+    <a href="<%= edit_region_url(@region) %>" class="btn btn-default"><i class="fa fa-pencil"></i> შეცვლა</a>
+    <a href="<%= delete_region_url(@region) %>" class="btn btn-danger" data-method="delete" data-confirm="ნამდვილად გინდათ წაშლა?"><i class="fa fa-trash"></i></a>
+  </div>
+  <h2><%= @region.name %>ს რაიონი</h2>
+</div>
+
+<div class="row">
+  <div class="col-sm-3">
+    <%= render_data_menu(@region, ['offices', 'substations', 'lines', 'towers', 'fiders', 'tps', 'poles']) %>
+  </div>
+  <div class="col-sm-9">
+    <%= render_data(@region) %>
+  </div>
+</div>

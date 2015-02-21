@@ -1,0 +1,24 @@
+<div>
+  <div class="pull-right compact-pagination">
+    <%= will_paginate data %>
+  </div>
+  <h3>ოფისები <code><%= data.total_entries %></code></h3>
+</div>
+<% if data.any? %>
+  <table class="table table-bordered table-hover">
+    <% data.each do |office| %>
+      <tr>
+        <td>
+          <strong><%= link_to office.name, objects_office_url(office) %></strong>
+          <% if office.address %>
+            &mdash;
+            <span class="text-muted"><%= office.address %></span>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </table>
+  <%= will_paginate data %>
+<% else %>
+  <%= render partial: '/data/no_data' %>
+<% end %>

@@ -10,10 +10,13 @@ class Objects::Fider
   field :description, type: String
   belongs_to :region
   embeds_many :lines, class_name: 'Objects::FiderLine'
+  has_many :tps, class_name: 'Objects::Tp'
+  has_many :poles, class_name: 'Objects::Pole'
 
   index({ name: 1 })
   index({ region_id: 1 })
 
+  def to_s; self.name end
   def self.by_name(name); Objects::Fider.where(name: name).first || Objects::Fider.create(name: name) end
 
   def self.from_kml(xml)
@@ -24,7 +27,8 @@ class Objects::Fider
     placemarks.each do |placemark|
       id = placemark.attributes['id']
       descr=placemark.find('./kml:description',kmlns).first.content
-      fider = Objects::Fider.by_name(Objects::Kml.get_property(descr, 'ფიდერის დასახელება').to_ka(:all))
+      name = Objects::Kml.get_property(descr, 'ფიდერის დასახელება').to_ka(:all)
+      fider = Objects::Fider.by_name(name)
       # add line
       line = Objects::FiderLine.create(fider: fider)
       line.start = Objects::Kml.get_property(descr, 'საწყისი ბოძი')
@@ -35,7 +39,7 @@ class Objects::Fider
         point.set_coordinate(coord)
         point.save
       end
-      line.region = Region.get_by_name(Objects::Kml.get_property(descr, 'მუნიციპალიტეტი').to_ka(:all))
+      line.region = Region.get_by_name(Objects::Kml.get_property(descr, 'მუნიციპალიტეტი') || 'კახეთი')
       line.calc_length!
       line.save
       fider.region = line.region

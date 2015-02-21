@@ -1,13 +1,52 @@
-<%=table_for @tps, title: @title, icon: '/icons/substation.png', collapsible: true do |t|
-  t.title_action objects_upload_tps_url, label: 'ფაილის ატვირთვა', icon: '/icons/upload-cloud.png'
-  t.title_action objects_upload_tpstat_url, label: 'სტატისტიკის ატვირთვა', icon: '/icons/plus.png'
-  # t.title_action objects_tps_url(format:'xlsx'), label: 'Excel ფორმატში', icon: '/icons/document-excel.png'
-  # t.title_action objects_tps_url(format:'kmz'), label: 'KMZ ფორმატში', icon: '/icons/kmz.png'
-  t.item_action ->(x){objects_tp_url(id:x.id)}, icon: '/icons/eye.png'
-  t.text_field 'kmlid', tag: 'code'
-  t.text_field 'owner'
-  t.text_field 'name', url: ->(x){objects_tp_url(id:x.id)}
-  t.text_field 'address'
-  #t.text_field 'region.name', i18n: 'region'
-  t.paginate records: 'ჩანაწერი'
-end%>
+<div class="page-header">
+  <div class="pull-right">
+    <a href="<%= objects_upload_tps_url %>" class="btn btn-default"><i class="fa fa-upload"></i> ფაილის ატვირთვა</a>
+  </div>
+  <h2>სატრ. ჯიხურები <code><%= @tps.total_entries %></code></h2>
+</div>
+
+<%= search_form @search do |s|
+  s.combo_field 'region', collection: Region.all.asc('name'), label: 'რაიონი', empty: '-- ყველა რაიონი --'
+  s.text_field 'name', label: 'ჯიხურის #'
+  s.text_field 'owner', label: 'მფლობელი'
+end %>
+
+<% if @tps.any? %>
+  <table class="table table-bordered table-hover">
+    <thead>
+      <tr>
+        <th width="75" class="text-center"><i class="fa fa-image"></i></th>
+        <th>სატრანსფორმატორო ჯიხური</th>
+        <th width="200">რაიონი</th>
+      </tr>
+    </thead>
+    <% @tps.each do |tp| %>
+      <tr>
+        <td class="text-center">
+          <img src="<%= tp.picture %>" style="max-height: 50px; max-width: 50px;" />
+        </td>
+        <td>
+          <a href="<%= objects_tp_url(tp) %>">ჯიხური #<strong><%= tp.name %></strong></a>
+          <% if tp.owner.present? %><code><%= tp.owner %></code><% end %>
+          <span class="text-muted"><%= tp.address %></span>
+        </td>
+        <td>
+          <%= link_to tp.region.name, region_url(tp.region, tab: 'tps') %>
+        </td>
+      </tr>
+    <% end %>
+  </table>
+  <%= will_paginate @tps %>
+<% else %>
+  <%= render partial: '/data/no_data' %>
+<% end %>
+
+<!-- hide images which failed to load -->
+<script type="text/javascript">
+  $(function() {
+    $('img').error(function() {
+      $(this).hide();
+      $(this).parent().append('<span class="text-muted">no-image</span>');
+    })
+  });
+</script>

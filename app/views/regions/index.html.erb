@@ -1,7 +1,27 @@
-<%=table_for @regions, title:@title, icon: '/icons/region.png', collapsible: true do |t|
-  t.title_action new_region_url, label: 'ახალი რაიონი', icon: '/icons/region--plus.png'
-  t.edit_action ->(x){edit_region_url(id:x.id)}
-  t.delete_action ->(x){delete_region_url(id:x.id)}
-  t.text_field 'name', url: ->(x){region_url(id:x.id)}
-  t.text_field 'description'
-end%>
+<div class="page-header">
+  <div class="pull-right">
+    <a href="<%= new_region_url %>" class="btn btn-default"><i class="fa fa-plus"></i> ახალი რაიონი</a>
+  </div>
+  <h2><%= @title %> &mdash; <code><%= @regions.count %></code></h2>
+</div>
+<% if @regions.any? %>
+  <table class="table table-bordered table-hover">
+    <% @regions.each do |reg| %>
+      <tr>
+        <td>
+          <strong><%= link_to reg.name, region_url(reg) %></strong>
+          <% if reg.description.present? %>
+            &mdash;
+            <span class="text-muted"><%= reg.description %></span>
+          <% end %>
+        </td>
+        <td width="100" class="text-center">
+          <a href="<%= edit_region_url(reg) %>" class="btn btn-default btn-sm"><i class="fa fa-pencil"></i></a>
+          <a href="<%= delete_region_url(reg) %>" data-method="delete" data-confirm="ნამდვილად გინდათ წაშლა?" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
+        </td>
+      </tr>
+    <% end %>
+  </table>
+<% else %>
+  <%= render partial: '/data/no_data' %>
+<% end %>

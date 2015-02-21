@@ -1,0 +1,35 @@
+<% tps = data %>
+<div class="page-header">
+  <div class="pull-right compact-pagination">
+    <%= will_paginate tps %>
+  </div>
+  <h2>სატრ. ჯიხურები <code><%= tps.total_entries %></code></h2>
+</div>
+
+<% if tps.any? %>
+  <table class="table table-bordered table-hover">
+    <% tps.each do |tp| %>
+      <tr>
+        <td class="text-center">
+          <img src="<%= tp.picture %>" style="max-height: 50px; max-width: 50px;" />
+        </td>
+        <td>
+          <a href="<%= objects_tp_url(tp) %>">ჯიხური #<strong><%= tp.name %></strong></a>
+          <% if tp.owner.present? %><code><%= tp.owner %></code><% end %>
+          <span class="text-muted"><%= tp.address %></span>
+        </td>
+      </tr>
+    <% end %>
+  </table>
+<% else %>
+  <%= render partial: '/data/no_data' %>
+<% end %>
+<!-- hide images which failed to load -->
+<script type="text/javascript">
+  $(function() {
+    $('img').error(function() {
+      $(this).hide();
+      $(this).parent().append('<span class="text-muted">no-image</span>');
+    })
+  });
+</script>

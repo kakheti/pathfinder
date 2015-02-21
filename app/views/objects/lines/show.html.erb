@@ -1,10 +1,10 @@
-<%=view_for @line, title: @title, icon: '/icons/line.png', collapsible: true do |f|
-  f.text_field 'kmlid', tag: 'code'
-  f.text_field 'name'
-  f.text_field 'region.name', i18n: 'region', url: region_url(id:@line.region.id)
-  f.text_field 'direction'
-  f.text_field 'description'
-  f.text_field 'points.count', i18n: 'points', tag: 'code'
-  f.number_field 'length', after: 'კმ'
-end%>
-<%= render partial: '/layouts/paths', locals: {paths: [ @line ], direction: false} %>
+<h2 class="page-header"><%= @line.name %></h2>
+
+<div class="row">
+  <div class="col-sm-3">
+    <%= render_data_menu(@line, ['towers']) %>
+  </div>
+  <div class="col-sm-9">
+    <%= render_data(@line) %>
+  </div>
+</div>

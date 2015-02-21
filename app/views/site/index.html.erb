@@ -13,17 +13,14 @@
 </div>
 
 <div>
-  <h3 class="page-header"><i class="fa fa-cubes"></i> ობიექტები</h3>
   <div class="row">
     <div class="col-xs-4">
       <h4 class="page-header">ადმინისტრაციული</h4>
       <p>
-        <i class="fa fa-globe"></i>
-        <%=link_to 'რაიონების მართვა', regions_url%>
+        <%=link_to 'რაიონები', regions_url%>
         <span class="label label-info"><%= Region.count %></span>
       </p>
       <p>
-        <i class="fa fa-building"></i>
         <%=link_to 'ოფისები', objects_offices_url%>
         <span class="label label-info"><%= Objects::Office.count %></span>
       </p>
@@ -31,22 +28,18 @@
     <div class="col-xs-4">
       <h4 class="page-header">110-220 კვ</h4>
       <p>
-        <i class="fa fa-bolt"></i>
         <%=link_to 'ქვესადგურები', objects_substations_url%>
         <span class="label label-info"><%= Objects::Substation.count %></span>
       </p>
       <p>
-        <i class="fa fa-bolt"></i>
-        <%=link_to 'ანძები', objects_towers_url%>
-        <span class="label label-info"><%= Objects::Tower.count %></span>
-      </p>
-      <p>
-        <i class="fa fa-bolt"></i>
         <%=link_to 'გადამცემი ხაზები', objects_lines_url%>
         <span class="label label-info"><%= Objects::Line.count %></span>
       </p>
       <p>
-        <i class="fa fa-bolt"></i>
+        <%=link_to 'ანძები', objects_towers_url%>
+        <span class="label label-info"><%= Objects::Tower.count %></span>
+      </p>
+      <p>
         <%=link_to 'ფიდერები', objects_fiders_url%>
         <span class="label label-info"><%= Objects::Fider.count %></span>
       </p>
@@ -54,12 +47,10 @@
     <div class="col-xs-4">
       <h4 class="page-header">6-10 კვ</h4>
       <p>
-        <i class="fa fa-bolt"></i>
         <%=link_to 'სატრ. ჯიხურები', objects_tps_url%>
         <span class="label label-info"><%= Objects::Tp.count %></span>
       </p>
       <p>
-        <i class="fa fa-bolt"></i>
         <%=link_to '6-10კვ ბოძები', objects_poles_url%>
         <span class="label label-info"><%= Objects::Pole.count %></span>
       </p>
@@ -67,8 +58,4 @@
   </div>
 </div>
 
-<div class="row">
-  <div class="col-sm-6">
-    <%= render partial: 'layouts/admin' if sys_admin? %>
-  </div>
-</div>
+<%= render partial: 'layouts/admin' if sys_admin? %>

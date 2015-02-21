@@ -50,7 +50,8 @@ module RegionsHelper
             t.text_field 'kmlid', tag: 'code'
             t.text_field 'name', url: ->(x){objects_substation_url(id:x.id)}
             t.text_field 'address'
-            t.item_action ->(x){objects_substation_url(id:x.id)}, icon: '/icons/eye.png'
+            t.item_action ->(x){ objects_substation_url(id:x.id) }, icon: '/icons/eye.png'
+            t.paginate per_page: 10
           end
         end
       end

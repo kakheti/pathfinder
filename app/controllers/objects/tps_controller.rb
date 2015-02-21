@@ -6,8 +6,17 @@ class Objects::TpsController < ApplicationController
 
   def index
     rel=Objects::Tp.asc(:kmlid)
+    @search = search_params
+    if @search.present?
+      rel = rel.where(name: @search[:name].mongonize) if @search[:name].present?
+      rel = rel.where(owner: @search[:owner].mongonize) if @search[:owner].present?
+      rel = rel.where(region_id: @search[:region]) if @search[:region].present?
+    end
     respond_to do |format|
-      format.html{ @title='სატრანსფორმატორო ჯიხურები'; @tps=rel.paginate(per_page:10, page: params[:page]) }
+      format.html {
+        @title = 'სატრანსფორმატორო ჯიხურები'
+        @tps = rel.paginate(per_page:10, page: params[:page])
+      }
       format.xlsx{ @tps=rel }
       format.kmz do
         @tps=rel

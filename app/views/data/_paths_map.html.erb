@@ -38,6 +38,7 @@
 
   function initialize() {
     var mapOptions = {
+      mapTypeId: google.maps.MapTypeId.HYBRID,
       center: new google.maps.LatLng(42,43),
       zoom: 7
     };
@@ -58,5 +59,6 @@
       if(total_points > 1) { map.fitBounds(bounds); }
     }
   }
+
   google.maps.event.addDomListener(window, 'load', initialize);
 </script>
