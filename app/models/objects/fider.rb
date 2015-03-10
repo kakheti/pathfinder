@@ -27,22 +27,30 @@ class Objects::Fider
     placemarks.each do |placemark|
       id = placemark.attributes['id']
       descr=placemark.find('./kml:description',kmlns).first.content
-      name = Objects::Kml.get_property(descr, 'ფიდერის დასახელება').to_ka(:all)
-      fider = Objects::Fider.by_name(name)
+      name = Objects::Kml.get_property(descr, 'ფიდერი')
+      fider = Objects::Fider.by_name(name.to_ka(:all)) if name
       # add line
       line = Objects::FiderLine.create(fider: fider)
       line.start = Objects::Kml.get_property(descr, 'საწყისი ბოძი')
       line.end = Objects::Kml.get_property(descr, 'ბოძამდე')
+      line.cable_type = Objects::Kml.get_property(descr, 'სადენის ტიპი')
+      line.cable_area = Objects::Kml.get_property(descr, 'სადენის კვეთი')
+      line.underground = Objects::Kml.get_property(descr, 'მიწისქვეშა კაბელი')
+      line.quro = Objects::Kml.get_property(descr, 'ქურო')
+      line.description = Objects::Kml.get_property(descr, 'შენიშვნა')
+      line.region = Region.get_by_name Objects::Kml.get_property(descr, 'მუნიციპალიტეტი')
+      line.voltage = Objects::Kml.get_property(descr, 'ფიდერის ძაბვა')
+      line.linename = Objects::Kml.get_property(descr, 'ელ, გადამცემი ხაზი')
       coords = placemark.find('./kml:MultiGeometry/kml:LineString/kml:coordinates',kmlns).first.content
       coords.split(' ').each do |coord|
         point = line.points.new(line: line)
         point.set_coordinate(coord)
         point.save
       end
-      line.region = Region.get_by_name(Objects::Kml.get_property(descr, 'მუნიციპალიტეტი') || 'კახეთი')
       line.calc_length!
       line.save
-      fider.region = line.region
+      # XXX how to get fider's region?
+      fider.region = line.region unless fider.region.present?
       fider.save
     end
   end
@@ -79,6 +87,13 @@ class Objects::FiderLine
   field :description, type: String
   field :start, type: String
   field :end, type: String
+  field :cable_type, type: Integer
+  field :cable_area, type: Integer
+  field :underground, type: String
+  field :quro, type: String
+  field :substation_number, type: String
+  field :voltage, type: String
+  field :linename, type: String
   belongs_to :region
   embedded_in :fider,  class_name: 'Objects::Fider'
   embeds_many :points, class_name: 'Objects::FiderPoint'
