@@ -19,7 +19,11 @@
   </tr>
   <tr>
     <td class="text-muted">რაიონი</td>
-    <td><%= link_to @substation.region.name, region_url(@substation.region, tab: 'substations') %></td>
+    <td>
+      <% if @substation.region.present? %>
+        <%= link_to @substation.region.name, region_url(@substation.region, tab: 'substations') %>
+      <% end %>
+    </td>
   </tr>
   <tr>
     <td class="text-muted">კოორდინატები</td>

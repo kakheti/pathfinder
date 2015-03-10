@@ -27,7 +27,9 @@ end %>
           <% end %>
         </td>
         <td>
-          <%= link_to sub.region.name, region_url(sub.region, tab: 'substations') %>
+          <% if sub.region.present? %>
+            <%= link_to sub.region.name, region_url(sub.region, tab: 'substations') %>
+          <% end %>
         </td>
       </tr>
     <% end %>
