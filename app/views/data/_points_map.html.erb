@@ -1,7 +1,7 @@
 <div id="map-canvas" style="width:100%; height: 500px; border: 1px solid #aaa; margin-bottom: 32px;"></div>
 
 <script type="text/javascript">
-  var POINTS = [<%= points.map{|p| "[#{p[0]},#{p[1]}]" }.join(',') %>];
+  var POINTS = [<%= points.select{|x| x.present?}.map{|p| "[#{p[0]},#{p[1]}]" }.join(',') %>];
 
   function initialize() {
     var p0 = POINTS[0];

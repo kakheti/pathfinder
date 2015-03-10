@@ -12,6 +12,21 @@
         <td><code><%= @tp.owner %></code></td>
       </tr>
       <tr>
+        <td class="text-muted">ტიპი</td>
+        <td><code><%= @tp.tp_type %></code></td>
+      </tr>
+      <tr>
+        <td class="text-muted">სართულიანობა</td>
+        <td><code><%= @tp.stores %></code> სართული</td>
+      </tr>
+      <tr>
+        <td class="text-muted">ამომრთველები</td>
+        <td>
+          მაღალი ძაბვის: <code><%= @tp.count_high_voltage %></code>;
+          დაბალი ძაბვის: <code><%= @tp.count_low_voltage %></code>
+        </td>
+      </tr>
+      <tr>
         <td class="text-muted">სიმძლავრე</td>
         <td><code><%= number_with_precision @tp.power %></code> კვტ</td>
       </tr>
@@ -23,11 +38,21 @@
           <% else %>
             <span class="text-muted">(ფიდერის გარეშე)</span>
           <% end %>
+          <span class="text-muted"><%= @tp.linename %></span>
         </td>
       </tr>
       <tr>
         <td class="text-muted">რაიონი</td>
         <td><%= link_to @tp.region, region_url(@tp.region, tab: 'tps') %></td>
+      </tr>
+      <tr>
+        <td class="text-muted">ქვესადგური</td>
+        <td>
+          <% if @tp.substation.present? %>
+            #<code><%= @tp.substation.number %></code> &mdash;
+            <%= link_to @tp.substation.name, objects_substation_url(@tp.substation, tab: 'tps') %>
+          <% end %>
+        </td>
       </tr>
       <tr>
         <td class="text-muted">მისამართი</td>

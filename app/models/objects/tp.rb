@@ -66,7 +66,8 @@ class Objects::Tp
       obj.fider = Objects::Fider.by_name(fidername.to_ka(:all)) if fidername.present?
       substation_name = Objects::Kml.get_property(descr, 'ქვესადგური')
       obj.substation = Objects::Substation.by_name(substation_name.to_ka(:all)) if substation_name.present?
-      obj.linename = Objects::Kml.get_property(descr, 'ელექტრო გადამცემი ხაზი')
+      linename = Objects::Kml.get_property(descr, 'ელექტრო გადამცემი ხაზი')
+      obj.linename = linename.to_ka(:all) if linename.present?
       obj.description = Objects::Kml.get_property(descr, 'შენიშვნა')
       # end of description section
       coord=placemark.find('./kml:Point/kml:coordinates',kmlns).first.content
