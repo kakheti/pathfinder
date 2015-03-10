@@ -9,19 +9,29 @@ class Objects::Tp
   field :kmlid, type: String
   field :name, type: String
   field :description, type: String
+  field :city, type: String
+  field :street, type: String
+  field :village, type: String
+  field :tp_type, type: String
   field :picture_id, type: String
   field :power, type: Float
+  field :stores, type: String
   field :owner, type: String
   field :address_code, type: String
   field :address, type: String
   field :residential_count, type: Integer, default: 0
   field :comercial_count, type: Integer, default: 0
   field :usage_average, type: Float, default: 0
+  field :count_high_voltage, type: Integer
+  field :count_low_voltage, type: Integer
+  field :linename, type: String
   belongs_to :region
+  belongs_to :substation, class_name: 'Objects::Substation'
   belongs_to :fider, class_name: 'Objects::Fider'
 
   index({ name: 1 })
   index({ region_id: 1 })
+  index({ substation_id: 1 })
   index({ fider_id: 1 })
 
   def picture; "/tps/#{self.picture_id}.jpg" end
@@ -37,18 +47,27 @@ class Objects::Tp
       # name=placemark.find('./kml:name',kmlns).first.content
       # start description section
       descr=placemark.find('./kml:description',kmlns).first.content
+      obj.region = Region.get_by_name(Objects::Kml.get_property(descr, 'მუნიციპალიტეტი').to_ka(:all))
+      obj.city = Objects::Kml.get_property(descr, 'ქალაქი/დაბა/საკრებულო ქალაქი/დაბა/საკრებულო')
+      obj.street = Objects::Kml.get_property(descr, 'ქუჩის დასახელება')
+      obj.village = Objects::Kml.get_property(descr, 'სოფელი')
       obj.name = Objects::Kml.get_property(descr, 'ტრანსფორმატორის ნომერი')
+      obj.tp_type = Objects::Kml.get_property(descr, 'ტრანსფორმატორის ტიპი')
       obj.picture_id = Objects::Kml.get_property(descr, 'სურათის ნომერი')
       obj.power = Objects::Kml.get_property(descr, 'სიმძლავრე').to_f
+      obj.stores = Objects::Kml.get_property(descr, 'შენობის სართულიანობა')
+      obj.count_high_voltage = Objects::Kml.get_property(descr, 'მაღალი ძაბვის ამომრთველი').to_i
+      obj.count_low_voltage = Objects::Kml.get_property(descr, 'დაბალი ძაბვის ამომრთველი').to_i
       obj.owner = Objects::Kml.get_property(descr, 'მესაკუთრე')
-      fidername = Objects::Kml.get_property(descr, 'ფიდერი')
-      obj.fider = Objects::Fider.by_name(fidername.to_ka(:all)) if fidername.present?
       obj.address_code = Objects::Kml.get_property(descr, 'საკადასტრო კოდი')
       address = Objects::Kml.get_property(descr, 'მთლიანი მისამართი')
       obj.address = address.to_ka(:all) if address
+      fidername = Objects::Kml.get_property(descr, 'ფიდერი')
+      obj.fider = Objects::Fider.by_name(fidername.to_ka(:all)) if fidername.present?
+      substation_name = Objects::Kml.get_property(descr, 'ქვესადგური')
+      obj.substation = Objects::Substation.by_name(substation_name.to_ka(:all)) if substation_name.present?
+      obj.linename = Objects::Kml.get_property(descr, 'ელექტრო გადამცემი ხაზი')
       obj.description = Objects::Kml.get_property(descr, 'შენიშვნა')
-      regname = Objects::Kml.get_property(descr, 'მუნიციპალიტეტი') || 'კახეთი'
-      obj.region = Region.get_by_name(regname.to_ka(:all))
       # end of description section
       coord=placemark.find('./kml:Point/kml:coordinates',kmlns).first.content
       obj.set_coordinate(coord)
