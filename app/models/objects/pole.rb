@@ -60,7 +60,6 @@ class Objects::Pole
       subname = Objects::Kml.get_property(descr, 'ქვესადგური')
       obj.substation = Objects::Substation.by_name(subname.to_ka(:all)) if subname.present?
       fidername = Objects::Kml.get_property(descr, 'ფიდერი')
-      raise fidername.to_ka(:all)
       obj.fider = Objects::Fider.by_name(fidername.to_ka(:all)) if fidername.present?
       linename = Objects::Kml.get_property(descr, 'ელ. გადამცემი ხაზი')
       obj.linename = linename if linename.present?
