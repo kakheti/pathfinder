@@ -1,5 +1,5 @@
 var Promise = require('bluebird');
-var clusterer = require('lib/markerclusterer');
+var clusterer = require('./lib/markerclusterer');
 var api = require('./api');
 
 var API_URL = 'https://maps.googleapis.com/maps/api/js';

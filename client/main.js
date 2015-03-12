@@ -19,5 +19,6 @@ googlemaps.start().then(googlemaps.create).then(function(map) {
     .then(map.showTps)
     .then(api.loadPoles)
     .then(map.showPoles)
-    .then(map.loadLines);
+    // .then(map.loadLines)
+    ;
 });
