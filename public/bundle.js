@@ -131,12 +131,16 @@ var createMap = function(opts) {
 
   google.maps.event.addListener(map, 'zoom_changed', markerZoomer);
 
+  // 
   map.showTowers = function(towers) { map.showPointlike(towers, 'towers', '/map/tower.png'); };
   map.showSubstations = function(substations) { map.showPointlike(substations, 'substations', '/map/substation.png'); };
   map.showTps = function(tps) { map.showPointlike(tps, 'tps', '/map/tp.png') };
   map.showPoles = function(poles) { map.showPointlike(poles, 'poles', '/map/pole.png') };
-  map.loadLines = function() { map.data.loadGeoJson('/api/lines'); };
 
+  // loading lines
+  map.loadLines = function() {
+    map.data.loadGeoJson('/api/lines');
+  };
   map.data.setStyle(styleFunction);
 
   ///////////////////////////////////////////////////////////////////////////////  
@@ -1855,7 +1859,7 @@ googlemaps.start().then(googlemaps.create).then(function(map) {
     .then(map.showTps)
     .then(api.loadPoles)
     .then(map.showPoles)
-    // .then(map.loadLines)
+    .then(map.loadLines)
     ;
 });
 

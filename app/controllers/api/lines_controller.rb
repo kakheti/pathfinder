@@ -1,7 +1,7 @@
 # -*- encoding : utf-8 -*-
 class Api::LinesController < ApiController
   def index
-    lines = Objects::Fider.all + Objects::Line.all
+    lines = Objects::Line.all #+ Objects::Fider.all
     render json: {
       type: 'FeatureCollection',
       features: lines.map do |line|
