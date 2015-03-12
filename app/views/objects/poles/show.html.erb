@@ -3,7 +3,12 @@
 <table class="table table-bordered table-hover">
   <tr>
     <td class="text-muted" width="150">ბოძის #</td>
-    <td>ბოძი #<%= @pole.name %></td>
+    <td>
+      ბოძი #<code><%= @pole.name %></code>
+      <% if @pole.number2.present? %>
+        <span class="text-muted">პირობითი ნომერი: <code><%= @pole.number2 %></code></span>
+      <% end %>
+    </td>
   </tr>
   <tr>
     <td class="text-muted">ფიდერი</td>
@@ -18,6 +23,56 @@
   <tr>
     <td class="text-muted">სიმაღლე</td>
     <td><code><%= number_with_precision @pole.height, precision: 2 %></code> მეტრი</td>
+  </tr>
+  <tr>
+    <td class="text-muted">ტიპი</td>
+    <td><%= @pole.pole_type %></td>
+  </tr>
+  <tr>
+    <td class="text-muted">ტრავერსის ტიპი</td>
+    <td>
+      <%= @pole.isolation_type %>
+    </td>
+  </tr>
+  <tr>
+    <td class="text-muted">იზოლატორის ტიპი</td>
+    <td>
+      <%= @pole.traverse_type %>
+      <% if @pole.traverse_type2.present? %>
+        <%= @pole.traverse_type2 %>
+      <% end %>
+    </td>
+  </tr>
+  <tr>
+    <td class="text-muted">გამთიშველი</td>
+    <td>
+      <span class="text-muted"><%= @pole.switch_type %></span>
+      <code><%= @pole.switch %></code>
+    </td>
+  </tr>
+  <tr>
+    <td class="text-muted">ვერტიკალური მდგომარეობა</td>
+    <td>
+      <%= @pole.vertical_position %>
+    </td>
+  </tr>
+  <tr>
+    <td class="text-muted">ცვეთის ხარისხი</td>
+    <td>
+      <%= @pole.oldness %>
+    </td>
+  </tr>
+  <tr>
+    <td class="text-muted">გამოსატანია</td>
+    <td>
+      <%= @pole.should_be_out %>
+    </td>
+  </tr>
+  <tr>
+    <td class="text-muted">GPS</td>
+    <td>
+      <%= @pole.gps %>
+    </td>
   </tr>
   <tr>
     <td class="text-muted">კოორდინატები</td>
