@@ -136,7 +136,7 @@ var createMap = function(opts) {
 
 var styleFunction = function(f) {
   var clazz = f.getProperty('class');
-  if (clazz === 'Objects::Fider') {
+  if (clazz === 'Objects::FiderLine') {
     return {
       strokeColor: '#FFA504',
       strokeWeight: 3,
