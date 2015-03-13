@@ -88,6 +88,7 @@ var createMap = function(opts) {
       var marker = new google.maps.Marker({ position: latLng, icon: icon, title: obj.name });
       marker.id = obj.id;
       marker.type = type;
+      marker.name = obj.name;
       google.maps.event.addListener(marker, 'click', markerClickListener);
       markers.push(marker);
     }
@@ -97,20 +98,35 @@ var createMap = function(opts) {
     }
     markerClusterers[type].addMarkers(markers);
     markerZoomer();
+    return markers;
   };
 
   google.maps.event.addListener(map, 'zoom_changed', markerZoomer);
 
-  // 
-  map.showTowers = function(towers) { map.showPointlike(towers, 'towers', '/map/tower.png'); };
-  map.showSubstations = function(substations) { map.showPointlike(substations, 'substations', '/map/substation.png'); };
-  map.showTps = function(tps) { map.showPointlike(tps, 'tps', '/map/tp.png') };
-  map.showPoles = function(poles) { map.showPointlike(poles, 'poles', '/map/pole.png') };
+  // display markers
+
+  map.showTowers = function(towers) {
+    map['tower_markers'] = map.showPointlike(towers, 'towers', '/map/tower.png');
+  };
+
+  map.showSubstations = function(substations) {
+    map['substation_markers'] = map.showPointlike(substations, 'substations', '/map/substation.png');
+  };
+
+  map.showTps = function(tps) {
+    map['tp_markers'] = map.showPointlike(tps, 'tps', '/map/tp.png');
+  };
+
+  map.showPoles = function(poles) {
+    map['pole_markers'] = map.showPointlike(poles, 'poles', '/map/pole.png');
+  };
 
   // loading lines
+
   map.loadLines = function() {
     map.data.loadGeoJson('/api/lines');
   };
+
   map.data.setStyle(styleFunction);
 
   ///////////////////////////////////////////////////////////////////////////////  

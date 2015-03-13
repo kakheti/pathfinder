@@ -20,7 +20,6 @@
     border: 1px solid #ffcc88;
   }
   #search {
-    max-height: 90%;
     width: 300px;
     position: absolute;
     top: 8px;
@@ -29,6 +28,28 @@
   #search-query {
     padding: 2px;
     width: 100%;
+    border: 1px solid #ccc;
+  }
+  #search-output {
+    display: none;
+    background-color: rgba(255,255,255,200);
+    max-height: 300px;
+    overflow: scroll;
+    padding: 4px;
+    margin-top: 2px;
+    border: 1px solid #ccc;
+  }
+  .search-summary {
+    font-size: 0.9em;
+    border-bottom: 1px solid #ccc;
+    margin: -4px -2px 2px -2px;
+    padding: 2px 4px;
+  }
+  .search-marker {
+    cursor: pointer;
+  }
+  .search-marker:hover {
+    background-color: rgba(230,255,230,100);
   }
 </style>
 
@@ -37,6 +58,7 @@
   <div id="messages"><span>loading...</span></div>
   <div id="search">
     <input type="text" id="search-query" placeholder="ძებნა">
+    <div id="search-output"></div>
   </div>
 </div>
 
