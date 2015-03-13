@@ -51,10 +51,10 @@ var view = {
     m.html('<span class="text-muted">' + (typeNames[marker.type] || marker.type) + '</span>' + marker.name);
     m.click(function() {
       data.map.setZoom(15);
-      google.maps.event.trigger(marker, 'click');
+      setTimeout(function() {
+        google.maps.event.trigger(marker, 'click');
+      }, 500);
       data.map.setCenter(marker.getPosition());
-      
-      console.log(marker.name);
     });
     return m;
   },
