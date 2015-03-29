@@ -1,7 +1,7 @@
 <div class="page-header">
-  <div class="pull-right">
+  <!--div class="pull-right">
     <a href="<%= new_region_url %>" class="btn btn-default"><i class="fa fa-plus"></i> ახალი რაიონი</a>
-  </div>
+  </div-->
   <h2><%= @title %> &mdash; <code><%= @regions.count %></code></h2>
 </div>
 <% if @regions.any? %>
@@ -15,10 +15,10 @@
             <span class="text-muted"><%= reg.description %></span>
           <% end %>
         </td>
-        <td width="100" class="text-center">
+        <!--td width="100" class="text-center">
           <a href="<%= edit_region_url(reg) %>" class="btn btn-default btn-sm"><i class="fa fa-pencil"></i></a>
           <a href="<%= delete_region_url(reg) %>" data-method="delete" data-confirm="ნამდვილად გინდათ წაშლა?" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
-        </td>
+        </td-->
       </tr>
     <% end %>
   </table>
