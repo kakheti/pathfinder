@@ -22,7 +22,7 @@
           <% end %>
         </td>
         <td>
-          <%= link_to office.region.name, region_url(office.region, tab: 'offices') %>
+          <%= link_to office.region.name, region_url(office.region, tab: 'offices') if office.region %>
         </td>
       </tr>
     <% end %>

@@ -13,7 +13,9 @@
   </tr>
   <tr>
     <td class="text-muted">რაიონი</td>
-    <td><%= link_to @office.region.name, region_url(@office.region, tab: 'offices')  %></td>
+    <td>
+      <%= link_to @office.region.name, region_url(@office.region, tab: 'offices') if @office.region.present?  %>
+    </td>
   </tr>
   <tr>
     <td class="text-muted">შენიშვნა</td>
