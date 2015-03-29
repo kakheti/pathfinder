@@ -22,7 +22,12 @@ end %>
     <% @towers.each do |tower| %>
       <tr>
         <td>
-          <%= link_to tower.line.name, objects_line_url(tower.line, tab: 'towers') if tower.line.present? %> &rarr;
+          <% if tower.line.present?%>
+            <%= link_to tower.line.name, objects_line_url(tower.line, tab: 'towers') %>
+          <% else %>
+            <%= tower.linename %>
+          <% end %>
+          &rarr;
           <strong><%= link_to "ანძა ##{tower.name}", objects_tower_url(tower) %></strong>
           <span class="text-muted"><%= tower.category %></span>
         </td>

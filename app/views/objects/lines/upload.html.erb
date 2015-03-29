@@ -2,8 +2,7 @@
 
 <% unless params[:status] == 'ok' %>
   <div class="text-muted" style="margin-bottom:16px;">
-    გადამცემი ხაზების შესახებ ინფორმაცია უნდა იყოს მოცემული <code>KMZ</code>
-    ან <code>XLSX</code> ფაილის სახით.
+    გადამცემი ხაზების შესახებ ინფორმაცია უნდა იყოს მოცემული <code>KMZ</code> ფაილის სახით.
   </div>
 
   <%=form_tag request.url, multipart: true do%>
@@ -19,9 +18,3 @@
 <% else %>
   <%= render partial: 'layouts/current_jobs' %>
 <% end %>
-
-<div class="alert alert-warning" style="margin-top: 16px;">
-  გადამცემი ხაზების <code>KMZ</code> ფაილის ატვირთვის შემდეგ,
-  გთხოვთ ხელახლა ატვირთოთ <%= link_to 'ანძების', objects_upload_towers_url %>
-  შესაბამისი <code>KMZ</code> ფაილიც!
-</div>

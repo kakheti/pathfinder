@@ -15,7 +15,7 @@ class Objects::Line
   embeds_many :points, class_name: 'Objects::LinePoint'
 
   def to_s; self.name end
-  def self.by_name(name); Objects::Line.where(name: name).first || Objects::Line.create(name: name) end
+  def self.by_name(name); Objects::Line.where(name: name).first end
 
   def set_points(points)
     self.points.destroy_all
@@ -56,26 +56,8 @@ class Objects::Line
           point.save
         end
         line.calc_length!
-      end
-    end
-  end
-
-  def to_kml(xml)
-    extra = extra_data('დასახელება' => name,
-      'მიმართულება' => direction,
-      'შენიშვნა' => description,
-      'რაიონი' => region.to_s,
-      'სიგრძე' => length
-    )
-    xml.Placemark(id: "ID_#{self.id.to_s}") do |xml|
-      xml.name self.name
-      xml.description "<p>#{self.name}, #{self.direction}</p> <!-- #{extra} -->"
-      xml.MultiGeometry do |xml|
-        xml.LineString do
-          xml.extrude 0
-          xml.altitudeMode 'clampedToGround'
-          xml.coordinates ' ' + self.points.map{ |p| [ p.lng, p.lat, p.alt || 0 ].join(',') }.join(' ')
-        end
+        # rejoin relations
+        Objects::Tower.rejoin_line(line)
       end
     end
   end

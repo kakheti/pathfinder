@@ -12,6 +12,7 @@ class Objects::Tower
   field :description, type: String
   belongs_to :region
   belongs_to :line, class_name: 'Objects::Line'
+  field :linename, type: String
 
   def self.from_kml(xml)
     parser=XML::Parser.string xml
@@ -36,30 +37,16 @@ class Objects::Tower
         obj.set_coordinate(coord)
         obj.category = category
         obj.line = Objects::Line.by_name(linename)
+        obj.linename = linename
         obj.save
       end
     end
   end
 
-  def generate_images
-    images = Dir.glob("#{Pathfinder::POLES_HOME}/#{self.linename.to_lat}/#{self.name}_*.jpg") if self.linename
-    if images.present?
-      images.each { |url|  generate_images_from_file(url, File.basename(url)) }
-    end
-  end
-
-  def to_kml(xml)
-    descr = "<p>#<strong>#{self.name}</strong>, #{self.linename}</p><p>#{self.description}</p>"
-    extra = extra_data('ანძის #' => name,
-      'ანძის ტიპი' => category,
-      'შენიშვნა' => description,
-      'გადამცემი ხაზი' => linename,
-      'რაიონი' => region.to_s
-    )
-    xml.Placemark do
-      xml.name self.name
-      xml.description { xml.cdata! "#{ descr } <!-- #{ extra } -->" }
-      xml.Point { xml.coordinates "#{self.lng},#{self.lat},#{self.alt||0}" }
+  def self.rejoin_line(line)
+    Objects::Tower.where(linename:line.name).each do |tower|
+      tower.line = line
+      tower.save
     end
   end
 end

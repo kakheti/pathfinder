@@ -15,7 +15,13 @@
   </tr>
   <tr>
     <td class="text-muted">გადამცემი ხაზი</td>
-    <td><%= link_to @tower.line.name, objects_line_url(@tower.line, tab: 'towers') %></td>
+    <td>
+      <% if @tower.line.present? %>
+        <%= link_to @tower.line.name, objects_line_url(@tower.line, tab: 'towers') %>
+      <% else %>
+        <%= @tower.linename %>
+      <% end %>
+    </td>
   </tr>
   <tr>
     <td class="text-muted">კოორდინატები</td>
