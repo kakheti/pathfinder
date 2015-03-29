@@ -4,7 +4,7 @@ module DataHelper
     menu_data = [{ label: 'ზოგადი', tab: 'main', url: tab_url(main_object, 'main') }]
     tabs.each do |tab|
       cnt = main_object.send(tab.to_sym).count
-      menu_data.append({ label: tab_label(tab), tab: tab, url: tab_url(main_object, tab), count: cnt })
+      menu_data.append({ label: tab_label(main_object, tab), tab: tab, url: tab_url(main_object, tab), count: cnt })
     end
     render partial: '/data/menu', locals: { menu_data: menu_data, current_tab: current_tab }
   end
@@ -31,12 +31,12 @@ module DataHelper
     end
   end
 
-  def tab_label(tab)
+  def tab_label(main_object, tab)
     case tab
     when 'offices' then 'ოფისები'
     when 'substations' then 'ქვესადგურები'
     when 'towers' then 'ანძები'
-    when 'lines' then  'გადამცემი ხაზები'
+    when 'lines' then  (main_object.is_a?(Objects::Fider) ? 'ფიდერის ხაზები' : 'გადამცემი ხაზები')
     when 'tps' then 'სატრ.ჯიხურები'
     when 'poles' then 'ბოძები'
     when 'fiders' then 'ფიდერები'
@@ -52,7 +52,11 @@ module DataHelper
     when 'offices'
       render partial: '/objects/offices/table', locals: { data: data }
     when 'lines'
-      render partial: '/objects/lines/table', locals: { data: data }
+      if main_object.is_a?(Objects::Fider)
+        render partial: '/objects/fiders/lines', locals: { data: data }
+      else
+        render partial: '/objects/lines/table', locals: { data: data }
+      end
     when 'towers'
       render partial: '/objects/towers/table', locals: { data: data }
     when 'fiders'
