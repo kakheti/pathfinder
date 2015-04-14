@@ -1,7 +1,7 @@
 # -*- encoding : utf-8 -*-
 class Api::LinesController < ApiController
   def index
-    lines = Objects::Line.all + Objects::Fider.all.map{|x| x.lines}.flatten
+    lines = Objects::Line.all #+ Objects::Fider.all.map{|x| x.lines}.flatten
     render json: {
       type: 'FeatureCollection',
       features: lines.map do |line|
