@@ -101,6 +101,9 @@ Pathfinder::Application.routes.draw do
     scope '/lines', controller: 'lines' do
       get '/', action: 'index'
     end
+    scope '/search', controller: 'search' do
+      get '/', action: 'index'
+    end
   end
 
   root 'site#index'
