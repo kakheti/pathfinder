@@ -3,6 +3,7 @@ require 'xml'
 
 class Objects::Office
   include Mongoid::Document
+  include Mongoid::Search
   include Objects::Coordinate
   include Objects::Kml
 
@@ -11,6 +12,8 @@ class Objects::Office
   field :description, type: String
   field :address, type: String
   belongs_to :region
+
+  search_in :name
 
   def self.from_kml(xml)
     parser = XML::Parser.string xml

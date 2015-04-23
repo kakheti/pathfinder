@@ -3,6 +3,7 @@ require 'xml'
 
 class Objects::Substation
   include Mongoid::Document
+  include Mongoid::Search
   include Objects::Coordinate
   include Objects::Kml
 
@@ -11,6 +12,8 @@ class Objects::Substation
   field :name, type: String
   field :description, type: String
   belongs_to :region
+
+  search_in :name
 
   def self.by_name(name)
     Objects::Substation.where(name: name).first || Objects::Substation.create(name: name)
