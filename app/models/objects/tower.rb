@@ -3,6 +3,7 @@ require 'xml'
 
 class Objects::Tower
   include Mongoid::Document
+  include Mongoid::Search
   include Objects::Coordinate
   include Objects::Kml
 
@@ -13,6 +14,8 @@ class Objects::Tower
   belongs_to :region
   belongs_to :line, class_name: 'Objects::Line'
   field :linename, type: String
+
+  search_in :name
 
   def self.from_kml(xml)
     parser=XML::Parser.string xml

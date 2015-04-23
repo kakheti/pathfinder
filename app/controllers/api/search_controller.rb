@@ -12,11 +12,14 @@ class Api::SearchController < ApiController
       "pole": Objects::Pole,
       "substation": Objects::Substation,
       "tower": Objects::Tower,
-      "tp": Objects::Tp
+      "tp": Objects::Tp,
+      "fider": Objects::Fider,
+      "office": Objects::Office
     }
 
     if !object_types[type].nil? then
       objects = object_types[type].all(filters)
+      objects += object_types[type].full_text_search(filters["name"]) if filters["name"]
       render json: objects
     else
       render json: []
