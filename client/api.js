@@ -7,8 +7,9 @@ var logger = function(message) { if (API.logger) { API.logger(message); } };
 
 var loadObjects = function(type, message) {
   logger(message);
+  var bounds = window.map.getBounds().toUrlValue();
   return new Promise(function(resolve, reject) {
-    $.get('/api/' + type).done(function(data) { logger(); resolve(data); }).fail(function(err) { logger(); reject(err); });
+    $.get('/api/' + type, {bounds: bounds}).done(function(data) { logger(); resolve(data); }).fail(function(err) { logger(); reject(err); });
   });
 };
 

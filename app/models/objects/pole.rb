@@ -24,7 +24,7 @@ class Objects::Pole
   field :description, type: String
   field :linename, type: String
 
-  search_in :name
+  search_in :name, :description
 
   belongs_to :region
   belongs_to :fider, class_name: 'Objects::Fider'

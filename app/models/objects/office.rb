@@ -13,7 +13,7 @@ class Objects::Office
   field :address, type: String
   belongs_to :region
 
-  search_in :name
+  search_in :name, :description
 
   def self.from_kml(xml)
     parser = XML::Parser.string xml
