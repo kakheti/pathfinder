@@ -13,7 +13,7 @@ class Objects::Substation
   field :description, type: String
   belongs_to :region
 
-  search_in :name
+  search_in :name, :description
 
   def self.by_name(name)
     Objects::Substation.where(name: name).first || Objects::Substation.create(name: name)
