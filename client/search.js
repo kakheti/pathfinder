@@ -39,10 +39,18 @@ var view = {
 
   initSearch: function() {
     var field = $($('#search-query')[0]);
+    var typeField = $($('#search-type')[0]);
     field.keyup(function() {
       var q = field.val();
-      var markers = data.filterMarkers(q);
-      view.displayMarkers(q, markers);
+      var type = typeField.val();
+      //var markers = data.filterMarkers(q);
+
+      $.get("/api/search", { name: q, type: type }).done(function(data){
+        console.log(data);
+        view.displayMarkers(q, data);
+      });
+
+      //view.displayMarkers(q, markers);
     });
   },
 
