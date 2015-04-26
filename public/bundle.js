@@ -1874,7 +1874,7 @@ googlemaps.start().then(googlemaps.create).then(function(map) {
   window.map = map;
 
   google.maps.event.addListener(map, 'tilesloaded', function() {
-       // loading data & initialize search
+    // loading data & initialize search
     api.loadTowers().then(map.showTowers)
       .then(api.loadSubstations).then(map.showSubstations)
       .then(api.loadTps).then(map.showTps)
@@ -16294,10 +16294,18 @@ var view = {
 
   initSearch: function() {
     var field = $($('#search-query')[0]);
+    var typeField = $($('#search-type')[0]);
     field.keyup(function() {
       var q = field.val();
-      var markers = data.filterMarkers(q);
-      view.displayMarkers(q, markers);
+      var type = typeField.val();
+      //var markers = data.filterMarkers(q);
+
+      $.get("/api/search", { name: q, type: type }).done(function(data){
+        console.log(data);
+        view.displayMarkers(q, data);
+      });
+
+      //view.displayMarkers(q, markers);
     });
   },
 

@@ -5,7 +5,7 @@ class Api::SearchController < ApiController
       %w(description switch traverse_type name).include? key
     }
 
-    type = params["type"].to_sym
+    type = params["type"].to_sym unless params["type"].nil?
 
     object_types = {
       "line": Objects::Line,
