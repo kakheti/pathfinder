@@ -3,7 +3,8 @@ class Api::SubstationsController < ApiController
   def index
     if params["bounds"] then
       bounds = params["bounds"].split(',')
-      substations = Objects::Substation.within_box([bounds[0], bounds[1]], [bounds[2], bounds[3]])
+      locs = [bounds[0].to_f, bounds[1].to_f], [bounds[2].to_f, bounds[3].to_f]
+      substations = Objects::Substation.where(location: {'$within' => {'$box' => locs}})
     else
       substations = Objects::Substation.all
     end
