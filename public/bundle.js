@@ -1872,9 +1872,9 @@ googlemaps.start().then(googlemaps.create).then(function(map) {
   map.logger = api.logger = search.logger = logger;
 
   window.map = map;
+  search.initialize(map);
 
   google.maps.event.addListener(map, 'tilesloaded', function() {
-    search.initialize(map);
 
     // loading data
     api.loadTowers().then(map.showTowers)
@@ -16293,6 +16293,7 @@ var view = {
   initSearch: function() {
     var field = $('#search-query');
     var typeField = $('#search-type');
+    var regionField = $("#search-region");
     var form = $("#search-form");
 
     form.submit(function(event) {
@@ -16301,7 +16302,15 @@ var view = {
       var q = field.val();
       var type = typeField.val();
 
-      $.get("/api/search", { name: q, type: type }).done(function(data){
+      var filters = { name: q, type: type };
+
+      console.log(regionField.val());
+
+      if(regionField.val() != "") {
+        filters.region = regionField.val();
+      }
+
+      $.get("/api/search", filters).done(function(data){
         console.log(data);
         view.displayMarkers(q, data);
       });

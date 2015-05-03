@@ -2,7 +2,7 @@
 class Api::SearchController < ApiController
   def index
     filters = params.select { |key, value|
-      %w(description switch traverse_type name).include? key
+      %w(description switch traverse_type name region).include? key
     }
 
     type = params["type"].to_sym unless params["type"].nil?
@@ -20,6 +20,7 @@ class Api::SearchController < ApiController
     if !object_types[type].nil? then
       objects = object_types[type].all(filters)
       objects += object_types[type].full_text_search(filters["name"]) if filters["name"]
+      
       render json: (objects.map do |object|
       { id: object.id.to_s, lat: object.lat, lng: object.lng, name: object.name, type: params['type'] }
     end)
