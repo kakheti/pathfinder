@@ -1,12 +1,13 @@
 <style type="text/css">
   #mapwrapper {
     position: absolute;
-    left: 300px; right: 0; top: 0; bottom: 0;
+    left: 600px; right: 0; top: 0; bottom: 0;
   }
   #sidebar {
     position: absolute;
     left: 0; top: 0; bottom: 0;
-    width: 300px;
+    width: 600px;
+    padding: 10px 0;
   }
   #mapregion {
     position: absolute;
@@ -23,22 +24,6 @@
     padding: 4px 8px;
     border: 1px solid #ffcc88;
   }
-  #search {
-  }
-  #search-query {
-    padding: 2px;
-    width: 100%;
-    border: 1px solid #ccc;
-  }
-  #search-output {
-    display: none;
-    background-color: rgba(255,255,255,200);
-    max-height: 300px;
-    overflow: scroll;
-    padding: 4px;
-    margin-top: 2px;
-    border: 1px solid #ccc;
-  }
   .search-summary {
     font-size: 0.9em;
     border-bottom: 1px solid #ccc;
@@ -54,17 +39,33 @@
 </style>
 
 <div id="sidebar">
-  <div id="search">
-    <input type="text" id="search-query" placeholder="სახელი">
-    <select id="search-type">
-      <option value="substation">ქვესადგური</option>
-      <option value="tower">ხაზი</option>
-      <option value="pole">ანძა</option>
-      <option value="tp">ფიდერი</option>
-    </select>
-    <button>ძებნა</button>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-6">
+        <form id="search-form">
+          <div class="form-group">
+            <label>დასახელება</label>
+            <input type="text" id="search-query" placeholder="სახელი" class="form-control">
+          </div>
+
+          <div class="form-group">
+            <label>სახეობა</label>
+            <select id="search-type" class="form-control">
+              <option value="substation">ქვესადგური</option>
+              <option value="tower">ხაზი</option>
+              <option value="pole">ანძა</option>
+              <option value="tp">ფიდერი</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <button class="btn btn-primary">ძებნა</button>
+          </div>
+        </form>
+      </div>
+      <div id="search-output" class="col-md-6"></div>
+    </div>
   </div>
-  <div id="search-output"></div>
 </div>
 
 <div id="mapwrapper">

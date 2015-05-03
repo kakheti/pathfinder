@@ -1,4 +1,5 @@
 var $ = require('jquery');
+var googlemaps = require('./googlemaps');
 
 var typeNames = {
   towers: 'ანძა #',
@@ -32,25 +33,24 @@ var data = {
 
 var view = {
   showSearch: function() {
-    $('#search').show();
-    $('#search-output').hide();
     $('#search-query').focus();
   },
 
   initSearch: function() {
-    var field = $($('#search-query')[0]);
-    var typeField = $($('#search-type')[0]);
-    field.keyup(function() {
+    var field = $('#search-query');
+    var typeField = $('#search-type');
+    var form = $("#search-form");
+
+    form.submit(function(event) {
+      event.preventDefault();
+
       var q = field.val();
       var type = typeField.val();
-      //var markers = data.filterMarkers(q);
 
       $.get("/api/search", { name: q, type: type }).done(function(data){
         console.log(data);
         view.displayMarkers(q, data);
       });
-
-      //view.displayMarkers(q, markers);
     });
   },
 
@@ -62,32 +62,26 @@ var view = {
       setTimeout(function() {
         google.maps.event.trigger(marker, 'click');
       }, 500);
-      data.map.setCenter(marker.getPosition());
+      data.map.setCenter(new googlemaps.LatLng(marker.lat, marker.lng));
     });
     return m;
   },
 
   displayMarkers: function(q, markers) {
-    var renderCollection = function(type, output) {
-      var array = markers[type];
+    var renderCollection = function(array, output) {
       for (var i = 0; i < array.length && i < 5; i++) {
         var element = view.renderMarker(array[i]);
         output.append(element);
       }
     };
-    if (q && markers.size > 0) {
-      var summary = $('<div class="search-summary">ნაპოვნია: <span class="text-muted"><strong>' + markers.size + '</strong> ობიექტი</span></div>');
+    if (markers.length > 0) {
+      var summary = $('<div class="search-summary">ნაპოვნია: <span class="text-muted"><strong>' + markers.length + '</strong> ობიექტი</span></div>');
       var output = $('#search-output');
       output.html('');
-      output.show();
       output.append(summary);
-      renderCollection('substations', output);
-      renderCollection('towers', output);
-      renderCollection('tps', output);
-      renderCollection('poles', output);
+      renderCollection(markers, output);
     } else {
       $('#search-output').html('');
-      $('#search-output').hide();
     }
   },
 };

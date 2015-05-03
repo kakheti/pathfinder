@@ -17,15 +17,14 @@ googlemaps.start().then(googlemaps.create).then(function(map) {
   window.map = map;
 
   google.maps.event.addListener(map, 'tilesloaded', function() {
-    // loading data & initialize search
+    search.initialize(map);
+
+    // loading data
     api.loadTowers().then(map.showTowers)
       .then(api.loadSubstations).then(map.showSubstations)
       .then(api.loadTps).then(map.showTps)
       //.then(api.loadPoles).then(map.showPoles)
       //.then(map.loadLines)
-      .then(function() {
-        search.initialize(map)
-      })
       ;
   });
 });
