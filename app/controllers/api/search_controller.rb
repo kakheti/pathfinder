@@ -20,7 +20,9 @@ class Api::SearchController < ApiController
     if !object_types[type].nil? then
       objects = object_types[type].all(filters)
       objects += object_types[type].full_text_search(filters["name"]) if filters["name"]
-      render json: objects
+      render json: (objects.map do |object|
+      { id: object.id.to_s, lat: object.lat, lng: object.lng, name: object.name, type: params['type'] }
+    end)
     else
       render json: []
     end
