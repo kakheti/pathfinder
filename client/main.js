@@ -15,9 +15,9 @@ googlemaps.start().then(googlemaps.create).then(function(map) {
   map.logger = api.logger = search.logger = logger;
 
   window.map = map;
+  search.initialize(map);
 
   google.maps.event.addListener(map, 'tilesloaded', function() {
-    search.initialize(map);
 
     // loading data
     api.loadTowers().then(map.showTowers)
