@@ -1,7 +1,11 @@
 # -*- encoding : utf-8 -*-
 class Api::PolesController < ApiController
   def index
-    poles = Objects::Pole.all
+    if params["bounds"] then
+      poles = Objects::Pole.where(within_bounds(params["bounds"]))
+    else
+      poles = Objects::Pole.all
+    end
     render json: (poles.map do |pole|
       { id: pole.id.to_s, lat: pole.lat, lng: pole.lng, name: pole.name }
     end)
