@@ -8,13 +8,13 @@ class Api::SearchController < ApiController
     type = params["type"].to_sym unless params["type"].nil?
 
     object_types = {
-      "line": Objects::Line,
-      "pole": Objects::Pole,
-      "substation": Objects::Substation,
-      "tower": Objects::Tower,
-      "tp": Objects::Tp,
-      "fider": Objects::Fider,
-      "office": Objects::Office
+      line: Objects::Line,
+      pole: Objects::Pole,
+      substation: Objects::Substation,
+      tower: Objects::Tower,
+      tp: Objects::Tp,
+      fider: Objects::Fider,
+      office: Objects::Office
     }
 
     if !object_types[type].nil? then
