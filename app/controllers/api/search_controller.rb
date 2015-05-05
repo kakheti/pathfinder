@@ -2,7 +2,7 @@
 class Api::SearchController < ApiController
   def index
     filters = params.select { |key, value|
-      %w(description name region_id).include?(key) && value.length > 0
+      %w(region_id).include?(key) && value.length > 0
     }
 
     type = params["type"].to_sym unless params["type"].nil?
@@ -19,7 +19,7 @@ class Api::SearchController < ApiController
 
     if !object_types[type].nil? then
       objects = object_types[type].all(filters)
-      objects += object_types[type].full_text_search(filters["name"]) if filters["name"]
+      objects = objects.full_text_search(params["name"]) if params["name"] && params["name"].length > 0
       
       render json: (objects.map do |object|
       { id: object.id.to_s, lat: object.lat, lng: object.lng, name: object.name, type: params['type']+'s' }
