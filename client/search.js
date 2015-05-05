@@ -51,7 +51,7 @@ var view = {
       var filters = { name: q, type: type };
 
       if(regionField.val() != "") {
-        filters.region = regionField.val();
+        filters.region_id = regionField.val();
       }
 
       $.get("/api/search", filters).done(function(data){
@@ -76,7 +76,7 @@ var view = {
 
   displayMarkers: function(q, markers) {
     var renderCollection = function(array, output) {
-      for (var i = 0; i < array.length && i < 5; i++) {
+      for (var i = 0; i < array.length; i++) {
         var element = view.renderMarker(array[i]);
         output.append(element);
       }
