@@ -1,7 +1,11 @@
 # -*- encoding : utf-8 -*-
 class Objects::MapsController < ApplicationController
   def editor; @title='ობიექტების რედაქტირება' ; render layout: 'map' end
-  def viewer; @title='ობიექტების რუკა' ; render layout: 'map' end
+  def viewer
+   @title='ობიექტების რუკა'
+   @regions = Region.all
+   render layout: 'map'
+  end
 
   def generate_images
     if request.post?
