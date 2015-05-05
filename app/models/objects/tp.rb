@@ -3,6 +3,7 @@ require 'xml'
 
 class Objects::Tp
   include Mongoid::Document
+  include Mongoid::Search
   include Objects::Coordinate
   include Objects::Kml
 
@@ -28,6 +29,8 @@ class Objects::Tp
   belongs_to :region
   belongs_to :substation, class_name: 'Objects::Substation'
   belongs_to :fider, class_name: 'Objects::Fider'
+
+  search_in :name, :description
 
   index({ name: 1 })
   index({ region_id: 1 })

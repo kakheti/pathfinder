@@ -3,6 +3,7 @@ require 'xml'
 
 class Objects::Fider
   include Mongoid::Document
+  include Mongoid::Search
   include Mongoid::Timestamps
   include Objects::Kml
 
@@ -12,6 +13,8 @@ class Objects::Fider
   embeds_many :lines, class_name: 'Objects::FiderLine'
   has_many :tps, class_name: 'Objects::Tp'
   has_many :poles, class_name: 'Objects::Pole'
+
+  search_in :name, :description
 
   index({ name: 1 })
   index({ region_id: 1 })

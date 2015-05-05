@@ -14,14 +14,17 @@ googlemaps.start().then(googlemaps.create).then(function(map) {
   // setting loggers
   map.logger = api.logger = search.logger = logger;
 
-  // loading data & initialize search
-  api.loadTowers().then(map.showTowers)
-    .then(api.loadSubstations).then(map.showSubstations)
-    .then(api.loadTps).then(map.showTps)
-    .then(api.loadPoles).then(map.showPoles)
-    .then(map.loadLines)
-    .then(function() {
-      search.initialize(map)
-    })
-    ;
+  window.map = map;
+  search.initialize(map);
+
+  google.maps.event.addListener(map, 'tilesloaded', function() {
+
+    // loading data
+    api.loadTowers().then(map.showTowers)
+      .then(api.loadSubstations).then(map.showSubstations)
+      .then(api.loadTps).then(map.showTps)
+      //.then(api.loadPoles).then(map.showPoles)
+      //.then(map.loadLines)
+      ;
+  });
 });

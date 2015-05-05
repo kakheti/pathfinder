@@ -3,6 +3,7 @@ require 'xml'
 
 class Objects::Pole
   include Mongoid::Document
+  include Mongoid::Search
   include Objects::Coordinate
   include Objects::Kml
 
@@ -22,6 +23,8 @@ class Objects::Pole
   field :gps, type: String
   field :description, type: String
   field :linename, type: String
+
+  search_in :name, :description
 
   belongs_to :region
   belongs_to :fider, class_name: 'Objects::Fider'
