@@ -32,3 +32,5 @@ gem 'geoutm'
 gem 'sidekiq'
 gem 'sinatra', '>= 1.3.0', :require => nil
 gem 'puma'
+
+gem "browserify-rails", "~> 0.7"
