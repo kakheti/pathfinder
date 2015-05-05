@@ -13,6 +13,7 @@ gem 'jquery-rails'
 gem 'jbuilder', '~> 1.2'
 
 gem 'mongoid', '~> 4.0'
+gem 'mongoid_search'
 gem 'will_paginate_mongoid'
 gem 'forma', '~>0.1'
 gem 'bootstrap-will_paginate'
