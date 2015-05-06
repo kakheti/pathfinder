@@ -55,7 +55,6 @@ var view = {
       }
 
       $.get("/api/search", filters).done(function(data){
-        console.log(data);
         view.displayMarkers(q, data);
       });
     });
@@ -67,9 +66,12 @@ var view = {
     m.click(function() {
       data.map.setZoom(15);
       setTimeout(function() {
-        google.maps.event.trigger(marker, 'click');
+        google.maps.event.trigger(marker, 'click', {
+          stop: null,
+          latLng: new google.maps.LatLng(marker.lat, marker.lng)
+        });
       }, 500);
-      data.map.setCenter(new googlemaps.LatLng(marker.lat, marker.lng));
+      data.map.setCenter(new google.maps.LatLng(marker.lat, marker.lng));
     });
     return m;
   },
