@@ -22,7 +22,7 @@ class Api::SearchController < ApiController
       objects = objects.full_text_search(params["name"]) if params["name"] && params["name"].length > 0
       
       render json: (objects.map do |object|
-      { id: object.id.to_s, lat: object.lat, lng: object.lng, name: object.name, type: params['type']+'s' }
+      { id: object.id.to_s, lat: object.lat, lng: object.lng, name: object.name, type: params['type'] }
     end)
     else
       render json: []
