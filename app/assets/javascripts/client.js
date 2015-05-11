@@ -26,5 +26,7 @@ googlemaps.start().then(googlemaps.create).then(function(map) {
       //.then(api.loadPoles).then(map.showPoles)
       //.then(map.loadLines)
       ;
+    
+    google.maps.event.clearListeners(map, 'tilesloaded');
   });
 });
