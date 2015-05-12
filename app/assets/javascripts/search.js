@@ -46,7 +46,11 @@ var view = {
       event.preventDefault();
 
       var q = field.val();
-      var type = typeField.val();
+      var type = [];
+
+      typeField.find("input[type=checkbox]:checked").each(function(){
+        type.push($(this).val());
+      });
 
       var filters = { name: q, type: type };
 
