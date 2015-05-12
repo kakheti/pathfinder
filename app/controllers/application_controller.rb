@@ -5,7 +5,8 @@ class ApplicationController < ActionController::Base
   def render(*args)
     self.nav
     if self.login_required and current_user.blank?
-      super 'layouts/login_required'
+      #super 'layouts/login_required'
+      redirect_to "/login", notice:"პროგრამაში სამუშაოდ საჭიროა ავტორიზაცია"
     elsif permission_required
       super 'layouts/permission_required'
     else

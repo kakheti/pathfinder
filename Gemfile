@@ -8,6 +8,7 @@ gem 'sass-rails', '~> 4.0.2'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.0.0'
 gem 'jquery-rails'
+gem 'bootstrap-sass'
 # gem 'turbolinks'
 # gem 'jquery-turbolinks'
 gem 'jbuilder', '~> 1.2'
@@ -32,3 +33,5 @@ gem 'geoutm'
 gem 'sidekiq'
 gem 'sinatra', '>= 1.3.0', :require => nil
 gem 'puma'
+
+gem "browserify-rails", "~> 0.7"

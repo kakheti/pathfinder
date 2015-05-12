@@ -2,10 +2,10 @@ var $ = require('jquery');
 var googlemaps = require('./googlemaps');
 
 var typeNames = {
-  towers: 'ანძა #',
-  substations: 'ქ/ს ',
-  tps: 'ჯიხური #',
-  poles: 'ბოძი #'
+  tower: 'ანძა #',
+  substation: 'ქ/ს ',
+  tp: 'ჯიხური #',
+  pole: 'ბოძი #'
 };
 
 var data = {
@@ -46,7 +46,11 @@ var view = {
       event.preventDefault();
 
       var q = field.val();
-      var type = typeField.val();
+      var type = [];
+
+      typeField.find("input[type=checkbox]:checked").each(function(){
+        type.push($(this).val());
+      });
 
       var filters = { name: q, type: type };
 
@@ -55,21 +59,33 @@ var view = {
       }
 
       $.get("/api/search", filters).done(function(data){
-        console.log(data);
         view.displayMarkers(q, data);
       });
     });
   },
 
   renderMarker: function(marker) {
+    var realMarker;
+    var markers = data.map[marker.type + '_markers'];
+    for(m in markers) {
+      if(markers[m].id == marker.id) {
+        realMarker = markers[m];
+      }
+    }
+
+    if(!realMarker) {
+      markers = data.map.showPointlike([marker], marker.type+'s', '/map/'+marker.type+'.png');
+      realMarker = markers[0];
+    }
+
     var m = $('<div class="search-marker"></div>');
     m.html('<span class="text-muted">' + (typeNames[marker.type] || marker.type) + '</span>' + marker.name);
     m.click(function() {
       data.map.setZoom(15);
       setTimeout(function() {
-        google.maps.event.trigger(marker, 'click');
+        google.maps.event.trigger(realMarker, 'click');
       }, 500);
-      data.map.setCenter(new googlemaps.LatLng(marker.lat, marker.lng));
+      data.map.setCenter(new google.maps.LatLng(marker.lat, marker.lng));
     });
     return m;
   },

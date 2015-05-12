@@ -24,6 +24,42 @@ var map;
 var markerClusterers = {};
 var infoWindow;
 
+var styleFunction = function(f) {
+  var clazz = f.getProperty('class');
+  if (clazz === 'Objects::FiderLine') {
+    return {
+      strokeColor: '#FFA504',
+      strokeWeight: 3,
+      strokeOpacity: 0.5
+    };
+  } else if (clazz === 'Objects::Line') {
+    return {
+      strokeColor: '#FF0000',
+      strokeWeight: 5,
+      strokeOpacity: 0.5
+    };
+  }
+};
+
+var markerZoomer = function() {
+  var zoom = map.getZoom();
+  for(prop in MIN_ZOOM) {
+    var clust = markerClusterers[prop];
+    var min_zoom = MIN_ZOOM[prop]
+    if (min_zoom <= zoom) {
+      if (clust && clust.savedMarkers) {
+        clust.addMarkers(clust.savedMarkers);
+        clust.savedMarkers = null;
+      }
+    } else {
+      if (clust && !clust.savedMarkers) {
+        clust.savedMarkers = clust.getMarkers();
+        clust.clearMarkers();
+      }
+    }
+  }
+};
+
 var loadAPI = function(opts) {
   return new Promise(function(resolve, reject) {
     var script = document.createElement('script');
@@ -132,42 +168,6 @@ var createMap = function(opts) {
   ///////////////////////////////////////////////////////////////////////////////  
 
   return map;
-};
-
-var styleFunction = function(f) {
-  var clazz = f.getProperty('class');
-  if (clazz === 'Objects::FiderLine') {
-    return {
-      strokeColor: '#FFA504',
-      strokeWeight: 3,
-      strokeOpacity: 0.5
-    };
-  } else if (clazz === 'Objects::Line') {
-    return {
-      strokeColor: '#FF0000',
-      strokeWeight: 5,
-      strokeOpacity: 0.5
-    };
-  }
-};
-
-var markerZoomer = function() {
-  var zoom = map.getZoom();
-  for(prop in MIN_ZOOM) {
-    var clust = markerClusterers[prop];
-    var min_zoom = MIN_ZOOM[prop]
-    if (min_zoom <= zoom) {
-      if (clust && clust.savedMarkers) {
-        clust.addMarkers(clust.savedMarkers);
-        clust.savedMarkers = null;
-      }
-    } else {
-      if (clust && !clust.savedMarkers) {
-        clust.savedMarkers = clust.getMarkers();
-        clust.clearMarkers();
-      }
-    }
-  }
 };
 
 module.exports = {
