@@ -167,7 +167,10 @@ var createMap = function(opts) {
   // loading lines
 
   map.loadLines = function() {
+    if(map.linesLoaded) return false;
+
     map.data.loadGeoJson('/api/lines');
+    map.linesLoaded = true;
   };
 
   map.data.setStyle(styleFunction);
