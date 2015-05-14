@@ -116,15 +116,21 @@ var createMap = function(opts) {
     }
   };
 
+  map.loadedMarkers = {};
+
   map.showPointlike = function(objects, type, icon) {
     var markers = [];
     for (var i = 0, l = objects.length; i < l; ++i) {
       var obj = objects[i];
+
+      if(map.loadedMarkers[obj.id] == true) continue;
+
       var latLng = new google.maps.LatLng(obj.lat, obj.lng);
       var marker = new google.maps.Marker({ position: latLng, icon: icon, title: obj.name });
       marker.id = obj.id;
       marker.type = type;
       marker.name = obj.name;
+      map.loadedMarkers[obj.id] = true;
       google.maps.event.addListener(marker, 'click', markerClickListener);
       markers.push(marker);
     }
@@ -142,25 +148,29 @@ var createMap = function(opts) {
   // display markers
 
   map.showTowers = function(towers) {
-    map['tower_markers'] = map.showPointlike(towers, 'towers', '/map/tower.png');
+    if(!map['tower_markers']) map['tower_markers'] = [];
+    map['tower_markers'].concat(map.showPointlike(towers, 'towers', '/map/tower.png'));
   };
-
   map.showSubstations = function(substations) {
-    map['substation_markers'] = map.showPointlike(substations, 'substations', '/map/substation.png');
+    if(!map['substation_markers']) map['substation_markers'] = [];
+    map['substation_markers'] = map['substation_markers'].concat(map.showPointlike(substations, 'substations', '/map/substation.png'));
   };
-
   map.showTps = function(tps) {
-    map['tp_markers'] = map.showPointlike(tps, 'tps', '/map/tp.png');
+    if(!map['tp_markers']) map['tp_markers'] = [];
+    map['tp_markers'] = map['tp_markers'].concat(map.showPointlike(tps, 'tps', '/map/tp.png'));
   };
-
   map.showPoles = function(poles) {
-    map['pole_markers'] = map.showPointlike(poles, 'poles', '/map/pole.png');
+    if(!map['pole_markers']) map['pole_markers'] = [];
+    map['pole_markers'] = map['pole_markers'].concat(map.showPointlike(poles, 'poles', '/map/pole.png'));
   };
 
   // loading lines
 
   map.loadLines = function() {
+    if(map.linesLoaded) return false;
+
     map.data.loadGeoJson('/api/lines');
+    map.linesLoaded = true;
   };
 
   map.data.setStyle(styleFunction);
