@@ -23,10 +23,8 @@ googlemaps.start().then(googlemaps.create).then(function(map) {
     api.loadTowers().then(map.showTowers)
       .then(api.loadSubstations).then(map.showSubstations)
       .then(api.loadTps).then(map.showTps)
-      //.then(api.loadPoles).then(map.showPoles)
-      //.then(map.loadLines)
+      .then(api.loadPoles).then(map.showPoles)
+      .then(map.loadLines)
       ;
-    
-    google.maps.event.clearListeners(map, 'tilesloaded');
-  });
+    });
 });
