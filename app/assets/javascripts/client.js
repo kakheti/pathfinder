@@ -29,13 +29,13 @@ googlemaps.start().then(googlemaps.create).then(function(map) {
     // loading data
     var promise = api.loadSubstations().then(map.showSubstations);
     if(map.zoom >= zoomLevels.towers) {
-      promise.then(api.loadTowers).then(map.showTowers)
+      promise = promise.then(api.loadTowers).then(map.showTowers)
     }
     if(map.zoom >= zoomLevels.tps) {
-      promise.then(api.loadTps).then(map.showTps)
+      promise = promise.then(api.loadTps).then(map.showTps)
     }
     if(map.zoom >= zoomLevels.poles) {
-      promise.then(api.loadPoles).then(map.showPoles)
+      promise = promise.then(api.loadPoles).then(map.showPoles)
     }
     promise.then(map.loadLines)
   });
