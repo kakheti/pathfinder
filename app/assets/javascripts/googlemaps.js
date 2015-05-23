@@ -167,10 +167,10 @@ var createMap = function(opts) {
   // loading lines
 
   map.loadLines = function() {
-    if(map.linesLoaded) return false;
-
-    map.data.loadGeoJson('/api/lines');
-    map.linesLoaded = true;
+    if(map.zoom >= 16)
+      map.data.loadGeoJson('/api/lines?fiders=true&bounds='+map.getBounds().toUrlValue());
+    else
+      map.data.loadGeoJson('/api/lines?bounds='+map.getBounds().toUrlValue());
   };
 
   map.data.setStyle(styleFunction);
