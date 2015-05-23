@@ -4,12 +4,16 @@
       <div class="col-md-6">
         <form id="search-form">
           <div class="form-group">
-            <label>დასახელება</label>
             <input type="text" id="search-query" placeholder="სახელი" class="form-control">
           </div>
 
           <div class="form-group" id="search-type">
-            <label>სახეობა</label>
+            <div class="checkbox">
+              <label>
+                <input type="checkbox" value="office">
+                ოფისი
+              </label>
+            </div>
             <div class="checkbox">
               <label>
                 <input type="checkbox" value="substation">
@@ -37,9 +41,8 @@
           </div>
 
           <div class="form-group">
-            <label>რაიონი</label>
             <select id="search-region" class="form-control">
-              <option value="">ყველა</option>
+              <option value="">რაიონი</option>
               <% @regions.each do |region| %>
               <option value="<%= region.id.to_s %>"><%= region.name.to_s %></option>
               <% end %>
