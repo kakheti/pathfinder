@@ -5,8 +5,6 @@ class Api::SearchController < ApiController
       %w(region_id).include?(key) && value.length > 0
     }
 
-    types = []
-    types = params["type"] unless params["type"].nil?
 
     object_types = {
       "line" => Objects::Line,
@@ -14,9 +12,12 @@ class Api::SearchController < ApiController
       "substation" => Objects::Substation,
       "tower" => Objects::Tower,
       "tp" => Objects::Tp,
-      "fider" => Objects::Fider,
+      #"fider" => Objects::Fider,
       "office" => Objects::Office
     }
+
+    types = object_types.keys
+    types = params["type"] unless params["type"].nil?
 
     all_objects = [];
 
