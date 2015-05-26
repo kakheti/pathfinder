@@ -1,0 +1,18 @@
+<h3>ხაზი &mdash; <%= @line.name %></h3>
+<table class="table">
+  <tr>
+    <td><strong>ხაზი</strong></td>
+    <td><%= @line.region %></td>
+  </tr>
+  <tr>
+    <td><strong>კოორდინატები</strong></td>
+    <td>
+      E:<code><%= @line.easting %></code>
+      N:<code><%= @line.northing %></code>
+    </td>
+  </tr>
+  <tr>
+    <td><strong>შენიშვნა</strong></td>
+    <td><%= @line.description || '<span class="text-muted">(none)</span>'.html_safe %></td>
+  </tr>
+</table>

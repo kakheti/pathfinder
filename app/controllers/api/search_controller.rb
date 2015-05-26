@@ -12,7 +12,7 @@ class Api::SearchController < ApiController
       "substation" => Objects::Substation,
       "tower" => Objects::Tower,
       "tp" => Objects::Tp,
-      #"fider" => Objects::Fider,
+      "fider" => Objects::Fider,
       "office" => Objects::Office
     }
 

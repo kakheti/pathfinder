@@ -6,6 +6,7 @@ class Objects::Line
   include Mongoid::Search
   include Objects::Kml
   include Objects::LengthProperty
+  include Objects::Coordinate
 
   field :kmlid, type: String
   field :name, type: String
@@ -24,6 +25,7 @@ class Objects::Line
     self.points.destroy_all
     points.each do |p|
       lat,lng = p[0],p[1]
+      
       point = self.points.new(line:self)
       point.lat = lat
       point.lng = lng
@@ -58,6 +60,7 @@ class Objects::Line
           point.set_coordinate(coord)
           point.save
         end
+        line.set_coordinate(coords.split(' ').sample)
         line.calc_length!
         # rejoin relations
         Objects::Tower.rejoin_line(line)

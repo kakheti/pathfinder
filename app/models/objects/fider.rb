@@ -5,6 +5,7 @@ class Objects::Fider
   include Mongoid::Document
   include Mongoid::Search
   include Mongoid::Timestamps
+  include Objects::Coordinate
   include Objects::Kml
 
   field :name, type: String
