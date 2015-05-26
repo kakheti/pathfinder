@@ -27,4 +27,9 @@ class Api::LinesController < ApiController
       end
     }
   end
+  
+  def info
+    @line = Objects::Line.find(params[:id])
+    render layout: false
+  end
 end

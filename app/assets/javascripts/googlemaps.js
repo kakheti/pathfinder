@@ -12,6 +12,7 @@ var MIN_CLUSER_SIZES = {
   substations: 10,
   tps: 30,
   poles: 50,
+  lines: 100
 };
 
 var MIN_ZOOM = {

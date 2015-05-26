@@ -5,7 +5,8 @@ var typeNames = {
   tower: 'ანძა #',
   substation: 'ქ/ს ',
   tp: 'ჯიხური #',
-  pole: 'ბოძი #'
+  pole: 'ბოძი #',
+  line: 'ხაზი '
 };
 
 var data = {
