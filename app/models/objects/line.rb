@@ -55,12 +55,13 @@ class Objects::Line
         line.name = name
         line.save
         line.points.destroy_all
-        coords.split(' ').each do |coord|
+        coords = coords.split(' ')
+        coords.each do |coord|
           point = line.points.new(line: line)
           point.set_coordinate(coord)
           point.save
         end
-        line.set_coordinate(coords.split(' ').sample)
+        line.set_coordinate(coords[coords.size/2])
         line.calc_length!
         # rejoin relations
         Objects::Tower.rejoin_line(line)
