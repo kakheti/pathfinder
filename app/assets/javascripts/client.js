@@ -2,14 +2,7 @@ var googlemaps = require('./googlemaps');
 var api = require('./api');
 var search = require('./search');
 var $ = require('jquery');
-
-var zoomLevels = {
-  tower: 16,
-  tp: 18,
-  pole: 18,
-  fider: 16,
-  substation: 0
-};
+var objectTypes = require('./object-types');
 
 var logger = function(message) {
   if(!message) return;
@@ -31,8 +24,9 @@ googlemaps.start().then(googlemaps.create).then(function(map) {
     // Loading data
     logger("იტვირთება");
 
-    for(type in zoomLevels) {
-      if(map.zoom >= zoomLevels[type]) {
+    for(type in objectTypes) {
+      var objType = objectTypes[type];
+      if(objType.marker !== false && map.zoom >= objType.zoom) {
         api.loadObjects(type).then(map.showObjects);
       }
     }
