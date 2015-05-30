@@ -166,6 +166,9 @@ var createMap = function(opts) {
   };
 
   google.maps.event.addListener(map, 'zoom_changed', markerZoomer);
+  google.maps.event.addListener(map, 'click', function(){
+    $('#search-output').hide();
+  });
 
   // loading lines
 
