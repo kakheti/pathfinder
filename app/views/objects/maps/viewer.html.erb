@@ -2,50 +2,7 @@
   <div class="container-fluid">
     <div class="row">
       <div class="col-md-6">
-        <form id="search-form">
-          <div class="form-group">
-            <input type="text" id="search-query" placeholder="სახელი" class="form-control">
-          </div>
-
-          <div class="form-group" id="search-type">
-            <div class="checkbox">
-              <label>
-                <input type="checkbox" value="office">
-                ოფისი
-              </label>
-            </div>
-            <div class="checkbox">
-              <label>
-                <input type="checkbox" value="substation">
-                ქვესადგური
-              </label>
-            </div>
-            <div class="checkbox">
-              <label>
-                <input type="checkbox" value="tower">
-                ანძა
-              </label>
-            </div>
-            <div class="checkbox">
-              <label>
-                <input type="checkbox" value="line">
-                ხაზი
-              </label>
-            </div>
-            <div class="checkbox">
-              <label>
-                <input type="checkbox" value="pole">
-                ბოძი
-              </label>
-            </div>
-            <div class="checkbox">
-              <label>
-                <input type="checkbox" value="tp">
-                ჯიხური
-              </label>
-            </div>
-          </div>
-
+        <form>
           <div class="form-group">
             <select id="search-region" class="form-control">
               <option value="">რაიონი</option>
@@ -60,14 +17,78 @@
           </div>
         </form>
       </div>
-      <div id="search-output" class="col-md-6"></div>
     </div>
   </div>
 </div>
 
 <div id="mapwrapper">
   <div id="mapregion"></div>
-  <div id="messages"><span>loading...</span></div>
 </div>
 
+<div class="search">
+  <div class="card">
+    <form id="search-form">
+      <input type="text" id="search-query" autofocus autocomplete="off">
+      <button class="waves-effect waves-light btn btn-flat red accent-2 white-text">
+        <i class="mdi-action-search"></i>
+
+        <div class="preloader-wrapper active">
+          <div class="spinner-layer spinner-blue-only">
+            <div class="circle-clipper left">
+              <div class="circle"></div>
+            </div><div class="gap-patch">
+              <div class="circle"></div>
+            </div><div class="circle-clipper right">
+              <div class="circle"></div>
+            </div>
+          </div>
+        </div>
+      </button>
+    </form>
+  </div>
+
+  <div class="output" id="search-output">
+    <div class="card-panel small-padding">
+      <div class="summary"></div>
+    </div>
+
+    <div class="card-panel no-padding">
+      <div class="collection"></div>
+    </div>
+  </div>
+</div>
+
+<div class="layers">
+  <div class="card-panel">
+    <div id="search-type">
+      <div>
+        <input type="checkbox" checked value="office" id="checkbox-office">
+        <label for="checkbox-office">ოფისი</label>
+      </div>
+      <div>
+        <input type="checkbox" checked value="substation" id="checkbox-substation">
+        <label for="checkbox-substation">ქვესადგური</label>
+      </div>
+      <div>
+        <input type="checkbox" checked value="tower" id="checkbox-tower">
+        <label for="checkbox-tower">ანძა</label>
+      </div>
+      <div>
+        <input type="checkbox" checked value="line" id="checkbox-line">
+        <label for="checkbox-line">ხაზი</label>
+      </div>
+      <div>
+        <input type="checkbox" checked value="pole" id="checkbox-pole">
+        <label for="checkbox-pole">ბოძი</label>
+      </div>
+      <div>
+        <input type="checkbox" checked value="tp" id="checkbox-tp">
+        <label for="checkbox-tp">ჯიხური</label>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%= javascript_include_tag "jquery" %>
+<%= javascript_include_tag "materialize" %>
 <%= javascript_include_tag "client" %>

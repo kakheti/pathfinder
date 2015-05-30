@@ -11,9 +11,9 @@ var zoomLevels = {
 };
 
 var logger = function(message) {
-  var el = $("#messages")[0];
-  if( message ) { el.innerHTML = '<span>' + message + '</span>'; }
-  else { el.innerHTML = ''; }
+  if(!message) return;
+  console.log(message);
+  window.currentToast = Materialize.toast(message, 2000)
 };
 
 logger('იტვირთება...');
