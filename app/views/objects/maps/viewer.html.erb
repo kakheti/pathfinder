@@ -1,26 +1,3 @@
-<div id="sidebar">
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-md-6">
-        <form>
-          <div class="form-group">
-            <select id="search-region" class="form-control">
-              <option value="">რაიონი</option>
-              <% @regions.each do |region| %>
-              <option value="<%= region.id.to_s %>"><%= region.name.to_s %></option>
-              <% end %>
-            </select>
-          </div>
-
-          <div class="form-group">
-            <button class="btn btn-primary">ძებნა</button>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
-</div>
-
 <div id="mapwrapper">
   <div id="mapregion"></div>
 </div>
@@ -60,6 +37,16 @@
 
 <div class="layers">
   <div class="card-panel">
+
+    <div class="regions">
+      <select class="browser-default" id="search-region">
+        <option value="" selected>რაიონი</option>
+        <% @regions.each do |region| %>
+        <option value="<%= region.id.to_s %>"><%= region.name.to_s %></option>
+        <% end %>
+      </select>
+    </div>
+
     <div id="search-type">
       <div>
         <input type="checkbox" checked value="office" id="checkbox-office">
