@@ -1,25 +1,12 @@
 var Promise = require('bluebird');
 var clusterer = require('./lib/markerclusterer');
 var api = require('./api');
+var objectTypes = require('./object-types');
 
 var API_URL = 'https://maps.googleapis.com/maps/api/js';
 var DEFAULT_ZOOM = 9;
 var DEFAULT_LAT = 41.9;
 var DEFAULT_LNG = 45.8;
-
-var MIN_CLUSER_SIZES = {
-  tower: 30,
-  substation: 10,
-  tp: 30,
-  pole: 50,
-  line: 100
-};
-
-var MIN_ZOOM = {
-  tower: 13,
-  tp: 14,
-  pole: 16,
-};
 
 var map;
 var markerClusterers = {};
@@ -44,9 +31,9 @@ var styleFunction = function(f) {
 
 var markerZoomer = function() {
   var zoom = map.getZoom();
-  for(prop in MIN_ZOOM) {
-    var clust = markerClusterers[prop];
-    var min_zoom = MIN_ZOOM[prop]
+  for(type in objectTypes) {
+    var clust = markerClusterers[type];
+    var min_zoom = objectTypes[type].zoom;
     if (min_zoom <= zoom) {
       if (clust && clust.savedMarkers) {
         clust.addMarkers(clust.savedMarkers);
@@ -122,7 +109,6 @@ var createMap = function(opts) {
   map.loadedMarkers = {};
 
   map.showObjects = function(objects) {
-    console.log(objects);
     var markers = [];
     for (var i = 0, l = objects.length; i < l; ++i) {
       var obj = objects[i];
@@ -139,7 +125,7 @@ var createMap = function(opts) {
       google.maps.event.addListener(marker, 'click', markerClickListener);
       if ( !markerClusterers[obj.type] ) {
         markerClusterers[obj.type] = new clusterer.MarkerClusterer(map);
-        markerClusterers[obj.type].setMinimumClusterSize(MIN_CLUSER_SIZES[obj.type]);
+        markerClusterers[obj.type].setMinimumClusterSize(objectTypes[obj.type].cluster);
       }
       markerClusterers[obj.type].addMarker(marker);
       markers.push(marker);

@@ -1,15 +1,6 @@
 var $ = require('jquery');
 var googlemaps = require('./googlemaps');
-
-var typeNames = {
-  tower: 'ანძა',
-  substation: 'ქ/ს',
-  tp: 'ჯიხური',
-  pole: 'ბოძი',
-  line: 'ხაზი',
-  fider: 'ფიდერი',
-  office: 'ოფისი'
-};
+var objectTypes = require('./object-types');
 
 var data = {};
 
@@ -67,7 +58,7 @@ var view = {
     }
 
     var m = $('<a class="search-marker collection-item"></a>');
-    m.html(marker.name+ '<span class="badge">' + (typeNames[marker.type] || marker.type) + '</span>');
+    m.html(marker.name+ '<span class="badge">' + (objectTypes[marker.type].name || marker.type) + '</span>');
     m.click(function() {
       data.map.setZoom(15);
       setTimeout(function() {
