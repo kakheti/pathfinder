@@ -15,7 +15,7 @@ class Objects::Fider
   has_many :tps, class_name: 'Objects::Tp'
   has_many :poles, class_name: 'Objects::Pole'
 
-  search_in :name, :description
+  search_in :name, :description, :poles
 
   index({ name: 1 })
   index({ region_id: 1 })
