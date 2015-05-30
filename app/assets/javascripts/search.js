@@ -11,28 +11,7 @@ var typeNames = {
   office: 'ოფისი'
 };
 
-var data = {
-  filterMarkers: function(q) {
-    var filterFunction = function(marker) {
-      if (q) {
-        return marker.name.indexOf(q) !== -1;
-      } else {
-        return true;
-      }
-    };
-    var tps = this.map.tp_markers.filter(filterFunction);
-    var towers = this.map.tower_markers.filter(filterFunction);
-    var substations = this.map.substation_markers.filter(filterFunction);
-    var poles = this.map.pole_markers.filter(filterFunction);
-    return {
-      towers: towers,
-      substations: substations,
-      tps: tps,
-      poles: poles,
-      size: tps.length + towers.length + substations.length + poles.length
-    };
-  }
-};
+var data = {};
 
 var view = {
   showSearch: function() {
