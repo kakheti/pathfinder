@@ -60,8 +60,14 @@ var view = {
         filters.region_id = regionField.val();
       }
 
+      $("#search-form .btn").prop("disabled", "disabled").addClass("loading");
+
       $.get("/api/search", filters).done(function(data){
+        $("#search-form .btn").prop("disabled", false).removeClass("loading");
         view.displayMarkers(q, data);
+      }).error(function(){
+
+        $("#search-form .btn").removeProp("disabled", false).removeClass("loading");
       });
     });
   },
@@ -80,8 +86,8 @@ var view = {
       realMarker = markers[0];
     }
 
-    var m = $('<div class="search-marker"></div>');
-    m.html('<span class="text-muted">' + (typeNames[marker.type] || marker.type) + '</span>' + marker.name);
+    var m = $('<a class="search-marker collection-item"></a>');
+    m.html(marker.name+ '<span class="badge">' + (typeNames[marker.type] || marker.type) + '</span>');
     m.click(function() {
       data.map.setZoom(15);
       setTimeout(function() {
@@ -100,13 +106,14 @@ var view = {
       }
     };
     if (markers.length > 0) {
-      var summary = $('<div class="search-summary">ნაპოვნია: <span class="text-muted"><strong>' + markers.length + '</strong> ობიექტი</span></div>');
-      var output = $('#search-output');
+      $('#search-output').show();
+      var summary = 'ნაპოვნია: <span class="text-muted"><strong>' + markers.length + '</strong> ობიექტი</span>';
+      $("#search-output .summary").html(summary);
+      var output = $('#search-output .collection');
       output.html('');
-      output.append(summary);
       renderCollection(markers, output);
     } else {
-      $('#search-output').html('');
+      $('#search-output').hide();
     }
   },
 };
