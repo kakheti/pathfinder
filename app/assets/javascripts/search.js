@@ -53,7 +53,7 @@ var view = {
     }
 
     if(!realMarker) {
-      markers = data.map.showPointlike([marker], marker.type+'s', '/map/'+marker.type+'.png');
+      markers = data.map.showObjects([marker]);
       realMarker = markers[0];
     }
 
