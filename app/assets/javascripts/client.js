@@ -1,6 +1,7 @@
 var googlemaps = require('./googlemaps');
 var api = require('./api');
 var search = require('./search');
+var $ = require('jquery');
 
 var zoomLevels = {
   towers: 16,
@@ -10,7 +11,7 @@ var zoomLevels = {
 };
 
 var logger = function(message) {
-  var el = document.getElementById('messages');
+  var el = $("#messages")[0];
   if( message ) { el.innerHTML = '<span>' + message + '</span>'; }
   else { el.innerHTML = ''; }
 };
@@ -38,5 +39,22 @@ googlemaps.start().then(googlemaps.create).then(function(map) {
       promise = promise.then(api.loadPoles).then(map.showPoles)
     }
     promise.then(map.loadLines)
+  });
+
+  $("#search-type input").on('change', function(){
+    var allDisabled = true;
+    var types = {};
+
+    $("#search-type input[type=checkbox]").each(function(){
+      var enabled = $(this).is(":checked");
+      types[$(this).val()] = enabled;
+      if(enabled) allDisabled = false;
+    });
+    for(type in types) {
+      var enabled = types[type];
+      if(allDisabled) enabled = true;
+
+      googlemaps.setLayerVisible(type, enabled);
+    }
   });
 });
