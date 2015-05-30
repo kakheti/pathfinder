@@ -2,12 +2,13 @@ var $ = require('jquery');
 var googlemaps = require('./googlemaps');
 
 var typeNames = {
-  tower: 'ანძა #',
-  substation: 'ქ/ს ',
-  tp: 'ჯიხური #',
-  pole: 'ბოძი #',
-  line: 'ხაზი ',
-  fider: 'ფიდერი '
+  tower: 'ანძა',
+  substation: 'ქ/ს',
+  tp: 'ჯიხური',
+  pole: 'ბოძი',
+  line: 'ხაზი',
+  fider: 'ფიდერი',
+  office: 'ოფისი'
 };
 
 var data = {

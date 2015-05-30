@@ -6,9 +6,6 @@ $primary-color: color("materialize-red", "lighten-2");
   position: absolute;
   left: 0; right: 0; top: 0; bottom: 0;
 }
-#sidebar {
-  display: none;
-}
 
 .search {
   position: absolute;
@@ -61,6 +58,10 @@ $primary-color: color("materialize-red", "lighten-2");
   .output {
     display: none;
 
+    .card-panel {
+      margin-bottom: 0;
+    }
+
     .collection {
       max-height: 400px;
       border: none;
@@ -98,26 +99,19 @@ $primary-color: color("materialize-red", "lighten-2");
   position: absolute;
   left: 0; right: 0; top: 0; bottom: 0;
 }
-#messages {
-  position: relative;
-  text-align: center;
-  z-index: 99;
-}
-#messages span {
-  margin: 4px 0 0 0;
-  background: #fce853;
-  padding: 4px 8px;
-  border: 1px solid #ffcc88;
-}
-.search-summary {
-  font-size: 0.9em;
-  border-bottom: 1px solid #ccc;
-  margin: -4px -2px 2px -2px;
-  padding: 2px 4px;
-}
-.search-marker {
-  cursor: pointer;
-}
-.search-marker:hover {
-  background-color: rgba(230,255,230,1);
+
+
+.gm-style {
+  h3 {
+    font-size: 16px;
+    font-weight: bold;
+    margin: 10px 0;
+    line-height: 1;
+  }
+
+  table {
+    td {
+      padding: 10px 5px;
+    }
+  }
 }
