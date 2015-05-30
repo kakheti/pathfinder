@@ -31,6 +31,7 @@ googlemaps.start().then(googlemaps.create).then(function(map) {
   google.maps.event.addListener(map, 'tilesloaded', function() {
     loadAll();
     map.loadLines();
+    map.loadFiders();
   });
 
   $("#search-type input").on('change', function(){
@@ -55,5 +56,6 @@ googlemaps.start().then(googlemaps.create).then(function(map) {
     map.clearLines();
     loadAll();
     map.loadLines();
+    map.loadFiders();
   });
 });
