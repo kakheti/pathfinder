@@ -151,6 +151,14 @@ var createMap = function(opts) {
     }
   }
 
+  map.clearAll = function(){
+    map.objects = [];
+    map.loadedMarkers = {};
+    for(i in markerClusterers) {
+      markerClusterers[i].clearMarkers();
+    };
+  }
+
   google.maps.event.addListener(map, 'zoom_changed', markerZoomer);
 
   // loading lines
