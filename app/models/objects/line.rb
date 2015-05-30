@@ -16,7 +16,7 @@ class Objects::Line
   has_many :towers, class_name: 'Objects::Tower'
   embeds_many :points, class_name: 'Objects::LinePoint'
 
-  search_in :name, :description
+  search_in :name, :description, :direction
 
   def to_s; self.name end
   def self.by_name(name); Objects::Line.where(name: name).first end

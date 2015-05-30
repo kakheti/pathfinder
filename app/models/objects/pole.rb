@@ -24,11 +24,11 @@ class Objects::Pole
   field :description, type: String
   field :linename, type: String
 
-  search_in :name, :description
-
   belongs_to :region
   belongs_to :fider, class_name: 'Objects::Fider'
   belongs_to :substation, class_name: 'Objects::Substation'
+
+  search_in :name, :description, :fider, :substation
 
   index({ name: 1 })
   index({ region_id: 1 })
