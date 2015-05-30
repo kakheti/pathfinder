@@ -170,8 +170,7 @@ var createMap = function(opts) {
   // loading lines
 
   map.loadLines = function() {
-    var params = api.getParams();
-    map.data.loadGeoJson('/api/lines?'+params);
+    map.data.loadGeoJson('/api/lines');
   };
 
   map.loadFiders = function() {
