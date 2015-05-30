@@ -2,7 +2,6 @@
 class Api::LinesController < ApiController
   def index
     params["type"] = ["line"]
-    params["bounds"] = nil
 
     lines = Api::SearchController.search(params)
 
