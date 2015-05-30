@@ -24,7 +24,7 @@ API.loadObjects = function(type, message) {
 API.loadObjectInfo = function(id, type) {
   logger('იტვირთება...');
   return new Promise(function(resolve, reject) {
-    $.get('/api/' + type + '/' + id).done(function(data){ logger(); resolve(data); }).fail(function(err){ logger(); reject(err); });
+    $.get('/api/' + type + 's/' + id).done(function(data){ logger(); resolve(data); }).fail(function(err){ logger(); reject(err); });
   });
 };
 
