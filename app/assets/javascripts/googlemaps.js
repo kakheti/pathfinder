@@ -171,11 +171,14 @@ var createMap = function(opts) {
 
   map.loadLines = function() {
     var params = api.getParams();
-    if(map.zoom >= 16)
-      map.data.loadGeoJson('/api/lines?fiders=true&'+params);
-    else
-      map.data.loadGeoJson('/api/lines?'+params);
+    map.data.loadGeoJson('/api/lines?'+params);
   };
+
+  map.loadFiders = function() {
+    var params = api.getParams();
+    if(map.zoom >= objectTypes.fider.zoom)
+      map.data.loadGeoJson('/api/lines/fiders?'+params);
+  }
 
   map.data.setStyle(styleFunction);
 
