@@ -5,6 +5,7 @@ class Objects::Fider
   include Mongoid::Document
   include Mongoid::Search
   include Mongoid::Timestamps
+  include Objects::Coordinate
   include Objects::Kml
 
   field :name, type: String
@@ -14,7 +15,7 @@ class Objects::Fider
   has_many :tps, class_name: 'Objects::Tp'
   has_many :poles, class_name: 'Objects::Pole'
 
-  search_in :name, :description
+  search_in :name, :description, :poles
 
   index({ name: 1 })
   index({ region_id: 1 })
@@ -45,7 +46,8 @@ class Objects::Fider
       line.voltage = Objects::Kml.get_property(descr, 'ფიდერის ძაბვა')
       line.linename = Objects::Kml.get_property(descr, 'ელ, გადამცემი ხაზი')
       coords = placemark.find('./kml:MultiGeometry/kml:LineString/kml:coordinates',kmlns).first.content
-      coords.split(' ').each do |coord|
+      coords = coords.split(' ')
+      coords.each do |coord|
         point = line.points.new(line: line)
         point.set_coordinate(coord)
         point.save
@@ -53,6 +55,7 @@ class Objects::Fider
       line.calc_length!
       line.save
       # XXX how to get fider's region?
+      fider.set_coordinate(coords[coords.size/2])
       fider.region = line.region unless fider.region.present?
       fider.save
     end
@@ -85,6 +88,7 @@ class Objects::FiderLine
   include Mongoid::Document
   include Objects::Kml
   include Objects::LengthProperty
+  include Objects::Coordinate
 
   field :kmlid, type: String
   field :description, type: String

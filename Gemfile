@@ -4,7 +4,8 @@ gem 'rails', '~> 4.0'
 gem 'actionpack-action_caching'
 # gem 'debugger'
 gem 'sqlite3'
-gem 'sass-rails', '~> 4.0.2'
+gem 'sass'
+gem 'sass-rails'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.0.0'
 gem 'jquery-rails'
@@ -35,3 +36,5 @@ gem 'sinatra', '>= 1.3.0', :require => nil
 gem 'puma'
 
 gem "browserify-rails", "~> 0.7"
+
+gem 'materialize-sass'

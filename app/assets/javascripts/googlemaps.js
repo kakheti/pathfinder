@@ -1,24 +1,12 @@
 var Promise = require('bluebird');
 var clusterer = require('./lib/markerclusterer');
 var api = require('./api');
+var objectTypes = require('./object-types');
 
 var API_URL = 'https://maps.googleapis.com/maps/api/js';
 var DEFAULT_ZOOM = 9;
 var DEFAULT_LAT = 41.9;
 var DEFAULT_LNG = 45.8;
-
-var MIN_CLUSER_SIZES = {
-  towers: 30,
-  substations: 10,
-  tps: 30,
-  poles: 50,
-};
-
-var MIN_ZOOM = {
-  towers: 13,
-  tps: 14,
-  poles: 16,
-};
 
 var map;
 var markerClusterers = {};
@@ -43,9 +31,9 @@ var styleFunction = function(f) {
 
 var markerZoomer = function() {
   var zoom = map.getZoom();
-  for(prop in MIN_ZOOM) {
-    var clust = markerClusterers[prop];
-    var min_zoom = MIN_ZOOM[prop]
+  for(type in objectTypes) {
+    var clust = markerClusterers[type];
+    var min_zoom = objectTypes[type].zoom;
     if (min_zoom <= zoom) {
       if (clust && clust.savedMarkers) {
         clust.addMarkers(clust.savedMarkers);
@@ -93,6 +81,8 @@ var createMap = function(opts) {
 
   ///////////////////////////////////////////////////////////////////////////////
 
+  map.objects = [];
+
   var markerClickListener = function() {
     var contentToString = function(content) {
       if (typeof content === 'string') {
@@ -118,7 +108,7 @@ var createMap = function(opts) {
 
   map.loadedMarkers = {};
 
-  map.showPointlike = function(objects, type, icon) {
+  map.showObjects = function(objects) {
     var markers = [];
     for (var i = 0, l = objects.length; i < l; ++i) {
       var obj = objects[i];
@@ -126,51 +116,50 @@ var createMap = function(opts) {
       if(map.loadedMarkers[obj.id] == true) continue;
 
       var latLng = new google.maps.LatLng(obj.lat, obj.lng);
+      var icon = "/map/"+obj.type +'.png';
       var marker = new google.maps.Marker({ position: latLng, icon: icon, title: obj.name });
       marker.id = obj.id;
-      marker.type = type;
+      marker.type = obj.type;
       marker.name = obj.name;
       map.loadedMarkers[obj.id] = true;
       google.maps.event.addListener(marker, 'click', markerClickListener);
+      if ( !markerClusterers[obj.type] ) {
+        markerClusterers[obj.type] = new clusterer.MarkerClusterer(map);
+        markerClusterers[obj.type].setMinimumClusterSize(objectTypes[obj.type].cluster);
+      }
+      markerClusterers[obj.type].addMarker(marker);
       markers.push(marker);
     }
-    if ( !markerClusterers[type] ) {
-      markerClusterers[type] = new clusterer.MarkerClusterer(map);
-      markerClusterers[type].setMinimumClusterSize(MIN_CLUSER_SIZES[type]);
-    }
-    markerClusterers[type].addMarkers(markers);
+    
     markerZoomer();
+    map.objects.concat(markers);
     return markers;
   };
 
+  map.setLayerVisible = function(layer, visible) {
+    var clust = markerClusterers[layer];
+    if (visible) {
+      if (clust && clust.msavedMarkers) {
+        clust.addMarkers(clust.msavedMarkers);
+        clust.msavedMarkers = null;
+      }
+    } else {
+      if (clust && !clust.msavedMarkers) {
+        clust.msavedMarkers = clust.getMarkers();
+        clust.clearMarkers();
+      }
+    }
+  }
+
   google.maps.event.addListener(map, 'zoom_changed', markerZoomer);
-
-  // display markers
-
-  map.showTowers = function(towers) {
-    if(!map['tower_markers']) map['tower_markers'] = [];
-    map['tower_markers'].concat(map.showPointlike(towers, 'towers', '/map/tower.png'));
-  };
-  map.showSubstations = function(substations) {
-    if(!map['substation_markers']) map['substation_markers'] = [];
-    map['substation_markers'] = map['substation_markers'].concat(map.showPointlike(substations, 'substations', '/map/substation.png'));
-  };
-  map.showTps = function(tps) {
-    if(!map['tp_markers']) map['tp_markers'] = [];
-    map['tp_markers'] = map['tp_markers'].concat(map.showPointlike(tps, 'tps', '/map/tp.png'));
-  };
-  map.showPoles = function(poles) {
-    if(!map['pole_markers']) map['pole_markers'] = [];
-    map['pole_markers'] = map['pole_markers'].concat(map.showPointlike(poles, 'poles', '/map/pole.png'));
-  };
 
   // loading lines
 
   map.loadLines = function() {
-    if(map.linesLoaded) return false;
-
-    map.data.loadGeoJson('/api/lines');
-    map.linesLoaded = true;
+    if(map.zoom >= 16)
+      map.data.loadGeoJson('/api/lines?fiders=true&bounds='+map.getBounds().toUrlValue());
+    else
+      map.data.loadGeoJson('/api/lines?bounds='+map.getBounds().toUrlValue());
   };
 
   map.data.setStyle(styleFunction);
@@ -182,5 +171,5 @@ var createMap = function(opts) {
 
 module.exports = {
   start  : loadAPI,
-  create : createMap,
+  create : createMap
 };
