@@ -42,6 +42,21 @@ var styleFunction = function(f) {
   }
 };
 
+var setLayerVisible = function(layer, visible) {
+  var clust = markerClusterers[layer+'s'];
+  if (visible) {
+    if (clust && clust.msavedMarkers) {
+      clust.addMarkers(clust.msavedMarkers);
+      clust.msavedMarkers = null;
+    }
+  } else {
+    if (clust && !clust.msavedMarkers) {
+      clust.msavedMarkers = clust.getMarkers();
+      clust.clearMarkers();
+    }
+  }
+}
+
 var markerZoomer = function() {
   var zoom = map.getZoom();
   for(prop in MIN_ZOOM) {
@@ -184,4 +199,5 @@ var createMap = function(opts) {
 module.exports = {
   start  : loadAPI,
   create : createMap,
+  setLayerVisible: setLayerVisible
 };
