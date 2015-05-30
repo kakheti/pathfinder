@@ -2,7 +2,7 @@
 class Api::SubstationsController < ApiController
   def index
     if params["bounds"] then
-      substations = Objects::Substation.where(within_bounds(params["bounds"]))
+      substations = Objects::Substation.where(self.within_bounds(params["bounds"]))
     else
       substations = Objects::Substation.all
     end

@@ -157,17 +157,24 @@ var createMap = function(opts) {
     for(i in markerClusterers) {
       markerClusterers[i].clearMarkers();
     };
-  }
+  };
+
+  map.clearLines = function(){
+    map.data.forEach(function(a){
+      map.data.remove(a);
+    });
+  };
 
   google.maps.event.addListener(map, 'zoom_changed', markerZoomer);
 
   // loading lines
 
   map.loadLines = function() {
+    var params = api.getParams();
     if(map.zoom >= 16)
-      map.data.loadGeoJson('/api/lines?fiders=true&bounds='+map.getBounds().toUrlValue());
+      map.data.loadGeoJson('/api/lines?fiders=true&'+params);
     else
-      map.data.loadGeoJson('/api/lines?bounds='+map.getBounds().toUrlValue());
+      map.data.loadGeoJson('/api/lines?'+params);
   };
 
   map.data.setStyle(styleFunction);

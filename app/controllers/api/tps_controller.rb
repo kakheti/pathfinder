@@ -2,7 +2,7 @@
 class Api::TpsController < ApiController
   def index
     if params["bounds"] then
-      tps = Objects::Tp.where(within_bounds(params["bounds"]))
+      tps = Objects::Tp.where(self.within_bounds(params["bounds"]))
     else
       tps = Objects::Tp.all
     end

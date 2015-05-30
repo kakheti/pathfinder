@@ -52,6 +52,8 @@ googlemaps.start().then(googlemaps.create).then(function(map) {
 
   $("#search-region").on('change', function(){
     map.clearAll();
+    map.clearLines();
     loadAll();
+    map.loadLines();
   });
 });
