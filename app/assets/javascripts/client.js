@@ -1,11 +1,13 @@
 var googlemaps = require('./googlemaps');
 var api = require('./api');
 var search = require('./search');
+var $ = require('jquery');
+var objectTypes = require('./object-types');
 
 var logger = function(message) {
-  var el = document.getElementById('messages');
-  if( message ) { el.innerHTML = '<span>' + message + '</span>'; }
-  else { el.innerHTML = ''; }
+  if(!message) return;
+  console.log(message);
+  window.currentToast = Materialize.toast(message, 2000)
 };
 
 logger('იტვირთება...');
@@ -19,12 +21,32 @@ googlemaps.start().then(googlemaps.create).then(function(map) {
 
   google.maps.event.addListener(map, 'tilesloaded', function() {
 
-    // loading data
-    api.loadTowers().then(map.showTowers)
-      .then(api.loadSubstations).then(map.showSubstations)
-      .then(api.loadTps).then(map.showTps)
-      .then(api.loadPoles).then(map.showPoles)
-      .then(map.loadLines)
-      ;
+    // Loading data
+    logger("იტვირთება");
+
+    for(type in objectTypes) {
+      var objType = objectTypes[type];
+      if(objType.marker !== false && map.zoom >= objType.zoom) {
+        api.loadObjects(type).then(map.showObjects);
+      }
+    }
+    map.loadLines();
+  });
+
+  $("#search-type input").on('change', function(){
+    var allDisabled = true;
+    var types = {};
+
+    $("#search-type input[type=checkbox]").each(function(){
+      var enabled = $(this).is(":checked");
+      types[$(this).val()] = enabled;
+      if(enabled) allDisabled = false;
     });
+    for(type in types) {
+      var enabled = types[type];
+      if(allDisabled) enabled = true;
+
+      map.setLayerVisible(type, enabled);
+    }
+  });
 });

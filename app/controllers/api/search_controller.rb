@@ -5,8 +5,6 @@ class Api::SearchController < ApiController
       %w(region_id).include?(key) && value.length > 0
     }
 
-    types = []
-    types = params["type"] unless params["type"].nil?
 
     object_types = {
       "line" => Objects::Line,
@@ -18,11 +16,15 @@ class Api::SearchController < ApiController
       "office" => Objects::Office
     }
 
+    types = object_types.keys
+    types = params["type"] unless params["type"].nil?
+
     all_objects = [];
 
     types.each do |type|
       if !object_types[type].nil? then
         objects = object_types[type].all(filters)
+        objects = objects.where(within_bounds(params["bounds"])) if params["bounds"]
         objects = objects.full_text_search(params["name"]) if params["name"] && params["name"].length > 0
         all_objects.concat objects
       end

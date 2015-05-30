@@ -15,7 +15,7 @@ class Objects::Tower
   belongs_to :line, class_name: 'Objects::Line'
   field :linename, type: String
 
-  search_in :name
+  search_in :name, :line
 
   def self.from_kml(xml)
     parser=XML::Parser.string xml
