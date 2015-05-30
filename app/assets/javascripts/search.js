@@ -9,6 +9,10 @@ var view = {
     $('#search-query').focus();
   },
 
+  resizeOutput: function() {
+    $("#search-output .collection").css("max-height", $(window).innerHeight() - 125)
+  },
+
   initSearch: function() {
     var field = $('#search-query');
     var typeField = $('#search-type');
@@ -41,11 +45,20 @@ var view = {
         $("#search-form .btn").removeProp("disabled", false).removeClass("loading");
       });
     });
+
+    field.on('click', function(){
+      if($("#search-output .collection .collection-item").length > 0) {
+        $("#search-output").show();
+      }
+    });
+
+    $(window).on('resize', view.resizeOutput);
+    view.resizeOutput();
   },
 
   renderMarker: function(marker) {
     var realMarker;
-    var markers = data.map[marker.type + '_markers'];
+    var markers = data.map.objects;
     for(m in markers) {
       if(markers[m].id == marker.id) {
         realMarker = markers[m];
@@ -76,16 +89,12 @@ var view = {
         output.append(element);
       }
     };
-    if (markers.length > 0) {
-      $('#search-output').show();
-      var summary = 'ნაპოვნია: <span class="text-muted"><strong>' + markers.length + '</strong> ობიექტი</span>';
-      $("#search-output .summary").html(summary);
-      var output = $('#search-output .collection');
-      output.html('');
-      renderCollection(markers, output);
-    } else {
-      $('#search-output').hide();
-    }
+    $('#search-output').show();
+    var summary = 'ნაპოვნია: <span class="text-muted"><strong>' + markers.length + '</strong> ობიექტი</span>';
+    $("#search-output .summary").html(summary);
+    var output = $('#search-output .collection');
+    output.html('');
+    renderCollection(markers, output);
   },
 };
 
