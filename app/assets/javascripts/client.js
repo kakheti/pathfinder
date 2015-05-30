@@ -4,10 +4,11 @@ var search = require('./search');
 var $ = require('jquery');
 
 var zoomLevels = {
-  towers: 16,
-  tps: 18,
-  poles: 18,
-  fiders: 16
+  tower: 16,
+  tp: 18,
+  pole: 18,
+  fider: 16,
+  substation: 0
 };
 
 var logger = function(message) {
@@ -27,18 +28,15 @@ googlemaps.start().then(googlemaps.create).then(function(map) {
 
   google.maps.event.addListener(map, 'tilesloaded', function() {
 
-    // loading data
-    var promise = api.loadSubstations().then(map.showSubstations);
-    if(map.zoom >= zoomLevels.towers) {
-      promise = promise.then(api.loadTowers).then(map.showTowers)
+    // Loading data
+    logger("იტვირთება");
+
+    for(type in zoomLevels) {
+      if(map.zoom >= zoomLevels[type]) {
+        api.loadObjects(type).then(map.showObjects);
+      }
     }
-    if(map.zoom >= zoomLevels.tps) {
-      promise = promise.then(api.loadTps).then(map.showTps)
-    }
-    if(map.zoom >= zoomLevels.poles) {
-      promise = promise.then(api.loadPoles).then(map.showPoles)
-    }
-    promise.then(map.loadLines)
+    map.loadLines();
   });
 
   $("#search-type input").on('change', function(){
@@ -54,7 +52,7 @@ googlemaps.start().then(googlemaps.create).then(function(map) {
       var enabled = types[type];
       if(allDisabled) enabled = true;
 
-      googlemaps.setLayerVisible(type, enabled);
+      map.setLayerVisible(type, enabled);
     }
   });
 });

@@ -24,6 +24,7 @@ class Api::SearchController < ApiController
     types.each do |type|
       if !object_types[type].nil? then
         objects = object_types[type].all(filters)
+        objects = objects.where(within_bounds(params["bounds"])) if params["bounds"]
         objects = objects.full_text_search(params["name"]) if params["name"] && params["name"].length > 0
         all_objects.concat objects
       end
