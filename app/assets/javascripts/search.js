@@ -70,16 +70,20 @@ var view = {
       realMarker = markers[0];
     }
 
-    var m = $('<a class="search-marker collection-item"></a>');
-    m.html(marker.name+ '<span class="badge">' + (objectTypes[marker.type].name || marker.type) + '</span>');
-    m.click(function() {
+    var m = _.template('<a class="search-marker collection-item">'
+      +'<%=name%><span class="badge"><%=type%></a>');
+    var el = $(m({
+      name: marker.name,
+      type: (objectTypes[marker.type].name || marker.type)
+    }));
+    el.click(function() {
       data.map.setZoom(15);
       setTimeout(function() {
         google.maps.event.trigger(realMarker, 'click');
       }, 500);
       data.map.setCenter(new google.maps.LatLng(marker.lat, marker.lng));
     });
-    return m;
+    return el;
   },
 
   displayMarkers: function(q, markers) {
@@ -90,8 +94,8 @@ var view = {
       }
     };
     $('#search-output').show();
-    var summary = 'ნაპოვნია: <span class="text-muted"><strong>' + markers.length + '</strong> ობიექტი</span>';
-    $("#search-output .summary").html(summary);
+    var summary = _.template('ნაპოვნია: <strong><%=length%></strong> ობიექტი');
+    $("#search-output .summary").html(summary({length: markers.length}));
     var output = $('#search-output .collection');
     output.html('');
     renderCollection(markers, output);
