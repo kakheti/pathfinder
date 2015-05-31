@@ -161,16 +161,21 @@ var createMap = function(opts) {
 
   map.clearLines = function(){
     map.data.forEach(function(a){
-      map.data.remove(a);
+      var clazz = a.getProperty('class');
+      if (clazz === 'Objects::Line') {
+        map.data.remove(a);
+      }
     });
   };
 
-  google.maps.event.addListener(map, 'zoom_changed', markerZoomer);
-  google.maps.event.addListener(map, 'click', function(){
-    $('#search-output').hide();
-  });
-
-  // loading lines
+  map.clearFiders = function(){
+    map.data.forEach(function(a){
+      var clazz = a.getProperty('class');
+      if (clazz === 'Objects::FiderLine') {
+        map.data.remove(a);
+      }
+    });
+  };
 
   map.loadLines = function() {
     map.data.loadGeoJson('/api/lines');
@@ -181,6 +186,11 @@ var createMap = function(opts) {
     if(map.zoom >= objectTypes.fider.zoom)
       map.data.loadGeoJson('/api/lines/fiders?'+params);
   }
+
+  google.maps.event.addListener(map, 'zoom_changed', markerZoomer);
+  google.maps.event.addListener(map, 'click', function(){
+    $('#search-output').hide();
+  });
 
   map.data.setStyle(styleFunction);
 

@@ -1,4 +1,4 @@
-var $ = require('jquery');
+var _ = require('lodash');
 var googlemaps = require('./googlemaps');
 var objectTypes = require('./object-types');
 

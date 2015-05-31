@@ -18,6 +18,7 @@
   },
   "dependencies": {
     "jquery": "^2.1.1",
+    "lodash": "^3.9.3",
     "materialize-css": "^0.96.1"
   }
 }
