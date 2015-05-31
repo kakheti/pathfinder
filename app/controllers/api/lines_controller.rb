@@ -24,9 +24,9 @@ class Api::LinesController < ApiController
   end
 
   def fiders
-    params["type"] = ["fider"]
+    params["type"] = ["fider-line"]
     fiders = Api::SearchController.search(params)
-    fiders = fiders.map{|x| x.lines}.flatten
+    #fiders = fiders.map{|x| x.lines}.flatten
 
     render json: {
       type: 'FeatureCollection',
