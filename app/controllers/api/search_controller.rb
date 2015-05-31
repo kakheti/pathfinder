@@ -9,7 +9,8 @@ class Api::SearchController < ApiController
       "tower" => Objects::Tower,
       "tp" => Objects::Tp,
       "fider" => Objects::Fider,
-      "office" => Objects::Office
+      "office" => Objects::Office,
+      "fider-line" => Objects::FiderLine
     }
 
     filters = params.select { |key, value|
@@ -24,7 +25,11 @@ class Api::SearchController < ApiController
     types.each do |type|
       if !object_types[type].nil? then
         objects = object_types[type].all(filters)
-        objects = objects.where(self.within_bounds(params["bounds"])) if params["bounds"]
+        if type == "fider-line" && params["bounds"] then
+          objects = objects.where({ points: within_bounds(params["bounds"]) })
+        elsif params["bounds"]
+          objects = objects.where(within_bounds(params["bounds"]))
+        end
         objects = objects.full_text_search(params["name"]) if params["name"] && params["name"].length > 0
         all_objects.concat objects
       end
@@ -41,7 +46,8 @@ class Api::SearchController < ApiController
       "tower" => Objects::Tower,
       "tp" => Objects::Tp,
       "fider" => Objects::Fider,
-      "office" => Objects::Office
+      "office" => Objects::Office,
+      "fider-line" => Objects::FiderLine
     }
     objects = Api::SearchController.search(params)
 
