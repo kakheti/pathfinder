@@ -1,7 +1,7 @@
 var googlemaps = require('./googlemaps');
 var api = require('./api');
 var search = require('./search');
-var $ = require('jquery');
+var _ = require('lodash');
 var objectTypes = require('./object-types');
 
 var logger = function(message, duration) {
@@ -17,6 +17,17 @@ var loadAll = function() {
       api.loadObjects(type).then(map.showObjects);
     }
   }
+}
+
+var tp = _.template(
+  '<div><input type="checkbox" checked value="<%= type %>" id="checkbox-<%= type %>">'
+  +'<label for="checkbox-<%= type %>"><%= name %></label></div>');
+var container = $("#search-type");
+for(type in objectTypes) {
+  container.append(tp({
+    type: type,
+    name: objectTypes[type].plural
+  }));
 }
 
 logger('იტვირთება...', 6000);
@@ -48,14 +59,24 @@ googlemaps.start().then(googlemaps.create).then(function(map) {
       if(allDisabled) enabled = true;
 
       map.setLayerVisible(type, enabled);
+
+      /*switch(type) {
+        case "line":
+          if(enabled) map.loadLines();
+          else map.clearLines();
+          break;
+        case "fider":
+          if(enabled) map.loadFiders();
+          else map.clearFiders();
+          break;
+      }*/
     }
   });
 
   $("#search-region").on('change', function(){
     map.clearAll();
-    map.clearLines();
+    map.clearFiders();
     loadAll();
-    map.loadLines();
     map.loadFiders();
   });
 });
