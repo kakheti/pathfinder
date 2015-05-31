@@ -1,4 +1,5 @@
 var Promise = require('bluebird');
+var _ = require('lodash');
 var clusterer = require('./lib/markerclusterer');
 var api = require('./api');
 var objectTypes = require('./object-types');
@@ -110,10 +111,8 @@ var createMap = function(opts) {
 
   map.showObjects = function(objects) {
     var markers = [];
-    for (var i = 0, l = objects.length; i < l; ++i) {
-      var obj = objects[i];
-
-      if(map.loadedMarkers[obj.id] == true) continue;
+    _.forEach(objects, function(obj){
+      if(map.loadedMarkers[obj.id] == true) return;
 
       var latLng = new google.maps.LatLng(obj.lat, obj.lng);
       var icon = "/map/"+obj.type +'.png';
@@ -129,7 +128,7 @@ var createMap = function(opts) {
       }
       markerClusterers[obj.type].addMarker(marker);
       markers.push(marker);
-    }
+    });
     
     markerZoomer();
     map.objects.concat(markers);

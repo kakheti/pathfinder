@@ -59,11 +59,8 @@ var view = {
   renderMarker: function(marker) {
     var realMarker;
     var markers = data.map.objects;
-    for(m in markers) {
-      if(markers[m].id == marker.id) {
-        realMarker = markers[m];
-      }
-    }
+
+    realMarker = _.find(markers, _.matchesProperty('id', marker.id));
 
     if(!realMarker) {
       markers = data.map.showObjects([marker]);
@@ -88,11 +85,12 @@ var view = {
 
   displayMarkers: function(q, markers) {
     var renderCollection = function(array, output) {
-      for (var i = 0; i < array.length; i++) {
-        var element = view.renderMarker(array[i]);
+      _.forEach(array, function(item){
+        var element = view.renderMarker(item);
         output.append(element);
-      }
+      });
     };
+    
     $('#search-output').show();
     var summary = _.template('ნაპოვნია: <strong><%=length%></strong> ობიექტი');
     $("#search-output .summary").html(summary({length: markers.length}));
