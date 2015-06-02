@@ -2,7 +2,7 @@
 class Api::PolesController < ApiController
   def index
     if params["bounds"] then
-      poles = Objects::Pole.where(within_bounds(params["bounds"]))
+      poles = Objects::Pole.where(self.within_bounds(params["bounds"]))
     else
       poles = Objects::Pole.all
     end

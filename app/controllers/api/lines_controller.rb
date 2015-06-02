@@ -1,18 +1,36 @@
 # -*- encoding : utf-8 -*-
 class Api::LinesController < ApiController
   def index
-    puts params
-    if params["bounds"] then
-      lines = Objects::Line.where(within_bounds(params["bounds"]))
-      lines += Objects::Fider.where(within_bounds(params["bounds"])).map{|x| x.lines}.flatten if params["fiders"]
-    else
-      lines = Objects::Line.all
-      lines += Objects::Fider.all.map{|x| x.lines}.flatten if params["fiders"]
-    end
+    params["type"] = ["line"]
+
+    lines = Api::SearchController.search(params)
 
     render json: {
       type: 'FeatureCollection',
       features: lines.map do |line|
+        {
+          type: 'Feature',
+          geometry: {
+            type: 'LineString',
+            coordinates: line.points.map{|p| [p.lng,p.lat] }
+          },
+          id: line.id.to_s,
+          properties: {
+            class: line.class.name
+          }
+        }
+      end
+    }
+  end
+
+  def fiders
+    params["type"] = ["fider-line"]
+    fiders = Api::SearchController.search(params)
+    #fiders = fiders.map{|x| x.lines}.flatten
+
+    render json: {
+      type: 'FeatureCollection',
+      features: fiders.map do |line|
         {
           type: 'Feature',
           geometry: {
