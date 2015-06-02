@@ -2,7 +2,7 @@
 class Api::TowersController < ApiController
   def index
     if params["bounds"] then
-      towers = Objects::Tower.where(within_bounds(params["bounds"]))
+      towers = Objects::Tower.where(self.within_bounds(params["bounds"]))
     else
       towers = Objects::Tower.all
     end

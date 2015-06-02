@@ -1,4 +1,4 @@
-var $ = require('jquery');
+var _ = require('lodash');
 var googlemaps = require('./googlemaps');
 var objectTypes = require('./object-types');
 
@@ -7,6 +7,10 @@ var data = {};
 var view = {
   showSearch: function() {
     $('#search-query').focus();
+  },
+
+  resizeOutput: function() {
+    $("#search-output .collection").css("max-height", $(window).innerHeight() - 125)
   },
 
   initSearch: function() {
@@ -41,51 +45,58 @@ var view = {
         $("#search-form .btn").removeProp("disabled", false).removeClass("loading");
       });
     });
+
+    field.on('click', function(){
+      if($("#search-output .collection .collection-item").length > 0) {
+        $("#search-output").show();
+      }
+    });
+
+    $(window).on('resize', view.resizeOutput);
+    view.resizeOutput();
   },
 
   renderMarker: function(marker) {
     var realMarker;
-    var markers = data.map[marker.type + '_markers'];
-    for(m in markers) {
-      if(markers[m].id == marker.id) {
-        realMarker = markers[m];
-      }
-    }
+    var markers = data.map.objects;
+
+    realMarker = _.find(markers, _.matchesProperty('id', marker.id));
 
     if(!realMarker) {
-      markers = data.map.showPointlike([marker], marker.type+'s', '/map/'+marker.type+'.png');
+      markers = data.map.showObjects([marker]);
       realMarker = markers[0];
     }
 
-    var m = $('<a class="search-marker collection-item"></a>');
-    m.html(marker.name+ '<span class="badge">' + (objectTypes[marker.type].name || marker.type) + '</span>');
-    m.click(function() {
+    var m = _.template('<a class="search-marker collection-item">'
+      +'<%=name%><span class="badge"><%=type%></a>');
+    var el = $(m({
+      name: marker.name,
+      type: (objectTypes[marker.type].name || marker.type)
+    }));
+    el.click(function() {
       data.map.setZoom(15);
       setTimeout(function() {
         google.maps.event.trigger(realMarker, 'click');
       }, 500);
       data.map.setCenter(new google.maps.LatLng(marker.lat, marker.lng));
     });
-    return m;
+    return el;
   },
 
   displayMarkers: function(q, markers) {
     var renderCollection = function(array, output) {
-      for (var i = 0; i < array.length; i++) {
-        var element = view.renderMarker(array[i]);
+      _.forEach(array, function(item){
+        var element = view.renderMarker(item);
         output.append(element);
-      }
+      });
     };
-    if (markers.length > 0) {
-      $('#search-output').show();
-      var summary = 'ნაპოვნია: <span class="text-muted"><strong>' + markers.length + '</strong> ობიექტი</span>';
-      $("#search-output .summary").html(summary);
-      var output = $('#search-output .collection');
-      output.html('');
-      renderCollection(markers, output);
-    } else {
-      $('#search-output').hide();
-    }
+    
+    $('#search-output').show();
+    var summary = _.template('ნაპოვნია: <strong><%=length%></strong> ობიექტი');
+    $("#search-output .summary").html(summary({length: markers.length}));
+    var output = $('#search-output .collection');
+    output.html('');
+    renderCollection(markers, output);
   },
 };
 

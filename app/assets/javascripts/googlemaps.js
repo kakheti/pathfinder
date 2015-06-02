@@ -1,4 +1,5 @@
 var Promise = require('bluebird');
+var _ = require('lodash');
 var clusterer = require('./lib/markerclusterer');
 var api = require('./api');
 var objectTypes = require('./object-types');
@@ -110,10 +111,8 @@ var createMap = function(opts) {
 
   map.showObjects = function(objects) {
     var markers = [];
-    for (var i = 0, l = objects.length; i < l; ++i) {
-      var obj = objects[i];
-
-      if(map.loadedMarkers[obj.id] == true) continue;
+    _.forEach(objects, function(obj){
+      if(map.loadedMarkers[obj.id] == true) return;
 
       var latLng = new google.maps.LatLng(obj.lat, obj.lng);
       var icon = "/map/"+obj.type +'.png';
@@ -129,7 +128,7 @@ var createMap = function(opts) {
       }
       markerClusterers[obj.type].addMarker(marker);
       markers.push(marker);
-    }
+    });
     
     markerZoomer();
     map.objects.concat(markers);
@@ -151,16 +150,46 @@ var createMap = function(opts) {
     }
   }
 
-  google.maps.event.addListener(map, 'zoom_changed', markerZoomer);
+  map.clearAll = function(){
+    map.objects = [];
+    map.loadedMarkers = {};
+    for(i in markerClusterers) {
+      markerClusterers[i].clearMarkers();
+    };
+  };
 
-  // loading lines
+  map.clearLines = function(){
+    map.data.forEach(function(a){
+      var clazz = a.getProperty('class');
+      if (clazz === 'Objects::Line') {
+        map.data.remove(a);
+      }
+    });
+  };
+
+  map.clearFiders = function(){
+    map.data.forEach(function(a){
+      var clazz = a.getProperty('class');
+      if (clazz === 'Objects::FiderLine') {
+        map.data.remove(a);
+      }
+    });
+  };
 
   map.loadLines = function() {
-    if(map.zoom >= 16)
-      map.data.loadGeoJson('/api/lines?fiders=true&bounds='+map.getBounds().toUrlValue());
-    else
-      map.data.loadGeoJson('/api/lines?bounds='+map.getBounds().toUrlValue());
+    map.data.loadGeoJson('/api/lines');
   };
+
+  map.loadFiders = function() {
+    var params = api.getParams();
+    if(map.zoom >= objectTypes.fider.zoom)
+      map.data.loadGeoJson('/api/lines/fiders?'+params);
+  }
+
+  google.maps.event.addListener(map, 'zoom_changed', markerZoomer);
+  google.maps.event.addListener(map, 'click', function(){
+    $('#search-output').hide();
+  });
 
   map.data.setStyle(styleFunction);
 
