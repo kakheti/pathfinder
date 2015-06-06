@@ -35,7 +35,7 @@
             </ul>
           </li>
           <li class="dropdown <%= group == '110-220' ? 'active' : 'passive' %>">
-            <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="110-220" aria-expanded="false">110-220 კვ <span class="caret"></span></a>
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="110-220" aria-expanded="false">35-110-220 კვ <span class="caret"></span></a>
             <ul class="dropdown-menu" aria-labelledby="110-220">
               <li><a href="<%= objects_substations_url %>">ქვესადგურები <span class="badge"><%= Objects::Substation.count %></span></a></li>
               <li><a href="<%= objects_lines_url %>">გადამცემი ხაზები <span class="badge"><%= Objects::Line.count %></span></a></li>
@@ -46,8 +46,8 @@
             <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="6-10" aria-expanded="false">6-10 კვ<span class="caret"></span></a>
             <ul class="dropdown-menu" aria-labelledby="6-10">
               <li><a href="<%= objects_fiders_url %>">ფიდერები <span class="badge"><%= Objects::Fider.count %></span></a></li>
-              <li><a href="<%= objects_tps_url %>">სატრ. ჯიხურები <span class="badge"><%= Objects::Tp.count %></span></a></li>
-              <li><a href="<%= objects_poles_url %>">6-10კვ ბოძები <span class="badge"><%= Objects::Pole.count %></span></a></li>
+              <li><a href="<%= objects_tps_url %>">6-10კვ სატრ. ჯიხურები <span class="badge"><%= Objects::Tp.count %></span></a></li>
+              <li><a href="<%= objects_poles_url %>">6-10კვ საყრდენები <span class="badge"><%= Objects::Pole.count %></span></a></li>
             </ul>
           </li>
         </ul>
