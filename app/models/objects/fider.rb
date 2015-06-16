@@ -11,6 +11,7 @@ class Objects::Fider
   field :name, type: String
   field :description, type: String
   belongs_to :region
+  belongs_to :substation, class_name: 'Objects::Substation'
   embeds_many :lines, class_name: 'Objects::FiderLine'
   has_many :tps, class_name: 'Objects::Tp'
   has_many :poles, class_name: 'Objects::Pole'

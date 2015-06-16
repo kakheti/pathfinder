@@ -12,6 +12,9 @@ class Objects::Substation
   field :name, type: String
   field :description, type: String
   belongs_to :region
+  has_many :tps, class_name: 'Objects::Tp'
+  has_many :poles, class_name: 'Objects::Pole'
+  has_many :fiders, class_name: 'Objects::Fider'
 
   search_in :name, :description
 
