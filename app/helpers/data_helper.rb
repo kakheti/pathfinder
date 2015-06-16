@@ -24,6 +24,8 @@ module DataHelper
   def tab_url(main_object, tab)
     if main_object.is_a?(Region)
       region_url(main_object, tab: tab)
+    elsif main_object.is_a?(Objects::Substation)
+      objects_substation_url(main_object, tab: tab)
     elsif main_object.is_a?(Objects::Line)
       objects_line_url(main_object, tab: tab)
     elsif main_object.is_a?(Objects::Fider)
