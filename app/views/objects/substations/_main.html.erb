@@ -1,0 +1,34 @@
+<% substation = data %>
+<table class="table table-bordered table-hover">
+  <tr>
+    <td class="text-muted" width="150">დასახელება</td>
+    <td><%= @substation.name %></td>
+  </tr>
+  <tr>
+    <td class="text-muted">ნომერი</td>
+    <td>
+      <% if @substation.number.present? %>
+        #<code><%= @substation.number %></code>
+      <% end %>
+    </td>
+  </tr>
+  <tr>
+    <td class="text-muted">შენიშვნა</td>
+    <td><%= @substation.description %></td>
+  </tr>
+  <tr>
+    <td class="text-muted">რაიონი</td>
+    <td>
+      <% if @substation.region.present? %>
+        <%= link_to @substation.region.name, region_url(@substation.region, tab: 'substations') %>
+      <% end %>
+    </td>
+  </tr>
+  <tr>
+    <td class="text-muted">კოორდინატები</td>
+    <td>
+      E: <code><%= @substation.easting %></code>;
+      N: <code><%= @substation.northing %></code>
+    </td>
+  </tr>
+</table>

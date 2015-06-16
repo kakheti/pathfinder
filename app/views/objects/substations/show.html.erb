@@ -1,38 +1,13 @@
 <h2 class="page-header"><%= @substation.name %></h2>
 
-<table class="table table-bordered table-hover">
-  <tr>
-    <td class="text-muted" width="150">დასახელება</td>
-    <td><%= @substation.name %></td>
-  </tr>
-  <tr>
-    <td class="text-muted">ნომერი</td>
-    <td>
-      <% if @substation.number.present? %>
-        #<code><%= @substation.number %></code>
-      <% end %>
-    </td>
-  </tr>
-  <tr>
-    <td class="text-muted">შენიშვნა</td>
-    <td><%= @substation.description %></td>
-  </tr>
-  <tr>
-    <td class="text-muted">რაიონი</td>
-    <td>
-      <% if @substation.region.present? %>
-        <%= link_to @substation.region.name, region_url(@substation.region, tab: 'substations') %>
-      <% end %>
-    </td>
-  </tr>
-  <tr>
-    <td class="text-muted">კოორდინატები</td>
-    <td>
-      E: <code><%= @substation.easting %></code>;
-      N: <code><%= @substation.northing %></code>
-    </td>
-  </tr>
-</table>
+<div class="row">
+  <div class="col-sm-3">
+    <%= render_data_menu(@substation, ['fiders', 'tps', 'poles']) %>
+  </div>
+  <div class="col-sm-9">
+    <%= render_data(@substation) %>
+  </div>
+</div>
 
 <h3 class="page-header">მდებარეობა რუკაზე</h3>
 <%= render partial: '/data/points_map', locals: { points: [ @substation.location ] } %>
