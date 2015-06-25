@@ -88,5 +88,7 @@ class Objects::TpsController < ApplicationController
       end
     end
     Region.each { |region| region.make_summaries }
+    Objects::Fider.each { |fider| fider.make_summaries }
+
   end
 end
