@@ -11,12 +11,22 @@ class Objects::Substation
   field :number, type: String
   field :name, type: String
   field :description, type: String
+  field :residential_count, type: Integer, default: 0
+  field :comercial_count, type: Integer, default: 0
+  field :usage_average, type: Float, default: 0
   belongs_to :region
   has_many :tps, class_name: 'Objects::Tp'
   has_many :poles, class_name: 'Objects::Pole'
   has_many :fiders, class_name: 'Objects::Fider'
 
   search_in :name, :description
+
+  def make_summaries
+    self.residential_count = self.tps.sum(:residential_count)
+    self.comercial_count = self.tps.sum(:comercial_count)
+    self.usage_average = self.tps.sum(:usage_average)
+    self.save
+  end
 
   def self.by_name(name)
     Objects::Substation.where(name: name).first || Objects::Substation.create(name: name)
