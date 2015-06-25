@@ -10,14 +10,14 @@
   </tr>
   <tr>
     <td class="text-muted">საყოფაცხოვრებო</td>
-    <td><code><%= region.residential_count %></code> აბონენტი</td>
+    <td><code><%= number_with_precision region.residential_count, delimiter: ',', precision: 0 %></code> აბონენტი</td>
   </tr>
   <tr>
     <td class="text-muted">არა საყოფაცხ.</td>
-    <td><code><%= region.comercial_count %></code> აბონენტი</td>
+    <td><code><%= number_with_precision region.comercial_count, delimiter: ',', precision: 0 %></code> აბონენტი</td>
   </tr>
   <tr>
     <td class="text-muted">საშ. მოხმარება</td>
-    <td><code><%= region.usage_average %></code> კვტ.სთ.</td>
+    <td><code><%= number_with_precision region.usage_average, delimiter: ',', precision: 0 %></code> კვტ.სთ.</td>
   </tr>
 </table>
