@@ -10,6 +10,9 @@ class Objects::Fider
 
   field :name, type: String
   field :description, type: String
+  field :residential_count, type: Float
+  field :comercial_count, type: Float
+  field :usage_average, type: Float
   belongs_to :region
   belongs_to :substation, class_name: 'Objects::Substation'
   embeds_many :lines, class_name: 'Objects::FiderLine'
@@ -23,6 +26,13 @@ class Objects::Fider
 
   def to_s; self.name end
   def self.by_name(name); Objects::Fider.where(name: name).first || Objects::Fider.create(name: name) end
+
+  def make_summaries
+    self.residential_count = self.tps.sum(:residential_count)
+    self.comercial_count = self.tps.sum(:comercial_count)
+    self.usage_average = self.tps.sum(:usage_average)
+    self.save
+  end
 
   def self.from_kml(xml)
     parser=XML::Parser.string xml
