@@ -10,7 +10,7 @@ class Api::SearchController < ApiController
       "tp" => Objects::Tp,
       "fider" => Objects::Fider,
       "office" => Objects::Office,
-      "fider-line" => Objects::FiderLine
+      "fider-line" => Objects::Fider
     }
 
     filters = params.select { |key, value|
@@ -26,7 +26,8 @@ class Api::SearchController < ApiController
       if !object_types[type].nil? then
         objects = object_types[type].all(filters)
         if type == "fider-line" && params["bounds"] then
-          objects = objects.where({ points: within_bounds(params["bounds"]) })
+          objects = objects.where({lines: { "$elemMatch" => { points: { "$elemMatch" => within_bounds(params["bounds"])} }}})
+          objects = objects.map { |obj| obj.lines }.flatten
         elsif params["bounds"]
           objects = objects.where(within_bounds(params["bounds"]))
         end
