@@ -1,0 +1,22 @@
+<h3>ოფისი &mdash; <%= @office.name %></h3>
+<table class="table">
+  <tr>
+    <td>მისამართი</td>
+    <td><%= @office.address %></td>
+  </tr>
+  <tr>
+    <td><strong>რაიონი</strong></td>
+    <td><%= @office.region %></td>
+  </tr>
+  <tr>
+    <td><strong>კოორდინატები</strong></td>
+    <td>
+      E:<code><%= @office.easting %></code>
+      N:<code><%= @office.northing %></code>
+    </td>
+  </tr>
+  <tr>
+    <td><strong>შენიშვნა</strong></td>
+    <td><%= @office.description || '<span class="text-muted">(none)</span>'.html_safe %></td>
+  </tr>
+</table>
