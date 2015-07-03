@@ -105,6 +105,7 @@ class Objects::FiderLine
   belongs_to :region
   embedded_in :fider,  class_name: 'Objects::Fider'
   embeds_many :points, class_name: 'Objects::FiderPoint'
+  search_in :linename, :substation_number, :start, :end
   
   def set_points(points)
     self.points.destroy_all
