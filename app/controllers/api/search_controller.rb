@@ -10,7 +10,7 @@ class Api::SearchController < ApiController
       "tp" => Objects::Tp,
       "fider" => Objects::Fider,
       "office" => Objects::Office,
-      "fider-line" => Objects::FiderLine
+      "fider-line" => Objects::Fider
     }
 
     filters = params.select { |key, value|
@@ -26,7 +26,8 @@ class Api::SearchController < ApiController
       if !object_types[type].nil? then
         objects = object_types[type].all(filters)
         if type == "fider-line" && params["bounds"] then
-          objects = objects.where({ points: within_bounds(params["bounds"]) })
+          objects = objects.where({lines: { "$elemMatch" => { points: { "$elemMatch" => within_bounds(params["bounds"])} }}})
+          objects = objects.map { |obj| obj.lines }.flatten
         elsif params["bounds"]
           objects = objects.where(within_bounds(params["bounds"]))
         end
@@ -54,7 +55,21 @@ class Api::SearchController < ApiController
     render json: (objects.map do |object|
       type = object_types.invert[object.class]
 
-      { id: object.id.to_s, lat: object.lat, lng: object.lng, name: object.name, type: type }
+      region = { name: object.region.name, id: object.region_id.to_s } if object.respond_to?(:region) && !object.region.nil?
+      substation = { name: object.substation.name, id: object.substation_id.to_s } if object.respond_to?(:substation) && !object.substation.nil?
+      line = { name: object.line.name, id: object.line_id.to_s } if object.respond_to?(:line) && !object.line.nil?
+      fider = { name: object.fider.name, id: object.fider_id.to_s } if object.respond_to?(:fider) && !object.fider.nil?
+
+      { 
+        id: object.id.to_s,
+        lat: object.lat,
+        lng: object.lng,
+        name: object.name,
+        region: region,
+        substation: substation,
+        line: line,
+        fider: fider,
+        type: type }
     end)
   end
 end

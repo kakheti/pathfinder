@@ -67,11 +67,24 @@ var view = {
       realMarker = markers[0];
     }
 
+    var moreinfo=""
+
+    for(i in objectTypes){
+      if(marker[i]) moreinfo += _.template(' <%=type%>: <%=name%>')({
+        type: objectTypes[i].name,
+        name: marker[i].name
+      });
+    }
+
     var m = _.template('<a class="search-marker collection-item">'
-      +'<%=name%><span class="badge"><%=type%></a>');
+      +'<span class="type"><%=type%></span> '
+      +'<span class="name"><%=name%></span> '
+      +'<span class="moreinfo"><%=moreinfo%></span>'
+      +'</a>');
     var el = $(m({
       name: marker.name,
-      type: (objectTypes[marker.type].name || marker.type)
+      type: (objectTypes[marker.type].name || marker.type),
+      moreinfo: moreinfo
     }));
     el.click(function() {
       data.map.setZoom(15);
