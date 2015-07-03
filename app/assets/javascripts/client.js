@@ -46,17 +46,14 @@ googlemaps.start().then(googlemaps.create).then(function(map) {
   });
 
   $("#search-type input").on('change', function(){
-    var allDisabled = true;
     var types = {};
 
     $("#search-type input[type=checkbox]").each(function(){
       var enabled = $(this).is(":checked");
       types[$(this).val()] = enabled;
-      if(enabled) allDisabled = false;
     });
     for(type in types) {
       var enabled = types[type];
-      if(allDisabled) enabled = true;
 
       map.setLayerVisible(type, enabled);
 

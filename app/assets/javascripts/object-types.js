@@ -13,7 +13,7 @@ var objectTypes = {
   },
   pole: {
     zoom: 18,
-    name: 'ბოძი',
+    name: 'საყრდენი',
     plural: '6-10კვ საყრდენები',
     cluster: 50
   },
