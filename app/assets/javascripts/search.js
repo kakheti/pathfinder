@@ -94,7 +94,6 @@ var view = {
         realMarker.setVisible(true);
         google.maps.event.trigger(realMarker, 'click');
       }, 500);
-      console.log(marker, realMarker);
     });
     return el;
   },
