@@ -87,11 +87,14 @@ var view = {
       moreinfo: moreinfo
     }));
     el.click(function() {
-      data.map.setZoom(15);
+      data.map.setZoom(objectTypes[marker.type].zoom);
+      data.map.setCenter({ lat: marker.lat, lng: marker.lng});
+
       setTimeout(function() {
+        realMarker.setVisible(true);
         google.maps.event.trigger(realMarker, 'click');
       }, 500);
-      data.map.setCenter(new google.maps.LatLng(marker.lat, marker.lng));
+      console.log(marker, realMarker);
     });
     return el;
   },
