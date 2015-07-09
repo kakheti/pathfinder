@@ -13,12 +13,12 @@
     <td><%= line.description %></td>
   </tr>
   <tr>
-    <td class="text-muted">რაიონი</td>
+    <td class="text-muted">მუნიციპალიტეტი</td>
     <td>
       <% if line.region %>
         <%= link_to line.region.name, region_url(line.region, tab: 'lines') %>
       <% else %>
-        <span class="text-muted">(რაიონის გარეშე)</span>
+        <span class="text-muted">(მუნიციპალიტეტის გარეშე)</span>
       <% end %>
     </td>
   </tr>

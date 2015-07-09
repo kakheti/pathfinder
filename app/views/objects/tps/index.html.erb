@@ -6,7 +6,7 @@
 </div>
 
 <%= search_form @search do |s|
-  s.combo_field 'region', collection: Region.all.asc('name'), label: 'რაიონი', empty: '-- ყველა რაიონი --'
+  s.combo_field 'region', collection: Region.all.asc('name'), label: 'მუნიციპალიტეტი', empty: '-- ყველა მუნიციპალიტეტი --'
   s.text_field 'name', label: 'ჯიხურის #'
   s.text_field 'owner', label: 'მფლობელი'
 end %>
@@ -17,7 +17,7 @@ end %>
       <tr>
         <th width="75" class="text-center"><i class="fa fa-image"></i></th>
         <th>სატრანსფორმატორო ჯიხური</th>
-        <th width="200">რაიონი</th>
+        <th width="200">მუნიციპალიტეტი</th>
       </tr>
     </thead>
     <% @tps.each do |tp| %>

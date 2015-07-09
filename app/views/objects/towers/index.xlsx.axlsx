@@ -4,7 +4,7 @@ wb.add_worksheet(name: "report") do |sheet|
     'ID',
     'ანძის #',
     'ანძის ტიპი',
-    'რაიონი',
+    'მუნიციპალიტეტი',
     'შენიშვნა'
   ]
   @towers.each do |tower|

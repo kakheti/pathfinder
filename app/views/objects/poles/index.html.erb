@@ -8,7 +8,7 @@
 </div>
 
 <%= search_form @search do |s|
-  s.combo_field 'region', collection: Region.all.asc('name'), label: 'რაიონი', empty: '-- ყველა რაიონი --'
+  s.combo_field 'region', collection: Region.all.asc('name'), label: 'მუნიციპალიტეტი', empty: '-- ყველა მუნიციპალიტეტი --'
   s.combo_field 'fider', collection: Objects::Fider.all.asc('name'), label: 'ფიდერი', empty: '-- ყველა ფიდერი --'
   s.text_field 'name', label: 'ბოძის #'
 end %>
@@ -19,7 +19,7 @@ end %>
       <tr>
         <th>ბოძის #</th>
         <th width="200">ფიდერი</th>
-        <th width="200">რაიონი</th>
+        <th width="200">მუნიციპალიტეტი</th>
       </tr>
     </thead>
     <% @poles.each do |pole| %>
@@ -35,7 +35,7 @@ end %>
           <% if pole.region %>
             <%= link_to pole.region.name, region_url(pole.region, tab: 'poles') %>
           <% else %>
-            <span class="text-muted">(რაიონის გარეშე)</span>
+            <span class="text-muted">(მუნიციპალიტეტის გარეშე)</span>
           <% end %>
         </td>
       </tr>

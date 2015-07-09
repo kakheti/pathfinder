@@ -6,7 +6,7 @@
     <span class="label label-info"><i class="fa fa-user"></i> <%= @user.username %></span>
     <%= @user.full_name %>
   </p>
-  <p>აარჩიეთ რაიონი, რომლის დამატება გსურთ მომხმარებელზე: </p>
+  <p>აარჩიეთ მუნიციპალიტეტი, რომლის დამატება გსურთ მომხმარებელზე: </p>
   <%= select_tag 'region_id', options_from_collection_for_select(Region.all, "id", "name") %>
   <div style="margin-top: 16px;">
     <%= submit_tag 'შენახვა', class: ['btn', 'btn-primary'] %>
