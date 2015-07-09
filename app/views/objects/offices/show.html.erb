@@ -12,7 +12,7 @@
     <td><%= @office.address  %></td>
   </tr>
   <tr>
-    <td class="text-muted">რაიონი</td>
+    <td class="text-muted">მუნიციპალიტეტი</td>
     <td>
       <%= link_to @office.region.name, region_url(@office.region, tab: 'offices') if @office.region.present?  %>
     </td>

@@ -17,7 +17,7 @@
     <td><%= @substation.description %></td>
   </tr>
   <tr>
-    <td class="text-muted">რაიონი</td>
+    <td class="text-muted">მუნიციპალიტეტი</td>
     <td>
       <% if @substation.region.present? %>
         <%= link_to @substation.region.name, region_url(@substation.region, tab: 'substations') %>

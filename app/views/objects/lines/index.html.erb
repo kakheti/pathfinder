@@ -6,7 +6,7 @@
 </div>
 
 <%= search_form @search do |s|
-  s.combo_field 'region', collection: Region.all.asc('name'), text: ->(x) {x.name}, label: 'რაიონი', empty: '-- ყველა რაიონი --'
+  s.combo_field 'region', collection: Region.all.asc('name'), text: ->(x) {x.name}, label: 'მუნიციპალიტეტი', empty: '-- ყველა მუნიციპალიტეტი --'
   s.text_field 'name', label: 'დასახელება'
   s.text_field 'direction', label: 'მიმართულება'
 end %>
@@ -16,7 +16,7 @@ end %>
     <thead>
       <tr>
         <th>გადამცემი ხაზი</th>
-        <th width="200">რაიონი</th>
+        <th width="200">მუნიციპალიტეტი</th>
       </tr>
     </thead>
     <% @lines.each do |line| %>
@@ -30,7 +30,7 @@ end %>
           <% if line.region %>
             <%= link_to line.region.name, region_url(line.region, tab: 'lines') %>
           <% else %>
-            <span class="text-muted">(რაიონის გარეშე)</span>
+            <span class="text-muted">(მუნიციპალიტეტის გარეშე)</span>
           <% end %>
         </td>
       </tr>

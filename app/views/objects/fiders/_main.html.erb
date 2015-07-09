@@ -15,12 +15,12 @@
     <td><%= fider.description %></td>
   </tr>
   <tr>
-    <td class="text-muted">რაიონი</td>
+    <td class="text-muted">მუნიციპალიტეტი</td>
     <td>
       <% if fider.region %>
         <%= link_to fider.region.name, region_url(fider.region, tab: 'fiders') %>
       <% else %>
-        <span class="text-muted">(რაიონის გარეშე)</span>
+        <span class="text-muted">(მუნიციპალიტეტის გარეშე)</span>
       <% end %>
     </td>
   </tr>

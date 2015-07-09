@@ -25,7 +25,7 @@ class Objects::Office
       name = placemark.find('./kml:name',kmlns).first.content
       # description content
       descr = placemark.find('./kml:description',kmlns).first.content
-      regname = Objects::Kml.get_property(descr, 'მუნიციპალიტეტი')
+      regname = Objects::Kml.get_property(descr, 'რაიონი')
       address = Objects::Kml.get_property(descr, 'ოფისის მისამართები')
       description = Objects::Kml.get_property(descr, 'შენიშვნა')
       # end of description section
@@ -46,7 +46,7 @@ class Objects::Office
     extra = extra_data( 'დასახელება' => name,
       'შენიშვნა' => description,
       'მისამართი' => address,
-      'რაიონი' => region.to_s
+      'მუნიციპალიტეტი' => region.to_s
     )
     xml.Placemark do
       xml.name self.name
