@@ -107,6 +107,42 @@ var createMap = function(opts) {
     }
   };
 
+  var lineClickListener = function(event) {
+    var contentToString = function(content) {
+      if (typeof content === 'string') {
+        return content
+      } else if (typeof content.error === 'string') {
+        return content.error;
+      } else {
+        return content.toString();
+      }
+    };
+
+    var line = event.feature;
+    var type;
+
+    if(line.A.class == "Objects::Line") {
+      type = "line";
+    } else {
+      type = "fider";
+    }
+
+    var info =  new google.maps.InfoWindow({ position: event.latLng });
+
+    console.log(event);
+
+    if (line.content) {
+      info.setContent(contentToString(line.content));
+      info.open(map);
+    } else {
+      api.loadObjectInfo(line.F, type).then(function(content) {
+        line.content = content;
+        info.setContent(contentToString(line.content));
+        info.open(map);
+      });
+    }
+  };
+
   map.loadedMarkers = {};
 
   map.showObjects = function(objects) {
@@ -192,6 +228,7 @@ var createMap = function(opts) {
   });
 
   map.data.setStyle(styleFunction);
+  map.data.addListener('click', lineClickListener);
 
   ///////////////////////////////////////////////////////////////////////////////  
 
