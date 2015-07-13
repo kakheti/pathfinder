@@ -14,7 +14,7 @@ class Objects::TpsController < ApplicationController
     end
     respond_to do |format|
       format.html {
-        @title = 'სატრანსფორმატორო ჯიხურები'
+        @title = '6-10კვ სატრ. ჯიხურები'
         @tps = rel.paginate(per_page:10, page: params[:page])
       }
       format.xlsx{ @tps=rel }
@@ -31,7 +31,7 @@ class Objects::TpsController < ApplicationController
   end
 
   def upload
-    @title='ფაილის ატვირთვა: სატრანსფორმატორო ჯიხურები'
+    @title='ფაილის ატვირთვა: 6-10კვ სატრ. ჯიხურები'
     if request.post?
       f=params[:data].original_filename
       case File.extname(f).downcase
@@ -52,14 +52,14 @@ class Objects::TpsController < ApplicationController
   end
 
   def show
-    @title='სატრანსფორმატორო ჯიხური'
+    @title='6-10კვ სატრ. ჯიხური'
     @tp=Objects::Tp.find(params[:id])
   end
 
   protected
   def nav
     @nav=super
-    @nav['ჯიხურები']=objects_tps_url
+    @nav['6-10კვ სატრ. ჯიხურები']=objects_tps_url
     @nav[@title]=nil unless ['index'].include?(action_name)
   end
 
