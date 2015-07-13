@@ -10,8 +10,8 @@
     <td><%= @tower.category %></td>
   </tr>
   <tr>
-    <td class="text-muted">მუნიციპალიტეტი</td>
-    <td><%= link_to @tower.region.name, region_url(@tower.region, tab: 'towers') %></td>
+    <td class="text-muted">შენიშვნა</td>
+    <td><%= @tower.description %></td>
   </tr>
   <tr>
     <td class="text-muted">გადამცემი ხაზი</td>
@@ -24,15 +24,15 @@
     </td>
   </tr>
   <tr>
+    <td class="text-muted">მუნიციპალიტეტი</td>
+    <td><%= link_to @tower.region.name, region_url(@tower.region, tab: 'towers') %></td>
+  </tr>
+  <tr>
     <td class="text-muted">კოორდინატები</td>
     <td>
       E: <code><%= @tower.easting %></code>;
       N: <code><%= @tower.northing %></code>
     </td>
-  </tr>
-  <tr>
-    <td class="text-muted">შენიშვნა</td>
-    <td><%= @tower.description %></td>
   </tr>
 </table>
 
