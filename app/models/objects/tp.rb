@@ -50,7 +50,7 @@ class Objects::Tp
       # name=placemark.find('./kml:name',kmlns).first.content
       # start description section
       descr=placemark.find('./kml:description',kmlns).first.content
-      obj.region = Region.get_by_name(Objects::Kml.get_property(descr, 'მუნიციპალიტეტი').to_ka(:all))
+      obj.region = Region.get_by_name(Objects::Kml.get_property(descr, 'რაიონი').to_ka(:all))
       obj.city = Objects::Kml.get_property(descr, 'ქალაქი/დაბა/საკრებულო ქალაქი/დაბა/საკრებულო')
       obj.street = Objects::Kml.get_property(descr, 'ქუჩის დასახელება')
       obj.village = Objects::Kml.get_property(descr, 'სოფელი')
@@ -84,7 +84,7 @@ class Objects::Tp
     # extra = extra_data( 'დასახელება' => name,
     #   'შენიშვნა' => description,
     #   'მისამართი' => address,
-    #   'რაიონი' => region.to_s
+    #   'მუნიციპალიტეტი' => region.to_s
     # )
     # xml.Placemark do
     #   xml.name self.name

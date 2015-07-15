@@ -3,7 +3,7 @@ wb.add_worksheet(name: "report") do |sheet|
   sheet.add_row [
     'ID',
     'დასახელება',
-    'რაიონი',
+    'მუნიციპალიტეტი',
     'მისამართი',
     'შენიშვნა']
   @offices.each do |office|

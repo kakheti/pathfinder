@@ -53,7 +53,7 @@ class Objects::Fider
       line.underground = Objects::Kml.get_property(descr, 'მიწისქვეშა კაბელი')
       line.quro = Objects::Kml.get_property(descr, 'ქურო')
       line.description = Objects::Kml.get_property(descr, 'შენიშვნა')
-      line.region = Region.get_by_name Objects::Kml.get_property(descr, 'მუნიციპალიტეტი')
+      line.region = Region.get_by_name Objects::Kml.get_property(descr, 'რაიონი')
       line.voltage = Objects::Kml.get_property(descr, 'ფიდერის ძაბვა')
       line.linename = Objects::Kml.get_property(descr, 'ელ, გადამცემი ხაზი')
       coords = placemark.find('./kml:MultiGeometry/kml:LineString/kml:coordinates',kmlns).first.content
@@ -76,7 +76,7 @@ class Objects::Fider
     # extra = extra_data('დასახელება' => name,
     #   'მიმართულება' => direction,
     #   'შენიშვნა' => description,
-    #   'რაიონი' => region.to_s,
+    #   'მუნიციპალიტეტი' => region.to_s,
     #   'სიგრძე' => length
     # )
     # xml.Placemark(id: "ID_#{self.id.to_s}") do |xml|

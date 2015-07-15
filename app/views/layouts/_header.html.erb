@@ -30,7 +30,7 @@
           <li class="dropdown <%= group == 'administrative' ? 'active' : 'passive' %>">
             <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="administrative" aria-expanded="false">ადმინისტრაციული <span class="caret"></span></a>
             <ul class="dropdown-menu" aria-labelledby="administrative">
-              <li><a href="<%= regions_url %>">რაიონები <span class="badge"><%= Region.count %></span></a></li>
+              <li><a href="<%= regions_url %>">მუნიციპალიტეტები <span class="badge"><%= Region.count %></span></a></li>
               <li><a href="<%= objects_offices_url %>">ოფისები <span class="badge"><%= Objects::Office.count %></span></a></li>
             </ul>
           </li>
