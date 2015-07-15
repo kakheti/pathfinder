@@ -42,7 +42,7 @@ class Objects::Substation
       name = placemark.find('./kml:name',kmlns).first.content
       # description content
       descr = placemark.find('./kml:description',kmlns).first.content
-      regname = Objects::Kml.get_property(descr, 'მუნიციპალიტეტი')
+      regname = Objects::Kml.get_property(descr, 'რაიონი')
       region=Region.get_by_name(regname)
       description = Objects::Kml.get_property(descr, 'მესაკუთრე')
       number = Objects::Kml.get_property(descr, 'ქვესადგურის ნომერი')
@@ -62,7 +62,7 @@ class Objects::Substation
     descr = "<p><strong>#{self.name}</strong></p><p>#{self.description}</p>"
     extra = extra_data('დასახელება' => name,
       'შენიშვნა' => description,
-      'რაიონი' => region.to_s
+      'მუნიციპალიტეტი' => region.to_s
     )
     xml.Placemark do
       xml.name self.name

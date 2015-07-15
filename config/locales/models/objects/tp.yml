@@ -3,7 +3,7 @@ ka:
     objects_tp:
       kmlid: kmlID
       name: "ჯიხურის #"
-      region: რაიონი
+      region: მუნიციპალიტეტი
       description: შენიშვნა
       address: მისამართი
       address_code: საკად.კოდი

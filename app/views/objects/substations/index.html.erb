@@ -6,7 +6,7 @@
 </div>
 
 <%= search_form @search do |s|
-  s.combo_field 'region', collection: Region.all.asc('name'), text: ->(x){ x.name }, label: 'რაიონი', empty: '-- ყველა რაიონი --'
+  s.combo_field 'region', collection: Region.all.asc('name'), text: ->(x){ x.name }, label: 'მუნიციპალიტეტი', empty: '-- ყველა მუნიციპალიტეტი --'
   s.text_field 'name', label: 'დასახელება'
 end %>
 
@@ -15,7 +15,7 @@ end %>
     <thead>
       <tr>
         <th>ქვესადგური</th>
-        <th class="200">რაიონი</th>
+        <th class="200">მუნიციპალიტეტი</th>
       </tr>
     </thead>
     <% @substations.each do |sub| %>

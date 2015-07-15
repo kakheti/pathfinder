@@ -1,7 +1,7 @@
 # -*- encoding : utf-8 -*-
 module RegionsHelper
   def region_form(region,opts={})
-    title=region.new_record? ? 'ახალი რაიონი' : 'რაიონის შეცვლა'
+    title=region.new_record? ? 'ახალი მუნიციპალიტეტი' : 'მუნიციპალიტეტის შეცვლა'
     icon=region.new_record? ? '/icons/region--plus.png' : '/icons/region--pencil.png'
     cancel_url=region.new_record? ? regions_url : region_url(id: region.id)
     forma_for region, title: title, collapsible: true, icon: icon do |f|
@@ -13,7 +13,7 @@ module RegionsHelper
   end
 
   def region_view(region,opts={})
-    title='რაიონის თვისებები'; icon='/icons/region.png'
+    title='მუნიციპალიტეტის თვისებები'; icon='/icons/region.png'
     idx=case opts[:tab]
         when 'offices' then 1
         when 'substations' then 2

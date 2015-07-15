@@ -3,7 +3,7 @@ ka:
     objects_pole:
       kmlid: kmlID
       name: "ბოძის #"
-      region: რაიონი
+      region: მუნიციპალიტეტი
       description: შენიშვნა
       position: მდებარეობა რუკაზე
       fider: ფიდერი

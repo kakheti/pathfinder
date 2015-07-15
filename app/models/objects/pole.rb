@@ -58,7 +58,7 @@ class Objects::Pole
       obj.oldness = Objects::Kml.get_property(descr, 'ცვეთის ხარისხი')
       obj.should_be_out = Objects::Kml.get_property(descr, 'გამოსატანია')
       obj.gps = Objects::Kml.get_property(descr, 'GPS')
-      regname = Objects::Kml.get_property(descr, 'მუნიციპალიტეტი')
+      regname = Objects::Kml.get_property(descr, 'რაიონი')
       obj.region = Region.get_by_name(regname.to_ka(:all)) if regname.present?
       subname = Objects::Kml.get_property(descr, 'ქვესადგური')
       obj.substation = Objects::Substation.by_name(subname.to_ka(:all)) if subname.present?

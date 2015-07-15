@@ -6,7 +6,7 @@
 </div>
 
 <%= search_form @search do |s|
-  s.combo_field 'region', collection: Region.all.asc('name'), label: 'რაიონი', empty: '-- ყველა რაიონი --'
+  s.combo_field 'region', collection: Region.all.asc('name'), label: 'მუნიციპალიტეტი', empty: '-- ყველა მუნიციპალიტეტი --'
   s.text_field 'name', label: 'დასახელება'
 end %>
 
@@ -15,7 +15,7 @@ end %>
     <thead>
       <tr>
         <th>ფიდერი</th>
-        <th width="200">რაიონი</th>
+        <th width="200">მუნიციპალიტეტი</th>
       </tr>
     </thead>
     <% @fiders.each do |fider| %>
@@ -37,7 +37,7 @@ end %>
           <% if fider.region %>
             <%= link_to fider.region.name, region_url(fider.region, tab: 'fiders') %>
           <% else %>
-            <span class="text-muted">(რაიონის გარეშე)</span>
+            <span class="text-muted">(მუნიციპალიტეტის გარეშე)</span>
           <% end %>
         </td>
       </tr>
