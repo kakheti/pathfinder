@@ -37,16 +37,8 @@ class Objects::TpsController < ApplicationController
       case File.extname(f).downcase
       when '.kmz' then upload_kmz(params[:data].tempfile)
       when '.kml' then upload_kml(params[:data].tempfile)
-      when '.xlsx' then upload_xlsx(params[:data].tempfile)
+      when '.xlsx' then uploadstat_xlsx(params[:data].tempfile)
       else raise 'არასწორი ფორმატი' end
-      redirect_to objects_tps_url, notice: 'მონაცემები ატვირთულია'
-    end
-  end
-
-  def upload_stat
-    @title = 'ტპ-ს სტატისტიკის ატვირთვა'
-    if request.post?
-      uploadstat_xlsx(params[:data].tempfile)
       redirect_to objects_tps_url, notice: 'მონაცემები ატვირთულია'
     end
   end
@@ -83,32 +75,20 @@ class Objects::TpsController < ApplicationController
   end
 
   def uploadstat_xlsx(file)
-    sheet=Roo::Spreadsheet.open(file.path, extension: 'xlsx')
+
+    sheet = Roo::Spreadsheet.open(file.path, extension: 'xlsx')
     (2..sheet.last_row).each do |row|
-      tpname = sheet.cell('A', row)
+      tpname = sheet.cell('D', row)
       tp = Objects::Tp.where(name: tpname).first
       if tp
-        tp.residential_count = sheet.cell('B', row).to_i rescue 0
-        tp.comercial_count = sheet.cell('C', row).to_i rescue 0
-        tp.usage_average = sheet.cell('D', row).to_f rescue 0
+        tp.residential_count = sheet.cell('G', row).to_i rescue 0
+        tp.comercial_count = sheet.cell('H', row).to_i rescue 0
+        tp.usage_average = sheet.cell('I', row).to_f rescue 0
         tp.save
       end
     end
-    Region.each {|region| region.make_summaries }
-  end
-
-  def upload_xlsx(file)
-
-    # TODO: change this!
-
-    # sheet=Roo::Spreadsheet.open(file.path, extension: 'xlsx')
-    # (2..sheet.last_row).each do |row|
-    #   id = sheet.cell('A',row) ; office = Objects::Office.find(id)
-    #   name = sheet.cell('B',row) ; office.name = name
-    #   regionname = sheet.cell('C',row).to_s ; region = Region.get_by_name(regionname) ; office.region = region
-    #   address = sheet.cell('D',row) ; office.address = address
-    #   description = sheet.cell('E',row) ; office.description = description
-    #   office.save
-    # end
+    Region.each { |region| region.make_summaries }
+    Objects::Fider.each { |fider| fider.make_summaries }
+    Objects::Substation.each { |fider| fider.make_summaries }
   end
 end
