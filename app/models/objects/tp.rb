@@ -79,6 +79,15 @@ class Objects::Tp
     end
   end
 
+  def tp_type_s
+    {
+      '1' => 'ცრპ',
+      '2' => 'ტპ',
+      '3' => 'გკტპ',
+      '4' => 'კტპ'
+    }[tp_type]
+  end
+
   def to_kml(xml)
     # descr = "<p><strong>#{self.region}</strong>, #{self.address}</p><p>#{self.description}</p>"
     # extra = extra_data( 'დასახელება' => name,
