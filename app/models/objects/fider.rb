@@ -54,7 +54,7 @@ class Objects::Fider
       line.underground = Objects::Kml.get_property(descr, 'მიწისქვეშა კაბელი')
       line.quro = Objects::Kml.get_property(descr, 'ქურო')
       line.description = Objects::Kml.get_property(descr, 'შენიშვნა')
-      line.region = Region.get_by_name Objects::Kml.get_property(descr, 'რაიონი')
+      line.region = Region.get_by_name Objects::Kml.get_property(descr, 'მუნიციპალიტეტი')
       line.voltage = Objects::Kml.get_property(descr, 'ფიდერის ძაბვა')
       line.linename = Objects::Kml.get_property(descr, 'ელ, გადამცემი ხაზი')
       line.substation_number = Objects::Kml.get_property(descr, 'ქვესადგურის ნომერი')
