@@ -13,13 +13,14 @@ class Objects::Fider
   field :residential_count, type: Float
   field :comercial_count, type: Float
   field :usage_average, type: Float
+  field :substation_number, type: String
   belongs_to :region
   belongs_to :substation, class_name: 'Objects::Substation'
   embeds_many :lines, class_name: 'Objects::FiderLine'
   has_many :tps, class_name: 'Objects::Tp'
   has_many :poles, class_name: 'Objects::Pole'
 
-  search_in :name, :description, :poles, :substation
+  search_in :name, :description, :poles, :substation => 'name'
 
   index({ name: 1 })
   index({ region_id: 1 })
@@ -56,6 +57,7 @@ class Objects::Fider
       line.region = Region.get_by_name Objects::Kml.get_property(descr, 'რაიონი')
       line.voltage = Objects::Kml.get_property(descr, 'ფიდერის ძაბვა')
       line.linename = Objects::Kml.get_property(descr, 'ელ, გადამცემი ხაზი')
+      line.substation_number = Objects::Kml.get_property(descr, 'ქვესადგურის ნომერი')
       coords = placemark.find('./kml:MultiGeometry/kml:LineString/kml:coordinates',kmlns).first.content
       coords = coords.split(' ')
       coords.each do |coord|
@@ -68,8 +70,12 @@ class Objects::Fider
       # XXX how to get fider's region?
       fider.set_coordinate(coords[coords.size/2])
       fider.region = line.region unless fider.region.present?
+      fider.substation_number = line.substation_number unless fider.substation_number.present?
       fider.save
     end
+
+    fider.substation = Objects::Substation.where({ number: substation_number }).first
+    fider.save
   end
 
   def to_kml(xml)

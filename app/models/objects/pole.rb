@@ -28,7 +28,7 @@ class Objects::Pole
   belongs_to :fider, class_name: 'Objects::Fider'
   belongs_to :substation, class_name: 'Objects::Substation'
 
-  search_in :name, :description, :fider, :substation
+  search_in :name, :description, :fider, :substation => 'name'
 
   index({ name: 1 })
   index({ region_id: 1 })
