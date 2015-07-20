@@ -63,14 +63,15 @@ var view = {
     realMarker = _.find(markers, _.matchesProperty('id', marker.id));
 
     if(!realMarker) {
+      console.log(marker);
       markers = data.map.showObjects([marker]);
       realMarker = markers[0];
     }
 
-    var moreinfo=""
+    var moreinfo = _.template(" მუნიციპალიტეტი: <%=name%>;")(marker.region);
 
     for(i in objectTypes){
-      if(marker[i]) moreinfo += _.template(' <%=type%>: <%=name%>')({
+      if(marker[i]) moreinfo += _.template(' <%=type%>: <%=name%>;')({
         type: objectTypes[i].name,
         name: marker[i].name
       });
@@ -87,8 +88,10 @@ var view = {
       moreinfo: moreinfo
     }));
     el.click(function() {
-      data.map.setZoom(objectTypes[marker.type].zoom);
-      data.map.setCenter({ lat: marker.lat, lng: marker.lng});
+      var zoom = objectTypes[marker.type].zoom;
+
+      if(data.map.zoom < zoom) data.map.setZoom(zoom);
+      if(marker.lat && marker.lng) data.map.setCenter({ lat: marker.lat, lng: marker.lng});
 
       setTimeout(function() {
         realMarker.setVisible(true);
