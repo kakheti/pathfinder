@@ -19,7 +19,7 @@ class Objects::Substation
   has_many :poles, class_name: 'Objects::Pole'
   has_many :fiders, class_name: 'Objects::Fider'
 
-  search_in :name, :description
+  search_in :name, :description, :number
 
   def make_summaries
     self.residential_count = self.tps.sum(:residential_count)
