@@ -1,0 +1,3000 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:schemaLocation="http://www.opengis.net/kml/2.2 http://schemas.opengis.net/kml/2.2.0/ogckml22.xsd http://www.google.com/kml/ext/2.2 http://code.google.com/apis/kml/schema/kml22gx.xsd">
+<Document id="ფიდერი">
+  <name>ფიდერი</name>
+  <Snippet></Snippet>
+  <Folder id="FeatureLayer0">
+    <name>ფიდერი</name>
+    <Snippet></Snippet>
+    <Placemark id="ID_00001">
+      <name>001</name>
+      <Snippet></Snippet>
+      <description><![CDATA[<html xmlns:fo="http://www.w3.org/1999/XSL/Format" xmlns:msxsl="urn:schemas-microsoft-com:xslt">
+<head>
+<META http-equiv="Content-Type" content="text/html">
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+</head>
+<body style="margin:0px 0px 0px 0px;overflow:auto;background:#FFFFFF;">
+<table style="font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-collapse:collapse;padding:3px 3px 3px 3px">
+<tr style="text-align:center;font-weight:bold;background:#9CBCE2">
+<td>001</td>
+</tr>
+<tr>
+<td>
+<table style="font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-spacing:0px; padding:3px 3px 3px 3px">
+<tr>
+<td>SHAPE</td>
+<td>Polyline</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>საწყისი ბოძი</td>
+<td>001</td>
+</tr>
+<tr>
+<td>სადენის ტიპი</td>
+<td>1</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>სადენის კვეთი</td>
+<td>3</td>
+</tr>
+<tr>
+<td>მიწისქვეშა კაბელი</td>
+<td>&lt;Null&gt;</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>ქურო</td>
+<td>&lt;Null&gt;</td>
+</tr>
+<tr>
+<td>შენიშვნა</td>
+<td>&lt;Null&gt;</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>ბოძამდე</td>
+<td>002</td>
+</tr>
+<tr>
+<td>მუნიციპალიტეტი</td>
+<td>dedofliswyaro</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>ქვესადგურის ნომერი</td>
+<td>16</td>
+</tr>
+<tr>
+<td>ქვესადგური</td>
+<td>35 kv q/s "qedi"</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>ფიდერის ძაბვა</td>
+<td>10</td>
+</tr>
+<tr>
+<td>ფიდერი</td>
+<td>z.qedi</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>ელ, გადამცემი ხაზი</td>
+<td>35 kv q/s "qedi" 10 z.qedi</td>
+</tr>
+<tr>
+<td>SHAPE_Length</td>
+<td>45.089989</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</body>
+</html>
+]]></description>
+      <styleUrl>#LineStyle01</styleUrl>
+      <MultiGeometry>
+        <LineString>
+          <extrude>0</extrude><altitudeMode>clampedToGround</altitudeMode>
+          <coordinates> 46.40625881034913,41.41976275165611,0 46.40615752582257,41.41936388994775,0</coordinates>
+        </LineString>
+      </MultiGeometry>
+    </Placemark>
+    <Placemark id="ID_00002">
+      <name>002</name>
+      <Snippet></Snippet>
+      <description><![CDATA[<html xmlns:fo="http://www.w3.org/1999/XSL/Format" xmlns:msxsl="urn:schemas-microsoft-com:xslt">
+<head>
+<META http-equiv="Content-Type" content="text/html">
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+</head>
+<body style="margin:0px 0px 0px 0px;overflow:auto;background:#FFFFFF;">
+<table style="font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-collapse:collapse;padding:3px 3px 3px 3px">
+<tr style="text-align:center;font-weight:bold;background:#9CBCE2">
+<td>002</td>
+</tr>
+<tr>
+<td>
+<table style="font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-spacing:0px; padding:3px 3px 3px 3px">
+<tr>
+<td>SHAPE</td>
+<td>Polyline</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>საწყისი ბოძი</td>
+<td>002</td>
+</tr>
+<tr>
+<td>სადენის ტიპი</td>
+<td>1</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>სადენის კვეთი</td>
+<td>3</td>
+</tr>
+<tr>
+<td>მიწისქვეშა კაბელი</td>
+<td>&lt;Null&gt;</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>ქურო</td>
+<td>&lt;Null&gt;</td>
+</tr>
+<tr>
+<td>შენიშვნა</td>
+<td>&lt;Null&gt;</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>ბოძამდე</td>
+<td>002a</td>
+</tr>
+<tr>
+<td>მუნიციპალიტეტი</td>
+<td>dedofliswyaro</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>ქვესადგურის ნომერი</td>
+<td>16</td>
+</tr>
+<tr>
+<td>ქვესადგური</td>
+<td>35 kv q/s "qedi"</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>ფიდერის ძაბვა</td>
+<td>10</td>
+</tr>
+<tr>
+<td>ფიდერი</td>
+<td>z.qedi</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>ელ, გადამცემი ხაზი</td>
+<td>35 kv q/s "qedi" 10 z.qedi</td>
+</tr>
+<tr>
+<td>SHAPE_Length</td>
+<td>27.123037</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</body>
+</html>
+]]></description>
+      <styleUrl>#LineStyle01</styleUrl>
+      <MultiGeometry>
+        <LineString>
+          <extrude>0</extrude><altitudeMode>clampedToGround</altitudeMode>
+          <coordinates> 46.40598750087661,41.41989677493551,0 46.40625881034913,41.41976275165611,0</coordinates>
+        </LineString>
+      </MultiGeometry>
+    </Placemark>
+    <Placemark id="ID_00003">
+      <name>002</name>
+      <Snippet></Snippet>
+      <description><![CDATA[<html xmlns:fo="http://www.w3.org/1999/XSL/Format" xmlns:msxsl="urn:schemas-microsoft-com:xslt">
+<head>
+<META http-equiv="Content-Type" content="text/html">
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+</head>
+<body style="margin:0px 0px 0px 0px;overflow:auto;background:#FFFFFF;">
+<table style="font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-collapse:collapse;padding:3px 3px 3px 3px">
+<tr style="text-align:center;font-weight:bold;background:#9CBCE2">
+<td>002</td>
+</tr>
+<tr>
+<td>
+<table style="font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-spacing:0px; padding:3px 3px 3px 3px">
+<tr>
+<td>SHAPE</td>
+<td>Polyline</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>საწყისი ბოძი</td>
+<td>002</td>
+</tr>
+<tr>
+<td>სადენის ტიპი</td>
+<td>1</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>სადენის კვეთი</td>
+<td>3</td>
+</tr>
+<tr>
+<td>მიწისქვეშა კაბელი</td>
+<td>&lt;Null&gt;</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>ქურო</td>
+<td>&lt;Null&gt;</td>
+</tr>
+<tr>
+<td>შენიშვნა</td>
+<td>&lt;Null&gt;</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>ბოძამდე</td>
+<td>003</td>
+</tr>
+<tr>
+<td>მუნიციპალიტეტი</td>
+<td>dedofliswyaro</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>ქვესადგურის ნომერი</td>
+<td>16</td>
+</tr>
+<tr>
+<td>ქვესადგური</td>
+<td>35 kv q/s "qedi"</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>ფიდერის ძაბვა</td>
+<td>10</td>
+</tr>
+<tr>
+<td>ფიდერი</td>
+<td>z.qedi</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>ელ, გადამცემი ხაზი</td>
+<td>35 kv q/s "qedi" 10 z.qedi</td>
+</tr>
+<tr>
+<td>SHAPE_Length</td>
+<td>52.141962</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</body>
+</html>
+]]></description>
+      <styleUrl>#LineStyle01</styleUrl>
+      <MultiGeometry>
+        <LineString>
+          <extrude>0</extrude><altitudeMode>clampedToGround</altitudeMode>
+          <coordinates> 46.4057881263798,41.41945454428723,0 46.40625881034913,41.41976275165611,0</coordinates>
+        </LineString>
+      </MultiGeometry>
+    </Placemark>
+    <Placemark id="ID_00004">
+      <name>004</name>
+      <Snippet></Snippet>
+      <description><![CDATA[<html xmlns:fo="http://www.w3.org/1999/XSL/Format" xmlns:msxsl="urn:schemas-microsoft-com:xslt">
+<head>
+<META http-equiv="Content-Type" content="text/html">
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+</head>
+<body style="margin:0px 0px 0px 0px;overflow:auto;background:#FFFFFF;">
+<table style="font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-collapse:collapse;padding:3px 3px 3px 3px">
+<tr style="text-align:center;font-weight:bold;background:#9CBCE2">
+<td>004</td>
+</tr>
+<tr>
+<td>
+<table style="font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-spacing:0px; padding:3px 3px 3px 3px">
+<tr>
+<td>SHAPE</td>
+<td>Polyline</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>საწყისი ბოძი</td>
+<td>004</td>
+</tr>
+<tr>
+<td>სადენის ტიპი</td>
+<td>1</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>სადენის კვეთი</td>
+<td>3</td>
+</tr>
+<tr>
+<td>მიწისქვეშა კაბელი</td>
+<td>&lt;Null&gt;</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>ქურო</td>
+<td>&lt;Null&gt;</td>
+</tr>
+<tr>
+<td>შენიშვნა</td>
+<td>&lt;Null&gt;</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>ბოძამდე</td>
+<td>005</td>
+</tr>
+<tr>
+<td>მუნიციპალიტეტი</td>
+<td>dedofliswyaro</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>ქვესადგურის ნომერი</td>
+<td>16</td>
+</tr>
+<tr>
+<td>ქვესადგური</td>
+<td>35 kv q/s "qedi"</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>ფიდერის ძაბვა</td>
+<td>10</td>
+</tr>
+<tr>
+<td>ფიდერი</td>
+<td>z.qedi</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>ელ, გადამცემი ხაზი</td>
+<td>35 kv q/s "qedi" 10 z.qedi</td>
+</tr>
+<tr>
+<td>SHAPE_Length</td>
+<td>70.704311</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</body>
+</html>
+]]></description>
+      <styleUrl>#LineStyle01</styleUrl>
+      <MultiGeometry>
+        <LineString>
+          <extrude>0</extrude><altitudeMode>clampedToGround</altitudeMode>
+          <coordinates> 46.40444193277882,41.41928835391086,0 46.40524518055069,41.4190886176025,0</coordinates>
+        </LineString>
+      </MultiGeometry>
+    </Placemark>
+    <Placemark id="ID_00005">
+      <name>005</name>
+      <Snippet></Snippet>
+      <description><![CDATA[<html xmlns:fo="http://www.w3.org/1999/XSL/Format" xmlns:msxsl="urn:schemas-microsoft-com:xslt">
+<head>
+<META http-equiv="Content-Type" content="text/html">
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+</head>
+<body style="margin:0px 0px 0px 0px;overflow:auto;background:#FFFFFF;">
+<table style="font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-collapse:collapse;padding:3px 3px 3px 3px">
+<tr style="text-align:center;font-weight:bold;background:#9CBCE2">
+<td>005</td>
+</tr>
+<tr>
+<td>
+<table style="font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-spacing:0px; padding:3px 3px 3px 3px">
+<tr>
+<td>SHAPE</td>
+<td>Polyline</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>საწყისი ბოძი</td>
+<td>005</td>
+</tr>
+<tr>
+<td>სადენის ტიპი</td>
+<td>1</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>სადენის კვეთი</td>
+<td>3</td>
+</tr>
+<tr>
+<td>მიწისქვეშა კაბელი</td>
+<td>&lt;Null&gt;</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>ქურო</td>
+<td>&lt;Null&gt;</td>
+</tr>
+<tr>
+<td>შენიშვნა</td>
+<td>&lt;Null&gt;</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>ბოძამდე</td>
+<td>006</td>
+</tr>
+<tr>
+<td>მუნიციპალიტეტი</td>
+<td>dedofliswyaro</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>ქვესადგურის ნომერი</td>
+<td>16</td>
+</tr>
+<tr>
+<td>ქვესადგური</td>
+<td>35 kv q/s "qedi"</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>ფიდერის ძაბვა</td>
+<td>10</td>
+</tr>
+<tr>
+<td>ფიდერი</td>
+<td>z.qedi</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>ელ, გადამცემი ხაზი</td>
+<td>35 kv q/s "qedi" 10 z.qedi</td>
+</tr>
+<tr>
+<td>SHAPE_Length</td>
+<td>71.159585</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</body>
+</html>
+]]></description>
+      <styleUrl>#LineStyle01</styleUrl>
+      <MultiGeometry>
+        <LineString>
+          <extrude>0</extrude><altitudeMode>clampedToGround</altitudeMode>
+          <coordinates> 46.40363503318325,41.41949281415742,0 46.40444193277882,41.41928835391086,0</coordinates>
+        </LineString>
+      </MultiGeometry>
+    </Placemark>
+    <Placemark id="ID_00006">
+      <name>006</name>
+      <Snippet></Snippet>
+      <description><![CDATA[<html xmlns:fo="http://www.w3.org/1999/XSL/Format" xmlns:msxsl="urn:schemas-microsoft-com:xslt">
+<head>
+<META http-equiv="Content-Type" content="text/html">
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+</head>
+<body style="margin:0px 0px 0px 0px;overflow:auto;background:#FFFFFF;">
+<table style="font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-collapse:collapse;padding:3px 3px 3px 3px">
+<tr style="text-align:center;font-weight:bold;background:#9CBCE2">
+<td>006</td>
+</tr>
+<tr>
+<td>
+<table style="font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-spacing:0px; padding:3px 3px 3px 3px">
+<tr>
+<td>SHAPE</td>
+<td>Polyline</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>საწყისი ბოძი</td>
+<td>006</td>
+</tr>
+<tr>
+<td>სადენის ტიპი</td>
+<td>1</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>სადენის კვეთი</td>
+<td>3</td>
+</tr>
+<tr>
+<td>მიწისქვეშა კაბელი</td>
+<td>&lt;Null&gt;</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>ქურო</td>
+<td>&lt;Null&gt;</td>
+</tr>
+<tr>
+<td>შენიშვნა</td>
+<td>&lt;Null&gt;</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>ბოძამდე</td>
+<td>007</td>
+</tr>
+<tr>
+<td>მუნიციპალიტეტი</td>
+<td>dedofliswyaro</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>ქვესადგურის ნომერი</td>
+<td>16</td>
+</tr>
+<tr>
+<td>ქვესადგური</td>
+<td>35 kv q/s "qedi"</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>ფიდერის ძაბვა</td>
+<td>10</td>
+</tr>
+<tr>
+<td>ფიდერი</td>
+<td>z.qedi</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>ელ, გადამცემი ხაზი</td>
+<td>35 kv q/s "qedi" 10 z.qedi</td>
+</tr>
+<tr>
+<td>SHAPE_Length</td>
+<td>69.073517</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</body>
+</html>
+]]></description>
+      <styleUrl>#LineStyle01</styleUrl>
+      <MultiGeometry>
+        <LineString>
+          <extrude>0</extrude><altitudeMode>clampedToGround</altitudeMode>
+          <coordinates> 46.40285064313493,41.41968870749408,0 46.40363503318325,41.41949281415742,0</coordinates>
+        </LineString>
+      </MultiGeometry>
+    </Placemark>
+    <Placemark id="ID_00007">
+      <name>007</name>
+      <Snippet></Snippet>
+      <description><![CDATA[<html xmlns:fo="http://www.w3.org/1999/XSL/Format" xmlns:msxsl="urn:schemas-microsoft-com:xslt">
+<head>
+<META http-equiv="Content-Type" content="text/html">
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+</head>
+<body style="margin:0px 0px 0px 0px;overflow:auto;background:#FFFFFF;">
+<table style="font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-collapse:collapse;padding:3px 3px 3px 3px">
+<tr style="text-align:center;font-weight:bold;background:#9CBCE2">
+<td>007</td>
+</tr>
+<tr>
+<td>
+<table style="font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-spacing:0px; padding:3px 3px 3px 3px">
+<tr>
+<td>SHAPE</td>
+<td>Polyline</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>საწყისი ბოძი</td>
+<td>007</td>
+</tr>
+<tr>
+<td>სადენის ტიპი</td>
+<td>1</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>სადენის კვეთი</td>
+<td>3</td>
+</tr>
+<tr>
+<td>მიწისქვეშა კაბელი</td>
+<td>&lt;Null&gt;</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>ქურო</td>
+<td>&lt;Null&gt;</td>
+</tr>
+<tr>
+<td>შენიშვნა</td>
+<td>&lt;Null&gt;</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>ბოძამდე</td>
+<td>008</td>
+</tr>
+<tr>
+<td>მუნიციპალიტეტი</td>
+<td>dedofliswyaro</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>ქვესადგურის ნომერი</td>
+<td>16</td>
+</tr>
+<tr>
+<td>ქვესადგური</td>
+<td>35 kv q/s "qedi"</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>ფიდერის ძაბვა</td>
+<td>10</td>
+</tr>
+<tr>
+<td>ფიდერი</td>
+<td>z.qedi</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>ელ, გადამცემი ხაზი</td>
+<td>35 kv q/s "qedi" 10 z.qedi</td>
+</tr>
+<tr>
+<td>SHAPE_Length</td>
+<td>59.083076</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</body>
+</html>
+]]></description>
+      <styleUrl>#LineStyle01</styleUrl>
+      <MultiGeometry>
+        <LineString>
+          <extrude>0</extrude><altitudeMode>clampedToGround</altitudeMode>
+          <coordinates> 46.40217976509129,41.41985641257669,0 46.40285064313493,41.41968870749408,0</coordinates>
+        </LineString>
+      </MultiGeometry>
+    </Placemark>
+    <Placemark id="ID_00008">
+      <name>008</name>
+      <Snippet></Snippet>
+      <description><![CDATA[<html xmlns:fo="http://www.w3.org/1999/XSL/Format" xmlns:msxsl="urn:schemas-microsoft-com:xslt">
+<head>
+<META http-equiv="Content-Type" content="text/html">
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+</head>
+<body style="margin:0px 0px 0px 0px;overflow:auto;background:#FFFFFF;">
+<table style="font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-collapse:collapse;padding:3px 3px 3px 3px">
+<tr style="text-align:center;font-weight:bold;background:#9CBCE2">
+<td>008</td>
+</tr>
+<tr>
+<td>
+<table style="font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-spacing:0px; padding:3px 3px 3px 3px">
+<tr>
+<td>SHAPE</td>
+<td>Polyline</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>საწყისი ბოძი</td>
+<td>008</td>
+</tr>
+<tr>
+<td>სადენის ტიპი</td>
+<td>1</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>სადენის კვეთი</td>
+<td>3</td>
+</tr>
+<tr>
+<td>მიწისქვეშა კაბელი</td>
+<td>&lt;Null&gt;</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>ქურო</td>
+<td>&lt;Null&gt;</td>
+</tr>
+<tr>
+<td>შენიშვნა</td>
+<td>&lt;Null&gt;</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>ბოძამდე</td>
+<td>009</td>
+</tr>
+<tr>
+<td>მუნიციპალიტეტი</td>
+<td>dedofliswyaro</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>ქვესადგურის ნომერი</td>
+<td>16</td>
+</tr>
+<tr>
+<td>ქვესადგური</td>
+<td>35 kv q/s "qedi"</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>ფიდერის ძაბვა</td>
+<td>10</td>
+</tr>
+<tr>
+<td>ფიდერი</td>
+<td>z.qedi</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>ელ, გადამცემი ხაზი</td>
+<td>35 kv q/s "qedi" 10 z.qedi</td>
+</tr>
+<tr>
+<td>SHAPE_Length</td>
+<td>69.545784</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</body>
+</html>
+]]></description>
+      <styleUrl>#LineStyle01</styleUrl>
+      <MultiGeometry>
+        <LineString>
+          <extrude>0</extrude><altitudeMode>clampedToGround</altitudeMode>
+          <coordinates> 46.40139045412814,41.42005465609586,0 46.40217976509129,41.41985641257669,0</coordinates>
+        </LineString>
+      </MultiGeometry>
+    </Placemark>
+    <Placemark id="ID_00009">
+      <name>011</name>
+      <Snippet></Snippet>
+      <description><![CDATA[<html xmlns:fo="http://www.w3.org/1999/XSL/Format" xmlns:msxsl="urn:schemas-microsoft-com:xslt">
+<head>
+<META http-equiv="Content-Type" content="text/html">
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+</head>
+<body style="margin:0px 0px 0px 0px;overflow:auto;background:#FFFFFF;">
+<table style="font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-collapse:collapse;padding:3px 3px 3px 3px">
+<tr style="text-align:center;font-weight:bold;background:#9CBCE2">
+<td>011</td>
+</tr>
+<tr>
+<td>
+<table style="font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-spacing:0px; padding:3px 3px 3px 3px">
+<tr>
+<td>SHAPE</td>
+<td>Polyline</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>საწყისი ბოძი</td>
+<td>011</td>
+</tr>
+<tr>
+<td>სადენის ტიპი</td>
+<td>1</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>სადენის კვეთი</td>
+<td>3</td>
+</tr>
+<tr>
+<td>მიწისქვეშა კაბელი</td>
+<td>&lt;Null&gt;</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>ქურო</td>
+<td>&lt;Null&gt;</td>
+</tr>
+<tr>
+<td>შენიშვნა</td>
+<td>&lt;Null&gt;</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>ბოძამდე</td>
+<td>012</td>
+</tr>
+<tr>
+<td>მუნიციპალიტეტი</td>
+<td>dedofliswyaro</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>ქვესადგურის ნომერი</td>
+<td>16</td>
+</tr>
+<tr>
+<td>ქვესადგური</td>
+<td>35 kv q/s "qedi"</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>ფიდერის ძაბვა</td>
+<td>10</td>
+</tr>
+<tr>
+<td>ფიდერი</td>
+<td>z.qedi</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>ელ, გადამცემი ხაზი</td>
+<td>35 kv q/s "qedi" 10 z.qedi</td>
+</tr>
+<tr>
+<td>SHAPE_Length</td>
+<td>68.729289</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</body>
+</html>
+]]></description>
+      <styleUrl>#LineStyle01</styleUrl>
+      <MultiGeometry>
+        <LineString>
+          <extrude>0</extrude><altitudeMode>clampedToGround</altitudeMode>
+          <coordinates> 46.3990308238903,41.42064576289616,0 46.39981062909278,41.42044929162982,0</coordinates>
+        </LineString>
+      </MultiGeometry>
+    </Placemark>
+    <Placemark id="ID_00010">
+      <name>012</name>
+      <Snippet></Snippet>
+      <description><![CDATA[<html xmlns:fo="http://www.w3.org/1999/XSL/Format" xmlns:msxsl="urn:schemas-microsoft-com:xslt">
+<head>
+<META http-equiv="Content-Type" content="text/html">
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+</head>
+<body style="margin:0px 0px 0px 0px;overflow:auto;background:#FFFFFF;">
+<table style="font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-collapse:collapse;padding:3px 3px 3px 3px">
+<tr style="text-align:center;font-weight:bold;background:#9CBCE2">
+<td>012</td>
+</tr>
+<tr>
+<td>
+<table style="font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-spacing:0px; padding:3px 3px 3px 3px">
+<tr>
+<td>SHAPE</td>
+<td>Polyline</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>საწყისი ბოძი</td>
+<td>012</td>
+</tr>
+<tr>
+<td>სადენის ტიპი</td>
+<td>1</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>სადენის კვეთი</td>
+<td>3</td>
+</tr>
+<tr>
+<td>მიწისქვეშა კაბელი</td>
+<td>&lt;Null&gt;</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>ქურო</td>
+<td>&lt;Null&gt;</td>
+</tr>
+<tr>
+<td>შენიშვნა</td>
+<td>&lt;Null&gt;</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>ბოძამდე</td>
+<td>013</td>
+</tr>
+<tr>
+<td>მუნიციპალიტეტი</td>
+<td>dedofliswyaro</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>ქვესადგურის ნომერი</td>
+<td>16</td>
+</tr>
+<tr>
+<td>ქვესადგური</td>
+<td>35 kv q/s "qedi"</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>ფიდერის ძაბვა</td>
+<td>10</td>
+</tr>
+<tr>
+<td>ფიდერი</td>
+<td>z.qedi</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>ელ, გადამცემი ხაზი</td>
+<td>35 kv q/s "qedi" 10 z.qedi</td>
+</tr>
+<tr>
+<td>SHAPE_Length</td>
+<td>59.592796</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</body>
+</html>
+]]></description>
+      <styleUrl>#LineStyle01</styleUrl>
+      <MultiGeometry>
+        <LineString>
+          <extrude>0</extrude><altitudeMode>clampedToGround</altitudeMode>
+          <coordinates> 46.39835300168086,41.42081229538179,0 46.3990308238903,41.42064576289616,0</coordinates>
+        </LineString>
+      </MultiGeometry>
+    </Placemark>
+    <Placemark id="ID_00011">
+      <name>014</name>
+      <Snippet></Snippet>
+      <description><![CDATA[<html xmlns:fo="http://www.w3.org/1999/XSL/Format" xmlns:msxsl="urn:schemas-microsoft-com:xslt">
+<head>
+<META http-equiv="Content-Type" content="text/html">
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+</head>
+<body style="margin:0px 0px 0px 0px;overflow:auto;background:#FFFFFF;">
+<table style="font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-collapse:collapse;padding:3px 3px 3px 3px">
+<tr style="text-align:center;font-weight:bold;background:#9CBCE2">
+<td>014</td>
+</tr>
+<tr>
+<td>
+<table style="font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-spacing:0px; padding:3px 3px 3px 3px">
+<tr>
+<td>SHAPE</td>
+<td>Polyline</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>საწყისი ბოძი</td>
+<td>014</td>
+</tr>
+<tr>
+<td>სადენის ტიპი</td>
+<td>1</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>სადენის კვეთი</td>
+<td>3</td>
+</tr>
+<tr>
+<td>მიწისქვეშა კაბელი</td>
+<td>&lt;Null&gt;</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>ქურო</td>
+<td>&lt;Null&gt;</td>
+</tr>
+<tr>
+<td>შენიშვნა</td>
+<td>&lt;Null&gt;</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>ბოძამდე</td>
+<td>015</td>
+</tr>
+<tr>
+<td>მუნიციპალიტეტი</td>
+<td>dedofliswyaro</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>ქვესადგურის ნომერი</td>
+<td>16</td>
+</tr>
+<tr>
+<td>ქვესადგური</td>
+<td>35 kv q/s "qedi"</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>ფიდერის ძაბვა</td>
+<td>10</td>
+</tr>
+<tr>
+<td>ფიდერი</td>
+<td>z.qedi</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>ელ, გადამცემი ხაზი</td>
+<td>35 kv q/s "qedi" 10 z.qedi</td>
+</tr>
+<tr>
+<td>SHAPE_Length</td>
+<td>67.137177</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</body>
+</html>
+]]></description>
+      <styleUrl>#LineStyle01</styleUrl>
+      <MultiGeometry>
+        <LineString>
+          <extrude>0</extrude><altitudeMode>clampedToGround</altitudeMode>
+          <coordinates> 46.39679506944752,41.42113895645005,0 46.39756905701918,41.4209771444555,0</coordinates>
+        </LineString>
+      </MultiGeometry>
+    </Placemark>
+    <Placemark id="ID_00012">
+      <name>015</name>
+      <Snippet></Snippet>
+      <description><![CDATA[<html xmlns:fo="http://www.w3.org/1999/XSL/Format" xmlns:msxsl="urn:schemas-microsoft-com:xslt">
+<head>
+<META http-equiv="Content-Type" content="text/html">
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+</head>
+<body style="margin:0px 0px 0px 0px;overflow:auto;background:#FFFFFF;">
+<table style="font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-collapse:collapse;padding:3px 3px 3px 3px">
+<tr style="text-align:center;font-weight:bold;background:#9CBCE2">
+<td>015</td>
+</tr>
+<tr>
+<td>
+<table style="font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-spacing:0px; padding:3px 3px 3px 3px">
+<tr>
+<td>SHAPE</td>
+<td>Polyline</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>საწყისი ბოძი</td>
+<td>015</td>
+</tr>
+<tr>
+<td>სადენის ტიპი</td>
+<td>1</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>სადენის კვეთი</td>
+<td>3</td>
+</tr>
+<tr>
+<td>მიწისქვეშა კაბელი</td>
+<td>&lt;Null&gt;</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>ქურო</td>
+<td>&lt;Null&gt;</td>
+</tr>
+<tr>
+<td>შენიშვნა</td>
+<td>&lt;Null&gt;</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>ბოძამდე</td>
+<td>016</td>
+</tr>
+<tr>
+<td>მუნიციპალიტეტი</td>
+<td>dedofliswyaro</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>ქვესადგურის ნომერი</td>
+<td>16</td>
+</tr>
+<tr>
+<td>ქვესადგური</td>
+<td>35 kv q/s "qedi"</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>ფიდერის ძაბვა</td>
+<td>10</td>
+</tr>
+<tr>
+<td>ფიდერი</td>
+<td>z.qedi</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>ელ, გადამცემი ხაზი</td>
+<td>35 kv q/s "qedi" 10 z.qedi</td>
+</tr>
+<tr>
+<td>SHAPE_Length</td>
+<td>70.593365</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</body>
+</html>
+]]></description>
+      <styleUrl>#LineStyle01</styleUrl>
+      <MultiGeometry>
+        <LineString>
+          <extrude>0</extrude><altitudeMode>clampedToGround</altitudeMode>
+          <coordinates> 46.395981856753,41.42131077416053,0 46.39679506944752,41.42113895645005,0</coordinates>
+        </LineString>
+      </MultiGeometry>
+    </Placemark>
+    <Placemark id="ID_00013">
+      <name>016</name>
+      <Snippet></Snippet>
+      <description><![CDATA[<html xmlns:fo="http://www.w3.org/1999/XSL/Format" xmlns:msxsl="urn:schemas-microsoft-com:xslt">
+<head>
+<META http-equiv="Content-Type" content="text/html">
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+</head>
+<body style="margin:0px 0px 0px 0px;overflow:auto;background:#FFFFFF;">
+<table style="font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-collapse:collapse;padding:3px 3px 3px 3px">
+<tr style="text-align:center;font-weight:bold;background:#9CBCE2">
+<td>016</td>
+</tr>
+<tr>
+<td>
+<table style="font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-spacing:0px; padding:3px 3px 3px 3px">
+<tr>
+<td>SHAPE</td>
+<td>Polyline</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>საწყისი ბოძი</td>
+<td>016</td>
+</tr>
+<tr>
+<td>სადენის ტიპი</td>
+<td>1</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>სადენის კვეთი</td>
+<td>3</td>
+</tr>
+<tr>
+<td>მიწისქვეშა კაბელი</td>
+<td>&lt;Null&gt;</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>ქურო</td>
+<td>&lt;Null&gt;</td>
+</tr>
+<tr>
+<td>შენიშვნა</td>
+<td>&lt;Null&gt;</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>ბოძამდე</td>
+<td>017</td>
+</tr>
+<tr>
+<td>მუნიციპალიტეტი</td>
+<td>dedofliswyaro</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>ქვესადგურის ნომერი</td>
+<td>16</td>
+</tr>
+<tr>
+<td>ქვესადგური</td>
+<td>35 kv q/s "qedi"</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>ფიდერის ძაბვა</td>
+<td>10</td>
+</tr>
+<tr>
+<td>ფიდერი</td>
+<td>z.qedi</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>ელ, გადამცემი ხაზი</td>
+<td>35 kv q/s "qedi" 10 z.qedi</td>
+</tr>
+<tr>
+<td>SHAPE_Length</td>
+<td>56.803178</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</body>
+</html>
+]]></description>
+      <styleUrl>#LineStyle01</styleUrl>
+      <MultiGeometry>
+        <LineString>
+          <extrude>0</extrude><altitudeMode>clampedToGround</altitudeMode>
+          <coordinates> 46.39532637423938,41.42144597026599,0 46.395981856753,41.42131077416053,0</coordinates>
+        </LineString>
+      </MultiGeometry>
+    </Placemark>
+    <Placemark id="ID_00014">
+      <name>003</name>
+      <Snippet></Snippet>
+      <description><![CDATA[<html xmlns:fo="http://www.w3.org/1999/XSL/Format" xmlns:msxsl="urn:schemas-microsoft-com:xslt">
+<head>
+<META http-equiv="Content-Type" content="text/html">
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+</head>
+<body style="margin:0px 0px 0px 0px;overflow:auto;background:#FFFFFF;">
+<table style="font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-collapse:collapse;padding:3px 3px 3px 3px">
+<tr style="text-align:center;font-weight:bold;background:#9CBCE2">
+<td>003</td>
+</tr>
+<tr>
+<td>
+<table style="font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-spacing:0px; padding:3px 3px 3px 3px">
+<tr>
+<td>SHAPE</td>
+<td>Polyline</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>საწყისი ბოძი</td>
+<td>003</td>
+</tr>
+<tr>
+<td>სადენის ტიპი</td>
+<td>1</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>სადენის კვეთი</td>
+<td>3</td>
+</tr>
+<tr>
+<td>მიწისქვეშა კაბელი</td>
+<td>&lt;Null&gt;</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>ქურო</td>
+<td>&lt;Null&gt;</td>
+</tr>
+<tr>
+<td>შენიშვნა</td>
+<td>&lt;Null&gt;</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>ბოძამდე</td>
+<td>004</td>
+</tr>
+<tr>
+<td>მუნიციპალიტეტი</td>
+<td>dedofliswyaro</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>ქვესადგურის ნომერი</td>
+<td>16</td>
+</tr>
+<tr>
+<td>ქვესადგური</td>
+<td>35 kv q/s "qedi"</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>ფიდერის ძაბვა</td>
+<td>10</td>
+</tr>
+<tr>
+<td>ფიდერი</td>
+<td>z.qedi</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>ელ, გადამცემი ხაზი</td>
+<td>35 kv q/s "qedi" 10 z.qedi</td>
+</tr>
+<tr>
+<td>SHAPE_Length</td>
+<td>60.911507</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</body>
+</html>
+]]></description>
+      <styleUrl>#LineStyle01</styleUrl>
+      <MultiGeometry>
+        <LineString>
+          <extrude>0</extrude><altitudeMode>clampedToGround</altitudeMode>
+          <coordinates> 46.40524518055069,41.4190886176025,0 46.4057881263798,41.41945454428723,0</coordinates>
+        </LineString>
+      </MultiGeometry>
+    </Placemark>
+    <Placemark id="ID_00015">
+      <name>009</name>
+      <Snippet></Snippet>
+      <description><![CDATA[<html xmlns:fo="http://www.w3.org/1999/XSL/Format" xmlns:msxsl="urn:schemas-microsoft-com:xslt">
+<head>
+<META http-equiv="Content-Type" content="text/html">
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+</head>
+<body style="margin:0px 0px 0px 0px;overflow:auto;background:#FFFFFF;">
+<table style="font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-collapse:collapse;padding:3px 3px 3px 3px">
+<tr style="text-align:center;font-weight:bold;background:#9CBCE2">
+<td>009</td>
+</tr>
+<tr>
+<td>
+<table style="font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-spacing:0px; padding:3px 3px 3px 3px">
+<tr>
+<td>SHAPE</td>
+<td>Polyline</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>საწყისი ბოძი</td>
+<td>009</td>
+</tr>
+<tr>
+<td>სადენის ტიპი</td>
+<td>1</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>სადენის კვეთი</td>
+<td>3</td>
+</tr>
+<tr>
+<td>მიწისქვეშა კაბელი</td>
+<td>&lt;Null&gt;</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>ქურო</td>
+<td>&lt;Null&gt;</td>
+</tr>
+<tr>
+<td>შენიშვნა</td>
+<td>&lt;Null&gt;</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>ბოძამდე</td>
+<td>010</td>
+</tr>
+<tr>
+<td>მუნიციპალიტეტი</td>
+<td>dedofliswyaro</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>ქვესადგურის ნომერი</td>
+<td>16</td>
+</tr>
+<tr>
+<td>ქვესადგური</td>
+<td>35 kv q/s "qedi"</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>ფიდერის ძაბვა</td>
+<td>10</td>
+</tr>
+<tr>
+<td>ფიდერი</td>
+<td>z.qedi</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>ელ, გადამცემი ხაზი</td>
+<td>35 kv q/s "qedi" 10 z.qedi</td>
+</tr>
+<tr>
+<td>SHAPE_Length</td>
+<td>70.22909</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</body>
+</html>
+]]></description>
+      <styleUrl>#LineStyle01</styleUrl>
+      <MultiGeometry>
+        <LineString>
+          <extrude>0</extrude><altitudeMode>clampedToGround</altitudeMode>
+          <coordinates> 46.40059273945018,41.42025338434205,0 46.40139045412814,41.42005465609586,0</coordinates>
+        </LineString>
+      </MultiGeometry>
+    </Placemark>
+    <Placemark id="ID_00016">
+      <name>010</name>
+      <Snippet></Snippet>
+      <description><![CDATA[<html xmlns:fo="http://www.w3.org/1999/XSL/Format" xmlns:msxsl="urn:schemas-microsoft-com:xslt">
+<head>
+<META http-equiv="Content-Type" content="text/html">
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+</head>
+<body style="margin:0px 0px 0px 0px;overflow:auto;background:#FFFFFF;">
+<table style="font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-collapse:collapse;padding:3px 3px 3px 3px">
+<tr style="text-align:center;font-weight:bold;background:#9CBCE2">
+<td>010</td>
+</tr>
+<tr>
+<td>
+<table style="font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-spacing:0px; padding:3px 3px 3px 3px">
+<tr>
+<td>SHAPE</td>
+<td>Polyline</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>საწყისი ბოძი</td>
+<td>010</td>
+</tr>
+<tr>
+<td>სადენის ტიპი</td>
+<td>1</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>სადენის კვეთი</td>
+<td>3</td>
+</tr>
+<tr>
+<td>მიწისქვეშა კაბელი</td>
+<td>&lt;Null&gt;</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>ქურო</td>
+<td>&lt;Null&gt;</td>
+</tr>
+<tr>
+<td>შენიშვნა</td>
+<td>&lt;Null&gt;</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>ბოძამდე</td>
+<td>011</td>
+</tr>
+<tr>
+<td>მუნიციპალიტეტი</td>
+<td>dedofliswyaro</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>ქვესადგურის ნომერი</td>
+<td>16</td>
+</tr>
+<tr>
+<td>ქვესადგური</td>
+<td>35 kv q/s "qedi"</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>ფიდერის ძაბვა</td>
+<td>10</td>
+</tr>
+<tr>
+<td>ფიდერი</td>
+<td>z.qedi</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>ელ, გადამცემი ხაზი</td>
+<td>35 kv q/s "qedi" 10 z.qedi</td>
+</tr>
+<tr>
+<td>SHAPE_Length</td>
+<td>68.892416</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</body>
+</html>
+]]></description>
+      <styleUrl>#LineStyle01</styleUrl>
+      <MultiGeometry>
+        <LineString>
+          <extrude>0</extrude><altitudeMode>clampedToGround</altitudeMode>
+          <coordinates> 46.39981062909278,41.42044929162982,0 46.40059273945018,41.42025338434205,0</coordinates>
+        </LineString>
+      </MultiGeometry>
+    </Placemark>
+    <Placemark id="ID_00017">
+      <name>013</name>
+      <Snippet></Snippet>
+      <description><![CDATA[<html xmlns:fo="http://www.w3.org/1999/XSL/Format" xmlns:msxsl="urn:schemas-microsoft-com:xslt">
+<head>
+<META http-equiv="Content-Type" content="text/html">
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+</head>
+<body style="margin:0px 0px 0px 0px;overflow:auto;background:#FFFFFF;">
+<table style="font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-collapse:collapse;padding:3px 3px 3px 3px">
+<tr style="text-align:center;font-weight:bold;background:#9CBCE2">
+<td>013</td>
+</tr>
+<tr>
+<td>
+<table style="font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-spacing:0px; padding:3px 3px 3px 3px">
+<tr>
+<td>SHAPE</td>
+<td>Polyline</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>საწყისი ბოძი</td>
+<td>013</td>
+</tr>
+<tr>
+<td>სადენის ტიპი</td>
+<td>1</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>სადენის კვეთი</td>
+<td>3</td>
+</tr>
+<tr>
+<td>მიწისქვეშა კაბელი</td>
+<td>&lt;Null&gt;</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>ქურო</td>
+<td>&lt;Null&gt;</td>
+</tr>
+<tr>
+<td>შენიშვნა</td>
+<td>&lt;Null&gt;</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>ბოძამდე</td>
+<td>014</td>
+</tr>
+<tr>
+<td>მუნიციპალიტეტი</td>
+<td>dedofliswyaro</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>ქვესადგურის ნომერი</td>
+<td>16</td>
+</tr>
+<tr>
+<td>ქვესადგური</td>
+<td>35 kv q/s "qedi"</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>ფიდერის ძაბვა</td>
+<td>10</td>
+</tr>
+<tr>
+<td>ფიდერი</td>
+<td>z.qedi</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>ელ, გადამცემი ხაზი</td>
+<td>35 kv q/s "qedi" 10 z.qedi</td>
+</tr>
+<tr>
+<td>SHAPE_Length</td>
+<td>68.029513</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</body>
+</html>
+]]></description>
+      <styleUrl>#LineStyle01</styleUrl>
+      <MultiGeometry>
+        <LineString>
+          <extrude>0</extrude><altitudeMode>clampedToGround</altitudeMode>
+          <coordinates> 46.39756905701918,41.4209771444555,0 46.39835300168086,41.42081229538179,0</coordinates>
+        </LineString>
+      </MultiGeometry>
+    </Placemark>
+    <Placemark id="ID_00018">
+      <name>017</name>
+      <Snippet></Snippet>
+      <description><![CDATA[<html xmlns:fo="http://www.w3.org/1999/XSL/Format" xmlns:msxsl="urn:schemas-microsoft-com:xslt">
+<head>
+<META http-equiv="Content-Type" content="text/html">
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+</head>
+<body style="margin:0px 0px 0px 0px;overflow:auto;background:#FFFFFF;">
+<table style="font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-collapse:collapse;padding:3px 3px 3px 3px">
+<tr style="text-align:center;font-weight:bold;background:#9CBCE2">
+<td>017</td>
+</tr>
+<tr>
+<td>
+<table style="font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-spacing:0px; padding:3px 3px 3px 3px">
+<tr>
+<td>SHAPE</td>
+<td>Polyline</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>საწყისი ბოძი</td>
+<td>017</td>
+</tr>
+<tr>
+<td>სადენის ტიპი</td>
+<td>1</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>სადენის კვეთი</td>
+<td>3</td>
+</tr>
+<tr>
+<td>მიწისქვეშა კაბელი</td>
+<td>&lt;Null&gt;</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>ქურო</td>
+<td>&lt;Null&gt;</td>
+</tr>
+<tr>
+<td>შენიშვნა</td>
+<td>&lt;Null&gt;</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>ბოძამდე</td>
+<td>018</td>
+</tr>
+<tr>
+<td>მუნიციპალიტეტი</td>
+<td>dedofliswyaro</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>ქვესადგურის ნომერი</td>
+<td>16</td>
+</tr>
+<tr>
+<td>ქვესადგური</td>
+<td>35 kv q/s "qedi"</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>ფიდერის ძაბვა</td>
+<td>10</td>
+</tr>
+<tr>
+<td>ფიდერი</td>
+<td>z.qedi</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>ელ, გადამცემი ხაზი</td>
+<td>35 kv q/s "qedi" 10 z.qedi</td>
+</tr>
+<tr>
+<td>SHAPE_Length</td>
+<td>71.354911</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</body>
+</html>
+]]></description>
+      <styleUrl>#LineStyle01</styleUrl>
+      <MultiGeometry>
+        <LineString>
+          <extrude>0</extrude><altitudeMode>clampedToGround</altitudeMode>
+          <coordinates> 46.39450302304091,41.42161594806699,0 46.39532637423938,41.42144597026599,0</coordinates>
+        </LineString>
+      </MultiGeometry>
+    </Placemark>
+    <Placemark id="ID_00019">
+      <name>018</name>
+      <Snippet></Snippet>
+      <description><![CDATA[<html xmlns:fo="http://www.w3.org/1999/XSL/Format" xmlns:msxsl="urn:schemas-microsoft-com:xslt">
+<head>
+<META http-equiv="Content-Type" content="text/html">
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+</head>
+<body style="margin:0px 0px 0px 0px;overflow:auto;background:#FFFFFF;">
+<table style="font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-collapse:collapse;padding:3px 3px 3px 3px">
+<tr style="text-align:center;font-weight:bold;background:#9CBCE2">
+<td>018</td>
+</tr>
+<tr>
+<td>
+<table style="font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-spacing:0px; padding:3px 3px 3px 3px">
+<tr>
+<td>SHAPE</td>
+<td>Polyline</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>საწყისი ბოძი</td>
+<td>018</td>
+</tr>
+<tr>
+<td>სადენის ტიპი</td>
+<td>1</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>სადენის კვეთი</td>
+<td>3</td>
+</tr>
+<tr>
+<td>მიწისქვეშა კაბელი</td>
+<td>&lt;Null&gt;</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>ქურო</td>
+<td>&lt;Null&gt;</td>
+</tr>
+<tr>
+<td>შენიშვნა</td>
+<td>&lt;Null&gt;</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>ბოძამდე</td>
+<td>019</td>
+</tr>
+<tr>
+<td>მუნიციპალიტეტი</td>
+<td>dedofliswyaro</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>ქვესადგურის ნომერი</td>
+<td>16</td>
+</tr>
+<tr>
+<td>ქვესადგური</td>
+<td>35 kv q/s "qedi"</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>ფიდერის ძაბვა</td>
+<td>10</td>
+</tr>
+<tr>
+<td>ფიდერი</td>
+<td>z.qedi</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>ელ, გადამცემი ხაზი</td>
+<td>35 kv q/s "qedi" 10 z.qedi</td>
+</tr>
+<tr>
+<td>SHAPE_Length</td>
+<td>70.284819</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</body>
+</html>
+]]></description>
+      <styleUrl>#LineStyle01</styleUrl>
+      <MultiGeometry>
+        <LineString>
+          <extrude>0</extrude><altitudeMode>clampedToGround</altitudeMode>
+          <coordinates> 46.3936773651066,41.42173613825542,0 46.39450302304091,41.42161594806699,0</coordinates>
+        </LineString>
+      </MultiGeometry>
+    </Placemark>
+    <Placemark id="ID_00020">
+      <name>019</name>
+      <Snippet></Snippet>
+      <description><![CDATA[<html xmlns:fo="http://www.w3.org/1999/XSL/Format" xmlns:msxsl="urn:schemas-microsoft-com:xslt">
+<head>
+<META http-equiv="Content-Type" content="text/html">
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+</head>
+<body style="margin:0px 0px 0px 0px;overflow:auto;background:#FFFFFF;">
+<table style="font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-collapse:collapse;padding:3px 3px 3px 3px">
+<tr style="text-align:center;font-weight:bold;background:#9CBCE2">
+<td>019</td>
+</tr>
+<tr>
+<td>
+<table style="font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-spacing:0px; padding:3px 3px 3px 3px">
+<tr>
+<td>SHAPE</td>
+<td>Polyline</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>საწყისი ბოძი</td>
+<td>019</td>
+</tr>
+<tr>
+<td>სადენის ტიპი</td>
+<td>1</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>სადენის კვეთი</td>
+<td>3</td>
+</tr>
+<tr>
+<td>მიწისქვეშა კაბელი</td>
+<td>&lt;Null&gt;</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>ქურო</td>
+<td>&lt;Null&gt;</td>
+</tr>
+<tr>
+<td>შენიშვნა</td>
+<td>&lt;Null&gt;</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>ბოძამდე</td>
+<td>020</td>
+</tr>
+<tr>
+<td>მუნიციპალიტეტი</td>
+<td>dedofliswyaro</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>ქვესადგურის ნომერი</td>
+<td>16</td>
+</tr>
+<tr>
+<td>ქვესადგური</td>
+<td>35 kv q/s "qedi"</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>ფიდერის ძაბვა</td>
+<td>10</td>
+</tr>
+<tr>
+<td>ფიდერი</td>
+<td>z.qedi</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>ელ, გადამცემი ხაზი</td>
+<td>35 kv q/s "qedi" 10 z.qedi</td>
+</tr>
+<tr>
+<td>SHAPE_Length</td>
+<td>63.632997</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</body>
+</html>
+]]></description>
+      <styleUrl>#LineStyle01</styleUrl>
+      <MultiGeometry>
+        <LineString>
+          <extrude>0</extrude><altitudeMode>clampedToGround</altitudeMode>
+          <coordinates> 46.39292992473445,41.42184525656752,0 46.3936773651066,41.42173613825542,0</coordinates>
+        </LineString>
+      </MultiGeometry>
+    </Placemark>
+    <Placemark id="ID_00021">
+      <name>020</name>
+      <Snippet></Snippet>
+      <description><![CDATA[<html xmlns:fo="http://www.w3.org/1999/XSL/Format" xmlns:msxsl="urn:schemas-microsoft-com:xslt">
+<head>
+<META http-equiv="Content-Type" content="text/html">
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+</head>
+<body style="margin:0px 0px 0px 0px;overflow:auto;background:#FFFFFF;">
+<table style="font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-collapse:collapse;padding:3px 3px 3px 3px">
+<tr style="text-align:center;font-weight:bold;background:#9CBCE2">
+<td>020</td>
+</tr>
+<tr>
+<td>
+<table style="font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-spacing:0px; padding:3px 3px 3px 3px">
+<tr>
+<td>SHAPE</td>
+<td>Polyline</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>საწყისი ბოძი</td>
+<td>020</td>
+</tr>
+<tr>
+<td>სადენის ტიპი</td>
+<td>1</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>სადენის კვეთი</td>
+<td>3</td>
+</tr>
+<tr>
+<td>მიწისქვეშა კაბელი</td>
+<td>&lt;Null&gt;</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>ქურო</td>
+<td>&lt;Null&gt;</td>
+</tr>
+<tr>
+<td>შენიშვნა</td>
+<td>&lt;Null&gt;</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>ბოძამდე</td>
+<td>021</td>
+</tr>
+<tr>
+<td>მუნიციპალიტეტი</td>
+<td>dedofliswyaro</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>ქვესადგურის ნომერი</td>
+<td>16</td>
+</tr>
+<tr>
+<td>ქვესადგური</td>
+<td>35 kv q/s "qedi"</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>ფიდერის ძაბვა</td>
+<td>10</td>
+</tr>
+<tr>
+<td>ფიდერი</td>
+<td>z.qedi</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>ელ, გადამცემი ხაზი</td>
+<td>35 kv q/s "qedi" 10 z.qedi</td>
+</tr>
+<tr>
+<td>SHAPE_Length</td>
+<td>78.127494</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</body>
+</html>
+]]></description>
+      <styleUrl>#LineStyle01</styleUrl>
+      <MultiGeometry>
+        <LineString>
+          <extrude>0</extrude><altitudeMode>clampedToGround</altitudeMode>
+          <coordinates> 46.39201185981264,41.42197779144551,0 46.39292992473445,41.42184525656752,0</coordinates>
+        </LineString>
+      </MultiGeometry>
+    </Placemark>
+    <Placemark id="ID_00022">
+      <name>021</name>
+      <Snippet></Snippet>
+      <description><![CDATA[<html xmlns:fo="http://www.w3.org/1999/XSL/Format" xmlns:msxsl="urn:schemas-microsoft-com:xslt">
+<head>
+<META http-equiv="Content-Type" content="text/html">
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+</head>
+<body style="margin:0px 0px 0px 0px;overflow:auto;background:#FFFFFF;">
+<table style="font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-collapse:collapse;padding:3px 3px 3px 3px">
+<tr style="text-align:center;font-weight:bold;background:#9CBCE2">
+<td>021</td>
+</tr>
+<tr>
+<td>
+<table style="font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-spacing:0px; padding:3px 3px 3px 3px">
+<tr>
+<td>SHAPE</td>
+<td>Polyline</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>საწყისი ბოძი</td>
+<td>021</td>
+</tr>
+<tr>
+<td>სადენის ტიპი</td>
+<td>1</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>სადენის კვეთი</td>
+<td>3</td>
+</tr>
+<tr>
+<td>მიწისქვეშა კაბელი</td>
+<td>&lt;Null&gt;</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>ქურო</td>
+<td>&lt;Null&gt;</td>
+</tr>
+<tr>
+<td>შენიშვნა</td>
+<td>&lt;Null&gt;</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>ბოძამდე</td>
+<td>022</td>
+</tr>
+<tr>
+<td>მუნიციპალიტეტი</td>
+<td>dedofliswyaro</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>ქვესადგურის ნომერი</td>
+<td>16</td>
+</tr>
+<tr>
+<td>ქვესადგური</td>
+<td>35 kv q/s "qedi"</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>ფიდერის ძაბვა</td>
+<td>10</td>
+</tr>
+<tr>
+<td>ფიდერი</td>
+<td>z.qedi</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>ელ, გადამცემი ხაზი</td>
+<td>35 kv q/s "qedi" 10 z.qedi</td>
+</tr>
+<tr>
+<td>SHAPE_Length</td>
+<td>70.147189</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</body>
+</html>
+]]></description>
+      <styleUrl>#LineStyle01</styleUrl>
+      <MultiGeometry>
+        <LineString>
+          <extrude>0</extrude><altitudeMode>clampedToGround</altitudeMode>
+          <coordinates> 46.39118598313863,41.42209038842594,0 46.39201185981264,41.42197779144551,0</coordinates>
+        </LineString>
+      </MultiGeometry>
+    </Placemark>
+    <Placemark id="ID_00023">
+      <name>022</name>
+      <Snippet></Snippet>
+      <description><![CDATA[<html xmlns:fo="http://www.w3.org/1999/XSL/Format" xmlns:msxsl="urn:schemas-microsoft-com:xslt">
+<head>
+<META http-equiv="Content-Type" content="text/html">
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+</head>
+<body style="margin:0px 0px 0px 0px;overflow:auto;background:#FFFFFF;">
+<table style="font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-collapse:collapse;padding:3px 3px 3px 3px">
+<tr style="text-align:center;font-weight:bold;background:#9CBCE2">
+<td>022</td>
+</tr>
+<tr>
+<td>
+<table style="font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-spacing:0px; padding:3px 3px 3px 3px">
+<tr>
+<td>SHAPE</td>
+<td>Polyline</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>საწყისი ბოძი</td>
+<td>022</td>
+</tr>
+<tr>
+<td>სადენის ტიპი</td>
+<td>1</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>სადენის კვეთი</td>
+<td>3</td>
+</tr>
+<tr>
+<td>მიწისქვეშა კაბელი</td>
+<td>&lt;Null&gt;</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>ქურო</td>
+<td>&lt;Null&gt;</td>
+</tr>
+<tr>
+<td>შენიშვნა</td>
+<td>&lt;Null&gt;</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>ბოძამდე</td>
+<td>023</td>
+</tr>
+<tr>
+<td>მუნიციპალიტეტი</td>
+<td>dedofliswyaro</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>ქვესადგურის ნომერი</td>
+<td>16</td>
+</tr>
+<tr>
+<td>ქვესადგური</td>
+<td>35 kv q/s "qedi"</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>ფიდერის ძაბვა</td>
+<td>10</td>
+</tr>
+<tr>
+<td>ფიდერი</td>
+<td>z.qedi</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>ელ, გადამცემი ხაზი</td>
+<td>35 kv q/s "qedi" 10 z.qedi</td>
+</tr>
+<tr>
+<td>SHAPE_Length</td>
+<td>60.394232</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</body>
+</html>
+]]></description>
+      <styleUrl>#LineStyle01</styleUrl>
+      <MultiGeometry>
+        <LineString>
+          <extrude>0</extrude><altitudeMode>clampedToGround</altitudeMode>
+          <coordinates> 46.39054458076578,41.42234092016564,0 46.39118598313863,41.42209038842594,0</coordinates>
+        </LineString>
+      </MultiGeometry>
+    </Placemark>
+    <Placemark id="ID_00024">
+      <name>023</name>
+      <Snippet></Snippet>
+      <description><![CDATA[<html xmlns:fo="http://www.w3.org/1999/XSL/Format" xmlns:msxsl="urn:schemas-microsoft-com:xslt">
+<head>
+<META http-equiv="Content-Type" content="text/html">
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+</head>
+<body style="margin:0px 0px 0px 0px;overflow:auto;background:#FFFFFF;">
+<table style="font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-collapse:collapse;padding:3px 3px 3px 3px">
+<tr style="text-align:center;font-weight:bold;background:#9CBCE2">
+<td>023</td>
+</tr>
+<tr>
+<td>
+<table style="font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-spacing:0px; padding:3px 3px 3px 3px">
+<tr>
+<td>SHAPE</td>
+<td>Polyline</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>საწყისი ბოძი</td>
+<td>023</td>
+</tr>
+<tr>
+<td>სადენის ტიპი</td>
+<td>1</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>სადენის კვეთი</td>
+<td>3</td>
+</tr>
+<tr>
+<td>მიწისქვეშა კაბელი</td>
+<td>&lt;Null&gt;</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>ქურო</td>
+<td>&lt;Null&gt;</td>
+</tr>
+<tr>
+<td>შენიშვნა</td>
+<td>&lt;Null&gt;</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>ბოძამდე</td>
+<td>024</td>
+</tr>
+<tr>
+<td>მუნიციპალიტეტი</td>
+<td>dedofliswyaro</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>ქვესადგურის ნომერი</td>
+<td>16</td>
+</tr>
+<tr>
+<td>ქვესადგური</td>
+<td>35 kv q/s "qedi"</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>ფიდერის ძაბვა</td>
+<td>10</td>
+</tr>
+<tr>
+<td>ფიდერი</td>
+<td>z.qedi</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>ელ, გადამცემი ხაზი</td>
+<td>35 kv q/s "qedi" 10 z.qedi</td>
+</tr>
+<tr>
+<td>SHAPE_Length</td>
+<td>70.996372</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</body>
+</html>
+]]></description>
+      <styleUrl>#LineStyle01</styleUrl>
+      <MultiGeometry>
+        <LineString>
+          <extrude>0</extrude><altitudeMode>clampedToGround</altitudeMode>
+          <coordinates> 46.38978769627991,41.4226312149877,0 46.39054458076578,41.42234092016564,0</coordinates>
+        </LineString>
+      </MultiGeometry>
+    </Placemark>
+    <Placemark id="ID_00025">
+      <name>024</name>
+      <Snippet></Snippet>
+      <description><![CDATA[<html xmlns:fo="http://www.w3.org/1999/XSL/Format" xmlns:msxsl="urn:schemas-microsoft-com:xslt">
+<head>
+<META http-equiv="Content-Type" content="text/html">
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+</head>
+<body style="margin:0px 0px 0px 0px;overflow:auto;background:#FFFFFF;">
+<table style="font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-collapse:collapse;padding:3px 3px 3px 3px">
+<tr style="text-align:center;font-weight:bold;background:#9CBCE2">
+<td>024</td>
+</tr>
+<tr>
+<td>
+<table style="font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-spacing:0px; padding:3px 3px 3px 3px">
+<tr>
+<td>SHAPE</td>
+<td>Polyline</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>საწყისი ბოძი</td>
+<td>024</td>
+</tr>
+<tr>
+<td>სადენის ტიპი</td>
+<td>1</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>სადენის კვეთი</td>
+<td>3</td>
+</tr>
+<tr>
+<td>მიწისქვეშა კაბელი</td>
+<td>&lt;Null&gt;</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>ქურო</td>
+<td>&lt;Null&gt;</td>
+</tr>
+<tr>
+<td>შენიშვნა</td>
+<td>&lt;Null&gt;</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>ბოძამდე</td>
+<td>025</td>
+</tr>
+<tr>
+<td>მუნიციპალიტეტი</td>
+<td>dedofliswyaro</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>ქვესადგურის ნომერი</td>
+<td>16</td>
+</tr>
+<tr>
+<td>ქვესადგური</td>
+<td>35 kv q/s "qedi"</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>ფიდერის ძაბვა</td>
+<td>10</td>
+</tr>
+<tr>
+<td>ფიდერი</td>
+<td>z.qedi</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>ელ, გადამცემი ხაზი</td>
+<td>35 kv q/s "qedi" 10 z.qedi</td>
+</tr>
+<tr>
+<td>SHAPE_Length</td>
+<td>61.162738</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</body>
+</html>
+]]></description>
+      <styleUrl>#LineStyle01</styleUrl>
+      <MultiGeometry>
+        <LineString>
+          <extrude>0</extrude><altitudeMode>clampedToGround</altitudeMode>
+          <coordinates> 46.38913635854539,41.42288235372098,0 46.38978769627991,41.4226312149877,0</coordinates>
+        </LineString>
+      </MultiGeometry>
+    </Placemark>
+    <Placemark id="ID_00026">
+      <name>025</name>
+      <Snippet></Snippet>
+      <description><![CDATA[<html xmlns:fo="http://www.w3.org/1999/XSL/Format" xmlns:msxsl="urn:schemas-microsoft-com:xslt">
+<head>
+<META http-equiv="Content-Type" content="text/html">
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+</head>
+<body style="margin:0px 0px 0px 0px;overflow:auto;background:#FFFFFF;">
+<table style="font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-collapse:collapse;padding:3px 3px 3px 3px">
+<tr style="text-align:center;font-weight:bold;background:#9CBCE2">
+<td>025</td>
+</tr>
+<tr>
+<td>
+<table style="font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-spacing:0px; padding:3px 3px 3px 3px">
+<tr>
+<td>SHAPE</td>
+<td>Polyline</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>საწყისი ბოძი</td>
+<td>025</td>
+</tr>
+<tr>
+<td>სადენის ტიპი</td>
+<td>1</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>სადენის კვეთი</td>
+<td>3</td>
+</tr>
+<tr>
+<td>მიწისქვეშა კაბელი</td>
+<td>&lt;Null&gt;</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>ქურო</td>
+<td>&lt;Null&gt;</td>
+</tr>
+<tr>
+<td>შენიშვნა</td>
+<td>&lt;Null&gt;</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>ბოძამდე</td>
+<td>026</td>
+</tr>
+<tr>
+<td>მუნიციპალიტეტი</td>
+<td>dedofliswyaro</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>ქვესადგურის ნომერი</td>
+<td>16</td>
+</tr>
+<tr>
+<td>ქვესადგური</td>
+<td>35 kv q/s "qedi"</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>ფიდერის ძაბვა</td>
+<td>10</td>
+</tr>
+<tr>
+<td>ფიდერი</td>
+<td>z.qedi</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>ელ, გადამცემი ხაზი</td>
+<td>35 kv q/s "qedi" 10 z.qedi</td>
+</tr>
+<tr>
+<td>SHAPE_Length</td>
+<td>71.206682</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</body>
+</html>
+]]></description>
+      <styleUrl>#LineStyle01</styleUrl>
+      <MultiGeometry>
+        <LineString>
+          <extrude>0</extrude><altitudeMode>clampedToGround</altitudeMode>
+          <coordinates> 46.38865288123145,41.42235431292635,0 46.38913635854539,41.42288235372098,0</coordinates>
+        </LineString>
+      </MultiGeometry>
+    </Placemark>
+    <Placemark id="ID_00027">
+      <name>026</name>
+      <Snippet></Snippet>
+      <description><![CDATA[<html xmlns:fo="http://www.w3.org/1999/XSL/Format" xmlns:msxsl="urn:schemas-microsoft-com:xslt">
+<head>
+<META http-equiv="Content-Type" content="text/html">
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+</head>
+<body style="margin:0px 0px 0px 0px;overflow:auto;background:#FFFFFF;">
+<table style="font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-collapse:collapse;padding:3px 3px 3px 3px">
+<tr style="text-align:center;font-weight:bold;background:#9CBCE2">
+<td>026</td>
+</tr>
+<tr>
+<td>
+<table style="font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-spacing:0px; padding:3px 3px 3px 3px">
+<tr>
+<td>SHAPE</td>
+<td>Polyline</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>საწყისი ბოძი</td>
+<td>026</td>
+</tr>
+<tr>
+<td>სადენის ტიპი</td>
+<td>1</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>სადენის კვეთი</td>
+<td>3</td>
+</tr>
+<tr>
+<td>მიწისქვეშა კაბელი</td>
+<td>&lt;Null&gt;</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>ქურო</td>
+<td>&lt;Null&gt;</td>
+</tr>
+<tr>
+<td>შენიშვნა</td>
+<td>&lt;Null&gt;</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>ბოძამდე</td>
+<td>027</td>
+</tr>
+<tr>
+<td>მუნიციპალიტეტი</td>
+<td>dedofliswyaro</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>ქვესადგურის ნომერი</td>
+<td>16</td>
+</tr>
+<tr>
+<td>ქვესადგური</td>
+<td>35 kv q/s "qedi"</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>ფიდერის ძაბვა</td>
+<td>10</td>
+</tr>
+<tr>
+<td>ფიდერი</td>
+<td>z.qedi</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>ელ, გადამცემი ხაზი</td>
+<td>35 kv q/s "qedi" 10 z.qedi</td>
+</tr>
+<tr>
+<td>SHAPE_Length</td>
+<td>85.654236</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</body>
+</html>
+]]></description>
+      <styleUrl>#LineStyle01</styleUrl>
+      <MultiGeometry>
+        <LineString>
+          <extrude>0</extrude><altitudeMode>clampedToGround</altitudeMode>
+          <coordinates> 46.38805723618669,41.42172656882958,0 46.38865288123145,41.42235431292635,0</coordinates>
+        </LineString>
+      </MultiGeometry>
+    </Placemark>
+    <Placemark id="ID_00028">
+      <name>002</name>
+      <Snippet></Snippet>
+      <description><![CDATA[<html xmlns:fo="http://www.w3.org/1999/XSL/Format" xmlns:msxsl="urn:schemas-microsoft-com:xslt">
+<head>
+<META http-equiv="Content-Type" content="text/html">
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+</head>
+<body style="margin:0px 0px 0px 0px;overflow:auto;background:#FFFFFF;">
+<table style="font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-collapse:collapse;padding:3px 3px 3px 3px">
+<tr style="text-align:center;font-weight:bold;background:#9CBCE2">
+<td>002</td>
+</tr>
+<tr>
+<td>
+<table style="font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-spacing:0px; padding:3px 3px 3px 3px">
+<tr>
+<td>SHAPE</td>
+<td>Polyline</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>საწყისი ბოძი</td>
+<td>002</td>
+</tr>
+<tr>
+<td>სადენის ტიპი</td>
+<td>1</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>სადენის კვეთი</td>
+<td>3</td>
+</tr>
+<tr>
+<td>მიწისქვეშა კაბელი</td>
+<td>&lt;Null&gt;</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>ქურო</td>
+<td>&lt;Null&gt;</td>
+</tr>
+<tr>
+<td>შენიშვნა</td>
+<td>N 2dan gadavida bodZi 2/1 ze mimartulebit  ktp 2115 -ze</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>ბოძამდე</td>
+<td>002/1</td>
+</tr>
+<tr>
+<td>მუნიციპალიტეტი</td>
+<td>dedofliswyaro</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>ქვესადგურის ნომერი</td>
+<td>16</td>
+</tr>
+<tr>
+<td>ქვესადგური</td>
+<td>35 kv q/s "qedi"</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>ფიდერის ძაბვა</td>
+<td>10</td>
+</tr>
+<tr>
+<td>ფიდერი</td>
+<td>z.qedi</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>ელ, გადამცემი ხაზი</td>
+<td>35 kv q/s "qedi" 10 z.qedi</td>
+</tr>
+<tr>
+<td>SHAPE_Length</td>
+<td>36.593764</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</body>
+</html>
+]]></description>
+      <styleUrl>#LineStyle01</styleUrl>
+      <MultiGeometry>
+        <LineString>
+          <extrude>0</extrude><altitudeMode>clampedToGround</altitudeMode>
+          <coordinates> 46.40622530470825,41.42009135044801,0 46.40625881034913,41.41976275165611,0</coordinates>
+        </LineString>
+      </MultiGeometry>
+    </Placemark>
+    <Placemark id="ID_00029">
+      <name>027</name>
+      <Snippet></Snippet>
+      <description><![CDATA[<html xmlns:fo="http://www.w3.org/1999/XSL/Format" xmlns:msxsl="urn:schemas-microsoft-com:xslt">
+<head>
+<META http-equiv="Content-Type" content="text/html">
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+</head>
+<body style="margin:0px 0px 0px 0px;overflow:auto;background:#FFFFFF;">
+<table style="font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-collapse:collapse;padding:3px 3px 3px 3px">
+<tr style="text-align:center;font-weight:bold;background:#9CBCE2">
+<td>027</td>
+</tr>
+<tr>
+<td>
+<table style="font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-spacing:0px; padding:3px 3px 3px 3px">
+<tr>
+<td>SHAPE</td>
+<td>Polyline</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>საწყისი ბოძი</td>
+<td>027</td>
+</tr>
+<tr>
+<td>სადენის ტიპი</td>
+<td>1</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>სადენის კვეთი</td>
+<td>3</td>
+</tr>
+<tr>
+<td>მიწისქვეშა კაბელი</td>
+<td>&lt;Null&gt;</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>ქურო</td>
+<td>&lt;Null&gt;</td>
+</tr>
+<tr>
+<td>შენიშვნა</td>
+<td>&lt;Null&gt;</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>ბოძამდე</td>
+<td>027/1</td>
+</tr>
+<tr>
+<td>მუნიციპალიტეტი</td>
+<td>dedofliswyaro</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>ქვესადგურის ნომერი</td>
+<td>16</td>
+</tr>
+<tr>
+<td>ქვესადგური</td>
+<td>35 kv q/s "qedi"</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>ფიდერის ძაბვა</td>
+<td>10</td>
+</tr>
+<tr>
+<td>ფიდერი</td>
+<td>z.qedi</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>ელ, გადამცემი ხაზი</td>
+<td>35 kv q/s "qedi" 10 z.qedi</td>
+</tr>
+<tr>
+<td>SHAPE_Length</td>
+<td>13.333698</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</body>
+</html>
+]]></description>
+      <styleUrl>#LineStyle01</styleUrl>
+      <MultiGeometry>
+        <LineString>
+          <extrude>0</extrude><altitudeMode>clampedToGround</altitudeMode>
+          <coordinates> 46.38818777726945,41.42165753607009,0 46.38805723618669,41.42172656882958,0</coordinates>
+        </LineString>
+      </MultiGeometry>
+    </Placemark>
+    <Placemark id="ID_00030">
+      <name>027/1</name>
+      <Snippet></Snippet>
+      <description><![CDATA[<html xmlns:fo="http://www.w3.org/1999/XSL/Format" xmlns:msxsl="urn:schemas-microsoft-com:xslt">
+<head>
+<META http-equiv="Content-Type" content="text/html">
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+</head>
+<body style="margin:0px 0px 0px 0px;overflow:auto;background:#FFFFFF;">
+<table style="font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-collapse:collapse;padding:3px 3px 3px 3px">
+<tr style="text-align:center;font-weight:bold;background:#9CBCE2">
+<td>027/1</td>
+</tr>
+<tr>
+<td>
+<table style="font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-spacing:0px; padding:3px 3px 3px 3px">
+<tr>
+<td>SHAPE</td>
+<td>Polyline</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>საწყისი ბოძი</td>
+<td>027/1</td>
+</tr>
+<tr>
+<td>სადენის ტიპი</td>
+<td>1</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>სადენის კვეთი</td>
+<td>3</td>
+</tr>
+<tr>
+<td>მიწისქვეშა კაბელი</td>
+<td>&lt;Null&gt;</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>ქურო</td>
+<td>&lt;Null&gt;</td>
+</tr>
+<tr>
+<td>შენიშვნა</td>
+<td>&lt;Null&gt;</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>ბოძამდე</td>
+<td>027/2</td>
+</tr>
+<tr>
+<td>მუნიციპალიტეტი</td>
+<td>dedofliswyaro</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>ქვესადგურის ნომერი</td>
+<td>16</td>
+</tr>
+<tr>
+<td>ქვესადგური</td>
+<td>35 kv q/s "qedi"</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>ფიდერის ძაბვა</td>
+<td>10</td>
+</tr>
+<tr>
+<td>ფიდერი</td>
+<td>z.qedi</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>ელ, გადამცემი ხაზი</td>
+<td>35 kv q/s "qedi" 10 z.qedi</td>
+</tr>
+<tr>
+<td>SHAPE_Length</td>
+<td>46.736662</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</body>
+</html>
+]]></description>
+      <styleUrl>#LineStyle01</styleUrl>
+      <MultiGeometry>
+        <LineString>
+          <extrude>0</extrude><altitudeMode>clampedToGround</altitudeMode>
+          <coordinates> 46.38864003244519,41.42140997402737,0 46.38818777726945,41.42165753607009,0</coordinates>
+        </LineString>
+      </MultiGeometry>
+    </Placemark>
+    <Placemark id="ID_00031">
+      <name>027/2</name>
+      <Snippet></Snippet>
+      <description><![CDATA[<html xmlns:fo="http://www.w3.org/1999/XSL/Format" xmlns:msxsl="urn:schemas-microsoft-com:xslt">
+<head>
+<META http-equiv="Content-Type" content="text/html">
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+</head>
+<body style="margin:0px 0px 0px 0px;overflow:auto;background:#FFFFFF;">
+<table style="font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-collapse:collapse;padding:3px 3px 3px 3px">
+<tr style="text-align:center;font-weight:bold;background:#9CBCE2">
+<td>027/2</td>
+</tr>
+<tr>
+<td>
+<table style="font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-spacing:0px; padding:3px 3px 3px 3px">
+<tr>
+<td>SHAPE</td>
+<td>Polyline</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>საწყისი ბოძი</td>
+<td>027/2</td>
+</tr>
+<tr>
+<td>სადენის ტიპი</td>
+<td>1</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>სადენის კვეთი</td>
+<td>3</td>
+</tr>
+<tr>
+<td>მიწისქვეშა კაბელი</td>
+<td>&lt;Null&gt;</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>ქურო</td>
+<td>&lt;Null&gt;</td>
+</tr>
+<tr>
+<td>შენიშვნა</td>
+<td>&lt;Null&gt;</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>ბოძამდე</td>
+<td>027/3</td>
+</tr>
+<tr>
+<td>მუნიციპალიტეტი</td>
+<td>dedofliswyaro</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>ქვესადგურის ნომერი</td>
+<td>16</td>
+</tr>
+<tr>
+<td>ქვესადგური</td>
+<td>35 kv q/s "qedi"</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>ფიდერის ძაბვა</td>
+<td>10</td>
+</tr>
+<tr>
+<td>ფიდერი</td>
+<td>z.qedi</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>ელ, გადამცემი ხაზი</td>
+<td>35 kv q/s "qedi" 10 z.qedi</td>
+</tr>
+<tr>
+<td>SHAPE_Length</td>
+<td>42.474078</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</body>
+</html>
+]]></description>
+      <styleUrl>#LineStyle01</styleUrl>
+      <MultiGeometry>
+        <LineString>
+          <extrude>0</extrude><altitudeMode>clampedToGround</altitudeMode>
+          <coordinates> 46.38905619361729,41.42119042549001,0 46.38864003244519,41.42140997402737,0</coordinates>
+        </LineString>
+      </MultiGeometry>
+    </Placemark>
+    <Placemark id="ID_00032">
+      <name>027/3</name>
+      <Snippet></Snippet>
+      <description><![CDATA[<html xmlns:fo="http://www.w3.org/1999/XSL/Format" xmlns:msxsl="urn:schemas-microsoft-com:xslt">
+<head>
+<META http-equiv="Content-Type" content="text/html">
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+</head>
+<body style="margin:0px 0px 0px 0px;overflow:auto;background:#FFFFFF;">
+<table style="font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-collapse:collapse;padding:3px 3px 3px 3px">
+<tr style="text-align:center;font-weight:bold;background:#9CBCE2">
+<td>027/3</td>
+</tr>
+<tr>
+<td>
+<table style="font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-spacing:0px; padding:3px 3px 3px 3px">
+<tr>
+<td>SHAPE</td>
+<td>Polyline</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>საწყისი ბოძი</td>
+<td>027/3</td>
+</tr>
+<tr>
+<td>სადენის ტიპი</td>
+<td>1</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>სადენის კვეთი</td>
+<td>3</td>
+</tr>
+<tr>
+<td>მიწისქვეშა კაბელი</td>
+<td>&lt;Null&gt;</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>ქურო</td>
+<td>&lt;Null&gt;</td>
+</tr>
+<tr>
+<td>შენიშვნა</td>
+<td>27/3 bodZi dasrulda xazi ktp 2200 ze</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>ბოძამდე</td>
+<td>2200</td>
+</tr>
+<tr>
+<td>მუნიციპალიტეტი</td>
+<td>dedofliswyaro</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>ქვესადგურის ნომერი</td>
+<td>16</td>
+</tr>
+<tr>
+<td>ქვესადგური</td>
+<td>35 kv q/s "qedi"</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>ფიდერის ძაბვა</td>
+<td>10</td>
+</tr>
+<tr>
+<td>ფიდერი</td>
+<td>z.qedi</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>ელ, გადამცემი ხაზი</td>
+<td>35 kv q/s "qedi" 10 z.qedi</td>
+</tr>
+<tr>
+<td>SHAPE_Length</td>
+<td>4.68755</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</body>
+</html>
+]]></description>
+      <styleUrl>#LineStyle01</styleUrl>
+      <MultiGeometry>
+        <LineString>
+          <extrude>0</extrude><altitudeMode>clampedToGround</altitudeMode>
+          <coordinates> 46.38910185795095,41.42116591424497,0 46.38905619361729,41.42119042549001,0</coordinates>
+        </LineString>
+      </MultiGeometry>
+    </Placemark>
+    <Placemark id="ID_00033">
+      <name>027</name>
+      <Snippet></Snippet>
+      <description><![CDATA[<html xmlns:fo="http://www.w3.org/1999/XSL/Format" xmlns:msxsl="urn:schemas-microsoft-com:xslt">
+<head>
+<META http-equiv="Content-Type" content="text/html">
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+</head>
+<body style="margin:0px 0px 0px 0px;overflow:auto;background:#FFFFFF;">
+<table style="font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-collapse:collapse;padding:3px 3px 3px 3px">
+<tr style="text-align:center;font-weight:bold;background:#9CBCE2">
+<td>027</td>
+</tr>
+<tr>
+<td>
+<table style="font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-spacing:0px; padding:3px 3px 3px 3px">
+<tr>
+<td>SHAPE</td>
+<td>Polyline</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>საწყისი ბოძი</td>
+<td>027</td>
+</tr>
+<tr>
+<td>სადენის ტიპი</td>
+<td>1</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>სადენის კვეთი</td>
+<td>3</td>
+</tr>
+<tr>
+<td>მიწისქვეშა კაბელი</td>
+<td>&lt;Null&gt;</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>ქურო</td>
+<td>&lt;Null&gt;</td>
+</tr>
+<tr>
+<td>შენიშვნა</td>
+<td>&lt;Null&gt;</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>ბოძამდე</td>
+<td>028</td>
+</tr>
+<tr>
+<td>მუნიციპალიტეტი</td>
+<td>dedofliswyaro</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>ქვესადგურის ნომერი</td>
+<td>16</td>
+</tr>
+<tr>
+<td>ქვესადგური</td>
+<td>35 kv q/s "qedi"</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>ფიდერის ძაბვა</td>
+<td>10</td>
+</tr>
+<tr>
+<td>ფიდერი</td>
+<td>z.qedi</td>
+</tr>
+<tr bgcolor="#D4E4F3">
+<td>ელ, გადამცემი ხაზი</td>
+<td>35 kv q/s "qedi" 10 z.qedi</td>
+</tr>
+<tr>
+<td>SHAPE_Length</td>
+<td>70.614241</td>
+</tr>
+</table>
+</td>
+</tr>
