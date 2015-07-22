@@ -14,7 +14,7 @@ class Objects::LinesController < ApplicationController
       rel = rel.where(direction: @search[:direction].mongonize) if @search[:direction].present?
     end
     respond_to do |format|
-      format.html { @title='ხაზები'; @lines = rel.asc(:name).paginate(per_page:10, page: params[:page]) }
+      format.html { @title='გადამცემი ხაზები'; @lines = rel.asc(:name).paginate(per_page:10, page: params[:page]) }
       format.xlsx { @lines = rel.asc(:name) }
       format.kmz do
         @lines = rel
@@ -49,7 +49,7 @@ class Objects::LinesController < ApplicationController
   protected
   def nav
     @nav=super
-    @nav['ხაზები']=objects_lines_url
+    @nav['გადამცემი ხაზები']=objects_lines_url
     @nav[@title]=nil unless ['index'].include?(action_name)
   end
 

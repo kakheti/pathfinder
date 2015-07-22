@@ -1,18 +1,23 @@
 <h3>ხაზი &mdash; <%= @line.name %></h3>
 <table class="table">
   <tr>
-    <td><strong>მუნიციპალიტეტი</strong></td>
-    <td><%= @line.region %></td>
-  </tr>
-  <tr>
-    <td><strong>კოორდინატები</strong></td>
-    <td>
-      E:<code><%= @line.easting %></code>
-      N:<code><%= @line.northing %></code>
-    </td>
+    <td><strong>მიმართულება</strong></td>
+    <td><%= @line.direction %></td>
   </tr>
   <tr>
     <td><strong>შენიშვნა</strong></td>
     <td><%= @line.description || '<span class="text-muted">(none)</span>'.html_safe %></td>
+  </tr>
+  <tr>
+    <td><strong>მუნიციპალიტეტი</strong></td>
+    <td><%= @line.region %></td>
+  </tr>
+  <tr>
+    <td><strong>წერტილები</strong></td>
+    <td><%= @line.points.count %></td>
+  </tr>
+  <tr>
+    <td><strong>სიგრძე</strong></td>
+    <td><%= number_with_precision @line.length %> კმ</td>
   </tr>
 </table>

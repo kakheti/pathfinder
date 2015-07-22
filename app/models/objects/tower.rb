@@ -27,7 +27,7 @@ class Objects::Tower
       name=placemark.find('./kml:name',kmlns).first.content
       # description content
       descr=placemark.find('./kml:description',kmlns).first.content
-      regname = Objects::Kml.get_property(descr, 'რეგიონი')
+      regname = Objects::Kml.get_property(descr, 'მუნიციპალიტეტი')
       category = Objects::Kml.get_property(descr, 'ანძის ტიპი')
       category = nil if category == '&lt;Null&gt;'
       linename = Objects::Kml.get_property(descr, 'გადამცემი ხაზი')

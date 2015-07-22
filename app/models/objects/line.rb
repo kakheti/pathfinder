@@ -44,7 +44,7 @@ class Objects::Line
       coords = placemark.find('./kml:MultiGeometry/kml:LineString/kml:coordinates',kmlns).first.content
       # description content
       descr = placemark.find('./kml:description', kmlns).first.content
-      regname = Objects::Kml.get_property(descr, 'რეგიონი')
+      regname = Objects::Kml.get_property(descr, 'მუნიციპალიტეტი')
       direction = Objects::Kml.get_property(descr, 'მიმართულება')
       # end of description section
       if regname == 'კახეთი'

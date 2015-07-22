@@ -30,7 +30,7 @@ class Objects::Tp
   belongs_to :substation, class_name: 'Objects::Substation'
   belongs_to :fider, class_name: 'Objects::Fider'
 
-  search_in :name, :description, :fider, :substation
+  search_in :name, :description, :fider, :substation => 'name'
 
   index({ name: 1 })
   index({ region_id: 1 })
@@ -50,7 +50,7 @@ class Objects::Tp
       # name=placemark.find('./kml:name',kmlns).first.content
       # start description section
       descr=placemark.find('./kml:description',kmlns).first.content
-      obj.region = Region.get_by_name(Objects::Kml.get_property(descr, 'რაიონი').to_ka(:all))
+      obj.region = Region.get_by_name(Objects::Kml.get_property(descr, 'მუნიციპალიტეტი').to_ka(:all))
       obj.city = Objects::Kml.get_property(descr, 'ქალაქი/დაბა/საკრებულო ქალაქი/დაბა/საკრებულო')
       obj.street = Objects::Kml.get_property(descr, 'ქუჩის დასახელება')
       obj.village = Objects::Kml.get_property(descr, 'სოფელი')
@@ -77,6 +77,15 @@ class Objects::Tp
       obj.set_coordinate(coord)
       obj.save
     end
+  end
+
+  def tp_type_s
+    {
+      '1' => 'ცრპ',
+      '2' => 'ტპ',
+      '3' => 'გკტპ',
+      '4' => 'კტპ'
+    }[tp_type]
   end
 
   def to_kml(xml)

@@ -19,7 +19,7 @@ class Objects::Substation
   has_many :poles, class_name: 'Objects::Pole'
   has_many :fiders, class_name: 'Objects::Fider'
 
-  search_in :name, :description
+  search_in :name, :description, :number
 
   def make_summaries
     self.residential_count = self.tps.sum(:residential_count)
@@ -42,7 +42,7 @@ class Objects::Substation
       name = placemark.find('./kml:name',kmlns).first.content
       # description content
       descr = placemark.find('./kml:description',kmlns).first.content
-      regname = Objects::Kml.get_property(descr, 'რაიონი')
+      regname = Objects::Kml.get_property(descr, 'მუნიციპალიტეტი')
       region=Region.get_by_name(regname)
       description = Objects::Kml.get_property(descr, 'მესაკუთრე')
       number = Objects::Kml.get_property(descr, 'ქვესადგურის ნომერი')

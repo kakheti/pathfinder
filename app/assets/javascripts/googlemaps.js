@@ -167,7 +167,8 @@ var createMap = function(opts) {
     });
     
     markerZoomer();
-    map.objects.concat(markers);
+
+    map.objects = map.objects.concat(markers);
     return markers;
   };
 

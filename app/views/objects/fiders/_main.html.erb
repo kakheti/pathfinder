@@ -15,6 +15,16 @@
     <td><%= fider.description %></td>
   </tr>
   <tr>
+    <td class="text-muted">ქვესადგური</td>
+    <td>
+      <% if fider.substation %>
+        <%= link_to fider.substation.name, substation_url(fider.substation, tab: 'fiders') %>
+      <% else %>
+        <span class="text-muted">(ქვესადგურის გარეშე)</span>
+      <% end %>
+    </td>
+  </tr>
+  <tr>
     <td class="text-muted">მუნიციპალიტეტი</td>
     <td>
       <% if fider.region %>

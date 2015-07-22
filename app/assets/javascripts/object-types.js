@@ -37,6 +37,7 @@ var objectTypes = {
     cluster: 10
   },
   line: {
+    zoom: 0,
     marker: false,
     name: 'ხაზი',
     plural: 'გადამცემი ხაზები',

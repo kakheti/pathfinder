@@ -12,7 +12,7 @@ class Objects::FidersController < ApplicationController
       rel = rel.where(region_id: @search[:region]) if @search[:region].present?
     end
     respond_to do |format|
-      format.html{ @title = 'ფიდერები'; @fiders = rel.paginate(per_page:10, page: params[:page]) }
+      format.html{ @title = '6-10კვ ფიდერები'; @fiders = rel.paginate(per_page:10, page: params[:page]) }
       format.xlsx{ @fiders = rel }
       format.kmz do
         @fiders = rel
@@ -27,7 +27,7 @@ class Objects::FidersController < ApplicationController
   end
 
   def upload
-    @title='ფაილის ატვირთვა: ფიდერები'
+    @title='ფაილის ატვირთვა: 6-10კვ ფიდერები'
     if request.post?
       f=params[:data].original_filename
       case File.extname(f).downcase
@@ -45,7 +45,7 @@ class Objects::FidersController < ApplicationController
   end
 
   def find
-    @title = 'ფიდერი'
+    @title = '6-10კვ ფიდერი'
     @fider = Objects::Fider.where(name: params[:name]).first
     if @fider
       render action: 'show'
@@ -57,7 +57,7 @@ class Objects::FidersController < ApplicationController
   protected
   def nav
     @nav=super
-    @nav['ფიდერები']=objects_fiders_url
+    @nav['6-10კვ ფიდერები']=objects_fiders_url
     @nav[@title]=nil unless ['index'].include?(action_name)
   end
 
