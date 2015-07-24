@@ -14,6 +14,7 @@ class Objects::Fider
   field :comercial_count, type: Float
   field :usage_average, type: Float
   field :substation_number, type: String
+  field :linename, type: String
   belongs_to :region
   belongs_to :substation, class_name: 'Objects::Substation'
   embeds_many :lines, class_name: 'Objects::FiderLine'
@@ -68,6 +69,7 @@ class Objects::Fider
       line.calc_length!
       line.save
       # XXX how to get fider's region?
+      fider.linename = Objects::Kml.get_property(descr, 'ელ, გადამცემი ხაზი')
       fider.set_coordinate(coords[coords.size/2])
       fider.region = line.region unless fider.region.present?
       fider.substation_number = line.substation_number unless fider.substation_number.present?
