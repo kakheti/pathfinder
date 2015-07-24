@@ -16,7 +16,8 @@ class Api::LinesController < ApiController
           },
           id: line.id.to_s,
           properties: {
-            class: line.class.name
+            class: line.class.name,
+            name: line.name
           }
         }
       end
@@ -39,7 +40,8 @@ class Api::LinesController < ApiController
           },
           id: line.id.to_s,
           properties: {
-            class: line.class.name
+            class: line.class.name,
+            name: line.fider.name
           }
         }
       end

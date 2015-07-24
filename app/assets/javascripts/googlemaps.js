@@ -143,6 +143,30 @@ var createMap = function(opts) {
     }
   };
 
+  var hoverWindow = new google.maps.InfoWindow();
+
+  var lineHoverListener = function(event) {
+    var line = event.feature;
+    var type;
+
+    if(line.A.class == "Objects::Line") {
+      type = "line";
+    } else {
+      type = "fiderline";
+    }
+
+    hoverWindow.setMap(map);
+    hoverWindow.setPosition(event.latLng);
+
+    console.log(event);
+
+    hoverWindow.setContent(line.A.name);
+  };
+
+  var lineHoverOverListener = function(event) {
+    hoverWindow.setMap(null);
+  };
+
   map.loadedMarkers = {};
 
   map.showObjects = function(objects) {
@@ -230,6 +254,9 @@ var createMap = function(opts) {
 
   map.data.setStyle(styleFunction);
   map.data.addListener('click', lineClickListener);
+  map.data.addListener('mouseover', lineHoverListener);
+  map.data.addListener('mouseout', lineHoverOverListener);
+
 
   ///////////////////////////////////////////////////////////////////////////////  
 
