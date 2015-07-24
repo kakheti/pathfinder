@@ -124,7 +124,7 @@ var createMap = function(opts) {
     if(line.A.class == "Objects::Line") {
       type = "line";
     } else {
-      type = "fider";
+      type = "fiderline";
     }
 
     var info =  new google.maps.InfoWindow({ position: event.latLng });

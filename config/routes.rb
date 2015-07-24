@@ -106,6 +106,9 @@ Pathfinder::Application.routes.draw do
     scope '/fiders', controller: 'fiders' do
       get '/:id', action: 'info'
     end
+    scope '/fiderlines', controller: 'fiderlines' do
+      get '/:id', action: 'info'
+    end
     scope '/offices', controller: 'offices' do
       get '/:id', action: 'info'
     end
