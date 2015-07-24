@@ -17,6 +17,7 @@ class Objects::Fider
   field :linename, type: String
   belongs_to :region
   belongs_to :substation, class_name: 'Objects::Substation'
+  belongs_to :line, class_name: 'Objects::Line'
   embeds_many :lines, class_name: 'Objects::FiderLine'
   has_many :tps, class_name: 'Objects::Tp'
   has_many :poles, class_name: 'Objects::Pole'
@@ -70,6 +71,7 @@ class Objects::Fider
       line.save
       # XXX how to get fider's region?
       fider.linename = Objects::Kml.get_property(descr, 'ელ, გადამცემი ხაზი')
+      fider.line = Objects::Line.by_name(fider.linename)
       fider.set_coordinate(coords[coords.size/2])
       fider.region = line.region unless fider.region.present?
       fider.substation_number = line.substation_number unless fider.substation_number.present?
