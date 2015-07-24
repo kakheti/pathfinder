@@ -1,10 +1,10 @@
-<h2 class="page-header">ბოძი #<%= @pole.name %></h2>
+<h2 class="page-header">6-10კვ საყრდენი #<%= @pole.name %></h2>
 
 <table class="table table-bordered table-hover">
   <tr>
-    <td class="text-muted" width="150">ბოძის #</td>
+    <td class="text-muted" width="150">6-10კვ საყრდენის #</td>
     <td>
-      ბოძი #<code><%= @pole.name %></code>
+      6-10კვ საყრდენის #<code><%= @pole.name %></code>
       <% if @pole.number2.present? %>
         <span class="text-muted">პირობითი ნომერი: <code><%= @pole.number2 %></code></span>
       <% end %>
@@ -88,6 +88,6 @@
 </table>
 
 <h3 class="page-header">
-  ბოძის მდებარეობა
+  6-10კვ საყრდენის მდებარეობა
 </h3>
 <%= render partial: 'data/points_map', locals: { points: [ @pole.location ] } %>

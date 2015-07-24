@@ -29,7 +29,7 @@ class Objects::PolesController < ApplicationController
   end
 
   def upload
-    @title='ფაილის ატვირთვა: 6-10კვ ბოძები'
+    @title='ფაილის ატვირთვა: 6-10კვ საყრდენები'
     if request.post?
       f=params[:data].original_filename
       case File.extname(f).downcase
@@ -42,7 +42,7 @@ class Objects::PolesController < ApplicationController
   end
 
   def show
-    @title='6-10კვ ბოძი'
+    @title='6-10კვ საყრდენი'
     @pole=Objects::Pole.find(params[:id])
   end
 

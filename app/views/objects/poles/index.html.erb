@@ -10,21 +10,21 @@
 <%= search_form @search do |s|
   s.combo_field 'region', collection: Region.all.asc('name'), label: 'მუნიციპალიტეტი', empty: '-- ყველა მუნიციპალიტეტი --'
   s.combo_field 'fider', collection: Objects::Fider.all.asc('name'), label: 'ფიდერი', empty: '-- ყველა ფიდერი --'
-  s.text_field 'name', label: 'ბოძის #'
+  s.text_field 'name', label: '6-10კვ საყრდენის #'
 end %>
 
 <% if @poles.any? %>
   <table class="table table-bordered table-hover">
     <thead>
       <tr>
-        <th>ბოძის #</th>
+        <th>6-10კვ საყრდენის #</th>
         <th width="200">ფიდერი</th>
         <th width="200">მუნიციპალიტეტი</th>
       </tr>
     </thead>
     <% @poles.each do |pole| %>
       <tr>
-        <td><a href="<%= objects_pole_url(pole) %>">ბოძი #<strong><%= pole.name %></strong></a></td>
+        <td><a href="<%= objects_pole_url(pole) %>">6-10კვ საყრდენი #<strong><%= pole.name %></strong></a></td>
         <td>
           <% if pole.fider %>
             <%= link_to pole.fider.name, objects_fider_url(pole.fider, tab: 'poles') %></td>
