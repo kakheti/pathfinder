@@ -74,6 +74,9 @@ class Objects::Fider
       fider.substation = Objects::Substation.where({ number: fider.substation_number }).first
       fider.save
     end
+
+    fider.substation = Objects::Substation.where({ number: substation_number }).first
+    fider.save
   end
 
   def to_kml(xml)
