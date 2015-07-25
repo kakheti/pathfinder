@@ -10,11 +10,12 @@ class Objects::PolesController < ApplicationController
     if @search.present?
       rel = rel.where(name: @search[:name].mongonize) if @search[:name].present?
       rel = rel.where(region_id: @search[:region]) if @search[:region].present?
+      rel = rel.where(substation_id: @search[:substation]) if @search[:substation].present?
       rel = rel.where(fider_id: @search[:fider]) if @search[:fider].present?
     end
 
     respond_to do |format|
-      format.html{ @title='6-10კვ ბოძები'; @poles=rel.paginate(per_page:10, page: params[:page]) }
+      format.html{ @title='6-10კვ საყრდენები'; @poles=rel.paginate(per_page:10, page: params[:page]) }
       format.xlsx{ @poles=rel }
       format.kmz do
         @poles=rel
