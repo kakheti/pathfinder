@@ -1,8 +1,5 @@
 <% lines = data %>
 <div>
-  <div class="pull-right compact-pagination">
-    <%= will_paginate lines %>
-  </div>
   <h3>
     ფიდერის ხაზები <code><%= lines.total_entries %></code>
   </h3>
@@ -18,6 +15,9 @@
       </tr>
     <% end %>
   </table>
+  <div class="compact-pagination">
+    <%= will_paginate lines %>
+  </div>
 <% else %>
   <%= render partial: '/data/no_data' %>
 <% end %>
