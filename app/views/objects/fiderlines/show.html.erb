@@ -41,3 +41,5 @@
     <td><%= number_with_precision @line.length %> კმ</td>
   </tr>
 </table>
+
+<%= render partial: '/data/paths_map', locals: { paths: [@line], direction: false } %>

@@ -76,6 +76,9 @@ Pathfinder::Application.routes.draw do
       match '/upload', action: 'upload', via: ['get','post'], as: 'upload_fiders'
       get '/find/:name', action: 'find', as: 'find_fider'
     end
+    scope '/fiderlines', controller: 'fiderlines' do
+      get '/show/:id', action: 'show', as: 'fiderline'
+    end
     scope '/maps', controller: 'maps' do
       get '/viewer', action: 'viewer', as: 'map_viewer'
     end
