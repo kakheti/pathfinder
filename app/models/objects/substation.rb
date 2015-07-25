@@ -21,6 +21,8 @@ class Objects::Substation
 
   search_in :name, :description, :number
 
+  def to_s; self.name end
+
   def make_summaries
     self.residential_count = self.tps.sum(:residential_count)
     self.comercial_count = self.tps.sum(:comercial_count)

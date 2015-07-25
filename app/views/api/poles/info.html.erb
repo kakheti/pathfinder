@@ -1,16 +1,56 @@
-<h3>ბოძი #<%= @pole.name %></h3>
+<h3>6-10კვ საყრდენი #<%= @pole.name %></h3>
 <table class="table">
   <tr>
-    <td><strong>მუნიციპალიტეტი</strong></td>
-    <td><%= @pole.region %></td>
+    <td><strong>ტიპი</strong></td>
+    <td><%= @pole.pole_type_s %></td>
+  </tr>
+  <tr>
+    <td><strong>სიმაღლე</strong></td>
+    <td><code><%= @pole.height %></code> მეტრი</td>
+  </tr>
+  <tr>
+    <td><strong>ვერტიკალური მდგომარეობა</strong></td>
+    <td><%= @pole.vertical_position_s %></td>
+  </tr>
+  <tr>
+    <td><strong>ცვეთის ხარისხი</strong></td>
+    <td><%= @pole.oldness %></td>
+  </tr>
+  <tr>
+    <td><strong>გამოსატანია</strong></td>
+    <td><%= @pole.should_be_out_s %></td>
+  </tr>
+  <tr>
+    <td><strong>ტრავერსის ტიპი</strong></td>
+    <td><%= @pole.traverse_type_s %></td>
+  </tr>
+  <tr>
+    <td><strong>იზოლატორის ტიპი</strong></td>
+    <td><%= @pole.isolation_type_s %></td>
+  </tr>
+  <tr>
+    <td><strong>გამთიშველი</strong></td>
+    <td><%= @pole.switch_s %></td>
+  </tr>
+  <tr>
+    <td><strong>გამთიშველის ტიპი</strong></td>
+    <td><%= @pole.switch_type_s %></td>
+  </tr>
+  <tr>
+    <td><strong>შენიშვნა</strong></td>
+    <td><%= @pole.description || '<span class="text-muted">(none)</span>'.html_safe %></td>
   </tr>
   <tr>
     <td><strong>ფიდერი</strong></td>
     <td><%= @pole.fider %></td>
   </tr>
   <tr>
-    <td><strong>სიმაღლე</strong></td>
-    <td><code><%= @pole.height %></code> მეტრი</td>
+    <td><strong>ქვესადგური</strong></td>
+    <td><%= @pole.substation %></td>
+  </tr>
+  <tr>
+    <td><strong>მუნიციპალიტეტი</strong></td>
+    <td><%= @pole.region %></td>
   </tr>
   <tr>
     <td><strong>კოორდინატები</strong></td>
@@ -18,9 +58,5 @@
       E:<code><%= @pole.easting %></code>
       N:<code><%= @pole.northing %></code>
     </td>
-  </tr>
-  <tr>
-    <td><strong>შენიშვნა</strong></td>
-    <td><%= @pole.description || '<span class="text-muted">(none)</span>'.html_safe %></td>
   </tr>
 </table>

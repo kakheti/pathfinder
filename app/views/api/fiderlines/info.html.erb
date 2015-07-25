@@ -1,0 +1,43 @@
+<h3><%= @line.fider %> → <%= @line.start %> - <%= @line.end %></h3>
+<table class="table">
+  <tr>
+    <td><strong>სადენის ტიპი</strong></td>
+    <td><%= @line.cable_type_s %></td>
+  </tr>
+  <tr>
+    <td><strong>სადენის კვეთი</strong></td>
+    <td><%= @line.cable_area_s %></td>
+  </tr>
+  <tr>
+    <td><strong>მიწისქვეშა კაბელი</strong></td>
+    <td><%= @line.underground_s %></td>
+  </tr>
+  <tr>
+    <td><strong>ქურო</strong></td>
+    <td><%= @line.quro_s %></td>
+  </tr>
+  <tr>
+    <td><strong>შენიშვნა</strong></td>
+    <td><%= @line.description || '<span class="text-muted">(none)</span>'.html_safe %></td>
+  </tr>
+  <tr>
+    <td><strong>ელ. გადამცემი ხაზი</strong></td>
+    <td><%= @line.linename %></td>
+  </tr>
+  <tr>
+    <td><strong>ფიდერი</strong></td>
+    <td><%= @line.fider %></td>
+  </tr>
+  <tr>
+    <td><strong>ქვესადგური</strong></td>
+    <td><%= @line.fider.substation.name %></td>
+  </tr>
+  <tr>
+    <td><strong>მუნიციპალიტეტი</strong></td>
+    <td><%= @line.region %></td>
+  </tr>
+  <tr>
+    <td><strong>სიგრძე</strong></td>
+    <td><%= number_with_precision @line.length %> კმ</td>
+  </tr>
+</table>

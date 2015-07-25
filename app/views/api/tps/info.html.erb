@@ -5,28 +5,39 @@
     <td><code><%= @tp.power %></code> კვტ</td>
   </tr>
   <tr>
-    <td><strong>მუნიციპალიტეტი</strong></td>
-    <td><%= @tp.region %></td>
+    <td><strong>ტიპი</strong></td>
+    <td><code><%= @tp.tp_type_s %></code> კვტ</td>
+  </tr>
+  <tr>
+    <td>ამომრთველები</td>
+    <td>
+      მაღალი ძაბვის: <code><%= @tp.count_high_voltage_s %></code>;
+      დაბალი ძაბვის: <code><%= @tp.count_low_voltage_s %></code>
+    </td>
+  </tr>
+  <tr>
+    <td><strong>სართულიანობა</strong></td>
+    <td><%= @tp.stores %></td>
   </tr>
   <tr>
     <td><strong>მფლობელი</strong></td>
     <td><%= @tp.owner %></td>
   </tr>
   <tr>
-    <td><strong>საყოფაცხოვრებო</strong></td>
-    <td><code><%= number_with_precision @tp.residential_count, separator:'.', delimiter: ',', precision: 0 %></code> აბონენტი</td>
-  </tr>
-  <tr>
-    <td><strong>არა საყოფაცხოვრებო</strong></td>
-    <td><code><%= number_with_precision @tp.comercial_count, separator:'.', delimiter: ',', precision: 0 %></code> აბონენტი</td>
-  </tr>
-  <tr>
-    <td><strong>საშ.მოხმარება</strong></td>
-    <td><code><%= number_with_precision @tp.usage_average, separator:'.', delimiter: ',', precision: 2 %></code> კვტ.საათი</td>
-  </tr>
-  <tr>
-    <td><strong>ფიდერი</strong></td>
+    <td><strong>6-10კვ ფიდერი</strong></td>
     <td><%= @tp.fider %></td>
+  </tr>
+  <tr>
+    <td><strong>ქვესადგური</strong></td>
+    <td><%= @tp.substation %></td>
+  </tr>
+  <tr>
+    <td><strong>მუნიციპალიტეტი</strong></td>
+    <td><%= @tp.region %></td>
+  </tr>
+  <tr>
+    <td><strong>მისამართი</strong></td>
+    <td><%= @tp.address %></td>
   </tr>
   <tr>
     <td><strong>კოორდინატები</strong></td>
@@ -36,8 +47,16 @@
     </td>
   </tr>
   <tr>
-    <td><strong>მისამართი</strong></td>
-    <td><%= @tp.address %></td>
+    <td><strong>საშ.მოხმარება</strong></td>
+    <td><code><%= number_with_precision @tp.usage_average, separator:'.', delimiter: ',', precision: 2 %></code> კვტ.საათი</td>
+  </tr>
+  <tr>
+    <td><strong>საყოფაცხოვრებო</strong></td>
+    <td><code><%= number_with_precision @tp.residential_count, separator:'.', delimiter: ',', precision: 0 %></code> აბონენტი</td>
+  </tr>
+  <tr>
+    <td><strong>არა საყოფაცხოვრებო</strong></td>
+    <td><code><%= number_with_precision @tp.comercial_count, separator:'.', delimiter: ',', precision: 0 %></code> აბონენტი</td>
   </tr>
   <tr>
     <td><strong>შენიშვნა</strong></td>

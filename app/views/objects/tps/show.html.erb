@@ -8,27 +8,27 @@
         <td>ჯიხური #<code><%= @tp.name %></code></td>
       </tr>
       <tr>
-        <td width="150" class="text-muted">მფლობელი</td>
-        <td><code><%= @tp.owner %></code></td>
+        <td class="text-muted">სიმძლავრე</td>
+        <td><code><%= number_with_precision @tp.power %></code> კვტ</td>
       </tr>
       <tr>
         <td class="text-muted">ტიპი</td>
         <td><code><%= @tp.tp_type_s %></code></td>
       </tr>
       <tr>
+        <td class="text-muted">ამომრთველები</td>
+        <td>
+          მაღალი ძაბვის: <code><%= @tp.count_high_voltage_s %></code>;
+          დაბალი ძაბვის: <code><%= @tp.count_low_voltage_s %></code>
+        </td>
+      </tr>
+      <tr>
         <td class="text-muted">სართულიანობა</td>
         <td><code><%= @tp.stores %></code> სართული</td>
       </tr>
       <tr>
-        <td class="text-muted">ამომრთველები</td>
-        <td>
-          მაღალი ძაბვის: <code><%= @tp.count_high_voltage %></code>;
-          დაბალი ძაბვის: <code><%= @tp.count_low_voltage %></code>
-        </td>
-      </tr>
-      <tr>
-        <td class="text-muted">სიმძლავრე</td>
-        <td><code><%= number_with_precision @tp.power %></code> კვტ</td>
+        <td width="150" class="text-muted">მფლობელი</td>
+        <td><code><%= @tp.owner %></code></td>
       </tr>
       <tr>
         <td class="text-muted">ფიდერი</td>
@@ -42,10 +42,6 @@
         </td>
       </tr>
       <tr>
-        <td class="text-muted">მუნიციპალიტეტი</td>
-        <td><%= link_to @tp.region, region_url(@tp.region, tab: 'tps') %></td>
-      </tr>
-      <tr>
         <td class="text-muted">ქვესადგური</td>
         <td>
           <% if @tp.substation.present? %>
@@ -53,6 +49,10 @@
             <%= link_to @tp.substation.name, objects_substation_url(@tp.substation, tab: 'tps') %>
           <% end %>
         </td>
+      </tr>
+      <tr>
+        <td class="text-muted">მუნიციპალიტეტი</td>
+        <td><%= link_to @tp.region, region_url(@tp.region, tab: 'tps') %></td>
       </tr>
       <tr>
         <td class="text-muted">მისამართი</td>

@@ -124,7 +124,7 @@ var createMap = function(opts) {
     if(line.A.class == "Objects::Line") {
       type = "line";
     } else {
-      type = "fider";
+      type = "fiderline";
     }
 
     var info =  new google.maps.InfoWindow({ position: event.latLng });
@@ -141,6 +141,30 @@ var createMap = function(opts) {
         info.open(map);
       });
     }
+  };
+
+  var hoverWindow = new google.maps.InfoWindow();
+
+  var lineHoverListener = function(event) {
+    var line = event.feature;
+    var type;
+
+    if(line.A.class == "Objects::Line") {
+      type = "line";
+    } else {
+      type = "fiderline";
+    }
+
+    hoverWindow.setMap(map);
+    hoverWindow.setPosition(event.latLng);
+
+    console.log(event);
+
+    hoverWindow.setContent(line.A.name);
+  };
+
+  var lineHoverOverListener = function(event) {
+    hoverWindow.setMap(null);
   };
 
   map.loadedMarkers = {};
@@ -230,6 +254,9 @@ var createMap = function(opts) {
 
   map.data.setStyle(styleFunction);
   map.data.addListener('click', lineClickListener);
+  map.data.addListener('mouseover', lineHoverListener);
+  map.data.addListener('mouseout', lineHoverOverListener);
+
 
   ///////////////////////////////////////////////////////////////////////////////  
 

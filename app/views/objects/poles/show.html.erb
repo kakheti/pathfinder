@@ -1,54 +1,22 @@
-<h2 class="page-header">ბოძი #<%= @pole.name %></h2>
+<h2 class="page-header">6-10კვ საყრდენი #<%= @pole.name %></h2>
 
 <table class="table table-bordered table-hover">
   <tr>
-    <td class="text-muted" width="150">ბოძის #</td>
+    <td class="text-muted" width="150">6-10კვ საყრდენის #</td>
     <td>
-      ბოძი #<code><%= @pole.name %></code>
+      6-10კვ საყრდენის #<code><%= @pole.name %></code>
       <% if @pole.number2.present? %>
         <span class="text-muted">პირობითი ნომერი: <code><%= @pole.number2 %></code></span>
       <% end %>
     </td>
   </tr>
   <tr>
-    <td class="text-muted">ფიდერი</td>
-    <td>
-      <% if @pole.fider %>
-        <%= link_to @pole.fider.name, objects_fider_url(@pole.fider, tab: 'poles') %>
-      <% else %>
-        <span class="text-muted">(ფიდერის გარეშე)</span>
-      <% end %>
-    </td>
-  </tr>
-  <tr>
-    <td class="text-muted">სიმაღლე</td>
-    <td><code><%= number_with_precision @pole.height, precision: 2 %></code> მეტრი</td>
-  </tr>
-  <tr>
     <td class="text-muted">ტიპი</td>
     <td><%= @pole.pole_type %></td>
   </tr>
   <tr>
-    <td class="text-muted">ტრავერსის ტიპი</td>
-    <td>
-      <%= @pole.isolation_type %>
-    </td>
-  </tr>
-  <tr>
-    <td class="text-muted">იზოლატორის ტიპი</td>
-    <td>
-      <%= @pole.traverse_type %>
-      <% if @pole.traverse_type2.present? %>
-        <%= @pole.traverse_type2 %>
-      <% end %>
-    </td>
-  </tr>
-  <tr>
-    <td class="text-muted">გამთიშველი</td>
-    <td>
-      <span class="text-muted"><%= @pole.switch_type %></span>
-      <code><%= @pole.switch %></code>
-    </td>
+    <td class="text-muted">სიმაღლე</td>
+    <td><code><%= number_with_precision @pole.height, precision: 2 %></code> მეტრი</td>
   </tr>
   <tr>
     <td class="text-muted">ვერტიკალური მდგომარეობა</td>
@@ -69,9 +37,44 @@
     </td>
   </tr>
   <tr>
-    <td class="text-muted">GPS</td>
+    <td class="text-muted">ტრავერსის ტიპი</td>
     <td>
-      <%= @pole.gps %>
+      <%= @pole.isolation_type %>
+    </td>
+  </tr>
+  <tr>
+    <td class="text-muted">იზოლატორის ტიპი</td>
+    <td>
+      <%= @pole.traverse_type %>
+      <% if @pole.traverse_type2.present? %>
+        <%= @pole.traverse_type2 %>
+      <% end %>
+    </td>
+  </tr>
+  <tr>
+    <td class="text-muted">გამთიშველი</td>
+    <td>
+      <%= @pole.switch_s %>
+    </td>
+  </tr>
+  <tr>
+    <td class="text-muted">გამთიშველის ტიპი</td>
+    <td>
+      <%= @pole.switch_type_s %>
+    </td>
+  </tr>
+  <tr>
+    <td class="text-muted">შენიშვნა</td>
+    <td><%= @pole.description%></td>
+  </tr>
+  <tr>
+    <td class="text-muted">ფიდერი</td>
+    <td>
+      <% if @pole.fider %>
+        <%= link_to @pole.fider.name, objects_fider_url(@pole.fider, tab: 'poles') %>
+      <% else %>
+        <span class="text-muted">(ფიდერის გარეშე)</span>
+      <% end %>
     </td>
   </tr>
   <tr>
@@ -81,13 +84,9 @@
       N: <code><%= @pole.northing %></code>
     </td>
   </tr>
-  <tr>
-    <td class="text-muted">შენიშვნა</td>
-    <td><%= @pole.description%></td>
-  </tr>
 </table>
 
 <h3 class="page-header">
-  ბოძის მდებარეობა
+  6-10კვ საყრდენის მდებარეობა
 </h3>
 <%= render partial: 'data/points_map', locals: { points: [ @pole.location ] } %>

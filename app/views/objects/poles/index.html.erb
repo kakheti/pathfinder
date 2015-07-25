@@ -9,28 +9,38 @@
 
 <%= search_form @search do |s|
   s.combo_field 'region', collection: Region.all.asc('name'), label: 'მუნიციპალიტეტი', empty: '-- ყველა მუნიციპალიტეტი --'
-  s.combo_field 'fider', collection: Objects::Fider.all.asc('name'), label: 'ფიდერი', empty: '-- ყველა ფიდერი --'
-  s.text_field 'name', label: 'ბოძის #'
+  s.combo_field 'substation', collection: Objects::Substation.all.asc('name'), label: 'ქვესადგური', empty: '-- ყველა ქვესადგური --'
+  s.combo_field 'fider', collection: Objects::Fider.all.asc('name'), label: '6-10კვ ფიდერი', empty: '-- ყველა ფიდერი --'
+  s.text_field 'name', label: '6-10კვ საყრდენის #'
 end %>
 
 <% if @poles.any? %>
   <table class="table table-bordered table-hover">
     <thead>
       <tr>
-        <th>ბოძის #</th>
-        <th width="200">ფიდერი</th>
+        <th>6-10კვ საყრდენის #</th>
+        <th width="200">6-10კვ ფიდერი</th>
+        <th width="200">ქვესადგური</th>
         <th width="200">მუნიციპალიტეტი</th>
       </tr>
     </thead>
     <% @poles.each do |pole| %>
       <tr>
-        <td><a href="<%= objects_pole_url(pole) %>">ბოძი #<strong><%= pole.name %></strong></a></td>
+        <td><a href="<%= objects_pole_url(pole) %>">6-10კვ საყრდენი #<strong><%= pole.name %></strong></a></td>
         <td>
           <% if pole.fider %>
-            <%= link_to pole.fider.name, objects_fider_url(pole.fider, tab: 'poles') %></td>
+            <%= link_to pole.fider.name, objects_fider_url(pole.fider, tab: 'poles') %>
           <% else %>
             <span class="text-muted">(ფიდერის გარეშე)</span>
           <% end %>
+        </td>
+        <td>
+          <% if pole.substation %>
+            <%= link_to pole.substation.name, objects_substation_url(pole.substation, tab: 'poles') %>
+          <% else %>
+            <span class="text-muted">(ქვესადგურის გარეშე)</span>
+          <% end %>
+        </td>
         <td>
           <% if pole.region %>
             <%= link_to pole.region.name, region_url(pole.region, tab: 'poles') %>

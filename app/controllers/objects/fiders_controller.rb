@@ -9,7 +9,9 @@ class Objects::FidersController < ApplicationController
     @search = search_params
     if @search.present?
       rel = rel.where(name: @search[:name].mongonize) if @search[:name].present?
+      rel = rel.where(line_id: @search[:line]) if @search[:line].present?
       rel = rel.where(region_id: @search[:region]) if @search[:region].present?
+      rel = rel.where(substation_id: @search[:substation]) if @search[:substation].present?
     end
     respond_to do |format|
       format.html{ @title = '6-10კვ ფიდერები'; @fiders = rel.paginate(per_page:10, page: params[:page]) }

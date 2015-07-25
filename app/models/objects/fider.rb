@@ -14,8 +14,10 @@ class Objects::Fider
   field :comercial_count, type: Float
   field :usage_average, type: Float
   field :substation_number, type: String
+  field :linename, type: String
   belongs_to :region
   belongs_to :substation, class_name: 'Objects::Substation'
+  belongs_to :line, class_name: 'Objects::Line'
   embeds_many :lines, class_name: 'Objects::FiderLine'
   has_many :tps, class_name: 'Objects::Tp'
   has_many :poles, class_name: 'Objects::Pole'
@@ -68,9 +70,12 @@ class Objects::Fider
       line.calc_length!
       line.save
       # XXX how to get fider's region?
+      fider.linename = Objects::Kml.get_property(descr, 'ელ, გადამცემი ხაზი')
+      fider.line = Objects::Line.by_name(fider.linename)
       fider.set_coordinate(coords[coords.size/2])
       fider.region = line.region unless fider.region.present?
       fider.substation_number = line.substation_number unless fider.substation_number.present?
+      fider.substation = Objects::Substation.where({ number: fider.substation_number }).first
       fider.save
     end
 
@@ -121,6 +126,43 @@ class Objects::FiderLine
   belongs_to :region
   embedded_in :fider,  class_name: 'Objects::Fider'
   embeds_many :points, class_name: 'Objects::FiderPoint'
+
+  def cable_type_s
+    {
+      1 => 'ალუმინი',
+      2 => 'ალუმინ-ფოლადი',
+      3 => 'რკინა',
+      4 => 'არასტანდარტული რკინა',
+      5 => 'ტროსი',
+    }[cable_type]
+  end
+
+  def cable_area_s
+    {
+      1 => '16',
+      2 => '25',
+      3 => '35',
+      4 => '50',
+      5 => '70',
+      6 => '95',
+      7 => '120',
+      8 => '150',
+    }[cable_area]
+  end
+
+  def underground_s
+    {
+      1 => 'ზეთოვანი',
+      2 => 'მშრალი',
+    }[underground]
+  end
+
+  def quro_s
+    {
+      1 => 'კი',
+      2 => 'არა'
+    }[quro]
+  end
   
   def set_points(points)
     self.points.destroy_all

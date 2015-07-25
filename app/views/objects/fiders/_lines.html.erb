@@ -1,8 +1,5 @@
 <% lines = data %>
 <div>
-  <div class="pull-right compact-pagination">
-    <%= will_paginate lines %>
-  </div>
   <h3>
     ფიდერის ხაზები <code><%= lines.total_entries %></code>
   </h3>
@@ -12,12 +9,15 @@
     <% lines.each do |line| %>
       <tr>
         <td>
-          <%= link_to line.fider.name, objects_fider_url(line.fider) %> &rarr;
+          <%= link_to line.fider.name, objects_fiderline_url(line) %> &rarr;
           <code><%= line.start %></code>-<code><%= line.end %></code>
         </td>
       </tr>
     <% end %>
   </table>
+  <div class="compact-pagination">
+    <%= will_paginate lines %>
+  </div>
 <% else %>
   <%= render partial: '/data/no_data' %>
 <% end %>

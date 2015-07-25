@@ -3,7 +3,7 @@
   <div class="pull-right compact-pagination">
     <%= will_paginate tps %>
   </div>
-  <h2>სატრ. ჯიხურები <code><%= tps.total_entries %></code></h2>
+  <h2>6-10კვ სატრ. ჯიხურები <code><%= tps.total_entries %></code></h2>
 </div>
 
 <% if tps.any? %>
@@ -14,7 +14,7 @@
           <img src="<%= tp.picture %>" style="max-height: 50px; max-width: 50px;" />
         </td>
         <td>
-          <a href="<%= objects_tp_url(tp) %>">ჯიხური #<strong><%= tp.name %></strong></a>
+          <a href="<%= objects_tp_url(tp) %>">6-10კვ სატრ. ჯიხური #<strong><%= tp.name %></strong></a>
           <% if tp.owner.present? %><code><%= tp.owner %></code><% end %>
           <span class="text-muted"><%= tp.address %></span>
         </td>

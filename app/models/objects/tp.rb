@@ -88,6 +88,22 @@ class Objects::Tp
     }[tp_type]
   end
 
+  def count_high_voltage_s
+    {
+      '1' => 'ვმგ',
+      '2' => 'ვმპ',
+      '3' => 'მექანიკური'
+    }[count_high_voltage]
+  end
+
+  def count_low_voltage_s
+    {
+      '1' => 'ვმგ',
+      '2' => 'ვმპ',
+      '3' => 'მექანიკური'
+    }[count_low_voltage]
+  end
+
   def to_kml(xml)
     # descr = "<p><strong>#{self.region}</strong>, #{self.address}</p><p>#{self.description}</p>"
     # extra = extra_data( 'დასახელება' => name,
