@@ -126,6 +126,43 @@ class Objects::FiderLine
   belongs_to :region
   embedded_in :fider,  class_name: 'Objects::Fider'
   embeds_many :points, class_name: 'Objects::FiderPoint'
+
+  def cable_type_s
+    {
+      1: 'ალუმინი',
+      2: 'ალუმინ-ფოლადი',
+      3: 'რკინა',
+      4: 'არასტანდარტული რკინა',
+      5: 'ტროსი',
+    }[cable_type]
+  end
+
+  def cable_area_s
+    {
+      1: '16',
+      2: '25',
+      3: '35',
+      4: '50',
+      5: '70',
+      6: '95',
+      7: '120',
+      8: '150',
+    }[cable_area]
+  end
+
+  def underground_s
+    {
+      1: 'ზეთოვანი',
+      2: 'მშრალი',
+    }[underground]
+  end
+
+  def quro_s
+    {
+      1: 'კი',
+      2: 'არა'
+    }[quro]
+  end
   
   def set_points(points)
     self.points.destroy_all
