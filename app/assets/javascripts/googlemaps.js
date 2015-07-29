@@ -107,6 +107,8 @@ var createMap = function(opts) {
     }
   };
 
+  var lineInfo =  new google.maps.InfoWindow();
+
   var lineClickListener = function(event) {
     var contentToString = function(content) {
       if (typeof content === 'string') {
@@ -126,8 +128,6 @@ var createMap = function(opts) {
     } else {
       type = "fiderline";
     }
-
-    var info =  new google.maps.InfoWindow({ position: event.latLng });
 
     console.log(event);
 
@@ -238,13 +238,13 @@ var createMap = function(opts) {
   };
 
   map.loadLines = function() {
-    map.data.loadGeoJson('/api/lines');
+    map.data.loadGeoJson(api.getUrl('/api/lines'));
   };
 
   map.loadFiders = function() {
     var params = api.getParams();
     if(map.zoom >= objectTypes.fider.zoom)
-      map.data.loadGeoJson('/api/lines/fiders?'+params);
+      map.data.loadGeoJson(api.getUrl('/api/lines/fiders?'+params));
   }
 
   google.maps.event.addListener(map, 'zoom_changed', markerZoomer);
