@@ -31,7 +31,7 @@ API.loadObjectInfo = function(id, type) {
   logger('იტვირთება...');
   return new Promise(function(resolve, reject) {
     var tp = _.template('/api/<%=type%>s/<%=id%>');
-    $.get(API.getUrl(tp({ type: type, id:id })).done(function(data){ logger(); resolve(data); }).fail(function(err){ logger(); reject(err); });
+    $.get(API.getUrl(tp({ type: type, id:id }))).done(function(data){ logger(); resolve(data); }).fail(function(err){ logger(); reject(err); });
   });
 };
 
