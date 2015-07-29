@@ -18,7 +18,7 @@ var styleFunction = function(f) {
   if (clazz === 'Objects::FiderLine') {
     return {
       strokeColor: '#FFA504',
-      strokeWeight: 3,
+      strokeWeight: 4,
       strokeOpacity: 0.5
     };
   } else if (clazz === 'Objects::Line') {
@@ -111,6 +111,8 @@ var createMap = function(opts) {
 
   var lineClickListener = function(event) {
     var contentToString = function(content) {
+      if(!content) return "";
+
       if (typeof content === 'string') {
         return content
       } else if (typeof content.error === 'string') {
@@ -123,48 +125,55 @@ var createMap = function(opts) {
     var line = event.feature;
     var type;
 
-    if(line.A.class == "Objects::Line") {
+    if(line.getProperty('class') == "Objects::Line") {
       type = "line";
     } else {
       type = "fiderline";
     }
 
-    console.log(event);
+    window.lll = line;
+    lineInfo.setPosition(line.getProperty('latLng'));
 
     if (line.content) {
-      info.setContent(contentToString(line.content));
-      info.open(map);
+      lineInfo.setContent(contentToString(line.content));
+      lineInfo.open(map);
     } else {
-      api.loadObjectInfo(line.F, type).then(function(content) {
-        line.content = content;
-        info.setContent(contentToString(line.content));
-        info.open(map);
+      api.loadObjectInfo(line.getId(), type).then(function(content) {
+        lineInfo.setContent(contentToString(content));
+        lineInfo.open(map);
       });
     }
   };
 
-  var hoverWindow = new google.maps.InfoWindow();
+  var hoverWindow = $("<div class='hover-window'>");
+  $('body').append(hoverWindow);
 
   var lineHoverListener = function(event) {
     var line = event.feature;
     var type;
 
-    if(line.A.class == "Objects::Line") {
+    console.log(arguments);
+
+    if(line.getProperty('class') == "Objects::Line") {
       type = "line";
     } else {
       type = "fiderline";
     }
 
-    hoverWindow.setMap(map);
-    hoverWindow.setPosition(event.latLng);
+    hoverWindow.css({
+      top: event.ub.clientY + 10,
+      left: event.ub.clientX + 10
+    });
 
-    console.log(event);
+    hoverWindow.text(line.getProperty('name'));
 
-    hoverWindow.setContent(line.A.name);
+    window.e = event;
+
+    hoverWindow.addClass("show");
   };
 
   var lineHoverOverListener = function(event) {
-    hoverWindow.setMap(null);
+    hoverWindow.removeClass("show");
   };
 
   map.loadedMarkers = {};
