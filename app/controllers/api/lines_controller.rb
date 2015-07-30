@@ -17,7 +17,8 @@ class Api::LinesController < ApiController
           id: line.id.to_s,
           properties: {
             class: line.class.name,
-            name: line.name
+            name: line.name,
+            latLng: { lat: line.lat, lng: line.lng }
           }
         }
       end
@@ -41,7 +42,8 @@ class Api::LinesController < ApiController
           id: line.id.to_s,
           properties: {
             class: line.class.name,
-            name: line.fider.name
+            name: line.fider.name,
+            latLng: { lat: line.lat, lng: line.lng }
           }
         }
       end

@@ -1,6 +1,7 @@
-var _ = require('lodash');
-var googlemaps = require('./googlemaps');
-var objectTypes = require('./object-types');
+var _ = require('lodash'),
+googlemaps = require('./googlemaps'),
+objectTypes = require('./object-types'),
+api = require('./api');
 
 var data = {};
 
@@ -37,7 +38,7 @@ var view = {
 
       $("#search-form .btn").prop("disabled", "disabled").addClass("loading");
 
-      $.get("/api/search", filters).done(function(data){
+      $.get(api.getUrl("/api/search"), filters).done(function(data){
         $("#search-form .btn").prop("disabled", false).removeClass("loading");
         view.displayMarkers(q, data);
       }).error(function(){

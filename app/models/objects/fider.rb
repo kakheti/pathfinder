@@ -67,6 +67,7 @@ class Objects::Fider
         point.set_coordinate(coord)
         point.save
       end
+      line.set_coordinate(coords[coords.size/2])
       line.calc_length!
       line.save
       # XXX how to get fider's region?
@@ -78,9 +79,6 @@ class Objects::Fider
       fider.substation = Objects::Substation.where({ number: fider.substation_number }).first
       fider.save
     end
-
-    fider.substation = Objects::Substation.where({ number: substation_number }).first
-    fider.save
   end
 
   def to_kml(xml)
