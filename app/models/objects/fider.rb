@@ -45,7 +45,7 @@ class Objects::Fider
     placemarks.each do |placemark|
       id = placemark.attributes['id']
       descr=placemark.find('./kml:description',kmlns).first.content
-      name = Objects::Kml.get_property(descr, 'ფიდერის დასახელება')
+      name = Objects::Kml.get_property(descr, 'ფიდერი')
       fider = Objects::Fider.by_name(name.to_ka(:all)) if name
       # add line
       line = Objects::FiderLine.create(fider: fider)
