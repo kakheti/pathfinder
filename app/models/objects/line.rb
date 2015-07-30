@@ -44,10 +44,10 @@ class Objects::Line
       coords = placemark.find('./kml:MultiGeometry/kml:LineString/kml:coordinates',kmlns).first.content
       # description content
       descr = placemark.find('./kml:description', kmlns).first.content
-      regname = Objects::Kml.get_property(descr, 'მუნიციპალიტეტი')
+      regname = Objects::Kml.get_property(descr, 'რეგიონი')
       direction = Objects::Kml.get_property(descr, 'მიმართულება')
       # end of description section
-      if regname == 'კახეთი'
+      # if regname == 'კახეთი'
         region = Region.get_by_name(regname)
         line = Objects::Line.where(kmlid: id).first || Objects::Line.create(kmlid: id)
         line.direction = direction
@@ -63,9 +63,10 @@ class Objects::Line
         end
         line.set_coordinate(coords[coords.size/2])
         line.calc_length!
+        line.save
         # rejoin relations
         Objects::Tower.rejoin_line(line)
-      end
+      #end
     end
   end
 end

@@ -144,7 +144,7 @@ class Objects::Pole
     # extra = extra_data( 'დასახელება' => name,
     #   'შენიშვნა' => description,
     #   'მისამართი' => address,
-    #   'რაიონი' => region.to_s
+    #   'რეგიონი' => region.to_s
     # )
     # xml.Placemark do
     #   xml.name self.name

@@ -64,7 +64,7 @@ class Objects::Substation
     descr = "<p><strong>#{self.name}</strong></p><p>#{self.description}</p>"
     extra = extra_data('დასახელება' => name,
       'შენიშვნა' => description,
-      'მუნიციპალიტეტი' => region.to_s
+      'რეგიონი' => region.to_s
     )
     xml.Placemark do
       xml.name self.name
