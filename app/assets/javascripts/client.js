@@ -30,6 +30,13 @@ for(type in objectTypes) {
   }));
 }
 
+api.loadRegions().then(function (regions) {
+  var option_tp = _.template("<option value='<%=id%>'><%=name%></option>");
+  regions.forEach(function (region) {
+    $("#search-region").append(option_tp(region));
+  });
+});
+
 logger('იტვირთება...', 6000);
 
 googlemaps.start().then(googlemaps.create).then(function(map) {

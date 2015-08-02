@@ -41,9 +41,6 @@
     <div class="regions">
       <select class="browser-default" id="search-region">
         <option value="" selected>მუნიციპალიტეტი</option>
-        <% @regions.each do |region| %>
-        <option value="<%= region.id.to_s %>"><%= region.name.to_s %></option>
-        <% end %>
       </select>
     </div>
 
