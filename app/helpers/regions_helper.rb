@@ -94,8 +94,8 @@ module RegionsHelper
           end
         end
       end
-      v.tab title: "ფიდერები &mdash; <strong>#{region.fiders.count}</strong>".html_safe, icon: '/icons/substation.png' do |v|
-        v.table_field 'fiders_limited', table: {title:'ფიდერები', icon: '/icons/substation.png'} do |field|
+      v.tab title: "6-10კვ ფიდერები &mdash; <strong>#{region.fiders.count}</strong>".html_safe, icon: '/icons/substation.png' do |v|
+        v.table_field 'fiders_limited', table: {title:'6-10კვ ფიდერები', icon: '/icons/substation.png'} do |field|
           field.table do |t|
             t.text_field 'kmlid', tag: 'code'
             t.text_field 'name', url: ->(x){objects_fider_url(id:x.id)}

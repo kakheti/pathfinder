@@ -38,7 +38,7 @@ module DataHelper
     when 'offices' then 'ოფისები'
     when 'substations' then 'ქვესადგურები'
     when 'towers' then 'ანძები'
-    when 'lines' then  (main_object.is_a?(Objects::Fider) ? 'ფიდერის ხაზები' : 'გადამცემი ხაზები')
+    when 'lines' then  (main_object.is_a?(Objects::Fider) ? '6-10კვ ფიდერის ხაზები' : 'გადამცემი ხაზები')
     when 'tps' then '6-10კვ სატრ.ჯიხურები'
     when 'poles' then '6-10კვ საყრდენები'
     when 'fiders' then '6-10კვ ფიდერები'

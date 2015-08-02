@@ -42,7 +42,7 @@ class Objects::FidersController < ApplicationController
   end
 
   def show
-    @title='ფიდერის თვისებები'
+    @title='6-10კვ ფიდერის თვისებები'
     @fider=Objects::Fider.find(params[:id])
   end
 
@@ -52,7 +52,7 @@ class Objects::FidersController < ApplicationController
     if @fider
       render action: 'show'
     else
-      render text: "ფიდერი \"#{params[:name]}\" ვერ მოიძებნა"
+      render text: "6-10კვ ფიდერი \"#{params[:name]}\" ვერ მოიძებნა"
     end
   end
 
