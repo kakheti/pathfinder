@@ -42,7 +42,7 @@ class Objects::LinesController < ApplicationController
   end
 
   def show
-    @title='ხაზის თვისებები'
+    @title='გადამცემი ხაზის თვისებები'
     @line=Objects::Line.find(params[:id])
   end
 
