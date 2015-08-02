@@ -60,7 +60,9 @@ class Api::SearchController < ApiController
       line = { name: object.line.name, id: object.line_id.to_s } if object.respond_to?(:line) && !object.line.nil?
       fider = { name: object.fider.name, id: object.fider_id.to_s } if object.respond_to?(:fider) && !object.fider.nil?
 
-      { 
+      object.name = "\##{object.number} #{object.name}" if type == "substation"
+
+      {
         id: object.id.to_s,
         lat: object.lat,
         lng: object.lng,

@@ -12,7 +12,7 @@
   </tr>
   <tr>
     <td class="text-muted">ტიპი</td>
-    <td><%= @pole.pole_type %></td>
+    <td><%= @pole.pole_type_s %></td>
   </tr>
   <tr>
     <td class="text-muted">სიმაღლე</td>
@@ -21,33 +21,33 @@
   <tr>
     <td class="text-muted">ვერტიკალური მდგომარეობა</td>
     <td>
-      <%= @pole.vertical_position %>
+      <%= @pole.vertical_position_s %>
     </td>
   </tr>
   <tr>
     <td class="text-muted">ცვეთის ხარისხი</td>
     <td>
-      <%= @pole.oldness %>
+      <%= @pole.oldness_s %>
     </td>
   </tr>
   <tr>
     <td class="text-muted">გამოსატანია</td>
     <td>
-      <%= @pole.should_be_out %>
+      <%= @pole.should_be_out_s %>
     </td>
   </tr>
   <tr>
     <td class="text-muted">ტრავერსის ტიპი</td>
     <td>
-      <%= @pole.isolation_type %>
+      <%= @pole.traverse_type_s %>
     </td>
   </tr>
   <tr>
     <td class="text-muted">იზოლატორის ტიპი</td>
     <td>
-      <%= @pole.traverse_type %>
-      <% if @pole.traverse_type2.present? %>
-        <%= @pole.traverse_type2 %>
+      <%= @pole.isolation_type %>
+      <% if @pole.isolation_type2.present? %>
+        <%= @pole.isolation_type2 %>
       <% end %>
     </td>
   </tr>
