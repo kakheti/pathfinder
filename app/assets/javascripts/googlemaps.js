@@ -1,8 +1,8 @@
-var Promise = require('bluebird');
-var _ = require('lodash');
-var clusterer = require('./lib/markerclusterer');
-var api = require('./api');
-var objectTypes = require('./object-types');
+var Promise = require('bluebird'),
+_ = require('lodash'),
+clusterer = require('./lib/markerclusterer'),
+api = require('./api'),
+objectTypes = require('./object-types');
 
 var API_URL = 'https://maps.googleapis.com/maps/api/js';
 var DEFAULT_ZOOM = 9;
@@ -198,7 +198,7 @@ var createMap = function(opts) {
       markerClusterers[obj.type].addMarker(marker);
       markers.push(marker);
     });
-    
+
     markerZoomer();
 
     map.objects = map.objects.concat(markers);
@@ -247,14 +247,25 @@ var createMap = function(opts) {
   };
 
   map.loadLines = function() {
-    map.data.loadGeoJson(api.getUrl('/api/lines'));
+    return new Promise(function(resolve, reject){
+      if(map.showLines) {
+        map.data.loadGeoJson(api.getUrl('/api/lines'), resolve);
+      } else {
+        resolve();
+      }
+    });
   };
 
   map.loadFiders = function() {
-    var params = api.getParams();
-    if(map.zoom >= objectTypes.fider.zoom)
-      map.data.loadGeoJson(api.getUrl('/api/lines/fiders?'+params));
-  }
+    return new Promise(function(resolve, reject){
+      var params = api.getParams();
+      if(map.showFiders && map.zoom >= objectTypes.fider.zoom) {
+        map.data.loadGeoJson(api.getUrl('/api/lines/fiders?'+params), resolve);
+      } else {
+        resolve();
+      }
+    });
+  };
 
   google.maps.event.addListener(map, 'zoom_changed', markerZoomer);
   google.maps.event.addListener(map, 'click', function(){
@@ -267,7 +278,7 @@ var createMap = function(opts) {
   map.data.addListener('mouseout', lineHoverOverListener);
 
 
-  ///////////////////////////////////////////////////////////////////////////////  
+  ///////////////////////////////////////////////////////////////////////////////
 
   return map;
 };

@@ -93,6 +93,14 @@ class Objects::Pole
     }[vertical_position]
   end
 
+  def oldness_s
+    {
+      '1' => '30%',
+      '2' => '60%',
+      '3' => '90%'
+    }[oldness]
+  end
+
   def should_be_out_s
     {
       '1' => 'კი',

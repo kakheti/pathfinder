@@ -1,8 +1,9 @@
-var googlemaps = require('./googlemaps');
-var api = require('./api');
-var search = require('./search');
-var _ = require('lodash');
-var objectTypes = require('./object-types');
+var googlemaps = require('./googlemaps'),
+api = require('./api'),
+search = require('./search'),
+_ = require('lodash'),
+Promise = require('bluebird'),
+objectTypes = require('./object-types');
 
 var logger = function(message, duration) {
   if(!message) return;
@@ -11,24 +12,69 @@ var logger = function(message, duration) {
 };
 
 var loadAll = function() {
+  var promises = [];
   for(type in objectTypes) {
     var objType = objectTypes[type];
     if(objType.marker !== false && map.zoom >= objType.zoom) {
-      api.loadObjects(type).then(map.showObjects);
+      promises.push(api.loadObjects(type).then(map.showObjects));
     }
   }
+  return promises;
 }
 
+var typeOrder = ['office', 'substation', 'line', 'tower', 'fider', 'pole', 'tp'];
 var tp = _.template(
   '<div><input type="checkbox" checked value="<%= type %>" id="checkbox-<%= type %>">'
   +'<label for="checkbox-<%= type %>"><%= name %></label></div>');
 var container = $("#search-type");
-for(type in objectTypes) {
+typeOrder.forEach(function (type) {
   container.append(tp({
     type: type,
     name: objectTypes[type].plural
   }));
-}
+});
+
+api.loadRegions().then(function (regions) {
+  var option_tp = _.template("<option value='<%=id%>'><%=name%></option>");
+  regions.forEach(function (region) {
+    $("#search-region").append(option_tp(region));
+  });
+});
+
+var adjustVisibility = function () {
+  var types = {};
+
+  $("#search-type input[type=checkbox]").each(function(){
+    var enabled = $(this).is(":checked");
+    types[$(this).val()] = enabled;
+  });
+  for(type in types) {
+    var enabled = types[type];
+
+    map.setLayerVisible(type, enabled);
+
+    switch(type) {
+      case "line":
+        if(enabled) {
+          map.loadLines();
+          map.showLines = true;
+        } else {
+          map.clearLines();
+          map.showLines = false;
+        }
+        break;
+      case "fider":
+        if(enabled) {
+          map.loadFiders();
+          map.showFiders = true;
+        } else {
+          map.clearFiders();
+          map.showFiders = false;
+        }
+        break;
+    }
+  }
+};
 
 logger('იტვირთება...', 6000);
 
@@ -40,50 +86,19 @@ googlemaps.start().then(googlemaps.create).then(function(map) {
   search.initialize(map);
 
   google.maps.event.addListener(map, 'tilesloaded', function() {
-    loadAll();
-    if(map.showLines !== false) map.loadLines();
-    if(map.showFiders !== false) map.loadFiders();
+    Promise.all([
+      loadAll(),
+      map.loadLines(),
+      map.loadFiders()
+    ]).then(adjustVisibility);
   });
 
-  $("#search-type input").on('change', function(){
-    var types = {};
-
-    $("#search-type input[type=checkbox]").each(function(){
-      var enabled = $(this).is(":checked");
-      types[$(this).val()] = enabled;
-    });
-    for(type in types) {
-      var enabled = types[type];
-
-      map.setLayerVisible(type, enabled);
-
-      switch(type) {
-        case "line":
-          if(enabled) {
-            map.loadLines();
-            map.showLines = true;
-          } else {
-            map.clearLines();
-            map.showLines = false;
-          }
-          break;
-        case "fider":
-          if(enabled) {
-            map.loadFiders();
-            map.showFiders = true;
-          } else {
-            map.clearFiders();
-            map.showFiders = false;
-          }
-          break;
-      }
-    }
-  });
+  $("#search-type input").on('change', adjustVisibility);
 
   $("#search-region").on('change', function(){
     map.clearAll();
     map.clearFiders();
     loadAll();
-    if(map.showFiders !== false) map.loadFiders();
+    loadFiders();
   });
 });

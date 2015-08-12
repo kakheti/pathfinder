@@ -1,11 +1,11 @@
-<h2 class="page-header">ჯიხური #<%= @tp.name %></h2>
+<h2 class="page-header">6-10კვ სატრ. ჯიხური #<%= @tp.name %></h2>
 
 <div class="row">
   <div class="col-sm-8">
     <table class="table table-bordered table-hover">
       <tr>
         <td width="150" class="text-muted">ჯიხურის #</td>
-        <td>ჯიხური #<code><%= @tp.name %></code></td>
+        <td>6-10კვ სატრ. ჯიხური #<code><%= @tp.name %></code></td>
       </tr>
       <tr>
         <td class="text-muted">სიმძლავრე</td>
@@ -31,7 +31,7 @@
         <td><code><%= @tp.owner %></code></td>
       </tr>
       <tr>
-        <td class="text-muted">ფიდერი</td>
+        <td class="text-muted">6-10კვ ფიდერი</td>
         <td>
           <% if @tp.fider %>
             <%= link_to @tp.fider, objects_fider_url(@tp.fider, tab: 'tps') %>
@@ -105,6 +105,6 @@
 </script>
 
 <h3 class="page-header">
-  ჯიხურის მდებარეობა
+  6-10კვ სატრ. ჯიხურის მდებარეობა
 </h3>
 <%= render partial: 'data/points_map', locals: { points: [ @tp.location ] } %>

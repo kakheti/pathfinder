@@ -7,19 +7,19 @@ var objectTypes = {
   },
   tp: {
     zoom: 18,
-    name: 'ჯიხური',
+    name: '6-10კვ სატრ. ჯიხური',
     plural: '6-10კვ სატრ. ჯიხურები',
     cluster: 30
   },
   pole: {
     zoom: 18,
-    name: 'საყრდენი',
+    name: '6-10კვ საყრდენი',
     plural: '6-10კვ საყრდენები',
     cluster: 50
   },
   fider: {
     zoom: 16,
-    name: 'ფიდერი',
+    name: '6-10კვ ფიდერი',
     plural: '6-10კვ ფიდერები',
     marker: false,
     cluster: 100
@@ -39,7 +39,7 @@ var objectTypes = {
   line: {
     zoom: 0,
     marker: false,
-    name: 'ხაზი',
+    name: 'გადამცემი ხაზი',
     plural: 'გადამცემი ხაზები',
     cluster: 100
   }

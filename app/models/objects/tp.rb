@@ -39,6 +39,10 @@ class Objects::Tp
 
   def picture; "/tps/#{self.picture_id}.jpg" end
 
+  def self.by_name(name)
+    Objects::Tp.where(name: name).first
+  end
+
   def self.from_kml(xml)
     parser=XML::Parser.string xml
     doc=parser.parse ; root=doc.child

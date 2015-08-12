@@ -7,6 +7,8 @@
 
 <%= search_form @search do |s|
   s.combo_field 'region', collection: Region.all.asc('name'), label: 'მუნიციპალიტეტი', empty: '-- ყველა მუნიციპალიტეტი --'
+  s.combo_field 'substation', collection: Objects::Substation.all.asc('name'), label: 'ქვესადგუქი', empty: '-- ყველა ქვესადგური --'
+  s.text_field 'fider', label: '6-10კვ ფიდერი'
   s.text_field 'name', label: 'ჯიხურის #'
   s.text_field 'owner', label: 'მფლობელი'
 end %>
@@ -16,7 +18,7 @@ end %>
     <thead>
       <tr>
         <th width="75" class="text-center"><i class="fa fa-image"></i></th>
-        <th>სატრანსფორმატორო ჯიხური</th>
+        <th>6-10კვ სატრ. ჯიხური</th>
         <th width="200">მუნიციპალიტეტი</th>
       </tr>
     </thead>
@@ -26,7 +28,7 @@ end %>
           <img src="<%= tp.picture %>" style="max-height: 50px; max-width: 50px;" />
         </td>
         <td>
-          <a href="<%= objects_tp_url(tp) %>">ჯიხური #<strong><%= tp.name %></strong></a>
+          <a href="<%= objects_tp_url(tp) %>">6-10კვ სატრ. ჯიხური #<strong><%= tp.name %></strong></a>
           <% if tp.owner.present? %><code><%= tp.owner %></code><% end %>
           <span class="text-muted"><%= tp.address %></span>
         </td>

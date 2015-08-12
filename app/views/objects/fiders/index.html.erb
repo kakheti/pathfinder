@@ -8,7 +8,7 @@
 <%= search_form @search do |s|
   s.combo_field 'region', collection: Region.all.asc('name'), label: 'მუნიციპალიტეტი', empty: '-- ყველა მუნიციპალიტეტი --'
   s.combo_field 'substation', collection: Objects::Substation.all.asc('name'), label: 'ქ/ს', empty: '-- ყველა ქვესადგური --'
-  s.combo_field 'line', collection: Objects::Line.all.asc('name'), label: 'ელ. გადამცემი ხაზი', empty: '-- ყველა ელ. გადამცემი ხაზი --'
+  s.text_field 'line', label: 'ელ. გადამცემი ხაზი'
   s.text_field 'name', label: 'დასახელება'
 end %>
 
@@ -16,7 +16,7 @@ end %>
   <table class="table table-bordered table-hover">
     <thead>
       <tr>
-        <th>ფიდერი</th>
+        <th>6-10კვ ფიდერი</th>
         <th width="200">მუნიციპალიტეტი</th>
         <th width="200">ქვესადგური</th>
       </tr>

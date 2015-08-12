@@ -115,6 +115,9 @@ Pathfinder::Application.routes.draw do
     scope '/offices', controller: 'offices' do
       get '/:id', action: 'info'
     end
+    scope '/regions', controller: 'regions' do
+      get '/', action: 'index'
+    end
     scope '/search', controller: 'search' do
       get '/', action: 'index'
     end
