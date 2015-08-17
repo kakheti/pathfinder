@@ -53,11 +53,8 @@ class Objects::Fider04
       line.end = Objects::Kml.get_property(descr, 'ბოძამდე')
       line.cable_type = Objects::Kml.get_property(descr, 'სადენის ტიპი').to_ka(:all)
       line.cable_area = Objects::Kml.get_property(descr, 'სადენის კვეთი')
-      line.underground = Objects::Kml.get_property(descr, 'მიწისქვეშა კაბელი')
-      line.quro = Objects::Kml.get_property(descr, 'ქურო')
       line.description = Objects::Kml.get_property(descr, 'შენიშვნა')
       line.region = Region.get_by_name Objects::Kml.get_property(descr, 'მუნიციპალიტეტი')
-      line.voltage = Objects::Kml.get_property(descr, 'ფიდერის ძაბვა')
       line.linename = Objects::Kml.get_property(descr, 'ელ, გადამცემი ხაზი')
       line.substation_number = Objects::Kml.get_property(descr, 'ქვესადგურის ნომერი')
       coords = placemark.find('./kml:MultiGeometry/kml:LineString/kml:coordinates',kmlns).first.content
@@ -96,41 +93,11 @@ class Objects::Fider04Line
   field :end, type: String
   field :cable_type, type: Integer
   field :cable_area, type: Integer
-  field :underground, type: String
-  field :quro, type: String
   field :substation_number, type: String
-  field :voltage, type: String
   field :linename, type: String
   belongs_to :region
   embedded_in :fider,  class_name: 'Objects::Fider'
   embeds_many :points, class_name: 'Objects::FiderPoint'
-
-  def cable_area_s
-    {
-      1 => '16',
-      2 => '25',
-      3 => '35',
-      4 => '50',
-      5 => '70',
-      6 => '95',
-      7 => '120',
-      8 => '150',
-    }[cable_area]
-  end
-
-  def underground_s
-    {
-      1 => 'ზეთოვანი',
-      2 => 'მშრალი',
-    }[underground]
-  end
-
-  def quro_s
-    {
-      1 => 'კი',
-      2 => 'არა'
-    }[quro]
-  end
 
   def set_points(points)
     self.points.destroy_all
