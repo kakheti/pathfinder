@@ -51,7 +51,7 @@ class Objects::Fider04
       line = Objects::Fider04Line.create(fider: fider)
       line.start = Objects::Kml.get_property(descr, 'საწყისი ბოძი')
       line.end = Objects::Kml.get_property(descr, 'ბოძამდე')
-      line.cable_type = Objects::Kml.get_property(descr, 'სადენის ტიპი')
+      line.cable_type = Objects::Kml.get_property(descr, 'სადენის ტიპი').to_ka(:all)
       line.cable_area = Objects::Kml.get_property(descr, 'სადენის კვეთი')
       line.underground = Objects::Kml.get_property(descr, 'მიწისქვეშა კაბელი')
       line.quro = Objects::Kml.get_property(descr, 'ქურო')
@@ -104,16 +104,6 @@ class Objects::Fider04Line
   belongs_to :region
   embedded_in :fider,  class_name: 'Objects::Fider'
   embeds_many :points, class_name: 'Objects::FiderPoint'
-
-  def cable_type_s
-    {
-      1 => 'ალუმინი',
-      2 => 'ალუმინ-ფოლადი',
-      3 => 'რკინა',
-      4 => 'არასტანდარტული რკინა',
-      5 => 'ტროსი',
-    }[cable_type]
-  end
 
   def cable_area_s
     {
