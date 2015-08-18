@@ -12,7 +12,6 @@ class Api::SearchController < ApiController
       "office" => Objects::Office,
       "fider-line" => Objects::Fider,
       "fider04" => Objects::Fider04,
-      "fider04-line" => Objects::Fider04,
       "pole04" => Objects::Pole04,
     }
 
@@ -28,9 +27,11 @@ class Api::SearchController < ApiController
     types.each do |type|
       if !object_types[type].nil? then
         objects = object_types[type].all(filters)
-        if (type == "fider-line" || type == "fider04-line") && params["bounds"] then
+        if type == "fider-line" && params["bounds"] then
           objects = objects.where({lines: { "$elemMatch" => { points: { "$elemMatch" => within_bounds(params["bounds"])} }}})
           objects = objects.map { |obj| obj.lines }.flatten
+        elsif type == "fider04" && params["bounds"]
+          objects = objects.where({ "$elemMatch" => { points: { "$elemMatch" => within_bounds(params["bounds"])} }})
         elsif params["bounds"]
           objects = objects.where(within_bounds(params["bounds"]))
         end
@@ -53,8 +54,7 @@ class Api::SearchController < ApiController
       "office" => Objects::Office,
       "fider-line" => Objects::FiderLine,
       "fider04" => Objects::Fider04,
-      "fider04-line" => Objects::Fider04Line,
-      "pole04" => Objects::Pole04,
+      "pole04" => Objects::Pole04
     }
     objects = Api::SearchController.search(params)
 

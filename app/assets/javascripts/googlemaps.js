@@ -15,7 +15,7 @@ var infoWindow;
 
 var styleFunction = function(f) {
   var clazz = f.getProperty('class');
-  if (clazz === 'Objects::FiderLine') {
+  if (clazz === 'Objects::FiderLine' || clazz === 'Objects::Fider04') {
     return {
       strokeColor: '#FFA504',
       strokeWeight: 4,

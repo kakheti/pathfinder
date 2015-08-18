@@ -1,14 +1,12 @@
 <div class="page-header">
   <div class="pull-right">
-    <a href="<%= objects_upload_fiders_url %>" class="btn btn-default"><i class="fa fa-upload"></i> ფაილის ატვირთვა</a>
+    <a href="<%= objects_upload_fider04s_url %>" class="btn btn-default"><i class="fa fa-upload"></i> ფაილის ატვირთვა</a>
   </div>
   <h2>0.4კვ ფიდერები <code><%= @fiders.total_entries %></code></h2>
 </div>
 
 <%= search_form @search do |s|
   s.combo_field 'region', collection: Region.all.asc('name'), label: 'მუნიციპალიტეტი', empty: '-- ყველა მუნიციპალიტეტი --'
-  s.combo_field 'substation', collection: Objects::Substation.all.asc('name'), label: 'ქ/ს', empty: '-- ყველა ქვესადგური --'
-  s.text_field 'line', label: 'ელ. გადამცემი ხაზი'
   s.text_field 'name', label: 'დასახელება'
 end %>
 
@@ -17,15 +15,15 @@ end %>
     <thead>
       <tr>
         <th>0.4კვ ფიდერი</th>
+        <th width="300">6-10კვ სატრ. ჯიხური</th>
         <th width="200">მუნიციპალიტეტი</th>
-        <th width="200">ქვესადგური</th>
       </tr>
     </thead>
     <% @fiders.each do |fider| %>
       <tr>
         <td>
           <strong>
-            <a href="<%= objects_fider_url(fider) %>">
+            <a href="<%= objects_fider04_url(fider) %>">
               <% if fider.name.present? %>
                 <%= fider.name %>
               <% else %>
@@ -37,17 +35,17 @@ end %>
           <code><%= number_with_precision fider.length %></code> კმ
         </td>
         <td>
+          <% if fider.tp %>
+            <%= link_to fider.tp.name, objects_tps_url(fider.tp, tab: 'fider04s') %>
+          <% else %>
+            <span class="text-muted">(0-6კვ სატრ. ჯიხურის გარეშე)</span>
+          <% end %>
+        </td>
+        <td>
           <% if fider.region %>
             <%= link_to fider.region.name, region_url(fider.region, tab: 'fiders') %>
           <% else %>
             <span class="text-muted">(მუნიციპალიტეტის გარეშე)</span>
-          <% end %>
-        </td>
-        <td>
-          <% if fider.substation %>
-            <%= link_to fider.substation.name, objects_substation_url(fider.substation, tab: 'fiders') %>
-          <% else %>
-            <span class="text-muted">(ქვესადგურის გარეშე)</span>
           <% end %>
         </td>
       </tr>

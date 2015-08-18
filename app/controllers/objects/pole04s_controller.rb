@@ -38,7 +38,7 @@ class Objects::Pole04sController < ApplicationController
       when '.kml' then upload_kml(params[:data].tempfile)
       when '.xlsx' then upload_xlsx(params[:data].tempfile)
       else raise 'არასწორი ფორმატი' end
-      redirect_to objects_poles_url, notice: 'მონაცემები ატვირთულია'
+      redirect_to objects_pole04s_url, notice: 'მონაცემები ატვირთულია'
     end
   end
 

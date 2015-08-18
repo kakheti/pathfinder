@@ -90,9 +90,6 @@ Pathfinder::Application.routes.draw do
       match '/upload', action: 'upload', via: ['get','post'], as: 'upload_fider04s'
       get '/find/:name', action: 'find', as: 'find_fider04'
     end
-    scope '/fider04lines', controller: 'fider04lines' do
-      get '/show/:id', action: 'show', as: 'fider04line'
-    end
     scope '/maps', controller: 'maps' do
       get '/viewer', action: 'viewer', as: 'map_viewer'
     end
@@ -125,9 +122,6 @@ Pathfinder::Application.routes.draw do
       get '/:id', action: 'info'
     end
     scope '/fider04s', controller: 'fider04s' do
-      get '/:id', action: 'info'
-    end
-    scope '/fider04lines', controller: 'fider04lines' do
       get '/:id', action: 'info'
     end
     scope '/fiderlines', controller: 'fiderlines' do

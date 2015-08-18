@@ -9,9 +9,7 @@ class Objects::Fider04sController < ApplicationController
     @search = search_params
     if @search.present?
       rel = rel.where(name: @search[:name].mongonize) if @search[:name].present?
-      rel = rel.where(linename: @search[:line].mongoize) if @search[:line].present?
       rel = rel.where(region_id: @search[:region]) if @search[:region].present?
-      rel = rel.where(substation_id: @search[:substation]) if @search[:substation].present?
     end
     respond_to do |format|
       format.html{ @title = '0.4კვ ფიდერები'; @fiders = rel.paginate(per_page:10, page: params[:page]) }
@@ -37,7 +35,7 @@ class Objects::Fider04sController < ApplicationController
       when '.kml' then upload_kml(params[:data].tempfile)
       when '.xlsx' then upload_xlsx(params[:data].tempfile)
       else raise 'არასწორი ფორმატი' end
-      redirect_to objects_fiders_url, notice: 'მონაცემები ატვირთულია'
+      redirect_to objects_fider04s_url, notice: 'მონაცემები ატვირთულია'
     end
   end
 

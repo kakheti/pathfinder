@@ -43,12 +43,12 @@ module Objects::Kml
     end
   end
 
-  def get_property(description, propertyName)
+  def get_property(description, propertyName, default = nil)
     s1 = "<td>#{propertyName}</td>"
     if description.index(s1)
       idx1 = description.index(s1) + s1.length
       prop = description[idx1..-1].match(/<td>([^<])*<\/td>/)[0][4..-6].strip
-      prop unless prop == '&lt;Null&gt;'
+      prop == '&lt;Null&gt;' ? default : prop
     end
   end
 
