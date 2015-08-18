@@ -31,7 +31,7 @@ class Api::SearchController < ApiController
           objects = objects.where({lines: { "$elemMatch" => { points: { "$elemMatch" => within_bounds(params["bounds"])} }}})
           objects = objects.map { |obj| obj.lines }.flatten
         elsif type == "fider04" && params["bounds"]
-          objects = objects.where({ "$elemMatch" => { points: { "$elemMatch" => within_bounds(params["bounds"])} }})
+          objects = objects.where({ points: { "$elemMatch" => within_bounds(params["bounds"])} })
         elsif params["bounds"]
           objects = objects.where(within_bounds(params["bounds"]))
         end

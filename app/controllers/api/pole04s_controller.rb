@@ -1,5 +1,5 @@
 # -*- encoding : utf-8 -*-
-class Api::PolesController < ApiController
+class Api::Pole04sController < ApiController
   def index
     if params["bounds"] then
       poles = Objects::Pole04.where(self.within_bounds(params["bounds"]))

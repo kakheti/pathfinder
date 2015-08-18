@@ -112,10 +112,14 @@ Pathfinder::Application.routes.draw do
       get '/', action: 'index'
       get '/:id', action: 'info'
     end
+    scope '/pole04s', controller: 'pole04s' do
+      get '/', action: 'index'
+      get '/:id', action: 'info'
+    end
     scope '/lines', controller: 'lines' do
       get '/', action: 'index'
       get '/fiders', action: 'fiders'
-      get '/04fiders', action: 'fiders04'
+      get '/fiders04', action: 'fiders04'
       get '/:id', action: 'info'
     end
     scope '/fiders', controller: 'fiders' do
