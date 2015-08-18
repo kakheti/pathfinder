@@ -1,0 +1,23 @@
+<% lines = data %>
+<div>
+  <h3>
+    0.4კვ ფიდერის ხაზები <code><%= lines.total_entries %></code>
+  </h3>
+</div>
+<% if lines.any? %>
+  <table class="table table-bordered table-hover">
+    <% lines.each do |line| %>
+      <tr>
+        <td>
+          <%= link_to line.fider.name, objects_fiderline_url(line) %> &rarr;
+          <code><%= line.start %></code>-<code><%= line.end %></code>
+        </td>
+      </tr>
+    <% end %>
+  </table>
+  <div class="compact-pagination">
+    <%= will_paginate lines %>
+  </div>
+<% else %>
+  <%= render partial: '/data/no_data' %>
+<% end %>

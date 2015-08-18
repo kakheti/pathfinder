@@ -1,0 +1,57 @@
+<div class="page-header">
+  <div class="pull-right">
+    <a href="<%= objects_upload_poles_url %>" class="btn btn-default">
+      <i class="fa fa-upload"></i> ფაილის ატვირთვა
+    </a>
+  </div>
+  <h2>0.4კვ საყრდენები <code><%= @poles.total_entries %></code></h2>
+</div>
+
+<%= search_form @search do |s|
+  s.combo_field 'region', collection: Region.all.asc('name'), label: 'მუნიციპალიტეტი', empty: '-- ყველა მუნიციპალიტეტი --'
+  s.combo_field 'substation', collection: Objects::Substation.all.asc('name'), label: 'ქვესადგური', empty: '-- ყველა ქვესადგური --'
+  s.combo_field 'fider', collection: Objects::Fider.all.asc('name'), label: '0.4კვ ფიდერი', empty: '-- ყველა ფიდერი --'
+  s.text_field 'name', label: '0.4კვ საყრდენის #'
+end %>
+
+<% if @poles.any? %>
+  <table class="table table-bordered table-hover">
+    <thead>
+      <tr>
+        <th>0.4კვ საყრდენის #</th>
+        <th width="200">0.4კვ ფიდერი</th>
+        <th width="200">ქვესადგური</th>
+        <th width="200">მუნიციპალიტეტი</th>
+      </tr>
+    </thead>
+    <% @poles.each do |pole| %>
+      <tr>
+        <td><a href="<%= objects_pole_url(pole) %>">0.4კვ საყრდენი #<strong><%= pole.name %></strong></a></td>
+        <td>
+          <% if pole.fider %>
+            <%= link_to pole.fider.name, objects_fider_url(pole.fider, tab: 'poles') %>
+          <% else %>
+            <span class="text-muted">(ფიდერის გარეშე)</span>
+          <% end %>
+        </td>
+        <td>
+          <% if pole.substation %>
+            <%= link_to pole.substation.name, objects_substation_url(pole.substation, tab: 'poles') %>
+          <% else %>
+            <span class="text-muted">(ქვესადგურის გარეშე)</span>
+          <% end %>
+        </td>
+        <td>
+          <% if pole.region %>
+            <%= link_to pole.region.name, region_url(pole.region, tab: 'poles') %>
+          <% else %>
+            <span class="text-muted">(მუნიციპალიტეტის გარეშე)</span>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </table>
+  <%= will_paginate @poles %>
+<% else %>
+  <%= render partial: '/data/no_data' %>
+<% end %>

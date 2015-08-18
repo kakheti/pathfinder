@@ -1,0 +1,10 @@
+<h2 class="page-header"><%= @fider.name %></h2>
+
+<div class="row">
+  <div class="col-sm-3">
+    <%= render_data_menu(@fider, [ 'lines', 'tps', 'poles' ]) %>
+  </div>
+  <div class="col-sm-9">
+    <%= render_data(@fider) %>
+  </div>
+</div>

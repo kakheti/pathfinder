@@ -218,14 +218,14 @@ var createMap = function(opts) {
         clust.clearMarkers();
       }
     }
-  }
+  };
 
   map.clearAll = function(){
     map.objects = [];
     map.loadedMarkers = {};
     for(i in markerClusterers) {
       markerClusterers[i].clearMarkers();
-    };
+    }
   };
 
   map.clearLines = function(){
@@ -246,6 +246,15 @@ var createMap = function(opts) {
     });
   };
 
+  map.clear04Fiders = function(){
+    map.data.forEach(function(a){
+      var clazz = a.getProperty('class');
+      if (clazz === 'Objects::Fider04Line') {
+        map.data.remove(a);
+      }
+    });
+  };
+
   map.loadLines = function() {
     return new Promise(function(resolve, reject){
       if(map.showLines) {
@@ -261,6 +270,17 @@ var createMap = function(opts) {
       var params = api.getParams();
       if(map.showFiders && map.zoom >= objectTypes.fider.zoom) {
         map.data.loadGeoJson(api.getUrl('/api/lines/fiders?'+params), resolve);
+      } else {
+        resolve();
+      }
+    });
+  };
+
+  map.load04Fiders = function() {
+    return new Promise(function(resolve, reject){
+      var params = api.getParams();
+      if(map.showFiders && map.zoom >= objectTypes.fider.zoom) {
+        map.data.loadGeoJson(api.getUrl('/api/lines/fiders04?'+params), resolve);
       } else {
         resolve();
       }
