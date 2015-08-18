@@ -28,7 +28,7 @@ class Api::SearchController < ApiController
     types.each do |type|
       if !object_types[type].nil? then
         objects = object_types[type].all(filters)
-        if type == "fider-line" && params["bounds"] then
+        if (type == "fider-line" || type == "fider04-line") && params["bounds"] then
           objects = objects.where({lines: { "$elemMatch" => { points: { "$elemMatch" => within_bounds(params["bounds"])} }}})
           objects = objects.map { |obj| obj.lines }.flatten
         elsif params["bounds"]
