@@ -12,7 +12,7 @@ class Objects::TpsController < ApplicationController
       rel = rel.where(owner: @search[:owner].mongonize) if @search[:owner].present?
       rel = rel.where(region_id: @search[:region]) if @search[:region].present?
       rel = rel.where(substation_id: @search[:substation]) if @search[:substation].present?
-      rel = rel.where(fider: { name: @search[:fider].mongoize }) if @search[:fider].presend?
+      rel = rel.where(fider: { name: @search[:fider].mongoize }) if @search[:fider].present?
     end
     respond_to do |format|
       format.html {
