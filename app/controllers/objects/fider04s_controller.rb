@@ -12,7 +12,7 @@ class Objects::Fider04sController < ApplicationController
       rel = rel.where(region_id: @search[:region]) if @search[:region].present?
     end
     respond_to do |format|
-      format.html{ @title = '0.4კვ ფიდერები'; @fiders = rel.paginate(per_page:10, page: params[:page]) }
+      format.html{ @title = '0.4კვ ხაზები'; @fiders = rel.paginate(per_page:10, page: params[:page]) }
       format.xlsx{ @fiders = rel }
       format.kmz do
         @fiders = rel
@@ -27,7 +27,7 @@ class Objects::Fider04sController < ApplicationController
   end
 
   def upload
-    @title='ფაილის ატვირთვა: 0.4კვ ფიდერები'
+    @title='ფაილის ატვირთვა: 0.4კვ ხაზები'
     if request.post?
       f=params[:data].original_filename
       case File.extname(f).downcase
@@ -40,24 +40,24 @@ class Objects::Fider04sController < ApplicationController
   end
 
   def show
-    @title='0.4კვ ფიდერის თვისებები'
+    @title='0.4კვ ხაზის თვისებები'
     @fider=Objects::Fider04.find(params[:id])
   end
 
   def find
-    @title = '0.4კვ ფიდერი'
+    @title = '0.4კვ ხაზი'
     @fider = Objects::Fider04.where(name: params[:name]).first
     if @fider
       render action: 'show'
     else
-      render text: "0.4კვ ფიდერი \"#{params[:name]}\" ვერ მოიძებნა"
+      render text: "0.4კვ ხაზი \"#{params[:name]}\" ვერ მოიძებნა"
     end
   end
 
   protected
   def nav
     @nav=super
-    @nav['0.4კვ ფიდერები']=objects_fiders_url
+    @nav['0.4კვ ხაზები']=objects_fiders_url
     @nav[@title]=nil unless ['index'].include?(action_name)
   end
 

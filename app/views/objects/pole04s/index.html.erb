@@ -4,25 +4,25 @@
       <i class="fa fa-upload"></i> ფაილის ატვირთვა
     </a>
   </div>
-  <h2>0.4კვ საყრდენები <code><%= @poles.total_entries %></code></h2>
+  <h2>0.4კვ ბოძები <code><%= @poles.total_entries %></code></h2>
 </div>
 
 <%= search_form @search do |s|
   s.combo_field 'region', collection: Region.all.asc('name'), label: 'მუნიციპალიტეტი', empty: '-- ყველა მუნიციპალიტეტი --'
-  s.text_field 'name', label: '0.4კვ საყრდენის #'
+  s.text_field 'name', label: '0.4კვ ბოძის #'
 end %>
 
 <% if @poles.any? %>
   <table class="table table-bordered table-hover">
     <thead>
       <tr>
-        <th>0.4კვ საყრდენის #</th>
+        <th>0.4კვ ბოძის #</th>
         <th width="200">მუნიციპალიტეტი</th>
       </tr>
     </thead>
     <% @poles.each do |pole| %>
       <tr>
-        <td><a href="<%= objects_pole04_url(pole) %>">0.4კვ საყრდენი #<strong><%= pole.name %></strong></a></td>
+        <td><a href="<%= objects_pole04_url(pole) %>">0.4კვ ბოძი #<strong><%= pole.name %></strong></a></td>
         <td>
           <% if pole.region %>
             <%= link_to pole.region.name, region_url(pole.region, tab: 'poles') %>

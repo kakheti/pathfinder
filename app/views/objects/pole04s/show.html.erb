@@ -1,8 +1,8 @@
-<h2 class="page-header">0.4კვ საყრდენი #<%= @pole.name %></h2>
+<h2 class="page-header">0.4კვ ბოძი #<%= @pole.name %></h2>
 
 <table class="table table-bordered table-hover">
   <tr>
-    <td class="text-muted" width="150">0.4კვ საყრდენის #</td>
+    <td class="text-muted" width="150">0.4კვ ბოძის #</td>
     <td>
       <code><%= @pole.number %></code>
     </td>
@@ -41,6 +41,6 @@
 </table>
 
 <h3 class="page-header">
-  0.4კვ საყრდენის მდებარეობა
+  0.4კვ ბოძის მდებარეობა
 </h3>
 <%= render partial: 'data/points_map', locals: { points: [ @pole.location ] } %>

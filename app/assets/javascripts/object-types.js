@@ -45,15 +45,15 @@ var objectTypes = {
   },
   fider04: {
     zoom: 17,
-    name: '0.4კვ ფიდერი',
-    plural: '0.4კვ ფიდერები',
+    name: '0.4კვ ხაზი',
+    plural: '0.4კვ ხაზები',
     cluster: 50,
     marker: false
   },
   pole04: {
     zoom: 17,
-    name: '0.4კვ საყრდენი',
-    plural: '0.4კვ საყრდენები',
+    name: '0.4კვ ბოძი',
+    plural: '0.4კვ ბოძები',
     cluster: 50
   }
 };
