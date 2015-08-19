@@ -70,6 +70,11 @@ Pathfinder::Application.routes.draw do
       get '/show/:id', action: 'show', as: 'pole'
       match '/upload', action: 'upload', via: ['get','post'], as: 'upload_poles'
     end
+    scope '/pole04s', controller: 'pole04s' do
+      get '/', action: 'index', as: 'pole04s'
+      get '/show/:id', action: 'show', as: 'pole04'
+      match '/upload', action: 'upload', via: ['get','post'], as: 'upload_pole04s'
+    end
     scope '/fiders', controller: 'fiders' do
       get '/', action: 'index', as: 'fiders'
       get '/show/:id', action: 'show', as: 'fider'
@@ -78,6 +83,12 @@ Pathfinder::Application.routes.draw do
     end
     scope '/fiderlines', controller: 'fiderlines' do
       get '/show/:id', action: 'show', as: 'fiderline'
+    end
+    scope '/fider04s', controller: 'fider04s' do
+      get '/', action: 'index', as: 'fider04s'
+      get '/show/:id', action: 'show', as: 'fider04'
+      match '/upload', action: 'upload', via: ['get','post'], as: 'upload_fider04s'
+      get '/find/:name', action: 'find', as: 'find_fider04'
     end
     scope '/maps', controller: 'maps' do
       get '/viewer', action: 'viewer', as: 'map_viewer'
@@ -101,12 +112,20 @@ Pathfinder::Application.routes.draw do
       get '/', action: 'index'
       get '/:id', action: 'info'
     end
+    scope '/pole04s', controller: 'pole04s' do
+      get '/', action: 'index'
+      get '/:id', action: 'info'
+    end
     scope '/lines', controller: 'lines' do
       get '/', action: 'index'
       get '/fiders', action: 'fiders'
+      get '/fiders04', action: 'fiders04'
       get '/:id', action: 'info'
     end
     scope '/fiders', controller: 'fiders' do
+      get '/:id', action: 'info'
+    end
+    scope '/fider04s', controller: 'fider04s' do
       get '/:id', action: 'info'
     end
     scope '/fiderlines', controller: 'fiderlines' do

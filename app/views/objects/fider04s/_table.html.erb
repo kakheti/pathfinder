@@ -1,0 +1,23 @@
+<% fiders = data %>
+<div>
+  <div class="pull-right compact-pagination">
+    <%= will_paginate fiders %>
+  </div>
+  <h3>
+    0.4კვ ხაზები <code><%= fiders.total_entries %></code>
+  </h3>
+</div>
+<% if fiders.any? %>
+  <table class="table table-bordered table-hover">
+    <% fiders.each do |fider| %>
+      <tr>
+        <td>
+          <strong><%= link_to fider.name, objects_fider_url(fider) %></strong> &mdash;
+          <code><%= number_with_precision fider.length %></code> კმ
+        </td>
+      </tr>
+    <% end %>
+  </table>
+<% else %>
+  <%= render partial: '/data/no_data' %>
+<% end %>

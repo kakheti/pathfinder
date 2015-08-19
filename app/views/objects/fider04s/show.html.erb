@@ -1,0 +1,32 @@
+<table class="table table-bordered table-hover">
+  <tr>
+    <td class="text-muted" width="150">დასახელება</td>
+    <td>
+      <% if @fider.name.present? %>
+        <%= @fider.name %>
+      <% else %>
+        <span class="text-muted">(დასახელების გარეშე)</span>
+      <% end %>
+    </td>
+  </tr>
+  <tr>
+    <td class="text-muted">შენიშვნა</td>
+    <td><%= @fider.description %></td>
+  </tr>
+  <tr>
+    <td class="text-muted">მუნიციპალიტეტი</td>
+    <td>
+      <% if @fider.region %>
+        <%= link_to @fider.region.name, region_url(@fider.region, tab: 'fiders') %>
+      <% else %>
+        <span class="text-muted">(მუნიციპალიტეტის გარეშე)</span>
+      <% end %>
+    </td>
+  </tr>
+  <tr>
+    <td class="text-muted">სიგრძე</td>
+    <td><code><%= number_with_precision @fider.length %></code> კმ</td>
+  </tr>
+</table>
+
+<%= render partial: '/data/paths_map', locals: { paths: [@fider], direction: false } %>

@@ -22,14 +22,12 @@ class Objects::Pole04
   field :street_light, type: String
 
   belongs_to :region
-  belongs_to :fider, class_name: 'Objects::Fider04'
   belongs_to :tp, class_name: 'Objects::Tp'
 
   search_in :name, :description, :fider, :tp => 'name'
 
   index({ name: 1 })
   index({ region_id: 1 })
-  index({ fider_id: 1 })
 
   def self.from_kml(xml)
     parser=XML::Parser.string xml
@@ -44,20 +42,17 @@ class Objects::Pole04
       obj.name = Objects::Kml.get_property(descr, 'ბოძის იდენტიფიკატორი')
       obj.number = Objects::Kml.get_property(descr, 'ბოძის ნომერი')
       obj.height = Objects::Kml.get_property(descr, 'ბოძის სიმაღლე').to_f
-      obj.pole_type = Objects::Kml.get_property(descr, 'ბოძის ტიპი').to_ka(:all)
-      obj.ankeruli = Objects::Kml.get_property(descr, 'ანკერული').to_ka(:all)
-      obj.oldness = Objects::Kml.get_property(descr, 'ხარისხრობრივი მდგომარეობა').to_ka(:all)
-      obj.vertical_position = Objects::Kml.get_property(descr, 'ვერტიკალური მდგომარეობა').to_ka(:all)
-      obj.owner = Objects::Kml.get_property(descr, 'მესაკუთრე').to_ka(:all)
-      obj.lampioni = Objects::Kml.get_property(descr, 'ლამპიონის სამაგრი').to_ka(:all)
-      obj.internet = Objects::Kml.get_property(descr, 'ინტერნეტი').to_ka(:all)
-      obj.street_light = Objects::Kml.get_property(descr, 'გარე განათება').to_ka(:all)
+      obj.pole_type = Objects::Kml.get_property(descr, 'ბოძის ტიპი', '').to_ka(:all)
+      obj.ankeruli = Objects::Kml.get_property(descr, 'ანკერული', '').to_ka(:all)
+      obj.oldness = Objects::Kml.get_property(descr, 'ხარისხრობრივი მდგომარეობა', '').to_ka(:all)
+      obj.vertical_position = Objects::Kml.get_property(descr, 'ვერტიკალური მდგომარეობა', '').to_ka(:all)
+      obj.owner = Objects::Kml.get_property(descr, 'მესაკუთრე', '').to_ka(:all)
+      obj.lampioni = Objects::Kml.get_property(descr, 'ლამპიონის სამაგრი', '').to_ka(:all)
+      obj.internet = Objects::Kml.get_property(descr, 'ინტერნეტი', '').to_ka(:all)
+      obj.street_light = Objects::Kml.get_property(descr, 'გარე განათება', '').to_ka(:all)
 
       tpnumber = Objects::Kml.get_property(descr, 'ტრანსფორმატორის ნომერი')
       obj.tp = Objects::Tp.by_name(tpnumber) if tpnumber.present?
-
-      fidername = Objects::Kml.get_property(descr, 'ფიდერი')
-      obj.fider = Objects::Fider04.by_name(fidername.to_ka(:all)) if fidername.present?
 
       description = Objects::Kml.get_property(descr, 'Note_')
       obj.description = description.to_ka(:all) if description.present?

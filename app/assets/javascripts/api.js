@@ -1,5 +1,5 @@
 var _ = require('lodash'),
-Promise = require('bluebird')
+Promise = require('bluebird'),
 config = require('config');
 
 var API = {};
@@ -14,8 +14,7 @@ API.getParams = function () {
   var bounds = window.map.getBounds().toUrlValue();
   var region = $("#search-region").val();
   var tp = _.template('bounds=<%=bounds%>&region_id=<%=region%>');
-  var params = tp({ bounds: bounds, region: region });
-  return params;
+  return tp({bounds: bounds, region: region});
 };
 
 API.loadObjects = function (type, message) {

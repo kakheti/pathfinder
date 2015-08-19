@@ -1,3 +1,5 @@
+/* global require, $, Materialize */
+
 var googlemaps = require('./googlemaps'),
 api = require('./api'),
 search = require('./search'),
@@ -20,9 +22,9 @@ var loadAll = function() {
     }
   }
   return promises;
-}
+};
 
-var typeOrder = ['office', 'substation', 'line', 'tower', 'fider', 'pole', 'tp'];
+var typeOrder = ['office', 'substation', 'line', 'tower', 'fider', 'pole', 'tp', 'fider04', 'pole04'];
 var tp = _.template(
   '<div><input type="checkbox" checked value="<%= type %>" id="checkbox-<%= type %>">'
   +'<label for="checkbox-<%= type %>"><%= name %></label></div>');
@@ -44,11 +46,11 @@ api.loadRegions().then(function (regions) {
 var adjustVisibility = function () {
   var types = {};
 
-  $("#search-type input[type=checkbox]").each(function(){
-    var enabled = $(this).is(":checked");
-    types[$(this).val()] = enabled;
+  $("#search-type").find("input[type=checkbox]").each(function(){
+    types[$(this).val()] = $(this).is(":checked");
   });
-  for(type in types) {
+
+  for(var type in types) {
     var enabled = types[type];
 
     map.setLayerVisible(type, enabled);
@@ -72,6 +74,15 @@ var adjustVisibility = function () {
           map.showFiders = false;
         }
         break;
+      case "fider04":
+        if(enabled) {
+          map.load04Fiders();
+          map.show04Fiders = true;
+        } else {
+          map.clear04Fiders();
+          map.show04Fiders = false;
+        }
+        break;
     }
   }
 };
@@ -89,16 +100,19 @@ googlemaps.start().then(googlemaps.create).then(function(map) {
     Promise.all([
       loadAll(),
       map.loadLines(),
-      map.loadFiders()
+      map.loadFiders(),
+      map.load04Fiders()
     ]).then(adjustVisibility);
   });
 
-  $("#search-type input").on('change', adjustVisibility);
+  $("#search-type").find("input").on('change', adjustVisibility);
 
   $("#search-region").on('change', function(){
     map.clearAll();
     map.clearFiders();
+    map.clear04Fiders()
     loadAll();
-    loadFiders();
+    map.loadFiders();
+    map.load04Fiders();
   });
 });

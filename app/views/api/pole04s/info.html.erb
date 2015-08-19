@@ -1,0 +1,39 @@
+<table class="table table-bordered table-hover">
+  <tr>
+    <td class="text-muted" width="150">0.4კვ ბოძის #</td>
+    <td>
+      <code><%= @pole.number %></code>
+    </td>
+  </tr>
+  <tr>
+    <td class="text-muted">ტიპი</td>
+    <td><%= @pole.pole_type %></td>
+  </tr>
+  <tr>
+    <td class="text-muted">სიმაღლე</td>
+    <td><code><%= number_with_precision @pole.height, precision: 2 %></code> მეტრი</td>
+  </tr>
+  <tr>
+    <td class="text-muted">ვერტიკალური მდგომარეობა</td>
+    <td>
+      <%= @pole.vertical_position %>
+    </td>
+  </tr>
+  <tr>
+    <td class="text-muted">ცვეთის ხარისხი</td>
+    <td>
+      <%= @pole.oldness %>
+    </td>
+  </tr>
+  <tr>
+    <td class="text-muted">შენიშვნა</td>
+    <td><%= @pole.description%></td>
+  </tr>
+  <tr>
+    <td class="text-muted">კოორდინატები</td>
+    <td>
+      E: <code><%= @pole.easting %></code>,
+      N: <code><%= @pole.northing %></code>
+    </td>
+  </tr>
+</table>

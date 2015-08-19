@@ -1,9 +1,10 @@
 var _ = require('lodash'),
-googlemaps = require('./googlemaps'),
 objectTypes = require('./object-types'),
 api = require('./api');
 
 var data = {};
+
+var $output = $("#search-output");
 
 var view = {
   showSearch: function() {
@@ -11,7 +12,7 @@ var view = {
   },
 
   resizeOutput: function() {
-    $("#search-output .collection").css("max-height", $(window).innerHeight() - 125)
+    $output.find(".collection").css("max-height", $(window).innerHeight() - 125)
   },
 
   initSearch: function() {
@@ -36,20 +37,21 @@ var view = {
         filters.region_id = regionField.val();
       }
 
-      $("#search-form .btn").prop("disabled", "disabled").addClass("loading");
+      var $btn = $("#search-form").find(".btn");
+      $btn.prop("disabled", "disabled").addClass("loading");
 
       $.get(api.getUrl("/api/search"), filters).done(function(data){
-        $("#search-form .btn").prop("disabled", false).removeClass("loading");
+        $btn.prop("disabled", false).removeClass("loading");
         view.displayMarkers(q, data);
       }).error(function(){
 
-        $("#search-form .btn").removeProp("disabled", false).removeClass("loading");
+        $btn.removeProp("disabled", false).removeClass("loading");
       });
     });
 
     field.on('click', function(){
-      if($("#search-output .collection .collection-item").length > 0) {
-        $("#search-output").show();
+      if($output.find(".collection .collection-item").length > 0) {
+        $output.show();
       }
     });
 
@@ -71,7 +73,7 @@ var view = {
 
     var moreinfo = _.template(" მუნიციპალიტეტი: <%=name%>;")(marker.region);
 
-    for(i in objectTypes){
+    for(var i in objectTypes){
       if(marker[i]) moreinfo += _.template(' <%=type%>: <%=name%>;')({
         type: objectTypes[i].name,
         name: marker[i].name
@@ -109,14 +111,14 @@ var view = {
         output.append(element);
       });
     };
-    
-    $('#search-output').show();
+
+    $output.show();
     var summary = _.template('ნაპოვნია: <strong><%=length%></strong> ობიექტი');
-    $("#search-output .summary").html(summary({length: markers.length}));
-    var output = $('#search-output .collection');
+    $output.find(".summary").html(summary({length: markers.length}));
+    var output = $output.find('.collection');
     output.html('');
     renderCollection(markers, output);
-  },
+  }
 };
 
 module.exports = {

@@ -49,7 +49,31 @@ class Api::LinesController < ApiController
       end
     }
   end
-  
+
+  def fiders04
+    params["type"] = ["fider04"]
+    fiders = Api::SearchController.search(params)
+
+    render json: {
+      type: 'FeatureCollection',
+      features: fiders.map do |line|
+        {
+          type: 'Feature',
+          geometry: {
+            type: 'LineString',
+            coordinates: line.points.map{|p| [p.lng,p.lat] }
+          },
+          id: line.id.to_s,
+          properties: {
+            class: line.class.name,
+            name: line.name,
+            latLng: { lat: line.lat, lng: line.lng }
+          }
+        }
+      end
+    }
+  end
+
   def info
     @line = Objects::Line.find(params[:id])
     render layout: false

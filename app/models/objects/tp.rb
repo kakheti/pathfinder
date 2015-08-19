@@ -29,6 +29,7 @@ class Objects::Tp
   belongs_to :region
   belongs_to :substation, class_name: 'Objects::Substation'
   belongs_to :fider, class_name: 'Objects::Fider'
+  has_many :fider04s, class_name: 'Objects::Fider04'
 
   search_in :name, :description, :fider, :substation => 'name'
 

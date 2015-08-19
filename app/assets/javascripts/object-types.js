@@ -42,6 +42,19 @@ var objectTypes = {
     name: 'გადამცემი ხაზი',
     plural: 'გადამცემი ხაზები',
     cluster: 100
+  },
+  fider04: {
+    zoom: 17,
+    name: '0.4კვ ხაზი',
+    plural: '0.4კვ ხაზები',
+    cluster: 50,
+    marker: false
+  },
+  pole04: {
+    zoom: 17,
+    name: '0.4კვ ბოძი',
+    plural: '0.4კვ ბოძები',
+    cluster: 50
   }
 };
 

@@ -6,8 +6,12 @@
   elsif url.index('/objects/towers') == 0 then group = '110-220'
   elsif url.index('/objects/lines') == 0 then group = '110-220'
   elsif url.index('/objects/fiders') == 0 then group = '6-10'
+  elsif url.index('/objects/fiderlines') == 0 then group = '6-10'
   elsif url.index('/objects/tps') == 0 then group = '6-10'
   elsif url.index('/objects/poles') == 0 then group = '6-10'
+  elsif url.index('/objects/pole04s') == 0 then group = '04'
+  elsif url.index('/objects/fider04s') == 0 then group = '04'
+  elsif url.index('/objects/fider04lines') == 0 then group = '04'
   elsif url.index('/account') == 0 then group = 'account'
   else group = 'unknown'
   end
@@ -48,6 +52,13 @@
               <li><a href="<%= objects_fiders_url %>">6-10კვ ფიდერები <span class="badge"><%= Objects::Fider.count %></span></a></li>
               <li><a href="<%= objects_poles_url %>">6-10კვ საყრდენები <span class="badge"><%= Objects::Pole.count %></span></a></li>
               <li><a href="<%= objects_tps_url %>">6-10კვ სატრ. ჯიხურები <span class="badge"><%= Objects::Tp.count %></span></a></li>
+            </ul>
+          </li>
+          <li class="dropdown <%= group == '04' ? 'active' : 'passive' %>">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="04" aria-expanded="false">0.4 კვ<span class="caret"></span></a>
+            <ul class="dropdown-menu" aria-labelledby="04">
+              <li><a href="<%= objects_fider04s_url %>">0.4კვ ხაზები <span class="badge"><%= Objects::Fider04.count %></span></a></li>
+              <li><a href="<%= objects_pole04s_url %>">0.4კვ ბოძები <span class="badge"><%= Objects::Pole04.count %></span></a></li>
             </ul>
           </li>
         </ul>
