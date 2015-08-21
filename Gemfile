@@ -13,6 +13,7 @@ gem 'bootstrap-sass'
 # gem 'turbolinks'
 # gem 'jquery-turbolinks'
 gem 'jbuilder', '~> 1.2'
+gem 'zip'
 
 gem 'mongoid', '~> 4.0'
 gem 'mongoid_search'

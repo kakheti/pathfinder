@@ -14,14 +14,16 @@ var logger = function(message, duration) {
 };
 
 var loadAll = function() {
-  var promises = [];
-  for(type in objectTypes) {
+  var types = [];
+  var visibleTypes = getVisibleLayers();
+
+  for(var type in objectTypes) {
     var objType = objectTypes[type];
-    if(objType.marker !== false && map.zoom >= objType.zoom) {
-      promises.push(api.loadObjects(type).then(map.showObjects));
+    if(objType.marker !== false && map.zoom >= objType.zoom && visibleTypes[type]) {
+      types.push(type);
     }
   }
-  return promises;
+  return api.loadObjects(types).then(map.showObjects);
 };
 
 var typeOrder = ['office', 'substation', 'line', 'tower', 'fider', 'pole', 'tp', 'fider04', 'pole04'];
@@ -43,12 +45,16 @@ api.loadRegions().then(function (regions) {
   });
 });
 
-var adjustVisibility = function () {
+var getVisibleLayers = function () {
   var types = {};
-
   $("#search-type").find("input[type=checkbox]").each(function(){
     types[$(this).val()] = $(this).is(":checked");
   });
+  return types;
+};
+
+var adjustVisibility = function () {
+  var types = getVisibleLayers();
 
   for(var type in types) {
     var enabled = types[type];
@@ -84,6 +90,8 @@ var adjustVisibility = function () {
         }
         break;
     }
+
+    loadAll();
   }
 };
 
@@ -96,21 +104,29 @@ googlemaps.start().then(googlemaps.create).then(function(map) {
   window.map = map;
   search.initialize(map);
 
+  map.showLines = true;
+  map.showFiders = true;
+  map.show04Fiders = true;
+
   google.maps.event.addListener(map, 'tilesloaded', function() {
     Promise.all([
       loadAll(),
       map.loadLines(),
       map.loadFiders(),
       map.load04Fiders()
-    ]).then(adjustVisibility);
+    ]).then(function () {
+      console.log("Bounds changed, markers loaded")
+    });
   });
 
   $("#search-type").find("input").on('change', adjustVisibility);
 
-  $("#search-region").on('change', function(){
+  $("#search-region").on('change', function() {
+    var visibleTypes = getVisibleLayers();
+
     map.clearAll();
     map.clearFiders();
-    map.clear04Fiders()
+    map.clear04Fiders();
     loadAll();
     map.loadFiders();
     map.load04Fiders();
