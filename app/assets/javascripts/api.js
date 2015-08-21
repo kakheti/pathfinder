@@ -17,12 +17,12 @@ API.getParams = function () {
   return tp({bounds: bounds, region: region});
 };
 
-API.loadObjects = function (type, message) {
+API.loadObjects = function (types, message) {
   if(message) logger(message);
   var bounds = window.map.getBounds().toUrlValue();
   var region = $("#search-region").val();
   return new Promise(function(resolve, reject) {
-    $.get(API.getUrl('/api/search'), {bounds: bounds, region_id: region, type: [type]}).done(function(data) { logger(); resolve(data); }).fail(function(err) { logger(); reject(err); });
+    $.get(API.getUrl('/api/search'), {bounds: bounds, region_id: region, type: types}).done(function(data) { logger(); resolve(data); }).fail(function(err) { logger(); reject(err); });
   });
 };
 

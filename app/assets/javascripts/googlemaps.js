@@ -279,7 +279,7 @@ var createMap = function(opts) {
   map.load04Fiders = function() {
     return new Promise(function(resolve, reject){
       var params = api.getParams();
-      if(map.showFiders && map.zoom >= objectTypes.fider.zoom) {
+      if(map.show04Fiders && map.zoom >= objectTypes.fider04.zoom) {
         map.data.loadGeoJson(api.getUrl('/api/lines/fiders04?'+params), resolve);
       } else {
         resolve();
