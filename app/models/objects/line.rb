@@ -47,12 +47,12 @@ class Objects::Line
       regname = Objects::Kml.get_property(descr, 'რეგიონი')
       direction = Objects::Kml.get_property(descr, 'მიმართულება')
       # end of description section
-      # if regname == 'კახეთი'
+      if regname == 'კახეთი'
         region = Region.get_by_name(regname)
         line = Objects::Line.where(kmlid: id).first || Objects::Line.create(kmlid: id)
         line.direction = direction
         line.region = region
-        line.name = name
+        line.name = name.to_ka(:all) if name.present?
         line.save
         line.points.destroy_all
         coords = coords.split(' ')
@@ -66,7 +66,7 @@ class Objects::Line
         line.save
         # rejoin relations
         Objects::Tower.rejoin_line(line)
-      #end
+      end
     end
   end
 end

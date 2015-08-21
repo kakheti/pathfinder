@@ -21,6 +21,8 @@
     <td>
       <% if @substation.region.present? %>
         <%= link_to @substation.region.name, region_url(@substation.region, tab: 'substations') %>
+      <% else %>
+        <span class="text-muted">მუნიციპალიტეტის გარეშე</span>
       <% end %>
     </td>
   </tr>

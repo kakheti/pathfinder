@@ -55,9 +55,10 @@ class Objects::Fider04sController < ApplicationController
   end
 
   protected
+
   def nav
     @nav=super
-    @nav['0.4კვ ხაზები']=objects_fiders_url
+    @nav['0.4კვ ხაზები'] = objects_fider04s_url
     @nav[@title]=nil unless ['index'].include?(action_name)
   end
 

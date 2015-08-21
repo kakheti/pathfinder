@@ -32,7 +32,7 @@ class Objects::Tower
       category = nil if category == '&lt;Null&gt;'
       linename = Objects::Kml.get_property(descr, 'გადამცემი ხაზი')
       # end of description section
-      # if 'კახეთი' == regname
+      if 'კახეთი' == regname
         coord=placemark.find('./kml:Point/kml:coordinates',kmlns).first.content
         obj=Objects::Tower.where(kmlid:id).first || Objects::Tower.create(kmlid:id)
         obj.name = name
@@ -42,7 +42,7 @@ class Objects::Tower
         obj.line = Objects::Line.by_name(linename)
         obj.linename = linename
         obj.save
-      # end
+      end
     end
   end
 
