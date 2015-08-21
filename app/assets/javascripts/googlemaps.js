@@ -229,6 +229,7 @@ var createMap = function(opts) {
   };
 
   map.clearLines = function(){
+    map.linesLoaded = false;
     map.data.forEach(function(a){
       var clazz = a.getProperty('class');
       if (clazz === 'Objects::Line') {
@@ -256,12 +257,14 @@ var createMap = function(opts) {
   };
 
   map.loadLines = function() {
+
     return new Promise(function(resolve, reject){
-      if(map.showLines) {
+      if(map.showLines && !map.linesLoaded) {
         map.data.loadGeoJson(api.getUrl('/api/lines'), resolve);
       } else {
         resolve();
       }
+      map.linesLoaded = true;
     });
   };
 

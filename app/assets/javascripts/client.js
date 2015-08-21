@@ -64,20 +64,20 @@ var adjustVisibility = function () {
     switch(type) {
       case "line":
         if(enabled) {
-          map.loadLines();
           map.showLines = true;
+          map.loadLines();
         } else {
-          map.clearLines();
           map.showLines = false;
+          map.clearLines();
         }
         break;
       case "fider":
         if(enabled) {
-          map.loadFiders();
           map.showFiders = true;
+          map.loadFiders();
         } else {
-          map.clearFiders();
           map.showFiders = false;
+          map.clearFiders();
         }
         break;
       case "fider04":
