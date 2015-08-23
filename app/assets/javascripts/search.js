@@ -25,6 +25,9 @@ var view = {
       event.preventDefault();
 
       var q = field.val();
+
+      if(q.length < 2) return; 
+
       var type = [];
 
       typeField.find("input[type=checkbox]:checked").each(function(){

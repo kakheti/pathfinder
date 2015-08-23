@@ -260,11 +260,13 @@ var createMap = function(opts) {
 
     return new Promise(function(resolve, reject){
       if(map.showLines && !map.linesLoaded) {
-        map.data.loadGeoJson(api.getUrl('/api/lines'), resolve);
+        map.data.loadGeoJson(api.getUrl('/api/lines'), function () {
+          map.linesLoaded = true;
+          resolve();
+        });
       } else {
         resolve();
       }
-      map.linesLoaded = true;
     });
   };
 

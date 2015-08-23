@@ -109,14 +109,18 @@ googlemaps.start().then(googlemaps.create).then(function(map) {
   map.show04Fiders = true;
 
   google.maps.event.addListener(map, 'tilesloaded', function() {
-    Promise.all([
-      loadAll(),
-      map.loadLines(),
-      map.loadFiders(),
-      map.load04Fiders()
-    ]).then(function () {
-      console.log("Bounds changed, markers loaded")
-    });
+    if(window.loadTimeout) clearTimeout(window.loadTimeout);
+
+    window.loadTimeout = setTimeout(function () {
+      Promise.all([
+        loadAll(),
+        map.loadLines(),
+        map.loadFiders(),
+        map.load04Fiders()
+      ]).then(function () {
+        console.log("Bounds changed, markers loaded")
+      });
+    }, 500);
   });
 
   $("#search-type").find("input").on('change', adjustVisibility);
