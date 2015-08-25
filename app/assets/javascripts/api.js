@@ -18,6 +18,10 @@ API.getParams = function () {
 };
 
 API.loadObjects = function (types, message) {
+  if(types.length < 1) return new Promise(function (resolve, reject) {
+    resolve([]);
+  });
+
   if(message) logger(message);
   var bounds = window.map.getBounds().toUrlValue();
   var region = $("#search-region").val();
