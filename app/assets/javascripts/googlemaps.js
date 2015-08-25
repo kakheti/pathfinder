@@ -271,7 +271,7 @@ var createMap = function(opts) {
     return new Promise(function(resolve, reject){
       var params = api.getParams();
       if(map.showFiders && map.zoom >= objectTypes.fider.zoom) {
-        map.data.loadGeoJson(api.getUrl('/api/lines/fiders?'+params), resolve);
+        map.data.loadGeoJson(api.getUrl('/api/lines/fiders?'+params), null, resolve);
       } else {
         resolve();
       }
@@ -282,7 +282,7 @@ var createMap = function(opts) {
     return new Promise(function(resolve, reject){
       var params = api.getParams();
       if(map.show04Fiders && map.zoom >= objectTypes.fider04.zoom) {
-        map.data.loadGeoJson(api.getUrl('/api/lines/fiders04?'+params), resolve);
+        map.data.loadGeoJson(api.getUrl('/api/lines/fiders04?'+params), null, resolve);
       } else {
         resolve();
       }
