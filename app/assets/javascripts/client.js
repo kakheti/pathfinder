@@ -1,35 +1,36 @@
 /* global require, $, Materialize */
 
 var googlemaps = require('./googlemaps'),
-api = require('./api'),
-search = require('./search'),
-_ = require('lodash'),
-Promise = require('bluebird'),
-objectTypes = require('./object-types');
+  api = require('./api'),
+  search = require('./search'),
+  _ = require('lodash'),
+  Promise = require('bluebird'),
+  objectTypes = require('./object-types'),
+  visibleTypes = {};
 
-var logger = function(message, duration) {
-  if(!message) return;
+var logger = function (message, duration) {
+  if (!message) return;
   console.log(message);
   Materialize.toast(message, duration || 2000)
 };
 
-var loadAll = function() {
-  var types = [];
-  var visibleTypes = getVisibleLayers();
+var loadAll = function (types) {
+  if(!types) types = _.keys(objectTypes);
+  var shouldLoad = [];
 
-  for(var type in objectTypes) {
+  for (var type in objectTypes) {
     var objType = objectTypes[type];
-    if(objType.marker !== false && map.zoom >= objType.zoom && visibleTypes[type]) {
-      types.push(type);
+    if (types.indexOf(type) > -1 && objType.marker !== false && map.zoom >= objType.zoom && visibleTypes[type]) {
+      shouldLoad.push(type);
     }
   }
-  return api.loadObjects(types).then(map.showObjects);
+  return api.loadObjects(shouldLoad).then(map.showObjects);
 };
 
 var typeOrder = ['office', 'substation', 'line', 'tower', 'fider', 'pole', 'tp', 'fider04', 'pole04'];
 var tp = _.template(
   '<div><input type="checkbox" checked value="<%= type %>" id="checkbox-<%= type %>">'
-  +'<label for="checkbox-<%= type %>"><%= name %></label></div>');
+  + '<label for="checkbox-<%= type %>"><%= name %></label></div>');
 var container = $("#search-type");
 typeOrder.forEach(function (type) {
   container.append(tp({
@@ -47,7 +48,7 @@ api.loadRegions().then(function (regions) {
 
 var getVisibleLayers = function () {
   var types = {};
-  $("#search-type").find("input[type=checkbox]").each(function(){
+  $("#search-type").find("input[type=checkbox]").each(function () {
     types[$(this).val()] = $(this).is(":checked");
   });
   return types;
@@ -56,14 +57,18 @@ var getVisibleLayers = function () {
 var adjustVisibility = function () {
   var types = getVisibleLayers();
 
-  for(var type in types) {
+  for (var type in types) {
     var enabled = types[type];
+    var lastEnabled = visibleTypes[type];
+    var needToLoad = [];
 
     map.setLayerVisible(type, enabled);
 
-    switch(type) {
+    switch (type) {
       case "line":
-        if(enabled) {
+        if(enabled && lastEnabled) {
+
+        } else if (enabled) {
           map.showLines = true;
           map.loadLines();
         } else {
@@ -72,7 +77,9 @@ var adjustVisibility = function () {
         }
         break;
       case "fider":
-        if(enabled) {
+        if(enabled && lastEnabled) {
+
+        } else if (enabled) {
           map.showFiders = true;
           map.loadFiders();
         } else {
@@ -81,7 +88,9 @@ var adjustVisibility = function () {
         }
         break;
       case "fider04":
-        if(enabled) {
+        if(enabled && lastEnabled) {
+
+        } else if (enabled) {
           map.load04Fiders();
           map.show04Fiders = true;
         } else {
@@ -89,15 +98,20 @@ var adjustVisibility = function () {
           map.show04Fiders = false;
         }
         break;
+      default:
+        if(enabled && !lastEnabled) {
+          needToLoad.push(type);
+        }
     }
-
-    loadAll();
   }
+
+  loadAll(needToLoad);
+  visibleTypes = types;
 };
 
 logger('იტვირთება...', 6000);
 
-googlemaps.start().then(googlemaps.create).then(function(map) {
+googlemaps.start().then(googlemaps.create).then(function (map) {
   // setting loggers
   map.logger = api.logger = search.logger = logger;
 
@@ -108,8 +122,8 @@ googlemaps.start().then(googlemaps.create).then(function(map) {
   map.showFiders = true;
   map.show04Fiders = true;
 
-  google.maps.event.addListener(map, 'tilesloaded', function() {
-    if(window.loadTimeout) clearTimeout(window.loadTimeout);
+  google.maps.event.addListener(map, 'tilesloaded', function () {
+    if (window.loadTimeout) clearTimeout(window.loadTimeout);
 
     window.loadTimeout = setTimeout(function () {
       Promise.all([
@@ -118,14 +132,13 @@ googlemaps.start().then(googlemaps.create).then(function(map) {
         map.loadFiders(),
         map.load04Fiders()
       ]).then(function () {
-        console.log("Bounds changed, markers loaded")
       });
     }, 500);
   });
 
   $("#search-type").find("input").on('change', adjustVisibility);
 
-  $("#search-region").on('change', function() {
+  $("#search-region").on('change', function () {
     var visibleTypes = getVisibleLayers();
 
     map.clearAll();

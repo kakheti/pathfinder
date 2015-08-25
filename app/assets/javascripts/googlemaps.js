@@ -152,8 +152,6 @@ var createMap = function(opts) {
     var line = event.feature;
     var type;
 
-    console.log(arguments);
-
     if(line.getProperty('class') == "Objects::Line") {
       type = "line";
     } else {
@@ -176,12 +174,12 @@ var createMap = function(opts) {
     hoverWindow.removeClass("show");
   };
 
-  map.loadedMarkers = {};
+  map.loadedMarkers = [];
 
   map.showObjects = function(objects) {
     var markers = [];
     _.forEach(objects, function(obj){
-      if(map.loadedMarkers[obj.id] == true) return;
+      if(map.loadedMarkers.indexOf(obj.id)) return;
 
       var latLng = new google.maps.LatLng(obj.lat, obj.lng);
       var icon = "/map/"+obj.type +'.png';
@@ -189,7 +187,7 @@ var createMap = function(opts) {
       marker.id = obj.id;
       marker.type = obj.type;
       marker.name = obj.name;
-      map.loadedMarkers[obj.id] = true;
+      map.loadedMarkers.push(obj.id);
       google.maps.event.addListener(marker, 'click', markerClickListener);
       if ( !markerClusterers[obj.type] ) {
         markerClusterers[obj.type] = new clusterer.MarkerClusterer(map);
@@ -222,7 +220,7 @@ var createMap = function(opts) {
 
   map.clearAll = function(){
     map.objects = [];
-    map.loadedMarkers = {};
+    map.loadedMarkers = [];
     for(i in markerClusterers) {
       markerClusterers[i].clearMarkers();
     }
@@ -257,10 +255,9 @@ var createMap = function(opts) {
   };
 
   map.loadLines = function() {
-
     return new Promise(function(resolve, reject){
       if(map.showLines && !map.linesLoaded) {
-        map.data.loadGeoJson(api.getUrl('/api/lines'), function () {
+        map.data.loadGeoJson(api.getUrl('/api/lines'), null, function () {
           map.linesLoaded = true;
           resolve();
         });
