@@ -126,6 +126,7 @@ googlemaps.start().then(googlemaps.create).then(function (map) {
     if (window.loadTimeout) clearTimeout(window.loadTimeout);
 
     window.loadTimeout = setTimeout(function () {
+      visibleTypes = getVisibleLayers();
       Promise.all([
         loadAll(),
         map.loadLines(),
@@ -139,8 +140,6 @@ googlemaps.start().then(googlemaps.create).then(function (map) {
   $("#search-type").find("input").on('change', adjustVisibility);
 
   $("#search-region").on('change', function () {
-    var visibleTypes = getVisibleLayers();
-
     map.clearAll();
     map.clearFiders();
     map.clear04Fiders();
