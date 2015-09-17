@@ -176,7 +176,9 @@ var createMap = function(opts) {
   map.showObjects = function(objects) {
     var markers = [];
     _.forEach(objects, function(obj){
-      if(map.loadedMarkers.indexOf(obj.id) > -1) return;
+      if(map.loadedMarkers.indexOf(obj.id) > -1
+      || !window.visibleTypes[obj.type]
+      || map.zoom < objectTypes[obj.type].zoom) return;
 
       var latLng = new google.maps.LatLng(obj.lat, obj.lng);
       var icon = "/map/"+obj.type +'.png';
