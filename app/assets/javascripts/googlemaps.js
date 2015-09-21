@@ -41,6 +41,12 @@ var markerZoomer = function() {
         clust.savedMarkers = null;
       }
     } else {
+      if(type == 'fider') {
+        map.clearFiders();
+      }
+      if(type == 'fider04') {
+        map.clear04Fiders();
+      }
       if (clust && !clust.savedMarkers) {
         clust.savedMarkers = clust.getMarkers();
         clust.clearMarkers();
@@ -131,7 +137,6 @@ var createMap = function(opts) {
       type = "fiderline";
     }
 
-    window.lll = line;
     lineInfo.setPosition(line.getProperty('latLng'));
 
     if (line.content) {
@@ -145,8 +150,7 @@ var createMap = function(opts) {
     }
   };
 
-  var hoverWindow = $("<div class='hover-window'>");
-  $('body').append(hoverWindow);
+  var hoverWindow =  new google.maps.InfoWindow();
 
   var lineHoverListener = function(event) {
     var line = event.feature;
@@ -158,20 +162,13 @@ var createMap = function(opts) {
       type = "fiderline";
     }
 
-    hoverWindow.css({
-      top: event.ub.clientY + 10,
-      left: event.ub.clientX + 10
-    });
-
-    hoverWindow.text(line.getProperty('name'));
-
-    window.e = event;
-
-    hoverWindow.addClass("show");
+    hoverWindow.setPosition(event.latLng);
+    hoverWindow.setContent(line.getProperty('name'));
+    hoverWindow.open(map);
   };
 
   var lineHoverOverListener = function(event) {
-    hoverWindow.removeClass("show");
+    hoverWindow.close();
   };
 
   map.loadedMarkers = [];
@@ -179,7 +176,9 @@ var createMap = function(opts) {
   map.showObjects = function(objects) {
     var markers = [];
     _.forEach(objects, function(obj){
-      if(map.loadedMarkers.indexOf(obj.id) > -1) return;
+      if(map.loadedMarkers.indexOf(obj.id) > -1
+      || !window.visibleTypes[obj.type]
+      || map.zoom < objectTypes[obj.type].zoom) return;
 
       var latLng = new google.maps.LatLng(obj.lat, obj.lng);
       var icon = "/map/"+obj.type +'.png';
@@ -248,7 +247,7 @@ var createMap = function(opts) {
   map.clear04Fiders = function(){
     map.data.forEach(function(a){
       var clazz = a.getProperty('class');
-      if (clazz === 'Objects::Fider04Line') {
+      if (clazz === 'Objects::Fider04') {
         map.data.remove(a);
       }
     });

@@ -5,8 +5,8 @@ var googlemaps = require('./googlemaps'),
   search = require('./search'),
   _ = require('lodash'),
   Promise = require('bluebird'),
-  objectTypes = require('./object-types'),
-  visibleTypes = {};
+  objectTypes = require('./object-types');
+window.visibleTypes = {};
 
 var logger = function (message, duration) {
   if (!message) return;
