@@ -15,18 +15,25 @@ var infoWindow;
 
 var styleFunction = function(f) {
   var clazz = f.getProperty('class');
-  if (clazz === 'Objects::FiderLine' || clazz === 'Objects::Fider04') {
-    return {
-      strokeColor: '#FFA504',
-      strokeWeight: 4,
-      strokeOpacity: 0.5
-    };
-  } else if (clazz === 'Objects::Line') {
-    return {
-      strokeColor: '#FF0000',
-      strokeWeight: 5,
-      strokeOpacity: 0.5
-    };
+  switch(clazz) {
+    case 'Objects::FiderLine':
+      return {
+        strokeColor: '#FFA504',
+        strokeWeight: 4,
+        strokeOpacity: 0.5
+      };
+    case 'Objects::Fider04':
+      return {
+        strokeColor: '#2196F3',
+        strokeWeight: 4,
+        strokeOpacity: 0.5
+      };
+    case 'Objects::Line':
+      return {
+        strokeColor: '#FF0000',
+        strokeWeight: 5,
+        strokeOpacity: 0.5
+      };
   }
 };
 
@@ -36,11 +43,13 @@ var markerZoomer = function() {
     var clust = markerClusterers[type];
     var min_zoom = objectTypes[type].zoom;
     if (min_zoom <= zoom) {
+      $("#checkbox-"+type).prop('disabled', false);
       if (clust && clust.savedMarkers) {
         clust.addMarkers(clust.savedMarkers);
         clust.savedMarkers = null;
       }
     } else {
+      $("#checkbox-"+type).prop('disabled', true);
       if(type == 'fider') {
         map.clearFiders();
       }
@@ -298,6 +307,7 @@ var createMap = function(opts) {
   map.data.addListener('mouseover', lineHoverListener);
   map.data.addListener('mouseout', lineHoverOverListener);
 
+  markerZoomer();
 
   ///////////////////////////////////////////////////////////////////////////////
 
