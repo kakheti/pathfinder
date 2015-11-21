@@ -40,7 +40,7 @@ class Objects::Pole04
       obj = Objects::Pole04.where(kmlid:id).first || Objects::Pole04.create(kmlid:id)
       # start description section
       descr = placemark.find('./kml:description',kmlns).first.content
-      obj.name = Objects::Kml.get_property(descr, 'ბოძის იდენტიფიკატორი')
+      obj.name = Objects::Kml.get_property(descr, 'ბოძის id')
       obj.number = Objects::Kml.get_property(descr, 'ბოძის ნომერი')
       obj.height = Objects::Kml.get_property(descr, 'ბოძის სიმაღლე').to_f
       obj.pole_type = Objects::Kml.get_property(descr, 'ბოძის ტიპი', '').to_ka(:all)
