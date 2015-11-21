@@ -1,5 +1,6 @@
 # -*- encoding : utf-8 -*-
 require 'xml'
+require 'csv'
 
 class Objects::Pole04
   include Mongoid::Document
@@ -63,6 +64,12 @@ class Objects::Pole04
       coord = placemark.find('./kml:Point/kml:coordinates',kmlns).first.content
       obj.set_coordinate(coord)
       obj.save
+    end
+  end
+
+  def self.from_csv(csv)
+    CSV.parse(csv, :headers => true) do |row|
+      id = row['Pole_id'].gsub(',','')
     end
   end
 end

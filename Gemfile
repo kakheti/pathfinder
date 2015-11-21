@@ -13,7 +13,8 @@ gem 'bootstrap-sass'
 # gem 'turbolinks'
 # gem 'jquery-turbolinks'
 gem 'jbuilder', '~> 1.2'
-gem 'zip'
+gem 'rubyzip', '>= 1.0.0'
+gem 'zip-zip'
 
 gem 'mongoid', '~> 4.0'
 gem 'mongoid_search'
@@ -23,7 +24,6 @@ gem 'bootstrap-will_paginate'
 gem 'ka'
 
 gem 'libxml-ruby'
-gem 'rubyzip'
 
 gem 'prawn'
 gem 'prawn_rails'

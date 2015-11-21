@@ -33,7 +33,6 @@ class Objects::Fider04sController < ApplicationController
       case File.extname(f).downcase
       when '.kmz' then upload_kmz(params[:data].tempfile)
       when '.kml' then upload_kml(params[:data].tempfile)
-      when '.txt' then upload_txt(params[:data].tempfile)
       else raise 'არასწორი ფორმატი' end
       redirect_to objects_fider04s_url, notice: 'მონაცემები ატვირთულია'
     end
@@ -70,19 +69,14 @@ class Objects::Fider04sController < ApplicationController
   def upload_kmz(file)
     Zip::File.open file do |zip_file|
       zip_file.each do |entry|
-        upload_kml(entry) if 'kml'==entry.name[-3..-1]
+        upload_kml(entry.get_input_stream) if 'kml'==entry.name[-3..-1]
       end
     end
   end
 
   def upload_kml(file)
     Objects::Fider04.delete_all
-    kml = file.get_input_stream.read
+    kml = file.read
     Objects::Fider04.from_kml(kml)
-  end
-
-  def upload_txt(file)
-    txt = file.get_input_stream.read
-    Objects::Fider04.from_txt(txt)
   end
 end
