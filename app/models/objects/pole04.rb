@@ -21,6 +21,9 @@ class Objects::Pole04
   field :owner, type: String
   field :internet, type: String
   field :street_light, type: String
+  field :isolators, type: Array, default: []
+  field :traverse, type: Array, default: []
+  field :counters, type: Array, default: []
 
   belongs_to :region
   belongs_to :tp, class_name: 'Objects::Tp'
@@ -70,6 +73,26 @@ class Objects::Pole04
   def self.from_csv(csv)
     CSV.parse(csv, :headers => true) do |row|
       id = row['Pole_id'].gsub(',','')
+      quantity = row['Quantity'].to_i
+
+      pole = Objects::Pole04.where({ :name => id }).first
+
+      if !pole.nil? then
+        if !row['Pole_T_type'].nil? then
+          traverse_type = row['Pole_T_type'].to_i
+          puts "Traverse #{traverse_type} #{quantity}"
+          pole.traverse[traverse_type] = quantity
+        elsif !row['Pole_i_type'].nil? then
+          isolator_type = row['Pole_i_type'].to_i
+          puts "Isolator #{isolator_type} #{quantity}"
+          pole.isolators[isolator_type] = quantity
+        elsif !row['Pole_co_type'].nil? then
+          counter_type = row['Pole_co_type'].to_i
+          puts "Counter #{counter_type} #{quantity}"
+          pole.counters[counter_type] = quantity
+        end
+        pole.save
+      end
     end
   end
 end
