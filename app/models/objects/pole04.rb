@@ -33,6 +33,32 @@ class Objects::Pole04
   index({ name: 1 })
   index({ region_id: 1 })
 
+  def traverse_s
+    str = ""
+    str += "კაუჭისებრი #{traverse[1]}, " if !traverse[1].nil?
+    str += "კუთხოვანა ერთმაგი #{traverse[2]}, " if !traverse[2].nil?
+    str += "კუთხოვანა ორმაგი #{traverse[3]}, " if !traverse[3].nil?
+    str += "სხვა #{traverse[4]}" if !traverse[4].nil?
+  end
+
+  def isolators_s
+    str = ""
+    str += "ფაიფური პატარა #{isolators[1]}, " if !isolators[1].nil?
+    str += "ფაიფური დიდი #{isolators[2]}, " if !isolators[2].nil?
+    str += "შუშა პატარა #{isolators[3]}, " if !isolators[3].nil?
+    str += "შუშა დიდი #{isolators[4]}, " if !isolators[4].nil?
+    str += "სხვა #{isolators[5]}" if !isolators[5].nil?
+  end
+
+  def counters_s
+    str = ""
+    str += "ერთიანი #{counters[1]}, " if !counters[1].nil?
+    str += "ორიანი #{counters[2]}, " if !counters[2].nil?
+    str += "სამიანი #{counters[3]}, " if !counters[3].nil?
+    str += "ოთხიანი #{counters[4]}, " if !counters[4].nil?
+    str += "ხუთიანი #{counters[5]}" if !counters[5].nil?
+  end
+
   def self.from_kml(xml)
     parser=XML::Parser.string xml
     doc=parser.parse ; root=doc.child
