@@ -35,28 +35,31 @@ class Objects::Pole04
 
   def traverse_s
     str = ""
-    str += "კაუჭისებრი #{traverse[1]}, " if !traverse[1].nil?
-    str += "კუთხოვანა ერთმაგი #{traverse[2]}, " if !traverse[2].nil?
-    str += "კუთხოვანა ორმაგი #{traverse[3]}, " if !traverse[3].nil?
-    str += "სხვა #{traverse[4]}" if !traverse[4].nil?
+    str += "კაუჭისებრი #{traverse[1]}, " unless traverse[1].nil?
+    str += "კუთხოვანა ერთმაგი #{traverse[2]}, " unless traverse[2].nil?
+    str += "კუთხოვანა ორმაგი #{traverse[3]}, " unless traverse[3].nil?
+    str += "სხვა #{traverse[4]}" unless traverse[4].nil?
+    return str
   end
 
   def isolators_s
     str = ""
-    str += "ფაიფური პატარა #{isolators[1]}, " if !isolators[1].nil?
-    str += "ფაიფური დიდი #{isolators[2]}, " if !isolators[2].nil?
-    str += "შუშა პატარა #{isolators[3]}, " if !isolators[3].nil?
-    str += "შუშა დიდი #{isolators[4]}, " if !isolators[4].nil?
-    str += "სხვა #{isolators[5]}" if !isolators[5].nil?
+    str += "ფაიფური პატარა #{isolators[1]}, " unless isolators[1].nil?
+    str += "ფაიფური დიდი #{isolators[2]}, " unless isolators[2].nil?
+    str += "შუშა პატარა #{isolators[3]}, " unless isolators[3].nil?
+    str += "შუშა დიდი #{isolators[4]}, " unless isolators[4].nil?
+    str += "სხვა #{isolators[5]}" unless isolators[5].nil?
+    return str
   end
 
   def counters_s
     str = ""
-    str += "ერთიანი #{counters[1]}, " if !counters[1].nil?
-    str += "ორიანი #{counters[2]}, " if !counters[2].nil?
-    str += "სამიანი #{counters[3]}, " if !counters[3].nil?
-    str += "ოთხიანი #{counters[4]}, " if !counters[4].nil?
-    str += "ხუთიანი #{counters[5]}" if !counters[5].nil?
+    str += "ერთიანი #{counters[1]}, " unless counters[1].nil?
+    str += "ორიანი #{counters[2]}, " unless counters[2].nil?
+    str += "სამიანი #{counters[3]}, " unless counters[3].nil?
+    str += "ოთხიანი #{counters[4]}, " unless counters[4].nil?
+    str += "ხუთიანი #{counters[5]}" unless counters[5].nil?
+    return str
   end
 
   def self.from_kml(xml)
