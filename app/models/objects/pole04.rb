@@ -59,6 +59,11 @@ class Objects::Pole04
     str += "სამიანი #{counters[3]}, " unless counters[3].nil?
     str += "ოთხიანი #{counters[4]}, " unless counters[4].nil?
     str += "ხუთიანი #{counters[5]}" unless counters[5].nil?
+    str += "ექვსიანი #{counters[6]}" unless counters[6].nil?
+    str += "შვიდიანი #{counters[7]}" unless counters[7].nil?
+    str += "ათიანი #{counters[8]}" unless counters[8].nil?
+    str += "ცხრიანი #{counters[9]}" unless counters[9].nil?
+    str += "სხვა #{counters[10]}" unless counters[10].nil?
     return str
   end
 
