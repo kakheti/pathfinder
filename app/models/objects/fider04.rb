@@ -72,14 +72,10 @@ class Objects::Fider04
       line.owner = Objects::Kml.get_property(descr, 'მესაკუთრე')
       line.state = Objects::Kml.get_property(descr, 'სადენის მდგომარეობა')
       line.direction = Objects::Kml.get_property(descr, 'მიმართულება')
+      line.region = Region.get_by_name(Objects::Kml.get_property(descr, 'მუნიციპალიტეტი').to_ka(:all))
 
-      tr_num = Objects::Kml.get_property(descr, 'TR_NUM')
-
-      puts 'Parent'
-      puts tr_num
-
+      tr_num = Objects::Kml.get_property(descr, 'ტრანსფორმატორის ნომერი')
       line.tp = Objects::Tp.by_name(tr_num)
-      line.region = line.tp.region
 
       coords = placemark.find('./kml:MultiGeometry/kml:LineString/kml:coordinates', kmlns).first.content
       coords = coords.split(' ')
