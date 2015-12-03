@@ -118,15 +118,12 @@ class Objects::Pole04
       unless pole.nil?
         if !row['Pole_T_type'].nil?
           traverse_type = row['Pole_T_type'].to_i
-          puts "Traverse #{traverse_type} #{quantity}"
           pole.traverse[traverse_type] = quantity
         elsif !row['Pole_i_type'].nil?
           isolator_type = row['Pole_i_type'].to_i
-          puts "Isolator #{isolator_type} #{quantity}"
           pole.isolators[isolator_type] = quantity
         elsif !row['Pole_co_type'].nil?
           counter_type = row['Pole_co_type'].to_i
-          puts "Counter #{counter_type} #{quantity}"
           pole.counters[counter_type] = quantity
         end
         pole.save
