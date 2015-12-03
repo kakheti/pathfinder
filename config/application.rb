@@ -23,6 +23,6 @@ module Pathfinder
     config.i18n.default_locale = :ka
     config.i18n.fallbacks = true
 
-    config.mongoid.logger = Logger.new($stdout, :warn)
+    Mongo::Logger.logger.level = Logger::WARN
   end
 end
