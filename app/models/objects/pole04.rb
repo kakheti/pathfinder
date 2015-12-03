@@ -93,7 +93,7 @@ class Objects::Pole04
       tpnumber = Objects::Kml.get_property(descr, 'ტრანსფორმატორის ნომერი')
       obj.tp = Objects::Tp.by_name(tpnumber) if tpnumber.present?
 
-      dir_num = Objects::Kml.get_property(descr, 'მიმართულება')
+      dir_num = Objects::Direction04.decode(Objects::Kml.get_property(descr, 'მიმართულება'))
       obj.direction = Objects::Direction04.get_or_create(dir_num, obj.tp)
 
       description = Objects::Kml.get_property(descr, 'Note_')

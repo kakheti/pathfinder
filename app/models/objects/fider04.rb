@@ -76,7 +76,7 @@ class Objects::Fider04
       tr_num = Objects::Kml.get_property(descr, 'ტრანსფორმატორის ნომერი')
       line.tp = Objects::Tp.by_name(tr_num)
 
-      dir_num = Objects::Kml.get_property(descr, 'მიმართულება')
+      dir_num = Objects::Direction04.decode(Objects::Kml.get_property(descr, 'მიმართულება'))
       line.direction = Objects::Direction04.get_or_create(dir_num, line.tp)
 
       coords = placemark.find('./kml:MultiGeometry/kml:LineString/kml:coordinates', kmlns).first.content

@@ -22,4 +22,8 @@ class Objects::Direction04
   def self.get_or_create(number, tp)
     self.where(number: number).first || self.create(number: number, tp: tp, region: tp.region)
   end
+
+  def self.decode(coded)
+    [0, 100, 200, 300, 400, 500, 600, 700, 800, 900][coded.to_i]
+  end
 end
