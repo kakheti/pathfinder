@@ -1,5 +1,5 @@
 development:
-  sessions:
+  clients:
     default:
       database: pathfinder_development
       hosts:
@@ -7,7 +7,7 @@ development:
       options:
   options:
 test:
-  sessions:
+  clients:
     default:
       database: pathfinder_test
       hosts:

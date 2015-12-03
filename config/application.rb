@@ -3,14 +3,9 @@ require File.expand_path('../boot', __FILE__)
 
 require 'rails/all'
 
-require 'bson'
-require 'moped'
-
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
-
-Moped::BSON = BSON
 
 module Pathfinder
   class Application < Rails::Application
@@ -27,5 +22,7 @@ module Pathfinder
     config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{rb,yml}').to_s]
     config.i18n.default_locale = :ka
     config.i18n.fallbacks = true
+
+    config.mongoid.logger = Logger.new($stdout, :warn)
   end
 end

@@ -1,8 +1,8 @@
 # -*- encoding : utf-8 -*-
 module Sys::Userstamps
   def self.included(base)
-    base.field :created_by, type: Moped::BSON::ObjectId
-    base.field :updated_by, type: Moped::BSON::ObjectId
+    base.field :created_by, type: BSON::ObjectId
+    base.field :updated_by, type: BSON::ObjectId
   end
 
   def creator

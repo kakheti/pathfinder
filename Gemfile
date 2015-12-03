@@ -16,7 +16,7 @@ gem 'jbuilder', '~> 1.2'
 gem 'rubyzip', '>= 1.0.0'
 gem 'zip-zip'
 
-gem 'mongoid', '~> 4.0'
+gem 'mongoid', '~> 5.0'
 gem 'mongoid_search'
 gem 'will_paginate_mongoid'
 gem 'forma', '~>0.1'
@@ -36,6 +36,6 @@ gem 'sidekiq'
 gem 'sinatra', '>= 1.3.0', :require => nil
 gem 'puma'
 
-gem "browserify-rails", "~> 0.7"
+gem 'browserify-rails', '~> 2.0'
 
 gem 'materialize-sass'
