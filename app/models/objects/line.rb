@@ -18,15 +18,20 @@ class Objects::Line
 
   search_in :name, :description, :direction
 
-  def to_s; self.name end
-  def self.by_name(name); Objects::Line.where(name: name).first end
+  def to_s;
+    self.name
+  end
+
+  def self.by_name(name)
+    Objects::Line.where(name: name).first
+  end
 
   def set_points(points)
     self.points.destroy_all
     points.each do |p|
-      lat,lng = p[0],p[1]
-      
-      point = self.points.new(line:self)
+      lat, lng = p[0], p[1]
+
+      point = self.points.new(line: self)
       point.lat = lat
       point.lng = lng
       point.save
@@ -35,13 +40,13 @@ class Objects::Line
 
   def self.from_kml(xml)
     parser = XML::Parser.string xml
-    doc = parser.parse ; root=doc.child
+    doc = parser.parse
     kmlns = "kml:#{KMLNS}"
     placemarks = doc.child.find '//kml:Placemark', kmlns
     placemarks.each do |placemark|
       id = placemark.attributes['id']
-      name = placemark.find('./kml:name',kmlns).first.content
-      coords = placemark.find('./kml:MultiGeometry/kml:LineString/kml:coordinates',kmlns).first.content
+      name = placemark.find('./kml:name', kmlns).first.content
+      coords = placemark.find('./kml:MultiGeometry/kml:LineString/kml:coordinates', kmlns).first.content
       # description content
       descr = placemark.find('./kml:description', kmlns).first.content
       regname = Objects::Kml.get_property(descr, 'რეგიონი')

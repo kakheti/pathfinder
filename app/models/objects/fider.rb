@@ -43,7 +43,6 @@ class Objects::Fider
     kmlns="kml:#{KMLNS}"
     placemarks=doc.child.find '//kml:Placemark',kmlns
     placemarks.each do |placemark|
-      id = placemark.attributes['id']
       descr=placemark.find('./kml:description',kmlns).first.content
       name = Objects::Kml.get_property(descr, 'ფიდერი')
       fider = Objects::Fider.by_name(name.to_ka(:all)) if name
@@ -70,7 +69,6 @@ class Objects::Fider
       line.set_coordinate(coords[coords.size/2])
       line.calc_length!
       line.save
-      # XXX how to get fider's region?
       fider.linename = Objects::Kml.get_property(descr, 'ელ, გადამცემი ხაზი')
       fider.line = Objects::Line.by_name(fider.linename)
       fider.set_coordinate(coords[coords.size/2])

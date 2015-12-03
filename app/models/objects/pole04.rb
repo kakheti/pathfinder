@@ -30,30 +30,30 @@ class Objects::Pole04
 
   search_in :name, :description, :fider, :tp => 'name'
 
-  index({ name: 1 })
-  index({ region_id: 1 })
+  index({name: 1})
+  index({region_id: 1})
 
   def traverse_s
-    str = ""
+    str = ''
     str += "კაუჭისებრი #{traverse[1]}, " unless traverse[1].nil?
     str += "კუთხოვანა ერთმაგი #{traverse[2]}, " unless traverse[2].nil?
     str += "კუთხოვანა ორმაგი #{traverse[3]}, " unless traverse[3].nil?
     str += "სხვა #{traverse[4]}" unless traverse[4].nil?
-    return str
+    str
   end
 
   def isolators_s
-    str = ""
+    str = ''
     str += "ფაიფური პატარა #{isolators[1]}, " unless isolators[1].nil?
     str += "ფაიფური დიდი #{isolators[2]}, " unless isolators[2].nil?
     str += "შუშა პატარა #{isolators[3]}, " unless isolators[3].nil?
     str += "შუშა დიდი #{isolators[4]}, " unless isolators[4].nil?
     str += "სხვა #{isolators[5]}" unless isolators[5].nil?
-    return str
+    str
   end
 
   def counters_s
-    str = ""
+    str = ''
     str += "ერთიანი #{counters[1]}, " unless counters[1].nil?
     str += "ორიანი #{counters[2]}, " unless counters[2].nil?
     str += "სამიანი #{counters[3]}, " unless counters[3].nil?
@@ -64,19 +64,19 @@ class Objects::Pole04
     str += "ათიანი #{counters[8]}" unless counters[8].nil?
     str += "ცხრიანი #{counters[9]}" unless counters[9].nil?
     str += "სხვა #{counters[10]}" unless counters[10].nil?
-    return str
+    str
   end
 
   def self.from_kml(xml)
     parser=XML::Parser.string xml
-    doc=parser.parse ; root=doc.child
+    doc=parser.parse
     kmlns="kml:#{KMLNS}"
-    placemarks=doc.child.find '//kml:Placemark',kmlns
+    placemarks=doc.child.find '//kml:Placemark', kmlns
     placemarks.each do |placemark|
       id = placemark.attributes['id']
-      obj = Objects::Pole04.where(kmlid:id).first || Objects::Pole04.create(kmlid:id)
+      obj = Objects::Pole04.where(kmlid: id).first || Objects::Pole04.create(kmlid: id)
       # start description section
-      descr = placemark.find('./kml:description',kmlns).first.content
+      descr = placemark.find('./kml:description', kmlns).first.content
       obj.name = Objects::Kml.get_property(descr, 'ბოძის id')
       obj.number = Objects::Kml.get_property(descr, 'ბოძის ნომერი')
       obj.height = Objects::Kml.get_property(descr, 'ბოძის სიმაღლე').to_f
@@ -98,7 +98,7 @@ class Objects::Pole04
       obj.region = obj.tp.region if obj.tp.present?
 
       # end of description section
-      coord = placemark.find('./kml:Point/kml:coordinates',kmlns).first.content
+      coord = placemark.find('./kml:Point/kml:coordinates', kmlns).first.content
       obj.set_coordinate(coord)
       obj.save
     end
@@ -106,21 +106,21 @@ class Objects::Pole04
 
   def self.from_csv(csv)
     CSV.parse(csv, :headers => true) do |row|
-      id = row['Pole_id'].gsub(',','')
+      id = row['Pole_id'].gsub(',', '')
       quantity = row['Quantity'].to_i
 
-      pole = Objects::Pole04.where({ :name => id }).first
+      pole = Objects::Pole04.where({:name => id}).first
 
-      if !pole.nil? then
-        if !row['Pole_T_type'].nil? then
+      unless pole.nil?
+        if !row['Pole_T_type'].nil?
           traverse_type = row['Pole_T_type'].to_i
           puts "Traverse #{traverse_type} #{quantity}"
           pole.traverse[traverse_type] = quantity
-        elsif !row['Pole_i_type'].nil? then
+        elsif !row['Pole_i_type'].nil?
           isolator_type = row['Pole_i_type'].to_i
           puts "Isolator #{isolator_type} #{quantity}"
           pole.isolators[isolator_type] = quantity
-        elsif !row['Pole_co_type'].nil? then
+        elsif !row['Pole_co_type'].nil?
           counter_type = row['Pole_co_type'].to_i
           puts "Counter #{counter_type} #{quantity}"
           pole.counters[counter_type] = quantity

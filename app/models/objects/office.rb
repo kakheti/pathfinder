@@ -17,7 +17,7 @@ class Objects::Office
 
   def self.from_kml(xml)
     parser = XML::Parser.string xml
-    doc = parser.parse ; root=doc.child
+    doc = parser.parse
     kmlns = "kml:#{KMLNS}"
     placemarks = doc.child.find '//kml:Placemark',kmlns
     placemarks.each do |placemark|
