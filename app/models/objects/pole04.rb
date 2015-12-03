@@ -27,6 +27,7 @@ class Objects::Pole04
 
   belongs_to :region
   belongs_to :tp, class_name: 'Objects::Tp'
+  belongs_to :direction, class_name: 'Objects::Direction04'
 
   search_in :name, :description, :fider, :tp => 'name'
 
@@ -91,6 +92,9 @@ class Objects::Pole04
 
       tpnumber = Objects::Kml.get_property(descr, 'ტრანსფორმატორის ნომერი')
       obj.tp = Objects::Tp.by_name(tpnumber) if tpnumber.present?
+
+      dir_num = Objects::Kml.get_property(descr, 'მიმართულება')
+      obj.direction = Objects::Direction04.get_or_create(dir_num, obj.tp)
 
       description = Objects::Kml.get_property(descr, 'Note_')
       obj.description = description.to_ka(:all) if description.present?

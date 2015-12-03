@@ -25,10 +25,10 @@ class Objects::Fider04
   field :sip, type: Integer
   field :owner, type: Integer
   field :state, type: String
-  field :direction, type: Integer
 
   belongs_to :region
   belongs_to :tp, class_name: 'Objects::Tp'
+  belongs_to :direction, class_name: 'Objects::Direction04'
 
   embeds_many :points, class_name: 'Objects::Fider04Point'
 
@@ -71,11 +71,13 @@ class Objects::Fider04
       line.sip = Objects::Kml.get_property(descr, 'SIP')
       line.owner = Objects::Kml.get_property(descr, 'მესაკუთრე')
       line.state = Objects::Kml.get_property(descr, 'სადენის მდგომარეობა')
-      line.direction = Objects::Kml.get_property(descr, 'მიმართულება')
       line.region = Region.get_by_name(Objects::Kml.get_property(descr, 'მუნიციპალიტეტი').to_ka(:all))
 
       tr_num = Objects::Kml.get_property(descr, 'ტრანსფორმატორის ნომერი')
       line.tp = Objects::Tp.by_name(tr_num)
+
+      dir_num = Objects::Kml.get_property(descr, 'მიმართულება')
+      line.direction = Objects::Direction04.get_or_create(dir_num, line.tp)
 
       coords = placemark.find('./kml:MultiGeometry/kml:LineString/kml:coordinates', kmlns).first.content
       coords = coords.split(' ')
