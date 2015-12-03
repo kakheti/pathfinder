@@ -37,7 +37,7 @@
   </tr>
   <tr>
     <td class="text-muted">გარე განათება</td>
-    <td><%= @pole.street_light%></td>
+    <td><%= @pole.street_light %></td>
   </tr>
   <tr>
     <td class="text-muted">ინტერნეტი</td>
@@ -63,15 +63,15 @@
   </tr>
   <tr>
     <td class="text-muted">შენიშვნა</td>
-    <td><%= @pole.description%></td>
+    <td><%= @pole.description %></td>
   </tr>
   <tr>
     <td class="text-muted">მესაკუთრე</td>
-    <td><%= @pole.owner%></td>
+    <td><%= @pole.owner %></td>
   </tr>
   <tr>
     <td class="text-muted">0.4კვ ხაზის მიმართულება</td>
-    <td><%= @pole.description%></td>
+    <td></td>
   </tr>
   <tr>
     <td class="text-muted">სატრ. ჯიხური</td>
@@ -101,4 +101,4 @@
 <h3 class="page-header">
   0.4კვ ბოძის მდებარეობა
 </h3>
-<%= render partial: 'data/points_map', locals: { points: [ @pole.location ] } %>
+<%= render partial: 'data/points_map', locals: {points: [@pole.location]} %>
