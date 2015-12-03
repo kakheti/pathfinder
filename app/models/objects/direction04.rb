@@ -24,6 +24,6 @@ class Objects::Direction04
   end
 
   def self.decode(coded)
-    [0, 100, 200, 300, 400, 500, 600, 700, 800, 900][coded.to_i]
+    %w(0 100 200 300 400 500 600 700 800 900)[coded.to_i] || coded
   end
 end

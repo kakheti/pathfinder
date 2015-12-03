@@ -46,12 +46,10 @@ module Objects::Kml
   end
 
   def get_property(description, name, default = nil)
-    s1 = "<td>#{name}</td>"
-    if description.index(s1)
-      idx1 = description.index(s1) + s1.length
-      prop = description[idx1..-1].match(/<td>([^<])*<\/td>/)[0][4..-6].strip
-      prop == '&lt;Null&gt;' ? default : prop
-    end
+    regex = /<td>\s*?#{name}\s*?<\/td>\s*?<td>([^<]*)<\/td>/im
+    prop = regex.match(description)[1].strip
+
+    prop == '&lt;Null&gt;' ? default : prop
   end
 
   module_function :get_property
