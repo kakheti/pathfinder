@@ -16,16 +16,32 @@
     <td><code><%= number_with_precision @pole.height, precision: 2 %></code> მეტრი</td>
   </tr>
   <tr>
+    <td class="text-muted">ანკერული</td>
+    <td><%= @pole.ankeruli %></td>
+  </tr>
+  <tr>
     <td class="text-muted">ვერტიკალური მდგომარეობა</td>
     <td>
       <%= @pole.vertical_position %>
     </td>
   </tr>
   <tr>
-    <td class="text-muted">ცვეთის ხარისხი</td>
+    <td class="text-muted">ხარისხობრივი მდგომარეობა</td>
     <td>
       <%= @pole.oldness %>
     </td>
+  </tr>
+  <tr>
+    <td class="text-muted">ლამპიონის სამაგრი</td>
+    <td><%= @pole.lampioni %></td>
+  </tr>
+  <tr>
+    <td class="text-muted">გარე განათება</td>
+    <td><%= @pole.street_light %></td>
+  </tr>
+  <tr>
+    <td class="text-muted">ინტერნეტი</td>
+    <td><%= @pole.internet %></td>
   </tr>
   <tr>
     <td class="text-muted">ტრავერსი</td>
@@ -47,7 +63,31 @@
   </tr>
   <tr>
     <td class="text-muted">შენიშვნა</td>
-    <td><%= @pole.description%></td>
+    <td><%= @pole.description %></td>
+  </tr>
+  <tr>
+    <td class="text-muted">მესაკუთრე</td>
+    <td><%= @pole.owner %></td>
+  </tr>
+  <tr>
+    <td class="text-muted">0.4კვ ხაზის მიმართულება</td>
+    <td><%= @pole.direction.number unless @pole.direction.nil? %></td>
+  </tr>
+  <tr>
+    <td class="text-muted">სატრ. ჯიხური</td>
+    <td><%= link_to @pole.tp.name, objects_tp_url(@pole.tp) unless @pole.tp.nil? %></td>
+  </tr>
+  <tr>
+    <td class="text-muted">6-10კვ ფიდერი</td>
+    <td><%= link_to @pole.tp.fider.name, objects_fider_url(@pole.tp.fider) unless @pole.tp.nil? %></td>
+  </tr>
+  <tr>
+    <td class="text-muted">ქვესადგური</td>
+    <td><%= link_to @pole.tp.substation.name, objects_substation_url(@pole.tp.substation) unless @pole.tp.nil? %></td>
+  </tr>
+  <tr>
+    <td class="text-muted">მუნიციპალიტეტი</td>
+    <td><%= @pole.region.name %></td>
   </tr>
   <tr>
     <td class="text-muted">კოორდინატები</td>
@@ -61,4 +101,4 @@
 <h3 class="page-header">
   0.4კვ ბოძის მდებარეობა
 </h3>
-<%= render partial: 'data/points_map', locals: { points: [ @pole.location ] } %>
+<%= render partial: 'data/points_map', locals: {points: [@pole.location]} %>

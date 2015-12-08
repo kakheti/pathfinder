@@ -8,7 +8,7 @@ module Objects::LengthProperty
   def calc_length
     len=0; points=self.points.to_a
     (1..points.length-1).each do |idx|
-      p1 = points[idx-1] ; p2=points[idx]
+      p1 = points[idx-1]; p2=points[idx]
       a1 = Geokit::LatLng.new(p1.lat, p1.lng)
       a2 = Geokit::LatLng.new(p2.lat, p2.lng)
       len += a1.distance_to(a2)
