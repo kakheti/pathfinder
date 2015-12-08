@@ -27,6 +27,7 @@ class Objects::Pole04
 
   belongs_to :region
   belongs_to :tp, class_name: 'Objects::Tp'
+  belongs_to :fider, class_name: 'Objects::Fider'
   belongs_to :direction, class_name: 'Objects::Direction04'
   belongs_to :substation, class_name: 'Objects::Substation'
 
@@ -102,6 +103,7 @@ class Objects::Pole04
 
       obj.region = obj.tp.region if obj.tp.present?
       obj.substation = obj.tp.substation if obj.tp.present?
+      obj.fider = obj.tp.fider if obj.tp.present?
 
       # end of description section
       coord = placemark.find('./kml:Point/kml:coordinates', kmlns).first.content

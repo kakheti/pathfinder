@@ -21,6 +21,8 @@ class Objects::Fider
   embeds_many :lines, class_name: 'Objects::FiderLine'
   has_many :tps, class_name: 'Objects::Tp'
   has_many :poles, class_name: 'Objects::Pole'
+  has_many :fider04s, class_name: 'Objects::Fider04'
+  has_many :pole04s, class_name: 'Objects::Pole04'
 
   search_in :name, :description, :poles, :substation => 'name'
 
@@ -159,7 +161,7 @@ class Objects::FiderLine
       2 => 'არა'
     }[quro]
   end
-  
+
   def set_points(points)
     self.points.destroy_all
     points.each do |p|
