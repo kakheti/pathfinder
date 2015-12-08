@@ -27,6 +27,7 @@ class Objects::Fider04
   field :state, type: String
 
   belongs_to :region
+  belongs_to :substation, class_name: 'Objects::Substation'
   belongs_to :tp, class_name: 'Objects::Tp'
   belongs_to :direction, class_name: 'Objects::Direction04'
 
@@ -75,6 +76,8 @@ class Objects::Fider04
 
       tr_num = Objects::Kml.get_property(descr, 'ტრანსფორმატორის ნომერი')
       line.tp = Objects::Tp.by_name(tr_num)
+
+      line.substation = line.tp.substation if line.tp.present?
 
       dir_num = Objects::Direction04.decode(Objects::Kml.get_property(descr, 'მიმართულება'))
       line.direction = Objects::Direction04.get_or_create(dir_num, line.tp)

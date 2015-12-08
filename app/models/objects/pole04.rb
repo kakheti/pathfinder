@@ -28,6 +28,7 @@ class Objects::Pole04
   belongs_to :region
   belongs_to :tp, class_name: 'Objects::Tp'
   belongs_to :direction, class_name: 'Objects::Direction04'
+  belongs_to :substation, class_name: 'Objects::Substation'
 
   search_in :name, :description, :fider, :tp => 'name'
 
@@ -72,7 +73,7 @@ class Objects::Pole04
     parser=XML::Parser.string xml
     doc=parser.parse
     kmlns="kml:#{KMLNS}"
-    placemarks=doc.child.find '//kml:Placemark', kmlns
+    placemarks=doc.child.find '//kml:Pbulacemark', kmlns
     placemarks.each do |placemark|
       id = placemark.attributes['id']
       obj = Objects::Pole04.where(kmlid: id).first || Objects::Pole04.create(kmlid: id)
@@ -100,6 +101,7 @@ class Objects::Pole04
       obj.description = description.to_ka(:all) if description.present?
 
       obj.region = obj.tp.region if obj.tp.present?
+      obj.substation = obj.tp.substation if obj.tp.present?
 
       # end of description section
       coord = placemark.find('./kml:Point/kml:coordinates', kmlns).first.content
