@@ -47,9 +47,9 @@ module Objects::Kml
 
   def get_property(description, name, default = nil)
     regex = /<td>\s*?#{name}\s*?<\/td>\s*?<td>([^<]*)<\/td>/im
-    prop = regex.match(description)[1].strip
-
-    prop == '&lt;Null&gt;' ? default : prop
+    match = regex.match(description)
+    prop = if match.nil? then nil; else match[1].strip; end
+    prop == '&lt;Null&gt;' || prop.nil? ? default : prop
   end
 
   module_function :get_property
