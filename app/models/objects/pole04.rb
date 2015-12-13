@@ -74,7 +74,7 @@ class Objects::Pole04
     parser=XML::Parser.string xml
     doc=parser.parse
     kmlns="kml:#{KMLNS}"
-    placemarks=doc.child.find '//kml:Pbulacemark', kmlns
+    placemarks=doc.child.find '//kml:Placemark', kmlns
     placemarks.each do |placemark|
       id = placemark.attributes['id']
       obj = Objects::Pole04.where(kmlid: id).first || Objects::Pole04.create(kmlid: id)
