@@ -11,8 +11,10 @@ class Objects::Direction04
 
   belongs_to :region
   belongs_to :tp, class_name: 'Objects::Tp'
-  has_many :poles, class_name: 'Objects::Pole04'
-  has_many :lines, class_name: 'Objects::Fider04'
+  belongs_to :substation, class_name: 'Objects::Substation'
+  belongs_to :fider, class_name: 'Objects::Fider'
+  has_many :pole04s, class_name: 'Objects::Pole04'
+  has_many :fider04s, class_name: 'Objects::Fider04'
 
   search_in :name, :description, :fider, :tp => 'name'
 
@@ -20,7 +22,7 @@ class Objects::Direction04
   index({region_id: 1})
 
   def self.get_or_create(number, tp)
-    self.where(number: number).first || self.create(number: number, tp: tp, region: tp.region)
+    self.where(number: number).first || self.create(number: number, tp: tp, region: tp.region, fider: tp.fider, substation: tp.substation)
   end
 
   def self.decode(coded)
