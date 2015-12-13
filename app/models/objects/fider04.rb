@@ -39,8 +39,15 @@ class Objects::Fider04
   index({name: 1})
   index({region_id: 1})
 
-  def to_s;
+  def to_s
     self.name
+  end
+
+  def owner_s
+    {
+      1 => 'KED',
+      2 => 'სხვა'
+    }[owner]
   end
 
   def self.by_name(name)

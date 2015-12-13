@@ -31,7 +31,7 @@ end %>
               <% end %>
             </a>
           </strong>
-          &mdash; <code><%= number_with_precision fider.length*1000 unless fider.length.nil? %></code> მ
+          &mdash; <code><%= number_with_precision(fider.length*1000, precision: 0) unless fider.length.nil? %></code> მ
         </td>
         <td>
           <% if fider.tp %>

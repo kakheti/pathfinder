@@ -1,31 +1,80 @@
+<h2 class="page-header">
+  მიმართულება #<%=@fider.direction.number unless @fider.direction.nil?%> - ს/ჯ #<%=@fider.tp.name unless @fider.tp.nil?%>
+  &mdash; <code><%= @fider.start %></code>-<code><%= @fider.end %></code>
+</h2>
+
 <table class="table table-bordered table-hover">
   <tr>
-    <td class="text-muted" width="150">დასახელება</td>
+    <td class="text-muted">სადენის ტიპი</td>
     <td>
-      <% if @fider.name.present? %>
-        <%= @fider.name %>
+      <%= @fider.cable_type %>
+    </td>
+  </tr>
+  <tr>
+    <td class="text-muted">სადენის მდგომარეობა</td>
+    <td>
+      <%= @fider.state %>
+    </td>
+  </tr>
+  <tr>
+    <td class="text-muted">SIP</td>
+    <td>
+      <%= @fider.sip %>
+    </td>
+  </tr>
+  <tr>
+    <td class="text-muted">მესაკუთრე</td>
+    <td>
+      <%= @fider.owner_s %>
+    </td>
+  </tr>
+  <tr>
+    <td class="text-muted">სატრ. ჯიხური</td>
+    <td>
+      <% if @fider.tp %>
+          <%= link_to @fider.tp.name, objects_tp_url(@fider.tp, tab: 'direction04s') %>
       <% else %>
-        <span class="text-muted">(დასახელების გარეშე)</span>
+          <span class="text-muted">(სატრ. ჯიხურის გარეშე)</span>
       <% end %>
     </td>
   </tr>
   <tr>
-    <td class="text-muted">შენიშვნა</td>
-    <td><%= @fider.description %></td>
+    <td class="text-muted">6-10კვ ფიდერი</td>
+    <td>
+      <% if @fider.fider %>
+          <%= link_to @fider.fider.name, objects_fider_url(@fider.fider, tab: 'direction04s') %>
+      <% else %>
+          <span class="text-muted">(ფიდერის გარეშე)</span>
+      <% end %>
+    </td>
+  </tr>
+  <tr>
+    <td class="text-muted">ქვესადგური</td>
+    <td>
+      <% if @fider.substation %>
+          <%= link_to @fider.substation.name, objects_substation_url(@fider.substation, tab: 'direction04s') %>
+      <% else %>
+          <span class="text-muted">(ქვესადგურის გარეშე)</span>
+      <% end %>
+    </td>
   </tr>
   <tr>
     <td class="text-muted">მუნიციპალიტეტი</td>
     <td>
       <% if @fider.region %>
-        <%= link_to @fider.region.name, region_url(@fider.region, tab: 'fiders') %>
+          <%= link_to @fider.region.name, region_url(@fider.region, tab: 'direction04s') %>
       <% else %>
-        <span class="text-muted">(მუნიციპალიტეტის გარეშე)</span>
+          <span class="text-muted">(მუნიციპალიტეტის გარეშე)</span>
       <% end %>
     </td>
   </tr>
   <tr>
     <td class="text-muted">სიგრძე</td>
     <td><code><%= number_with_precision @fider.length*1000 %></code> მ</td>
+  </tr>
+  <tr>
+    <td class="text-muted">შენიშვნა</td>
+    <td><%= @fider.description %></td>
   </tr>
 </table>
 
