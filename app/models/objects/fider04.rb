@@ -44,7 +44,7 @@ class Objects::Fider04
   end
 
   def self.by_name(name)
-    ; Objects::Fider04.where(name: name).first || Objects::Fider04.create(name: name)
+    Objects::Fider04.where(name: name).first || Objects::Fider04.create(name: name)
   end
 
   def make_summaries
@@ -93,6 +93,9 @@ class Objects::Fider04
       end
       line.set_coordinate(coords[coords.size/2])
       line.calc_length!
+
+      line.direction.calculate! unless line.direction.nil?
+
       line.save
     end
   end

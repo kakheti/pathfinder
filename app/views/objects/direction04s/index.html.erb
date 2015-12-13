@@ -1,0 +1,56 @@
+<div class="page-header">
+  <div class="pull-right">
+    <a href="<%= objects_upload_fider04s_url %>" class="btn btn-default"><i class="fa fa-upload"></i> ფაილის ატვირთვა</a>
+  </div>
+  <h2>0.4კვ ხაზები <code><%= @fiders.total_entries %></code></h2>
+</div>
+
+<%= search_form @search do |s|
+  s.combo_field 'region', collection: Region.all.asc('name'), label: 'მუნიციპალიტეტი', empty: '-- ყველა მუნიციპალიტეტი --'
+  s.text_field 'name', label: 'დასახელება'
+end %>
+
+<% if @fiders.any? %>
+  <table class="table table-bordered table-hover">
+    <thead>
+      <tr>
+        <th>0.4კვ ხაზი</th>
+        <th width="300">6-10კვ სატრ. ჯიხური</th>
+        <th width="200">მუნიციპალიტეტი</th>
+      </tr>
+    </thead>
+    <% @fiders.each do |fider| %>
+      <tr>
+        <td>
+          <strong>
+            <a href="<%= objects_direction04_url(fider) %>">
+              <% if fider.number.present? %>
+                <%= fider.number %>
+              <% else %>
+                <span class="text-muted">(დასახელების გარეშე)</span>
+              <% end %>
+            </a>
+          </strong>
+          &mdash; <code><%= number_with_precision fider.length*1000 unless fider.length.nil? %></code> მ
+        </td>
+        <td>
+          <% if fider.tp %>
+            <%= link_to fider.tp.name, objects_tps_url(fider.tp, tab: 'fider04s') %>
+          <% else %>
+            <span class="text-muted">(0-6კვ სატრ. ჯიხურის გარეშე)</span>
+          <% end %>
+        </td>
+        <td>
+          <% if fider.region %>
+            <%= link_to fider.region.name, region_url(fider.region, tab: 'fiders') %>
+          <% else %>
+            <span class="text-muted">(მუნიციპალიტეტის გარეშე)</span>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </table>
+  <%= will_paginate @fiders %>
+<% else %>
+  <%= render partial: '/data/no_data' %>
+<% end %>

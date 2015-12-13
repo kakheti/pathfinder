@@ -30,6 +30,8 @@ module DataHelper
       objects_line_url(main_object, tab: tab)
     elsif main_object.is_a?(Objects::Fider)
       objects_fider_url(main_object, tab: tab)
+    elsif main_object.is_a?(Objects::Direction04)
+      objects_direction04_url(main_object, tab: tab)
     elsif main_object.is_a?(Objects::Tp)
       objects_tp_url(main_object, tab: tab)
     end
@@ -52,6 +54,8 @@ module DataHelper
       when 'fiders' then
         '6-10კვ ფიდერები'
       when 'fider04s' then
+        '0.4კვ ხაზის მონაკვეთები'
+      when 'direction04s' then
         '0.4კვ ხაზები'
       when 'pole04s' then
         '0.4კვ ბოძები'

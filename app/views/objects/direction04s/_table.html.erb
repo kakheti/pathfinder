@@ -1,7 +1,7 @@
 <% fiders = data %>
 <div>
   <h3>
-    0.4კვ ხაზის მონაკვეთები <code><%= fiders.total_entries %></code>
+    0.4კვ ხაზები <code><%= fiders.total_entries %></code>
   </h3>
   <div class="compact-pagination">
     <%= will_paginate fiders %>
@@ -12,7 +12,7 @@
     <% fiders.each do |fider| %>
       <tr>
         <td>
-          <strong><%= link_to fider.name, objects_fider04_url(fider) %></strong> &mdash;
+          <strong><%= link_to fider.name, objects_direction04_url(fider) %></strong> &mdash;
           <code><%= number_with_precision fider.length %></code> კმ
         </td>
       </tr>
