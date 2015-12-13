@@ -87,7 +87,7 @@
   </tr>
   <tr>
     <td class="text-muted">მუნიციპალიტეტი</td>
-    <td><%= @pole.region.name %></td>
+    <td><%= @pole.region.name unless @pole.region.nil? %></td>
   </tr>
   <tr>
     <td class="text-muted">კოორდინატები</td>
