@@ -1,10 +1,10 @@
 <% poles = data %>
 
 <div>
-  <div class="pull-right compact-pagination">
+  <h3>0.4კვ ბოძები <code><%= poles.total_entries %></code></h3>
+  <div class="compact-pagination">
     <%= will_paginate poles %>
   </div>
-  <h3>0.4კვ ბოძები</h3>
 </div>
 
 <% if poles.any? %>
@@ -12,7 +12,7 @@
     <% poles.each do |pole| %>
       <tr>
         <td>
-          <a href="<%= objects_pole_url(pole) %>">
+          <a href="<%= objects_pole04_url(pole) %>">
             0.4კვ ბოძი #<strong><%= pole.name %></strong>
           </a>
         </td>

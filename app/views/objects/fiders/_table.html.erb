@@ -1,11 +1,11 @@
 <% fiders = data %>
 <div>
-  <div class="pull-right compact-pagination">
-    <%= will_paginate fiders %>
-  </div>
   <h3>
     6-10კვ ფიდერები <code><%= fiders.total_entries %></code>
   </h3>
+  <div class="compact-pagination">
+    <%= will_paginate fiders %>
+  </div>
 </div>
 <% if fiders.any? %>
   <table class="table table-bordered table-hover">
