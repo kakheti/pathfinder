@@ -35,14 +35,26 @@ module DataHelper
 
   def tab_label(main_object, tab)
     case tab
-    when 'offices' then 'ოფისები'
-    when 'substations' then 'ქვესადგურები'
-    when 'towers' then 'ანძები'
-    when 'lines' then  (main_object.is_a?(Objects::Fider) ? '6-10კვ ფიდერის ხაზები' : 'გადამცემი ხაზები')
-    when 'tps' then '6-10კვ სატრ.ჯიხურები'
-    when 'poles' then '6-10კვ საყრდენები'
-    when 'fiders' then '6-10კვ ფიდერები'
-    else tab
+      when 'offices' then
+        'ოფისები'
+      when 'substations' then
+        'ქვესადგურები'
+      when 'towers' then
+        'ანძები'
+      when 'lines' then
+        (main_object.is_a?(Objects::Fider) ? '6-10კვ ფიდერის ხაზები' : 'გადამცემი ხაზები')
+      when 'tps' then
+        '6-10კვ სატრ.ჯიხურები'
+      when 'poles' then
+        '6-10კვ საყრდენები'
+      when 'fiders' then
+        '6-10კვ ფიდერები'
+      when 'fider04s' then
+        '0.4კვ ხაზები'
+      when 'pole04s' then
+        '0.4კვ ბოძები'
+      else
+        tab
     end
   end
 

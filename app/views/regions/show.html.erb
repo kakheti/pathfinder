@@ -8,7 +8,7 @@
 
 <div class="row">
   <div class="col-sm-3">
-    <%= render_data_menu(@region, ['offices', 'substations', 'lines', 'towers', 'fiders', 'poles', 'tps']) %>
+    <%= render_data_menu(@region, %w(offices substations lines towers fiders poles tps fider04s pole04s)) %>
   </div>
   <div class="col-sm-9">
     <%= render_data(@region) %>
