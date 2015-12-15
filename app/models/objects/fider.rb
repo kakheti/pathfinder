@@ -22,6 +22,7 @@ class Objects::Fider
   has_many :tps, class_name: 'Objects::Tp'
   has_many :poles, class_name: 'Objects::Pole'
   has_many :fider04s, class_name: 'Objects::Fider04'
+  has_many :direction04s, class_name: 'Objects::Direction04'
   has_many :pole04s, class_name: 'Objects::Pole04'
 
   search_in :name, :description, :poles, :substation => 'name'
