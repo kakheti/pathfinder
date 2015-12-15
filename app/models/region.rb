@@ -17,6 +17,7 @@ class Region
   has_many :fiders, class_name: 'Objects::Fider'
   has_many :pole04s, class_name: 'Objects::Pole04'
   has_many :fider04s, class_name: 'Objects::Fider04'
+  has_many :direction04s, class_name: 'Objects::Direction04'
   has_and_belongs_to_many :users, class_name: 'Sys::User'
   validates :name, presence: {message: 'ჩაწერეთ სახელი'}
 
