@@ -21,6 +21,8 @@ class Objects::Fider
   embeds_many :lines, class_name: 'Objects::FiderLine'
   has_many :tps, class_name: 'Objects::Tp'
   has_many :poles, class_name: 'Objects::Pole'
+  has_many :fider04s, class_name: 'Objects::Fider04'
+  has_many :pole04s, class_name: 'Objects::Pole04'
 
   search_in :name, :description, :poles, :substation => 'name'
 
@@ -43,7 +45,6 @@ class Objects::Fider
     kmlns="kml:#{KMLNS}"
     placemarks=doc.child.find '//kml:Placemark',kmlns
     placemarks.each do |placemark|
-      id = placemark.attributes['id']
       descr=placemark.find('./kml:description',kmlns).first.content
       name = Objects::Kml.get_property(descr, 'ფიდერი')
       fider = Objects::Fider.by_name(name.to_ka(:all)) if name
@@ -70,7 +71,6 @@ class Objects::Fider
       line.set_coordinate(coords[coords.size/2])
       line.calc_length!
       line.save
-      # XXX how to get fider's region?
       fider.linename = Objects::Kml.get_property(descr, 'ელ, გადამცემი ხაზი')
       fider.line = Objects::Line.by_name(fider.linename)
       fider.set_coordinate(coords[coords.size/2])
@@ -161,7 +161,7 @@ class Objects::FiderLine
       2 => 'არა'
     }[quro]
   end
-  
+
   def set_points(points)
     self.points.destroy_all
     points.each do |p|

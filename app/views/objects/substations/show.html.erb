@@ -2,7 +2,7 @@
 
 <div class="row">
   <div class="col-sm-3">
-    <%= render_data_menu(@substation, ['fiders', 'poles', 'tps']) %>
+    <%= render_data_menu(@substation, %w(fiders poles tps direction04s pole04s)) %>
   </div>
   <div class="col-sm-9">
     <%= render_data(@substation) %>

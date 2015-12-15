@@ -1,9 +1,9 @@
 <% tps = data %>
 <div class="page-header">
-  <div class="pull-right compact-pagination">
+  <h2>6-10კვ სატრ. ჯიხურები <code><%= tps.total_entries %></code></h2>
+  <div class="compact-pagination">
     <%= will_paginate tps %>
   </div>
-  <h2>6-10კვ სატრ. ჯიხურები <code><%= tps.total_entries %></code></h2>
 </div>
 
 <% if tps.any? %>

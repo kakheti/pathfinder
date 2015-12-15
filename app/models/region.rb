@@ -15,22 +15,39 @@ class Region
   has_many :tps, class_name: 'Objects::Tp'
   has_many :poles, class_name: 'Objects::Pole'
   has_many :fiders, class_name: 'Objects::Fider'
+  has_many :pole04s, class_name: 'Objects::Pole04'
+  has_many :fider04s, class_name: 'Objects::Fider04'
   has_and_belongs_to_many :users, class_name: 'Sys::User'
-  validates :name, presence: { message: 'ჩაწერეთ სახელი' }
+  validates :name, presence: {message: 'ჩაწერეთ სახელი'}
 
-  index({ name: 1 })
+  index({name: 1})
 
   def self.get_by_name(name)
     if name.present?
       name = name.to_ka(:all)
-      Region.where(name:name).first || Region.create(name:name)
+      Region.where(name: name).first || Region.create(name: name)
     end
   end
-  def can_delete?; lines.empty? and  towers.empty? and offices.empty? and substations.empty? end
-  def towers_limited; self.towers.paginate(per_page:50) end
-  def poles_limited; self.poles.paginate(per_page:50) end
-  def fiders_limited; self.fiders.paginate(per_page:50) end
-  def to_s; self.name end
+
+  def can_delete?
+    lines.empty? and towers.empty? and offices.empty? and substations.empty?
+  end
+
+  def towers_limited
+    self.towers.paginate(per_page: 50)
+  end
+
+  def poles_limited
+    self.poles.paginate(per_page: 50)
+  end
+
+  def fiders_limited
+    self.fiders.paginate(per_page: 50)
+  end
+
+  def to_s
+    self.name
+  end
 
   def make_summaries
     self.residential_count = self.tps.sum(:residential_count)

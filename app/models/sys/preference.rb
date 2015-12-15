@@ -5,10 +5,10 @@ class Sys::Preference
   field :int_value, type: Integer
 
   def self.inc(name)
-    pref=Sys::Preference.where(name:name).first
-    if pres.blank?
-      pref=Sys::Preference.new(name:name,int_value:0) ; pref.save
+    pref=Sys::Preference.where(name: name).first
+    if pref.blank?
+      pref=Sys::Preference.new(name: name, int_value: 0); pref.save
     end
-    pref.inc(:int_value,1)
+    pref.inc(:int_value => 1)
   end
 end

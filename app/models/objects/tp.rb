@@ -30,15 +30,18 @@ class Objects::Tp
   belongs_to :substation, class_name: 'Objects::Substation'
   belongs_to :fider, class_name: 'Objects::Fider'
   has_many :fider04s, class_name: 'Objects::Fider04'
+  has_many :pole04s, class_name: 'Objects::Pole04'
 
   search_in :name, :description, :fider, :substation => 'name'
 
-  index({ name: 1 })
-  index({ region_id: 1 })
-  index({ substation_id: 1 })
-  index({ fider_id: 1 })
+  index({name: 1})
+  index({region_id: 1})
+  index({substation_id: 1})
+  index({fider_id: 1})
 
-  def picture; "/tps/#{self.picture_id}.jpg" end
+  def picture;
+    "/tps/#{self.picture_id}.jpg"
+  end
 
   def self.by_name(name)
     Objects::Tp.where(name: name).first
@@ -46,15 +49,15 @@ class Objects::Tp
 
   def self.from_kml(xml)
     parser=XML::Parser.string xml
-    doc=parser.parse ; root=doc.child
+    doc=parser.parse
     kmlns="kml:#{KMLNS}"
-    placemarks=doc.child.find '//kml:Placemark',kmlns
+    placemarks=doc.child.find '//kml:Placemark', kmlns
     placemarks.each do |placemark|
       id=placemark.attributes['id']
-      obj=Objects::Tp.where(kmlid:id).first || Objects::Tp.create(kmlid:id)
+      obj=Objects::Tp.where(kmlid: id).first || Objects::Tp.create(kmlid: id)
       # name=placemark.find('./kml:name',kmlns).first.content
       # start description section
-      descr=placemark.find('./kml:description',kmlns).first.content
+      descr=placemark.find('./kml:description', kmlns).first.content
       obj.region = Region.get_by_name(Objects::Kml.get_property(descr, 'მუნიციპალიტეტი').to_ka(:all))
       obj.city = Objects::Kml.get_property(descr, 'ქალაქი/დაბა/საკრებულო ქალაქი/დაბა/საკრებულო')
       obj.street = Objects::Kml.get_property(descr, 'ქუჩის დასახელება')
@@ -78,7 +81,7 @@ class Objects::Tp
       obj.linename = linename.to_ka(:all) if linename.present?
       obj.description = Objects::Kml.get_property(descr, 'შენიშვნა')
       # end of description section
-      coord=placemark.find('./kml:Point/kml:coordinates',kmlns).first.content
+      coord=placemark.find('./kml:Point/kml:coordinates', kmlns).first.content
       obj.set_coordinate(coord)
       obj.save
     end

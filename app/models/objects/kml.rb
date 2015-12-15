@@ -19,7 +19,9 @@ module Objects::Kml
     xml.target!
   end
 
-  def to_kmz(opts={}); kml_to_kmz(self.to_kml(opts)) end
+  def to_kmz(opts={})
+    kml_to_kmz(self.to_kml(opts))
+  end
 
   def extra_data(hash)
     xml = Builder::XmlMarkup.new
@@ -43,13 +45,11 @@ module Objects::Kml
     end
   end
 
-  def get_property(description, propertyName, default = nil)
-    s1 = "<td>#{propertyName}</td>"
-    if description.index(s1)
-      idx1 = description.index(s1) + s1.length
-      prop = description[idx1..-1].match(/<td>([^<])*<\/td>/)[0][4..-6].strip
-      prop == '&lt;Null&gt;' ? default : prop
-    end
+  def get_property(description, name, default = nil)
+    regex = /<td>\s*?#{name}\s*?<\/td>\s*?<td>([^<]*)<\/td>/im
+    match = regex.match(description)
+    prop = if match.nil? then nil; else match[1].strip; end
+    prop == '&lt;Null&gt;' || prop.nil? ? default : prop
   end
 
   module_function :get_property

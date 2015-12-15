@@ -1,9 +1,9 @@
 <% lines = data %>
 <div>
-  <div class="pull-right compact-pagination">
+  <h3>გადამცემი ხაზები <code><%= lines.total_entries %></code></h3>
+  <div class="compact-pagination">
     <%= will_paginate lines %>
   </div>
-  <h3>გადამცემი ხაზები <code><%= lines.total_entries %></code></h3>
 </div>
 <% if lines.any? %>
   <table class="table table-bordered table-hover">

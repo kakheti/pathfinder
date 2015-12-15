@@ -36,7 +36,7 @@ class Objects::Pole04sController < ApplicationController
       case File.extname(f).downcase
       when '.kmz' then upload_kmz(params[:data].tempfile)
       when '.kml' then upload_kml(params[:data].tempfile)
-      when '.xlsx' then upload_xlsx(params[:data].tempfile)
+      when '.txt' then upload_txt(params[:data].tempfile)
       else raise 'არასწორი ფორმატი' end
       redirect_to objects_pole04s_url, notice: 'მონაცემები ატვირთულია'
     end
@@ -63,29 +63,19 @@ class Objects::Pole04sController < ApplicationController
   def upload_kmz(file)
     Zip::File.open file do |zip_file|
       zip_file.each do |entry|
-        upload_kml(entry) if 'kml'==entry.name[-3..-1]
+        upload_kml(entry.get_input_stream) if 'kml'==entry.name[-3..-1]
       end
     end
   end
 
   def upload_kml(file)
     Objects::Pole04.delete_all
-    kml = file.get_input_stream.read
+    kml = file.read
     Objects::Pole04.from_kml(kml)
   end
 
-  def upload_xlsx(file)
-
-    # TODO: change this!
-
-    # sheet=Roo::Spreadsheet.open(file.path, extension: 'xlsx')
-    # (2..sheet.last_row).each do |row|
-    #   id = sheet.cell('A',row) ; office = Objects::Office.find(id)
-    #   name = sheet.cell('B',row) ; office.name = name
-    #   regionname = sheet.cell('C',row).to_s ; region = Region.get_by_name(regionname) ; office.region = region
-    #   address = sheet.cell('D',row) ; office.address = address
-    #   description = sheet.cell('E',row) ; office.description = description
-    #   office.save
-    # end
+  def upload_txt(file)
+    txt = file.read
+    Objects::Pole04.from_csv(txt)
   end
 end

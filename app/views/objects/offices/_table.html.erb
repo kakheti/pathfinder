@@ -1,8 +1,8 @@
 <div>
-  <div class="pull-right compact-pagination">
+  <h3>ოფისები <code><%= data.total_entries %></code></h3>
+  <div class="compact-pagination">
     <%= will_paginate data %>
   </div>
-  <h3>ოფისები <code><%= data.total_entries %></code></h3>
 </div>
 <% if data.any? %>
   <table class="table table-bordered table-hover">

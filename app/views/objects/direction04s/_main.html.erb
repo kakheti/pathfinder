@@ -1,31 +1,8 @@
-<h2 class="page-header">
-  მიმართულება #<%=@fider.direction.number unless @fider.direction.nil?%> - ს/ჯ #<%=@fider.tp.name unless @fider.tp.nil?%>
-  &mdash; <code><%= @fider.start %></code>-<code><%= @fider.end %></code>
-</h2>
-
 <table class="table table-bordered table-hover">
   <tr>
-    <td class="text-muted">სადენის ტიპი</td>
+    <td class="text-muted" width="150">დასახელება</td>
     <td>
-      <%= @fider.cable_type %>
-    </td>
-  </tr>
-  <tr>
-    <td class="text-muted">სადენის მდგომარეობა</td>
-    <td>
-      <%= @fider.state %>
-    </td>
-  </tr>
-  <tr>
-    <td class="text-muted">SIP</td>
-    <td>
-      <%= @fider.sip %>
-    </td>
-  </tr>
-  <tr>
-    <td class="text-muted">მესაკუთრე</td>
-    <td>
-      <%= @fider.owner_s %>
+      მიმართულება <%= @fider.number %> - ს/ჯ #<%= @fider.tp.name if @fider.tp.present? %>
     </td>
   </tr>
   <tr>
@@ -69,13 +46,11 @@
     </td>
   </tr>
   <tr>
-    <td class="text-muted">სიგრძე</td>
-    <td><code><%= number_with_precision @fider.length*1000 %></code> მ</td>
+    <td class="text-muted">ხაზების რაოდ.</td>
+    <td><code><%= @fider.fider04s.count %></code> ხაზი</td>
   </tr>
   <tr>
-    <td class="text-muted">შენიშვნა</td>
-    <td><%= @fider.description %></td>
+    <td class="text-muted">სიგრძე</td>
+    <td><code><%= number_with_precision @fider.length*1000 unless @fider.length.nil?%></code> მ</td>
   </tr>
 </table>
-
-<%= render partial: '/data/paths_map', locals: { paths: [@fider], direction: false } %>

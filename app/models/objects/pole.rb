@@ -30,21 +30,21 @@ class Objects::Pole
 
   search_in :name, :description, :fider, :substation => 'name'
 
-  index({ name: 1 })
-  index({ region_id: 1 })
-  index({ fider_id: 1 })
-  index({ substation_id: 1 })
+  index({name: 1})
+  index({region_id: 1})
+  index({fider_id: 1})
+  index({substation_id: 1})
 
   def self.from_kml(xml)
     parser=XML::Parser.string xml
-    doc=parser.parse ; root=doc.child
+    doc=parser.parse
     kmlns="kml:#{KMLNS}"
-    placemarks=doc.child.find '//kml:Placemark',kmlns
+    placemarks=doc.child.find '//kml:Placemark', kmlns
     placemarks.each do |placemark|
       id = placemark.attributes['id']
-      obj = Objects::Pole.where(kmlid:id).first || Objects::Pole.create(kmlid:id)
+      obj = Objects::Pole.where(kmlid: id).first || Objects::Pole.create(kmlid: id)
       # start description section
-      descr = placemark.find('./kml:description',kmlns).first.content
+      descr = placemark.find('./kml:description', kmlns).first.content
       obj.name = Objects::Kml.get_property(descr, 'ბოძის ნომერი')
       obj.number2 = Objects::Kml.get_property(descr, 'ბოძის პირობითი ნომერი')
       obj.height = Objects::Kml.get_property(descr, 'ბოძის სიმაღლე').to_f
@@ -69,7 +69,7 @@ class Objects::Pole
       description = Objects::Kml.get_property(descr, 'შენიშვნა')
       obj.description = description.to_ka(:all) if description.present?
       # end of description section
-      coord = placemark.find('./kml:Point/kml:coordinates',kmlns).first.content
+      coord = placemark.find('./kml:Point/kml:coordinates', kmlns).first.content
       obj.set_coordinate(coord)
       obj.save
     end

@@ -1,11 +1,11 @@
 # -*- encoding : utf-8 -*-
 require 'zip'
 
-class Objects::Fider04sController < ApplicationController
+class Objects::Direction04sController < ApplicationController
   include Objects::Kml
 
   def index
-    rel = Objects::Fider04.asc(:name)
+    rel = Objects::Direction04.asc(:tp)
     @search = search_params
     if @search.present?
       rel = rel.where(name: @search[:name].mongonize) if @search[:name].present?
@@ -31,21 +31,21 @@ class Objects::Fider04sController < ApplicationController
     if request.post?
       f=params[:data].original_filename
       case File.extname(f).downcase
-      when '.kmz' then upload_kmz(params[:data].tempfile)
-      when '.kml' then upload_kml(params[:data].tempfile)
-      else raise 'არასწორი ფორმატი' end
+        when '.kmz' then upload_kmz(params[:data].tempfile)
+        when '.kml' then upload_kml(params[:data].tempfile)
+        else raise 'არასწორი ფორმატი' end
       redirect_to objects_fider04s_url, notice: 'მონაცემები ატვირთულია'
     end
   end
 
   def show
-    @title='0.4კვ ხაზის თვისებები'
-    @fider=Objects::Fider04.find(params[:id])
+    @title='მიმართულება'
+    @fider=Objects::Direction04.find(params[:id])
   end
 
   def find
-    @title = '0.4კვ ხაზი'
-    @fider = Objects::Fider04.where(name: params[:name]).first
+    @title = 'მიმართულება'
+    @fider = Objects::Direction04.where(name: params[:name]).first
     if @fider
       render action: 'show'
     else
@@ -57,7 +57,7 @@ class Objects::Fider04sController < ApplicationController
 
   def nav
     @nav=super
-    @nav['0.4კვ ხაზები'] = objects_fider04s_url
+    @nav['0.4კვ ხაზები'] = objects_direction04s_url
     @nav[@title]=nil unless ['index'].include?(action_name)
   end
 
