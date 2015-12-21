@@ -12,8 +12,12 @@
     <% fiders.each do |fider| %>
       <tr>
         <td>
-          <strong><%= link_to fider.name, objects_direction04_url(fider) %></strong> &mdash;
-          <code><%= number_with_precision fider.length %></code> კმ
+          <strong>
+            <a href="<%= objects_direction04_url(fider) %>">
+              <%= fider.number %> - ს/ჯ #<%= fider.tp.name if fider.tp.present? %>
+            </a>
+          </strong>
+          &mdash; <code><%= number_with_precision(fider.length*1000, precision: 0) unless fider.length.nil? %></code> მ
         </td>
       </tr>
     <% end %>
