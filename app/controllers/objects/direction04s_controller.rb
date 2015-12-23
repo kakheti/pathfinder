@@ -10,6 +10,12 @@ class Objects::Direction04sController < ApplicationController
     if @search.present?
       rel = rel.where(name: @search[:name].mongonize) if @search[:name].present?
       rel = rel.where(region_id: @search[:region]) if @search[:region].present?
+      rel = rel.where(number: @search[:number]) if @search[:number].present?
+
+      if @search[:tp].present? then
+        tp = Objects::Tp.by_name(@search[:tp])
+        rel = rel.where(tp_id: tp.id ) unless tp.nil?
+      end
     end
     respond_to do |format|
       format.html{ @title = '0.4კვ ხაზები'; @fiders = rel.paginate(per_page:10, page: params[:page]) }

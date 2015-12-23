@@ -9,9 +9,9 @@
 
 <%= search_form @search do |s|
   s.combo_field 'region', collection: Region.all.asc('name'), label: 'მუნიციპალიტეტი', empty: '-- ყველა მუნიციპალიტეტი --'
-  s.text_field 'tp', label: '6-10კვ სატრ. ჯიხური'
-  s.text_field 'direction', label: '0.4კვ ხაზის მიმართულება'
-  s.text_field 'number', label: '0.4კვ ბოძის #'
+  s.text_field 'tp', label: 'ჯიხურის #'
+  s.text_field 'direction', label: 'ხაზის მიმართულება'
+  s.text_field 'number', label: 'ბოძის ნომერი'
 end %>
 
 <% if @poles.any? %>
