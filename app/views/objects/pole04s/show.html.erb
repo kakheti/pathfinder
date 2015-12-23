@@ -1,4 +1,4 @@
-<h2 class="page-header">0.4კვ ბოძი #<%= @pole.name %></h2>
+<h2 class="page-header">0.4კვ ბოძი #<%= @pole.number %></h2>
 
 <table class="table table-bordered table-hover">
   <tr>
@@ -79,11 +79,11 @@
   </tr>
   <tr>
     <td class="text-muted">6-10კვ ფიდერი</td>
-    <td><%= link_to @pole.tp.fider.name, objects_fider_url(@pole.tp.fider) unless @pole.tp.nil? %></td>
+    <td><%= link_to @pole.tp.fider, objects_fider_url(@pole.fider) unless @pole.fider.nil? %></td>
   </tr>
   <tr>
     <td class="text-muted">ქვესადგური</td>
-    <td><%= link_to @pole.tp.substation.name, objects_substation_url(@pole.tp.substation) unless @pole.tp.nil? %></td>
+    <td><%= link_to @pole.substation.name, objects_substation_url(@pole.substation) unless @pole.substation.nil? %></td>
   </tr>
   <tr>
     <td class="text-muted">მუნიციპალიტეტი</td>
