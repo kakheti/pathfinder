@@ -17,6 +17,10 @@ class Objects::Pole04sController < ApplicationController
         tp = Objects::Tp.by_name(@search[:tp])
         rel = rel.where(tp_id: tp.id ) unless tp.nil?
       end
+      if @search[:direction].present? then
+        direction_ids = Objects::Direction04.where(number: @search[:direction]).pluck(:id)
+        rel = rel.where(:direction_id.in => direction_ids ) unless direction_ids.nil?
+      end
     end
 
     respond_to do |format|
