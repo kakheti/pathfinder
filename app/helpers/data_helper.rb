@@ -89,6 +89,8 @@ module DataHelper
         render partial: '/objects/pole04s/table', locals: {data: data}
       when 'fider04s'
         render partial: '/objects/fider04s/table', locals: {data: data}
+      when 'direction04s'
+        render partial: '/objects/direction04s/table', locals: {data: data}
       else
         render partial: '/data/no_template'
     end

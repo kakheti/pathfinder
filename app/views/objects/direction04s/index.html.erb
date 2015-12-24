@@ -7,7 +7,8 @@
 
 <%= search_form @search do |s|
   s.combo_field 'region', collection: Region.all.asc('name'), label: 'მუნიციპალიტეტი', empty: '-- ყველა მუნიციპალიტეტი --'
-  s.text_field 'name', label: 'დასახელება'
+  s.text_field 'tp', label: 'ჯიხურის #'
+  s.text_field 'number', label: 'მიმართულება'
 end %>
 
 <% if @fiders.any? %>

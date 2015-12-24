@@ -8,10 +8,19 @@ class Objects::Pole04sController < ApplicationController
     rel=Objects::Pole04.asc(:fider_id, :name)
     @search = search_params
     if @search.present?
-      rel = rel.where(name: @search[:name].mongonize) if @search[:name].present?
+      rel = rel.where(number: @search[:number].mongonize) if @search[:number].present?
       rel = rel.where(region_id: @search[:region]) if @search[:region].present?
       rel = rel.where(substation_id: @search[:substation]) if @search[:substation].present?
       rel = rel.where(fider_id: @search[:fider]) if @search[:fider].present?
+
+      if @search[:tp].present? then
+        tp = Objects::Tp.by_name(@search[:tp])
+        rel = rel.where(tp_id: tp.id ) unless tp.nil?
+      end
+      if @search[:direction].present? then
+        direction_ids = Objects::Direction04.where(number: @search[:direction]).pluck(:id)
+        rel = rel.where(:direction_id.in => direction_ids ) unless direction_ids.nil?
+      end
     end
 
     respond_to do |format|

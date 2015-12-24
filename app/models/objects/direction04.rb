@@ -19,7 +19,7 @@ class Objects::Direction04
 
   search_in :name, :description, :fider, :tp => 'name'
 
-  index({name: 1})
+  index({number: 1})
   index({region_id: 1})
 
   def calculate!

@@ -9,7 +9,9 @@
 
 <%= search_form @search do |s|
   s.combo_field 'region', collection: Region.all.asc('name'), label: 'მუნიციპალიტეტი', empty: '-- ყველა მუნიციპალიტეტი --'
-  s.text_field 'name', label: '0.4კვ ბოძის #'
+  s.text_field 'tp', label: 'ჯიხურის #'
+  s.text_field 'direction', label: 'ხაზის მიმართულება'
+  s.text_field 'number', label: 'ბოძის ნომერი'
 end %>
 
 <% if @poles.any? %>
@@ -17,15 +19,23 @@ end %>
     <thead>
       <tr>
         <th>0.4კვ ბოძის #</th>
+        <th>0.4კვ ხაზის მიმართულება</th>
+        <th>6-10კვ სატრ. ჯიხური</th>
         <th width="200">მუნიციპალიტეტი</th>
       </tr>
     </thead>
     <% @poles.each do |pole| %>
       <tr>
-        <td><a href="<%= objects_pole04_url(pole) %>">0.4კვ ბოძი #<strong><%= pole.name %></strong></a></td>
+        <td><a href="<%= objects_pole04_url(pole) %>">0.4კვ ბოძი #<strong><%= pole.number %></strong></a></td>
+        <td>
+          <%= link_to pole.direction.name, objects_direction04_url(pole.direction, tab: 'pole04s')  unless pole.direction.nil? %>
+        </td>
+        <td>
+          <%= link_to pole.tp.name, objects_tp_url(pole.tp, tab: 'pole04s') %>
+        </td>
         <td>
           <% if pole.region %>
-            <%= link_to pole.region.name, region_url(pole.region, tab: 'poles') %>
+            <%= link_to pole.region.name, region_url(pole.region, tab: 'pole04s') %>
           <% else %>
             <span class="text-muted">(მუნიციპალიტეტის გარეშე)</span>
           <% end %>
