@@ -31,7 +31,7 @@ end %>
           <%= link_to pole.direction.name, objects_direction04_url(pole.direction, tab: 'pole04s')  unless pole.direction.nil? %>
         </td>
         <td>
-          <%= link_to pole.tp.name, objects_tp_url(pole.tp, tab: 'pole04s') %>
+          <%= link_to pole.tp.name, objects_tp_url(pole.tp, tab: 'pole04s') unless pole.tp.nil? %>
         </td>
         <td>
           <% if pole.region %>
