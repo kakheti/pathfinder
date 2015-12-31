@@ -106,7 +106,7 @@ var adjustVisibility = function () {
   }
 
   loadAll(needToLoad);
-  visibleTypes = types;
+  window.visibleTypes = types;
 };
 
 logger('იტვირთება...', 6000);
@@ -122,19 +122,17 @@ googlemaps.start().then(googlemaps.create).then(function (map) {
   map.showFiders = true;
   map.show04Fiders = true;
 
-  google.maps.event.addListener(map, 'tilesloaded', function () {
-    if (window.loadTimeout) clearTimeout(window.loadTimeout);
-
-    window.loadTimeout = setTimeout(function () {
-      visibleTypes = getVisibleLayers();
+  google.maps.event.addListener(map, 'idle', function () {
+    //if (window.loadTimeout) clearTimeout(window.loadTimeout);
+    //
+    //window.loadTimeout = setTimeout(function () {
+      window.visibleTypes = getVisibleLayers();
       Promise.all([
         loadAll(),
-        map.loadLines(),
-        map.loadFiders(),
-        map.load04Fiders()
+        map.loadLines()
       ]).then(function () {
       });
-    }, 500);
+    //}, 500);
   });
 
   $("#search-type").find("input").on('change', adjustVisibility);
@@ -144,7 +142,6 @@ googlemaps.start().then(googlemaps.create).then(function (map) {
     map.clearFiders();
     map.clear04Fiders();
     loadAll();
-    map.loadFiders();
-    map.load04Fiders();
+    map.loadLines();
   });
 });

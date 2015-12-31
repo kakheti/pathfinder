@@ -68,7 +68,7 @@ var loadAPI = function(opts) {
   return new Promise(function(resolve, reject) {
     var script = document.createElement('script');
     script.type = 'text/javascript';
-    var baseUrl = API_URL + '?v=3.ex&sensor=false&callback=onGoogleMapLoaded&libraries=geometry';
+    var baseUrl = API_URL + '?v=3.23&callback=onGoogleMapLoaded&libraries=geometry';
 
     if ( opts && opts.apikey ) {
       script.src = baseUrl+'&key=' + opts.apikey;
@@ -263,34 +263,26 @@ var createMap = function(opts) {
   };
 
   map.loadLines = function() {
-    return new Promise(function(resolve, reject){
+    return new Promise(function(resolve){
+      var types = [];
       if(map.showLines && !map.linesLoaded) {
-        map.data.loadGeoJson(api.getUrl('/api/lines'), null, function () {
-          map.linesLoaded = true;
-          resolve();
-        });
-      } else {
-        resolve();
+        types.push('line');
       }
-    });
-  };
-
-  map.loadFiders = function() {
-    return new Promise(function(resolve, reject){
-      var params = api.getParams();
       if(map.showFiders && map.zoom >= objectTypes.fider.zoom) {
-        map.data.loadGeoJson(api.getUrl('/api/lines/fiders?'+params), null, resolve);
-      } else {
-        resolve();
+        types.push('fider-line');
       }
-    });
-  };
-
-  map.load04Fiders = function() {
-    return new Promise(function(resolve, reject){
-      var params = api.getParams();
       if(map.show04Fiders && map.zoom >= objectTypes.fider04.zoom) {
-        map.data.loadGeoJson(api.getUrl('/api/lines/fiders04?'+params), null, resolve);
+        types.push('fider04');
+      }
+      if(types.length) {
+        map.data.loadGeoJson(api.getUrl('/api/lines/?'+ $.param({
+            type: types,
+            bounds: window.map.getBounds().toUrlValue(),
+            region: $("#search-region").val()
+          })), null, function () {
+            map.linesLoaded = true;
+            resolve();
+          });
       } else {
         resolve();
       }

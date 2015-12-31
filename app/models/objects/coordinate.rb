@@ -5,7 +5,7 @@ module Objects::Coordinate
   def self.included(base)
     base.field :location, type: Array
     base.field :alt, type: Float
-    base.index({location: '2dsphere'}, {min: -200, max: 200})
+    base.index({location: '2d'}, {min: -200, max: 200})
   end
 
   def set_coordinate(text)
