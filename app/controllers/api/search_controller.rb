@@ -3,16 +3,16 @@ class Api::SearchController < ApiController
 
   def self.search(params)
     object_types = {
-      "line" => Objects::Line,
-      "pole" => Objects::Pole,
-      "substation" => Objects::Substation,
-      "tower" => Objects::Tower,
-      "tp" => Objects::Tp,
-      "fider" => Objects::Fider,
-      "office" => Objects::Office,
-      "fider-line" => Objects::Fider,
-      "fider04" => Objects::Fider04,
-      "pole04" => Objects::Pole04,
+      'line' => Objects::Line,
+      'pole' => Objects::Pole,
+      'substation' => Objects::Substation,
+      'tower' => Objects::Tower,
+      'tp' => Objects::Tp,
+      'fider' => Objects::Fider,
+      'office' => Objects::Office,
+      'fider-line' => Objects::Fider,
+      'fider04' => Objects::Fider04,
+      'pole04' => Objects::Pole04,
     }
 
     filters = params.select { |key, value|
@@ -20,22 +20,22 @@ class Api::SearchController < ApiController
     }
 
     types = object_types.keys
-    types = params["type"] unless params["type"].nil?
+    types = params['type'] unless params['type'].nil?
 
-    all_objects = [];
+    all_objects = []
 
     types.each do |type|
-      if !object_types[type].nil? then
+      unless object_types[type].nil?
         objects = object_types[type].all(filters)
-        if type == "fider-line" && params["bounds"] then
-          objects = objects.where({lines: { "$elemMatch" => { points: { "$elemMatch" => within_bounds(params["bounds"])} }}})
+        if type == 'fider-line' && params['bounds']
+          objects = objects.where({lines: {'$elemMatch' => {points: {'$elemMatch' => within_bounds(params['bounds'])}}}})
           objects = objects.map { |obj| obj.lines }.flatten
-        elsif type == "fider04" && params["bounds"]
-          objects = objects.where({ points: { "$elemMatch" => within_bounds(params["bounds"])} })
-        elsif params["bounds"]
-          objects = objects.where(within_bounds(params["bounds"]))
+        elsif type == 'fider04' && params['bounds']
+          objects = objects.where({points: {'$elemMatch' => within_bounds(params['bounds'])}})
+        elsif type != 'line' && params['bounds']
+          objects = objects.where(within_bounds(params['bounds']))
         end
-        objects = objects.full_text_search(params["name"], match: :all).limit(5) if params["name"] && params["name"].length > 0
+        objects = objects.full_text_search(params["name"], match: :all).limit(5) if params['name'] && params['name'].length > 0
         all_objects.concat objects
       end
     end
@@ -45,16 +45,16 @@ class Api::SearchController < ApiController
 
   def index
     object_types = {
-      "line" => Objects::Line,
-      "pole" => Objects::Pole,
-      "substation" => Objects::Substation,
-      "tower" => Objects::Tower,
-      "tp" => Objects::Tp,
-      "fider" => Objects::Fider,
-      "office" => Objects::Office,
-      "fider-line" => Objects::FiderLine,
-      "fider04" => Objects::Fider04,
-      "pole04" => Objects::Pole04
+      'line' => Objects::Line,
+      'pole' => Objects::Pole,
+      'substation' => Objects::Substation,
+      'tower' => Objects::Tower,
+      'tp' => Objects::Tp,
+      'fider' => Objects::Fider,
+      'office' => Objects::Office,
+      'fider-line' => Objects::FiderLine,
+      'fider04' => Objects::Fider04,
+      'pole04' => Objects::Pole04
     }
     objects = Api::SearchController.search(params)
 
@@ -67,7 +67,7 @@ class Api::SearchController < ApiController
       fider = { name: object.fider.name, id: object.fider_id.to_s } if object.respond_to?(:fider) && !object.fider.nil?
       tp = { name: object.tp.name, id: object.tp_id.to_s } if object.respond_to?(:tp) && !object.tp.nil?
 
-      object.name = "\##{object.number} #{object.name}" if type == "substation"
+      object.name = "\##{object.number} #{object.name}" if type == 'substation'
 
       {
         id: object.id.to_s,
