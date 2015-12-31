@@ -35,7 +35,7 @@ class Api::SearchController < ApiController
         elsif params["bounds"]
           objects = objects.where(within_bounds(params["bounds"]))
         end
-        objects = objects.full_text_search(params["name"], match: :all) if params["name"] && params["name"].length > 0
+        objects = objects.full_text_search(params["name"], match: :all).limit(5) if params["name"] && params["name"].length > 0
         all_objects.concat objects
       end
     end
