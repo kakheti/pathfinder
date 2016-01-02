@@ -37,7 +37,7 @@ class Objects::LinesController < ApplicationController
       when '.kml' then upload_kml(params[:data].tempfile)
       when '.xlsx' then upload_xlsx(params[:data].tempfile)
       else raise 'არასწორი ფორმატი' end
-      redirect_to objects_upload_lines_url(status: 'ok')
+      redirect_to objects_lines_url, notice: 'მონაცემები ატვირთვა დაწყებულია. შეამოწმეთ მიმდინარე დავალებათა გვერდი.'
     end
   end
 
@@ -59,18 +59,10 @@ class Objects::LinesController < ApplicationController
   private
 
   def upload_kmz(file)
-    Zip::File.open file do |zip_file|
-      zip_file.each do |entry|
-        upload_kml(entry) if 'kml'==entry.name[-3..-1]
-      end
-    end
+    LinesUploadWorker.perform_async(file.path)
   end
 
-  def upload_kml(file)
-    Objects::Line.delete_all
-    kml = file.get_input_stream.read
-    Objects::Line.from_kml(kml)
+  def upload_xlsx(file)
+    XLSConverter.perform_async('Objects::Line', file.path.to_s)
   end
-
-  def upload_xlsx(file); XLSConverter.perform_async('Objects::Line', file.path.to_s) end
 end
