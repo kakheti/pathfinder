@@ -70,18 +70,9 @@ class Objects::Pole04sController < ApplicationController
   private
 
   def upload_kmz(file)
-    Zip::File.open file do |zip_file|
-      zip_file.each do |entry|
-        upload_kml(entry.get_input_stream) if 'kml'==entry.name[-3..-1]
-      end
-    end
+    Pole04sUploadWorker.perform_async(file.path)
   end
 
-  def upload_kml(file)
-    Objects::Pole04.delete_all
-    kml = file.read
-    Objects::Pole04.from_kml(kml)
-  end
 
   def upload_txt(file)
     txt = file.read
