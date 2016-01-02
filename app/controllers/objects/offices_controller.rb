@@ -5,12 +5,12 @@ class Objects::OfficesController < ApplicationController
   include Objects::Kml
 
   def index
-    rel=Objects::Office.asc(:kmlid)
+    rel = Objects::Office.asc(:kmlid)
     respond_to do |format|
-      format.html{ @title='ოფისები'; @offices=rel.paginate(per_page:15, page: params[:page]) }
-      format.xlsx{ @offices=rel }
+      format.html{ @title = 'ოფისები'; @offices = rel.paginate(per_page:15, page: params[:page]) }
+      format.xlsx{ @offices = rel }
       format.kmz do
-        @offices=rel
+        @offices = rel
         kml = kml_document do |xml|
           xml.Document(id: 'offices') do
             @offices.each { |office| office.to_kml(xml) }
@@ -22,15 +22,15 @@ class Objects::OfficesController < ApplicationController
   end
 
   def upload
-    @title='ფაილის ატვირთვა: ოფისები'
+    @title = 'ფაილის ატვირთვა: ოფისები'
     if request.post?
-      f=params[:data].original_filename
+      f = params[:data].original_filename
       case File.extname(f).downcase
       when '.kmz' then upload_kmz(params[:data].tempfile)
       when '.kml' then upload_kml(params[:data].tempfile)
       when '.xlsx' then upload_xlsx(params[:data].tempfile)
       else raise 'არასწორი ფორმატი' end
-      redirect_to objects_offices_url, notice: 'მონაცემები ატვირთულია'
+      redirect_to objects_offices_url, notice: 'მონაცემები ატვირთვა დაწყებულია. შეამოწმეთ მიმდინარე დავალებათა გვერდი.'
     end
   end
 
@@ -39,30 +39,26 @@ class Objects::OfficesController < ApplicationController
     @office=Objects::Office.find(params[:id])
   end
 
-  protected
+protected
+
   def nav
     @nav=super
     @nav['ოფისები']=objects_offices_url
     @nav[@title]=nil unless ['index'].include?(action_name)
   end
 
+
   def login_required; true end
   def permission_required; not current_user.admin? end
 
-  private
+
+private
+
 
   def upload_kmz(file)
-    Zip::File.open file do |zip_file|
-      zip_file.each do |entry|
-        upload_kml(entry) if 'kml'==entry.name[-3..-1]
-      end
-    end
+    OfficeUploadWorker.perform_async(file.path)
   end
 
-  def upload_kml(file)
-    kml=file.get_input_stream.read
-    Objects::Office.from_kml(kml)
-  end
 
   def upload_xlsx(file)
     sheet=Roo::Spreadsheet.open(file.path, extension: 'xlsx')
