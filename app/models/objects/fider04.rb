@@ -67,43 +67,7 @@ class Objects::Fider04
     kmlns="kml:#{KMLNS}"
     placemarks = doc.child.find '//kml:Placemark', kmlns
     placemarks.each do |placemark|
-      id = placemark.attributes['id']
-      descr = placemark.find('./kml:description', kmlns).first.content
-
-      line = Objects::Fider04.where(kmlid: id).first || Objects::Fider04.create(kmlid: id)
-
-      line.name = placemark.find('./kml:name', kmlns).first.content
-      line.start = Objects::Kml.get_property(descr, 'საწყისი ბოძი')
-      line.end = Objects::Kml.get_property(descr, 'ბოძამდე')
-      line.cable_type = Objects::Kml.get_property(descr, 'სადენის ტიპი').to_ka(:all)
-      line.description = Objects::Kml.get_property(descr, 'შენიშვნა')
-      line.sip = Objects::Kml.get_property(descr, 'SIP')
-      line.owner = Objects::Kml.get_property(descr, 'მესაკუთრე')
-      line.state = Objects::Kml.get_property(descr, 'სადენის მდგომარეობა')
-      line.region = Region.get_by_name(Objects::Kml.get_property(descr, 'მუნიციპალიტეტი').to_ka(:all))
-
-      tr_num = Objects::Kml.get_property(descr, 'ტრანსფორმატორის ნომერი')
-      line.tp = Objects::Tp.by_name(tr_num)
-
-      line.substation = line.tp.substation if line.tp.present?
-      line.fider = line.tp.fider if line.tp.present?
-
-      dir_num = Objects::Direction04.decode(Objects::Kml.get_property(descr, 'მიმართულება'))
-      line.direction = Objects::Direction04.get_or_create(dir_num, line.tp)
-
-      coords = placemark.find('./kml:MultiGeometry/kml:LineString/kml:coordinates', kmlns).first.content
-      coords = coords.split(' ')
-      coords.each do |coord|
-        point = line.points.new(line: line)
-        point.set_coordinate(coord)
-        point.save
-      end
-      line.set_coordinate(coords[coords.size/2])
-      line.calc_length!
-
-      line.direction.calculate! unless line.direction.nil?
-
-      line.save
+      Direction04ExtractionWorker.perform_async(placemark.to_s)
     end
   end
 
