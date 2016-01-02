@@ -38,7 +38,7 @@ class Objects::TowersController < ApplicationController
       when '.kml' then upload_kml(params[:data].tempfile)
       when '.xlsx' then upload_xlsx(params[:data].tempfile)
       else raise 'არასწორი ფორმატი' end
-        redirect_to objects_upload_towers_url(status: 'ok')
+        redirect_to objects_towers_url, notice: 'მონაცემები ატვირთვა დაწყებულია. შეამოწმეთ მიმდინარე დავალებათა გვერდი.'
     end
   end
 
@@ -49,7 +49,7 @@ class Objects::TowersController < ApplicationController
       file = params[:data].tempfile
       filename = params[:data].original_filename
       @tower.generate_images_from_file(file.path, filename)
-      redirect_to objects_tower_url(id: @tower.id), notice: 'გამოსახულედა დამატებულია'
+      redirect_to objects_tower_url(id: @tower.id), notice: 'გამოსახულება დამატებულია'
     end
   end
 
@@ -77,21 +77,15 @@ class Objects::TowersController < ApplicationController
   def login_required; true end
   def permission_required; not current_user.admin? end
 
-  private
+private
 
   def upload_kmz(file)
-    Zip::File.open file do |zip_file|
-      zip_file.each do |entry|
-        upload_kml(entry) if 'kml'==entry.name[-3..-1]
-      end
-    end
+    TowersUploadWorker.perform_async(file.path)
   end
 
-  def upload_kml(file)
-    Objects::Tower.delete_all
-    kml = file.get_input_stream.read
-    Objects::Tower.from_kml(kml)
+
+  def upload_xlsx(file)
+    XLSConverter.perform_async('Objects::Tower', file.path.to_s)
   end
 
-  def upload_xlsx(file); XLSConverter.perform_async('Objects::Tower', file.path.to_s) end
 end

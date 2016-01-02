@@ -5,6 +5,8 @@ development:
       hosts:
         - localhost:27017
       options:
+        max_pool_size: 25
+        min_pool_size: 10
   options:
 test:
   clients:

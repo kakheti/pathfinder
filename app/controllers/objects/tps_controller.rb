@@ -63,17 +63,7 @@ class Objects::TpsController < ApplicationController
   private
 
   def upload_kmz(file)
-    Zip::File.open file do |zip_file|
-      zip_file.each do |entry|
-        upload_kml(entry) if 'kml'==entry.name[-3..-1]
-      end
-    end
-  end
-
-  def upload_kml(file)
-    Objects::Tp.destroy_all
-    kml = file.get_input_stream.read
-    Objects::Tp.from_kml(kml)
+    TpsUploadWorker.perform_async(file.path)
   end
 
   def uploadstat_xlsx(file)

@@ -36,7 +36,7 @@ class Objects::SubstationsController < ApplicationController
       when '.kml' then upload_kml(params[:data].tempfile)
       when '.xlsx' then upload_xlsx(params[:data].tempfile)
       else raise 'არასწორი ფორმატი' end
-      redirect_to objects_substations_url, notice: 'მონაცემები ატვირთულია'
+      redirect_to objects_substations_url, notice: 'მონაცემები ატვირთვა დაწყებულია. შეამოწმეთ მიმდინარე დავალებათა გვერდი.'
     end
   end
 
@@ -58,17 +58,7 @@ class Objects::SubstationsController < ApplicationController
   private
 
   def upload_kmz(file)
-    Zip::File.open file do |zip_file|
-      zip_file.each do |entry|
-        upload_kml(entry) if 'kml'==entry.name[-3..-1]
-      end
-    end
-  end
-
-  def upload_kml(file)
-    Objects::Substation.delete_all
-    kml = file.get_input_stream.read
-    Objects::Substation.from_kml(kml)
+    SubstationUploadWorker.perform_async(file.path)
   end
 
   def upload_xlsx(file)
