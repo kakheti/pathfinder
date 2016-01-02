@@ -25,6 +25,10 @@ class Objects::Fider04
   field :sip, type: Integer
   field :owner, type: Integer
   field :state, type: String
+  field :region_name, type: String
+  field :substation_name, type: String
+  field :fider_name, type: String
+  field :tp_name, type: String
 
   belongs_to :region
   belongs_to :substation, class_name: 'Objects::Substation'

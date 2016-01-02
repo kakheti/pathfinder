@@ -14,6 +14,7 @@ class Objects::Substation
   field :residential_count, type: Integer, default: 0
   field :comercial_count, type: Integer, default: 0
   field :usage_average, type: Float, default: 0
+  field :region_name, type: String
   belongs_to :region
   has_many :tps, class_name: 'Objects::Tp'
   has_many :poles, class_name: 'Objects::Pole'
@@ -58,6 +59,7 @@ class Objects::Substation
       obj = Objects::Substation.where(kmlid: id).first || Objects::Substation.create(kmlid: id)
       obj.name = name.to_ka(:all)
       obj.region = region
+      obj.region_name = regname
       obj.description = description.to_ka(:all) if description.present?
       obj.number = number
       obj.set_coordinate(coord)

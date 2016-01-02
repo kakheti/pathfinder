@@ -10,6 +10,11 @@ class Objects::Direction04
   field :number, type: String
   field :length, type: Float
 
+  field :region_name, type: String
+  field :substation_name, type: String
+  field :fider_name, type: String
+  field :tp_name, type: String
+
   belongs_to :region
   belongs_to :tp, class_name: 'Objects::Tp'
   belongs_to :substation, class_name: 'Objects::Substation'

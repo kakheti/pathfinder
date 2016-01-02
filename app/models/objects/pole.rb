@@ -23,6 +23,9 @@ class Objects::Pole
   field :gps, type: String
   field :description, type: String
   field :linename, type: String
+  field :region_name, type: String
+  field :substation_name, type: String
+  field :fider_name, type: String
 
   belongs_to :region
   belongs_to :fider, class_name: 'Objects::Fider'
