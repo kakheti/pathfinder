@@ -69,7 +69,7 @@ class Objects::FidersController < ApplicationController
   private
 
   def upload_kmz(file)
-    FidersUploadWorker.perform_async(file.path)    
+    FidersUploadWorker.perform_async(file.path)
   end
 
   def upload_xlsx(file)
