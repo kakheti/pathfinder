@@ -64,9 +64,9 @@ class Api::SearchController < ApiController
         bounds_split = params['bounds'].split(',')
         square = self.to_square(bounds_split[0], bounds_split[1])
         if geojson
-          cache_key = "#{square}:#{type}:geojson"
+          cache_key = "geodata:#{square}:#{type}:geojson"
         else
-          cache_key = "#{square}:#{type}"
+          cache_key = "geodata:#{square}:#{type}"
         end
         cached = $redis.get(cache_key)
         unless cached.nil?
