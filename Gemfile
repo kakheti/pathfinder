@@ -5,6 +5,8 @@ gem 'actionpack-action_caching'
 gem 'byebug'
 gem 'pry-byebug'
 gem 'sqlite3'
+gem 'redis', '~>3.2', :require => ['redis', 'redis/connection/hiredis']
+gem 'hiredis', '~> 0.6.0'
 gem 'sass'
 gem 'sass-rails'
 gem 'uglifier', '>= 1.3.0'

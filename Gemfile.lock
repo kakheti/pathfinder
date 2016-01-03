@@ -82,6 +82,7 @@ GEM
     geoutm (1.0.2)
     globalid (0.3.6)
       activesupport (>= 4.1.0)
+    hiredis (0.6.1)
     htmlentities (4.3.4)
     i18n (0.7.0)
     jbuilder (1.5.3)
@@ -222,6 +223,7 @@ DEPENDENCIES
   forma (~> 0.1)
   geokit
   geoutm
+  hiredis (~> 0.6.0)
   jbuilder (~> 1.2)
   jquery-rails
   ka
@@ -234,6 +236,7 @@ DEPENDENCIES
   pry-byebug
   puma
   rails (~> 4.0)
+  redis (~> 3.2)
   roo
   rubyzip (>= 1.0.0)
   sass
