@@ -14,8 +14,8 @@ class Api::SearchController < ApiController
   }
 
   def self.to_square(lat, lng)
-    x = ((lat.to_f - 41.21833)/10).round(2).to_s.gsub('.', '')
-    y = ((lng.to_f - 43.761383)/10).round(2).to_s.gsub('.', '')
+    x = ((lat.to_f - 41.21833)/50).round(3).to_s.gsub('.', '')
+    y = ((lng.to_f - 43.761383)/50).round(3).to_s.gsub('.', '')
     "#{x}#{y}"
   end
 
