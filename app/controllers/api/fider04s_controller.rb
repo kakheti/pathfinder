@@ -1,8 +1,8 @@
 # -*- encoding : utf-8 -*-
-class Api::Fiders04Controller < ApiController
+class Api::Fider04sController < ApiController
 
   def info
-    @fider = Objects::Fider.find(params[:id])
+    @fider = Objects::Fider04.find(params[:id])
 
     render layout: false
   end
