@@ -50,10 +50,6 @@ class Api::SearchController < ApiController
   end
 
   def self.search(params, geojson = false)
-    filters = params.select { |key, value|
-      %w(region_id).include?(key) && value.length > 0
-    }
-
     types = ( params['type'] || @@object_types.keys ) & @@object_types.keys
 
     all_objects = []
@@ -81,7 +77,7 @@ class Api::SearchController < ApiController
         end
       end
 
-      objects = @@object_types[type].all(filters)
+      objects = @@object_types[type].all
       if type == 'fider-line' && params['bounds']
         objects = objects.where({lines: {'$elemMatch' => {points: {'$elemMatch' => within_bounds(params['bounds'])}}}})
         objects = objects.map { |obj| obj.lines }.flatten
@@ -90,7 +86,6 @@ class Api::SearchController < ApiController
       elsif type != 'line' && params['bounds']
         objects = objects.where(within_bounds(params['bounds']))
       end
-      all_objects.concat objects
 
       unless key.nil?
         if geojson
@@ -101,6 +96,13 @@ class Api::SearchController < ApiController
         $redis.expire(key, 1.hour)
       end
 
+      if params['region_id']
+        objects.select! { |obj|
+          obj.region_id && obj.region_id.to_s == params['region_id']
+        }
+      end
+
+      all_objects.concat objects
     end
 
     return all_objects
