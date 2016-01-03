@@ -90,7 +90,6 @@ class Api::SearchController < ApiController
       elsif type != 'line' && params['bounds']
         objects = objects.where(within_bounds(params['bounds']))
       end
-      objects = objects.full_text_search(params['name'], match: :all).limit(5) if params['name'] && params['name'].length > 0
       all_objects.concat objects
 
       unless key.nil?
@@ -107,8 +106,31 @@ class Api::SearchController < ApiController
     return all_objects
   end
 
+  def self.search_by_name(params)
+    filters = params.select { |key, value|
+      %w(region_id).include?(key) && value.length > 0
+    }
+
+    types = ( params['type'] || @@object_types.keys ) & @@object_types.keys
+
+    all_objects = []
+
+    types.each do |type|
+      objects = @@object_types[type].all(filters).full_text_search(params['name'], match: :all).limit(10)
+      all_objects.concat objects
+    end
+
+    return all_objects
+  end
+
   def index
     objects = Api::SearchController.search(params)
+
+    render json: (Api::SearchController.to_jsonable objects)
+  end
+
+  def by_name
+    objects = Api::SearchController.search_by_name(params)
 
     render json: (Api::SearchController.to_jsonable objects)
   end

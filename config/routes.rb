@@ -143,6 +143,7 @@ Pathfinder::Application.routes.draw do
     end
     scope '/search', controller: 'search' do
       get '/', action: 'index'
+      get '/by_name', action: 'by_name'
     end
   end
 

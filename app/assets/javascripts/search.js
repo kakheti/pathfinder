@@ -43,7 +43,7 @@ var view = {
       var $btn = $("#search-form").find(".btn");
       $btn.prop("disabled", "disabled").addClass("loading");
 
-      $.get(api.getUrl("/api/search"), filters).done(function(data){
+      $.get(api.getUrl("/api/search/by_name"), filters).done(function(data){
         $btn.prop("disabled", false).removeClass("loading");
         view.displayMarkers(q, data);
       }).error(function(){
