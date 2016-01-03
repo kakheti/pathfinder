@@ -12,6 +12,7 @@ class Objects::Line
   field :name, type: String
   field :direction, type: String
   field :description, type: String
+  field :region_name, type: String
   belongs_to :region
   has_many :towers, class_name: 'Objects::Tower'
   embeds_many :points, class_name: 'Objects::LinePoint'

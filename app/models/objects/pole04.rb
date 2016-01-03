@@ -24,6 +24,11 @@ class Objects::Pole04
   field :isolators, type: Array, default: []
   field :traverse, type: Array, default: []
   field :counters, type: Array, default: []
+  field :region_name, type: String
+  field :substation_name, type: String
+  field :fider_name, type: String
+  field :direction_name, type: String
+  field :tp_name, type: String
 
   belongs_to :region
   belongs_to :tp, class_name: 'Objects::Tp'

@@ -11,6 +11,8 @@ class Objects::Tower
   field :name, type: String
   field :category, type: String
   field :description, type: String
+  field :region_name, type: String
+  field :line_name, type: String
   belongs_to :region
   belongs_to :line, class_name: 'Objects::Line'
   field :linename, type: String

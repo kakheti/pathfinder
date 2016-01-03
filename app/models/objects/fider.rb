@@ -15,6 +15,8 @@ class Objects::Fider
   field :usage_average, type: Float
   field :substation_number, type: String
   field :linename, type: String
+  field :region_name, type: String
+  field :substation_name, type: String
   belongs_to :region
   belongs_to :substation, class_name: 'Objects::Substation'
   belongs_to :line, class_name: 'Objects::Line'

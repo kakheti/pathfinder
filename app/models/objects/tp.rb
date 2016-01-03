@@ -26,6 +26,9 @@ class Objects::Tp
   field :count_high_voltage, type: Integer
   field :count_low_voltage, type: Integer
   field :linename, type: String
+  field :region_name, type: String
+  field :substation_name, type: String
+  field :fider_name, type: String
   belongs_to :region
   belongs_to :substation, class_name: 'Objects::Substation'
   belongs_to :fider, class_name: 'Objects::Fider'

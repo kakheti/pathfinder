@@ -61,11 +61,11 @@ class Api::SearchController < ApiController
     render json: (objects.map do |object|
       type = object_types.invert[object.class]
 
-      region = { name: object.region.name, id: object.region_id.to_s } if object.respond_to?(:region) && !object.region.nil?
-      substation = { name: object.substation.name, id: object.substation_id.to_s } if object.respond_to?(:substation) && !object.substation.nil?
-      line = { name: object.line.name, id: object.line_id.to_s } if object.respond_to?(:line) && !object.line.nil?
-      fider = { name: object.fider.name, id: object.fider_id.to_s } if object.respond_to?(:fider) && !object.fider.nil?
-      tp = { name: object.tp.name, id: object.tp_id.to_s } if object.respond_to?(:tp) && !object.tp.nil?
+      region = { name: object.region_name, id: object.region_id.to_s } if object.respond_to?(:region) && !object.region_id.nil?
+      substation = { name: object.substation_name, id: object.substation_id.to_s } if object.respond_to?(:substation) && !object.substation_id.nil?
+      line = { name: object.linename, id: object.line_id.to_s } if object.respond_to?(:line) && !object.line_id.nil?
+      fider = { name: object.fider_name, id: object.fider_id.to_s } if object.respond_to?(:fider) && !object.fider_id.nil?
+      tp = { name: object.tp_name, id: object.tp_id.to_s } if object.respond_to?(:tp) && !object.tp_id.nil?
 
       object.name = "\##{object.number} #{object.name}" if type == 'substation'
 

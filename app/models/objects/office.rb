@@ -11,6 +11,7 @@ class Objects::Office
   field :name, type: String
   field :description, type: String
   field :address, type: String
+  field :region_name, type: String
   belongs_to :region
 
   search_in :name, :description
