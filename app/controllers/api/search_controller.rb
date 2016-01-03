@@ -14,8 +14,8 @@ class Api::SearchController < ApiController
   }
 
   def self.to_square(lat, lng)
-    x = ((lat.to_f - 41.21833)/50).round(3).to_s.gsub('.', '')
-    y = ((lng.to_f - 43.761383)/50).round(3).to_s.gsub('.', '')
+    x = (lat.to_f * 100).round
+    y = (lng.to_f * 100).round
     "#{x}#{y}"
   end
 
@@ -61,14 +61,16 @@ class Api::SearchController < ApiController
 
     types.each do |type|
       unless @@object_types[type].nil?
+        cache_key = nil
         if params['bounds'] && !params['name']
           bounds_split = params['bounds'].split(',')
           square = self.to_square(bounds_split[0], bounds_split[1])
           if geojson
-            cached = $redis.get(square+type+'geojson')
+            cache_key = "#{square}#{type}geojson"
           else
-            cached = $redis.get(square+type)
+            cache_key = "#{square}#{type}"
           end
+          cached = $redis.get(cache_key)
           unless cached.nil?
             begin
               all_objects.concat JSON.parse(cached)
@@ -91,15 +93,13 @@ class Api::SearchController < ApiController
         objects = objects.full_text_search(params['name'], match: :all).limit(5) if params['name'] && params['name'].length > 0
         all_objects.concat objects
 
-        if params['bounds'] && !params['name']
-          bounds_split = params['bounds'].split(',')
-          square = self.to_square(bounds_split[0], bounds_split[1])
+        unless cache_key.nil?
           if geojson
-            $redis.set(square+type+'geojson', Api::LinesController.to_geojson(objects).to_json)
+            $redis.set(cache_key, Api::LinesController.to_geojson(objects).to_json)
           else
-            $redis.set(square+type, Api::SearchController.to_jsonable(objects).to_json)
+            $redis.set(cache_key, Api::SearchController.to_jsonable(objects).to_json)
           end
-          $redis.expire(square+type, 3600)
+          $redis.expire(cache_key, 1.hour)
         end
       end
     end
