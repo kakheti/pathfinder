@@ -69,13 +69,10 @@ class Api::SearchController < ApiController
           cache_key = "geodata:#{square}:#{type}"
         end
         cached = $redis.get(cache_key)
-        unless cached.nil?
-          begin
-            all_objects.concat JSON.parse(cached)
-            break
-          rescue
-            $redis.del(square+type)
-          end
+        cached = JSON.parse(cached) rescue nil
+        if cached
+          all_objects.concat(cached)
+          next
         end
       end
 
