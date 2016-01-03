@@ -64,8 +64,11 @@ class Api::SearchController < ApiController
         if params['bounds'] && !params['name']
           bounds_split = params['bounds'].split(',')
           square = self.to_square(bounds_split[0], bounds_split[1])
-          cached = $redis.get(square+type)
-          puts cached.inspect
+          if geojson
+            cached = $redis.get(square+type+'geojson')
+          else
+            cached = $redis.get(square+type)
+          end
           unless cached.nil?
             begin
               all_objects.concat JSON.parse(cached)
@@ -92,7 +95,7 @@ class Api::SearchController < ApiController
           bounds_split = params['bounds'].split(',')
           square = self.to_square(bounds_split[0], bounds_split[1])
           if geojson
-            $redis.set(square+type, Api::LinesController.to_geojson(objects).to_json)
+            $redis.set(square+type+'geojson', Api::LinesController.to_geojson(objects).to_json)
           else
             $redis.set(square+type, Api::SearchController.to_jsonable(objects).to_json)
           end
