@@ -86,7 +86,7 @@ class Api::SearchController < ApiController
           end
 
           if data.kind_of? Array
-            all_objects.concat(data)
+            all_objects.push(*data)
           else
             all_objects.push(data)
           end
@@ -120,7 +120,7 @@ class Api::SearchController < ApiController
         }
       end
 
-      all_objects.concat objects
+      all_objects.push(*objects)
     end
 
     return all_objects
@@ -137,7 +137,7 @@ class Api::SearchController < ApiController
 
     types.each do |type|
       objects = @@object_types[type].all(filters).full_text_search(params['name'], match: :all).limit(10)
-      all_objects.concat objects
+      all_objects.push(*objects)
     end
 
     return all_objects
