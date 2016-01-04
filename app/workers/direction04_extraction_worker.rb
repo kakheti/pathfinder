@@ -21,12 +21,16 @@ class Direction04ExtractionWorker
     line.owner = Objects::Kml.get_property(descr, 'მესაკუთრე')
     line.state = Objects::Kml.get_property(descr, 'სადენის მდგომარეობა')
     line.region = Region.get_by_name(Objects::Kml.get_property(descr, 'მუნიციპალიტეტი').to_ka(:all))
+    line.region_name = line.region.name
 
     tr_num = Objects::Kml.get_property(descr, 'ტრანსფორმატორის ნომერი')
     line.tp = Objects::Tp.by_name(tr_num)
+    line.tp_name = line.tp.name if line.tp.present?
 
     line.substation = line.tp.substation if line.tp.present?
     line.fider = line.tp.fider if line.tp.present?
+    line.substation_name = line.substation.name if line.substation.present?
+    line.fider_name = line.fider.name if line.fider.present?
 
     dir_num = Objects::Direction04.decode(Objects::Kml.get_property(descr, 'მიმართულება'))
     line.direction = Objects::Direction04.get_or_create(dir_num, line.tp)
