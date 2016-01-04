@@ -35,6 +35,7 @@ class Objects::Office
       obj = Objects::Office.where(kmlid:id).first || Objects::Office.create(kmlid:id)
       obj.name = name.to_ka(:all)
       obj.region = region
+      obj.region_name = regname
       obj.address = address.to_ka(:all) if address.present?
       obj.description = description.to_ka(:all)
       obj.set_coordinate(coord)

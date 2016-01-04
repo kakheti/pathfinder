@@ -58,6 +58,7 @@ class Objects::Line
         line = Objects::Line.where(kmlid: id).first || Objects::Line.create(kmlid: id)
         line.direction = direction
         line.region = region
+        line.region_name = regname
         line.name = name.to_ka(:all) if name.present?
         line.save
         line.points.destroy_all
