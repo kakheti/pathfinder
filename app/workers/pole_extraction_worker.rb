@@ -24,14 +24,14 @@ class PoleExtractionWorker
     obj.oldness = Objects::Kml.get_property(descr, 'ცვეთის ხარისხი')
     obj.should_be_out = Objects::Kml.get_property(descr, 'გამოსატანია')
     obj.gps = Objects::Kml.get_property(descr, 'GPS')
-    regname = Objects::Kml.get_property(descr, 'მუნიციპალიტეტი')
-    obj.region = Region.get_by_name(regname.to_ka(:all)) if regname.present?
-    subname = Objects::Kml.get_property(descr, 'ქვესადგური')
-    obj.substation = Objects::Substation.by_name(subname.to_ka(:all)) if subname.present?
-    fidername = Objects::Kml.get_property(descr, 'ფიდერი')
-    obj.fider = Objects::Fider.by_name(fidername.to_ka(:all)) if fidername.present?
+    obj.region_name = Objects::Kml.get_property(descr, 'მუნიციპალიტეტი').to_ka(:all)
+    obj.region = Region.get_by_name(obj.region_name) if obj.region_name.present?
+    obj.substation_name = Objects::Kml.get_property(descr, 'ქვესადგური').to_ka(:all)
+    obj.substation = Objects::Substation.by_name(obj.substation_name) if obj.substation_name.present?
+    obj.fider_name = Objects::Kml.get_property(descr, 'ფიდერი').to_ka(:all)
+    obj.fider = Objects::Fider.by_name(obj.fider_name) if obj.fider_name.present?
     linename = Objects::Kml.get_property(descr, 'ელ. გადამცემი ხაზი')
-    obj.linename = linename if linename.present?
+    obj.linename = linename.to_ka(:all) if linename.present?
     description = Objects::Kml.get_property(descr, 'შენიშვნა')
     obj.description = description.to_ka(:all) if description.present?
     # end of description section
