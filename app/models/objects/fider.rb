@@ -93,6 +93,7 @@ class Objects::FiderLine
   field :substation_number, type: String
   field :voltage, type: String
   field :linename, type: String
+  field :region_name, type: String
   belongs_to :region
   embedded_in :fider,  class_name: 'Objects::Fider'
   embeds_many :points, class_name: 'Objects::FiderPoint'

@@ -14,8 +14,7 @@ class ApiController < ActionController::Base
     end
   end
 
-  def self.within_bounds raw_bounds
-    bounds = raw_bounds.split(',')
+  def self.within_bounds bounds
     locs = [bounds[1].to_f, bounds[0].to_f], [bounds[3].to_f, bounds[2].to_f]
     return {location: {'$within' => {'$box' => locs}}}
   end

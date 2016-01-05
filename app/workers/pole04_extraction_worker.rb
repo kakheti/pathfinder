@@ -27,6 +27,7 @@ class Pole04ExtractionWorker
 
     tpnumber = Objects::Kml.get_property(descr, 'ტრანსფორმატორის ნომერი')
     obj.tp = Objects::Tp.by_name(tpnumber) if tpnumber.present?
+    obj.tp_name = obj.tp.name if obj.tp.present?
 
     dir_num = Objects::Direction04.decode(Objects::Kml.get_property(descr, 'მიმართულება'))
     obj.direction = Objects::Direction04.get_or_create(dir_num, obj.tp)
@@ -35,8 +36,11 @@ class Pole04ExtractionWorker
     obj.description = description.to_ka(:all) if description.present?
 
     obj.region = obj.tp.region if obj.tp.present?
+    obj.region_name = obj.region.name if obj.region.present?
     obj.substation = obj.tp.substation if obj.tp.present?
+    obj.substation_name = obj.substation.name if obj.substation.present?
     obj.fider = obj.tp.fider if obj.tp.present?
+    obj.fider_name = obj.fider.name if obj.fider.present?
 
     # end of description section
     coord = placemark.find('Point/coordinates').first.content

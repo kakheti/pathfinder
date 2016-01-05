@@ -39,6 +39,7 @@ class Objects::Tower
         obj=Objects::Tower.where(kmlid: id).first || Objects::Tower.create(kmlid: id)
         obj.name = name
         obj.region = Region.get_by_name(regname)
+        obj.region_name = regname
         obj.set_coordinate(coord)
         obj.category = category
         obj.line = Objects::Line.by_name(linename)

@@ -140,10 +140,16 @@ var createMap = function(opts) {
     var line = event.feature;
     var type;
 
-    if(line.getProperty('class') == "Objects::Line") {
-      type = "line";
-    } else {
-      type = "fiderline";
+    switch(line.getProperty('class')) {
+      case "Objects::Line":
+        type = "line";
+        break;
+      case "Objects::FiderLine":
+        type = "fiderline";
+        break;
+      case "Objects::Fider04":
+        type = "fider04";
+        break;
     }
 
     lineInfo.setPosition(line.getProperty('latLng'));
