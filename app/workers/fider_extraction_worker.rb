@@ -3,7 +3,7 @@ require 'xml'
 class FiderExtractionWorker
   include Sidekiq::Worker
 
-  sidekiq_options retry: 2, backtrace: true
+  sidekiq_options retry: 2
 
 
   def perform(placemark_xml)

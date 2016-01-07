@@ -57,7 +57,8 @@ class Objects::Tp
     kmlns="kml:#{KMLNS}"
     placemarks=doc.child.find '//kml:Placemark', kmlns
     placemarks.each do |placemark|
-      TpExtractionWorker.perform_async(placemark.to_s)
+      # TpExtractionWorker.perform_async(placemark.to_s)
+      TpExtractionWorker.new.perform(placemark.to_s)
     end
   end
 

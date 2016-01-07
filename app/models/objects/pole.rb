@@ -44,7 +44,8 @@ class Objects::Pole
     kmlns="kml:#{KMLNS}"
     placemarks=doc.child.find '//kml:Placemark', kmlns
     placemarks.each do |placemark|
-      PoleExtractionWorker.perform_async(placemark.to_s)
+      # PoleExtractionWorker.perform_async(placemark.to_s)
+      PoleExtractionWorker.new.perform(placemark.to_s)
     end
   end
 

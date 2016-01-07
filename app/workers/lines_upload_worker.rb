@@ -1,6 +1,8 @@
 class LinesUploadWorker
   include Sidekiq::Worker
 
+  sidekiq_options retry: 2
+
 
   def perform(file)
     Zip::File.open file do |zip_file|

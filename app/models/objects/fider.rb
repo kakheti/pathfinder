@@ -49,7 +49,8 @@ class Objects::Fider
     placemarks = doc.child.find '//kml:Placemark',kmlns
 
     placemarks.each do |placemark|
-      FiderExtractionWorker.perform_async(placemark.to_s)
+      # FiderExtractionWorker.perform_async(placemark.to_s)
+      FiderExtractionWorker.new.perform(placemark.to_s)
     end
   end
 
