@@ -24,10 +24,9 @@ class Region
   index({name: 1})
 
   def self.get_by_name(name)
-    if name.present?
-      name = name.to_ka(:all)
-      Region.where(name: name).first || Region.create(name: name)
-    end
+    return unless name.present?
+    name = name.to_ka(:all)
+    Region.where(name: name).first || Region.create(name: name)
   end
 
   def can_delete?
