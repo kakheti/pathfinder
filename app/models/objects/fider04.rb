@@ -71,11 +71,7 @@ class Objects::Fider04
     kmlns="kml:#{KMLNS}"
     placemarks = doc.child.find '//kml:Placemark', kmlns
     placemarks.each do |placemark|
-      # NB: we can't asyncronously process these,
-      #     while we are matching similar records
-      #
-      # Direction04ExtractionWorker.perform_async(placemark.to_s)
-      Direction04ExtractionWorker.new.perform(placemark.to_s)
+      Direction04ExtractionWorker.perform_async(placemark.to_s)
     end
   end
 

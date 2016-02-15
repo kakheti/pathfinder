@@ -31,9 +31,6 @@ class Pole04ExtractionWorker
     obj.tp = Objects::Tp.by_name(tpnumber) if tpnumber.present?
     obj.tp_name = obj.tp.name if obj.tp.present?
 
-    dir_num = Objects::Direction04.decode(Objects::Kml.get_property(descr, 'მიმართულება'))
-    obj.direction = Objects::Direction04.get_or_create(dir_num, obj.tp)
-
     description = Objects::Kml.get_property(descr, 'Note_')
     obj.description = description.to_ka(:all) if description.present?
 
@@ -42,6 +39,9 @@ class Pole04ExtractionWorker
     obj.region = obj.tp.region if obj.tp.present?
     obj.region = Region.get_by_name(region_name) if obj.region.blank?
     obj.region_name = obj.region.name if obj.region.present?
+
+    dir_num = Objects::Kml.get_property(descr, 'მიმართულება')
+    obj.direction = Objects::Direction04.get_or_create(obj.region, dir_num, obj.tp, tpnumber)
 
     obj.substation = obj.tp.substation if obj.tp.present?
     obj.substation_name = obj.substation.name if obj.substation.present?
