@@ -23,9 +23,9 @@ class Direction04ExtractionWorker
     line.region = Region.get_by_name(Objects::Kml.get_property(descr, 'მუნიციპალიტეტი').to_ka(:all))
     line.region_name = line.region.name
 
-    tr_num = Objects::Kml.get_property(descr, 'ტრანსფორმატორის ნომერი')
+    tr_num  = Objects::Kml.get_property(descr, 'ტრანსფორმატორის ნომერი')
     line.tp = Objects::Tp.by_name(tr_num)
-    line.tp_name = line.tp.name if line.tp.present?
+    line.tp_name = tr_num
 
     line.substation = line.tp.substation if line.tp.present?
     line.fider = line.tp.fider if line.tp.present?
