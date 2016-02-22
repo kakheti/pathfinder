@@ -54,7 +54,7 @@ class Pole04ExtractionWorker
     obj.save
 
     # XXX: removing some stange data
-    next unless ['xazi miwiqveSa', 'ხაზი მიწისქვეშა'].include?(obj.name)
+    return unless ['xazi miwiqveSa', 'ხაზი მიწისქვეშა'].include?(obj.name)
     obj.direction.destroy
     obj.destroy
 
