@@ -48,7 +48,7 @@ class Objects::Tp
   end
 
   def self.by_name(name)
-    Objects::Tp.where(name: name).first
+    Objects::Tp.where(name: name).first || Objects::Tp.create(name: name)
   end
 
   def self.from_kml(xml)
