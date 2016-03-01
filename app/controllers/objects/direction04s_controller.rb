@@ -32,16 +32,18 @@ class Objects::Direction04sController < ApplicationController
     end
   end
 
+  # DEPRECATED
   def upload
-    @title='ფაილის ატვირთვა: 0.4კვ ხაზები'
-    if request.post?
-      f=params[:data].original_filename
-      case File.extname(f).downcase
-        when '.kmz' then upload_kmz(params[:data].tempfile)
-        when '.kml' then upload_kml(params[:data].tempfile)
-        else raise 'არასწორი ფორმატი' end
-      redirect_to objects_fider04s_url, notice: 'მონაცემები ატვირთულია'
-    end
+    render text: 'not supported'
+    # @title='ფაილის ატვირთვა: 0.4კვ ხაზები'
+    # if request.post?
+    #   f=params[:data].original_filename
+    #   case File.extname(f).downcase
+    #     when '.kmz' then upload_kmz(params[:data].tempfile)
+    #     when '.kml' then upload_kml(params[:data].tempfile)
+    #     else raise 'არასწორი ფორმატი' end
+    #   redirect_to objects_fider04s_url, notice: 'მონაცემები ატვირთულია'
+    # end
   end
 
   def show
@@ -70,10 +72,11 @@ class Objects::Direction04sController < ApplicationController
   def login_required; true end
   def permission_required; not current_user.admin? end
 
-  private
+private
 
-  def upload_kmz(file)
-    Direction04sUploadWorker.perform_async(file.path)
-  end
+  # DEPRECATED
+  # def upload_kmz(file)
+  #   Direction04sUploadWorker.perform_async(file.path)
+  # end
 
 end
