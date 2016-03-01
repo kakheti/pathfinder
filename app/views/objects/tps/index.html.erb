@@ -33,7 +33,7 @@ end %>
           <span class="text-muted"><%= tp.address %></span>
         </td>
         <td>
-          <%= link_to tp.region.name, region_url(tp.region, tab: 'tps') %>
+          <%= link_to (tp.region.try(:name) || '(რეგიონის გარეშე)'), region_url(tp.region, tab: 'tps') %>
         </td>
       </tr>
     <% end %>
