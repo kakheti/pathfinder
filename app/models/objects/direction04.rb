@@ -39,6 +39,7 @@ class Objects::Direction04
   end
 
   def self.get_or_create(region, number, tp, tp_name)
+    number = decode(number)
     existing = self.where(region_id: region.id,
                           number: number,
                           tp_name: tp_name).first
@@ -49,5 +50,9 @@ class Objects::Direction04
                 region: region,
                 fider:  tp.try(:fider),
                 substation: tp.try(:substation))
+  end
+
+  def self.decode(number)
+    %w(0 100 200 300 400 500 600 700 800 900)[number.to_i] || number
   end
 end
