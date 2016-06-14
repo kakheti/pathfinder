@@ -16,6 +16,7 @@ private
 
   def upload_kml(file)
     Objects::Fider04.delete_all
+    Objects::Direction04.delete_all
     kml = file.read
     Objects::Fider04.from_kml(kml)
   end

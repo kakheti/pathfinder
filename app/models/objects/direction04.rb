@@ -38,16 +38,21 @@ class Objects::Direction04
     self.save
   end
 
-  def self.get_or_create(number, tp)
-    found = self.where(number: number, tp: tp).first
-    if found
-      return found
-    elsif !tp.nil?
-      return self.create(number: number, tp: tp, region: tp.region, fider: tp.fider, substation: tp.substation)
-    end
+  def self.get_or_create(region, number, tp, tp_name)
+    number = decode(number)
+    existing = self.where(region_id: region.id,
+                          number: number,
+                          tp_name: tp_name).first
+    return existing if existing
+    self.create(number: number,
+                tp: tp,
+                tp_name: tp_name,
+                region: region,
+                fider:  tp.try(:fider),
+                substation: tp.try(:substation))
   end
 
-  def self.decode(coded)
-    %w(0 100 200 300 400 500 600 700 800 900)[coded.to_i] || coded
+  def self.decode(number)
+    %w(0 100 200 300 400 500 600 700 800 900)[number.to_i] || number
   end
 end

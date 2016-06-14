@@ -11,10 +11,12 @@ class Pole04ExtractionWorker
 
     id = placemark.attributes['id']
     obj = Objects::Pole04.where(kmlid: id).first || Objects::Pole04.create(kmlid: id)
+
     # start description section
     descr = placemark.find('description').first.content
     obj.name = Objects::Kml.get_property(descr, 'ბოძის id')
     obj.number = Objects::Kml.get_property(descr, 'ბოძის ნომერი')
+
     obj.height = Objects::Kml.get_property(descr, 'ბოძის სიმაღლე').to_f
     obj.pole_type = Objects::Kml.get_property(descr, 'ბოძის ტიპი', '').to_ka(:all)
     obj.ankeruli = Objects::Kml.get_property(descr, 'ანკერული', '').to_ka(:all)
@@ -29,23 +31,33 @@ class Pole04ExtractionWorker
     obj.tp = Objects::Tp.by_name(tpnumber) if tpnumber.present?
     obj.tp_name = obj.tp.name if obj.tp.present?
 
-    dir_num = Objects::Direction04.decode(Objects::Kml.get_property(descr, 'მიმართულება'))
-    obj.direction = Objects::Direction04.get_or_create(dir_num, obj.tp)
-
     description = Objects::Kml.get_property(descr, 'Note_')
     obj.description = description.to_ka(:all) if description.present?
 
+    region = nil
+    region_name = Objects::Kml.get_property(descr, 'მუნიციპალიტეტი')
     obj.region = obj.tp.region if obj.tp.present?
+    obj.region = Region.get_by_name(region_name) if obj.region.blank?
     obj.region_name = obj.region.name if obj.region.present?
+
+    dir_num = Objects::Kml.get_property(descr, 'მიმართულება')
+    obj.direction = Objects::Direction04.get_or_create(obj.region, dir_num, obj.tp, tpnumber)
+
     obj.substation = obj.tp.substation if obj.tp.present?
     obj.substation_name = obj.substation.name if obj.substation.present?
     obj.fider = obj.tp.fider if obj.tp.present?
     obj.fider_name = obj.fider.name if obj.fider.present?
-
     # end of description section
+
     coord = placemark.find('Point/coordinates').first.content
     obj.set_coordinate(coord)
     obj.save
+
+    # XXX: removing some stange data
+    return unless ['xazi miwiqveSa', 'ხაზი მიწისქვეშა'].include?(obj.name)
+    obj.direction.destroy
+    obj.destroy
+
   end
 
 end

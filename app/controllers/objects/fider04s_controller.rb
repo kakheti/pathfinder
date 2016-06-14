@@ -26,15 +26,16 @@ class Objects::Fider04sController < ApplicationController
     end
   end
 
+  # DEPRECATED
   def upload
     @title='ფაილის ატვირთვა: 0.4კვ ხაზები'
     if request.post?
       f=params[:data].original_filename
       case File.extname(f).downcase
       when '.kmz' then upload_kmz(params[:data].tempfile)
-      when '.kml' then upload_kml(params[:data].tempfile)
+      # when '.kml' then upload_kml(params[:data].tempfile)
       else raise 'არასწორი ფორმატი' end
-      redirect_to objects_fider04s_url, notice: 'მონაცემები ატვირთულია'
+      redirect_to objects_direction04s_url, notice: 'მონაცემები ატვირთულია'
     end
   end
 
@@ -64,19 +65,9 @@ class Objects::Fider04sController < ApplicationController
   def login_required; true end
   def permission_required; not current_user.admin? end
 
-  private
+private
 
   def upload_kmz(file)
-    Zip::File.open file do |zip_file|
-      zip_file.each do |entry|
-        upload_kml(entry.get_input_stream) if 'kml'==entry.name[-3..-1]
-      end
-    end
-  end
-
-  def upload_kml(file)
-    Objects::Fider04.delete_all
-    kml = file.read
-    Objects::Fider04.from_kml(kml)
+    Direction04sUploadWorker.perform_async(file.path)
   end
 end

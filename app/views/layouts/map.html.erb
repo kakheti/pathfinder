@@ -7,6 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title><% if @title.present? %><%= @title %> &mdash; <% end %>pathfinder</title>
   <%= favicon_link_tag('/favicon.jpg') %>
+  <%= javascript_include_tag "application", media: "all" %>
   <%= stylesheet_link_tag "application", media: "all" %>
   <%= stylesheet_link_tag "client", media: "all" %>
   <%= csrf_meta_tags %>

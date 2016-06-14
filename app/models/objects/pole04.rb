@@ -42,37 +42,37 @@ class Objects::Pole04
   index({region_id: 1})
 
   def traverse_s
-    str = ''
-    str += "კაუჭისებრი #{traverse[1]}, " unless traverse[1].nil?
-    str += "კუთხოვანა ერთმაგი #{traverse[2]}, " unless traverse[2].nil?
-    str += "კუთხოვანა ორმაგი #{traverse[3]}, " unless traverse[3].nil?
-    str += "სხვა #{traverse[4]}" unless traverse[4].nil?
-    str
+    str = []
+    str.push "კაუჭისებრი #{traverse[1]}" unless traverse[1].nil?
+    str.push "კუთხოვანა ერთმაგი #{traverse[2]}" unless traverse[2].nil?
+    str.push "კუთხოვანა ორმაგი #{traverse[3]}" unless traverse[3].nil?
+    str.push "სხვა #{traverse[4]}" unless traverse[4].nil?
+    str.join(', ')
   end
 
   def isolators_s
-    str = ''
-    str += "ფაიფური პატარა #{isolators[1]}, " unless isolators[1].nil?
-    str += "ფაიფური დიდი #{isolators[2]}, " unless isolators[2].nil?
-    str += "შუშა პატარა #{isolators[3]}, " unless isolators[3].nil?
-    str += "შუშა დიდი #{isolators[4]}, " unless isolators[4].nil?
-    str += "სხვა #{isolators[5]}" unless isolators[5].nil?
-    str
+    str = []
+    str.push "ფაიფური პატარა #{isolators[1]}" unless isolators[1].nil?
+    str.push "ფაიფური დიდი #{isolators[2]}" unless isolators[2].nil?
+    str.push "შუშა პატარა #{isolators[3]}" unless isolators[3].nil?
+    str.push "შუშა დიდი #{isolators[4]}" unless isolators[4].nil?
+    str.push "სხვა #{isolators[5]}" unless isolators[5].nil?
+    str.join(', ')
   end
 
   def counters_s
-    str = ''
-    str += "ერთიანი #{counters[1]}, " unless counters[1].nil?
-    str += "ორიანი #{counters[2]}, " unless counters[2].nil?
-    str += "სამიანი #{counters[3]}, " unless counters[3].nil?
-    str += "ოთხიანი #{counters[4]}, " unless counters[4].nil?
-    str += "ხუთიანი #{counters[5]}" unless counters[5].nil?
-    str += "ექვსიანი #{counters[6]}" unless counters[6].nil?
-    str += "შვიდიანი #{counters[7]}" unless counters[7].nil?
-    str += "ათიანი #{counters[8]}" unless counters[8].nil?
-    str += "ცხრიანი #{counters[9]}" unless counters[9].nil?
-    str += "სხვა #{counters[10]}" unless counters[10].nil?
-    str
+    str = []
+    str.push "ერთიანი #{counters[1]}"  unless counters[1].nil?
+    str.push "ორიანი #{counters[2]}"   unless counters[2].nil?
+    str.push "სამიანი #{counters[3]}"  unless counters[3].nil?
+    str.push "ოთხიანი #{counters[4]}"  unless counters[4].nil?
+    str.push "ხუთიანი #{counters[5]}"  unless counters[5].nil?
+    str.push "ექვსიანი #{counters[6]}" unless counters[6].nil?
+    str.push "შვიდიანი #{counters[7]}" unless counters[7].nil?
+    str.push "ათიანი #{counters[8]}"   unless counters[8].nil?
+    str.push "ცხრიანი #{counters[9]}"  unless counters[9].nil?
+    str.push "სხვა #{counters[10]}"    unless counters[10].nil?
+    str.join(', ')
   end
 
   def self.from_kml(xml)
@@ -89,23 +89,20 @@ class Objects::Pole04
   def self.from_csv(csv)
     CSV.parse(csv, :headers => true) do |row|
       id = row['Pole_id'].gsub(',', '')
+      pole = Objects::Pole04.where(name: id).first
+
+      next unless pole
       quantity = row['Quantity'].to_i
 
-      pole = Objects::Pole04.where({:name => id}).first
+      traverse_type = row['Pole_T_type']
+      isolator_type = row['Pole_i_type']
+      counter_type = row['Pole_co_type']
 
-      unless pole.nil?
-        if !row['Pole_T_type'].nil?
-          traverse_type = row['Pole_T_type'].to_i
-          pole.traverse[traverse_type] = quantity
-        elsif !row['Pole_i_type'].nil?
-          isolator_type = row['Pole_i_type'].to_i
-          pole.isolators[isolator_type] = quantity
-        elsif !row['Pole_co_type'].nil?
-          counter_type = row['Pole_co_type'].to_i
-          pole.counters[counter_type] = quantity
-        end
-        pole.save
-      end
+      pole.traverse[traverse_type.to_i] = quantity if traverse_type
+      pole.isolators[isolator_type.to_i] = quantity if isolator_type
+      pole.counters[counter_type.to_i] = quantity if counter_type
+
+      pole.save
     end
   end
 end
