@@ -33,7 +33,10 @@ class Objects::Fider
   index({ region_id: 1 })
 
   def to_s; self.name end
-  def self.by_name(name); Objects::Fider.where(name: name).first || Objects::Fider.create(name: name) end
+  def self.find_or_create(name, substation_number, region)
+    Objects::Fider.where(name: name, substation_number: substation_number, region: region).first ||
+      Objects::Fider.create(name: name, substation_number: substation_number, region: region)
+  end
 
   def make_summaries
     self.residential_count = self.tps.sum(:residential_count)
@@ -44,7 +47,7 @@ class Objects::Fider
 
   def self.from_kml(xml)
     parser = XML::Parser.string xml
-    doc = parser.parse ; root=doc.child
+    doc = parser.parse
     kmlns = "kml:#{KMLNS}"
     placemarks = doc.child.find '//kml:Placemark',kmlns
 

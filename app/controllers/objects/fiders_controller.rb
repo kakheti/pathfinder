@@ -5,7 +5,7 @@ class Objects::FidersController < ApplicationController
   include Objects::Kml
 
   def index
-    rel = Objects::Fider.asc(:name)
+    rel = Objects::Fider.order_by(:region_id.asc, :substation_id.asc, :name.asc)
     @search = search_params
     if @search.present?
       rel = rel.where(name: @search[:name].mongonize) if @search[:name].present?
