@@ -8,34 +8,20 @@
 <%= search_form @search do |s|
   s.combo_field 'region', collection: Region.all.asc('name'), label: 'მუნიციპალიტეტი', empty: '-- ყველა მუნიციპალიტეტი --'
   s.combo_field 'substation', collection: Objects::Substation.all.asc('name'), label: 'ქ/ს', empty: '-- ყველა ქვესადგური --'
-  s.text_field 'line', label: 'ელ. გადამცემი ხაზი'
-  s.text_field 'name', label: 'დასახელება'
+  s.combo_field 'id', collection: Objects::Fider.all.asc('name'), label: 'დასახელება', empty: '-- ყველა --'
 end %>
 
 <% if @fiders.any? %>
   <table class="table table-bordered table-hover">
     <thead>
       <tr>
-        <th>6-10კვ ფიდერი</th>
         <th width="200">მუნიციპალიტეტი</th>
         <th width="200">ქვესადგური</th>
+        <th>6-10კვ ფიდერი</th>
       </tr>
     </thead>
     <% @fiders.each do |fider| %>
       <tr>
-        <td>
-          <strong>
-            <a href="<%= objects_fider_url(fider) %>">
-              <% if fider.name.present? %>
-                <%= fider.name %>
-              <% else %>
-                <span class="text-muted">(დასახელების გარეშე)</span>
-              <% end %>
-            </a>
-          </strong>
-          &mdash;
-          <code><%= number_with_precision fider.length %></code> კმ
-        </td>
         <td>
           <% if fider.region %>
             <%= link_to fider.region.name, region_url(fider.region, tab: 'fiders') %>
@@ -49,6 +35,19 @@ end %>
           <% else %>
             <span class="text-muted">(ქვესადგურის გარეშე)</span>
           <% end %>
+        </td>
+        <td>
+          <strong>
+            <a href="<%= objects_fider_url(fider) %>">
+              <% if fider.name.present? %>
+                <%= fider.name %>
+              <% else %>
+                <span class="text-muted">(დასახელების გარეშე)</span>
+              <% end %>
+            </a>
+          </strong>
+          &mdash;
+          <code><%= number_with_precision fider.length %></code> კმ
         </td>
       </tr>
     <% end %>
