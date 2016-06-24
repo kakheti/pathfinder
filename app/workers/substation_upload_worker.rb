@@ -2,6 +2,8 @@ class SubstationUploadWorker
   include Sidekiq::Worker
 
 
+  sidekiq_options retry: 2
+
   def perform(file)
     Zip::File.open file do |zip_file|
       zip_file.each do |entry|

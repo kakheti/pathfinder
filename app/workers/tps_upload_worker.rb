@@ -1,7 +1,7 @@
 class TpsUploadWorker
   include Sidekiq::Worker
 
-  sidekiq_options retries: false
+  sidekiq_options retry: 2
 
 
   def perform(file)

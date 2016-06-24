@@ -3,7 +3,7 @@ require 'xml'
 class TpExtractionWorker
   include Sidekiq::Worker
 
-  sidekiq_options retry: 2, backtrace: true
+  sidekiq_options retry: 2
 
   def perform(placemark_xml)
     placemark = XML::Parser.string(placemark_xml).parse.child

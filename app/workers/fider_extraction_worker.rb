@@ -3,14 +3,18 @@ require 'xml'
 class FiderExtractionWorker
   include Sidekiq::Worker
 
-  sidekiq_options retry: 2, backtrace: true
+  sidekiq_options retry: 2
 
 
   def perform(placemark_xml)
     placemark = XML::Parser.string(placemark_xml).parse.child
     descr = placemark.find('description').first.content
-    name  = Objects::Kml.get_property(descr, 'ფიდერი')
-    fider = Objects::Fider.by_name(name.to_ka(:all)) if name
+    name = Objects::Kml.get_property(descr, 'ფიდერი').to_ka(:all)
+    substation_number = Objects::Kml.get_property(descr, 'ქვესადგურის ნომერი')
+    region = Region.get_by_name(Objects::Kml.get_property(descr, 'მუნიციპალიტეტი'))
+
+    fider = Objects::Fider.find_or_create(name, substation_number, region)
+
     line  = Objects::FiderLine.create(fider: fider)
     line.start = Objects::Kml.get_property(descr, 'საწყისი ბოძი')
     line.end = Objects::Kml.get_property(descr, 'ბოძამდე')
@@ -19,10 +23,11 @@ class FiderExtractionWorker
     line.underground = Objects::Kml.get_property(descr, 'მიწისქვეშა კაბელი')
     line.quro = Objects::Kml.get_property(descr, 'ქურო')
     line.description = Objects::Kml.get_property(descr, 'შენიშვნა')
-    line.region = Region.get_by_name Objects::Kml.get_property(descr, 'მუნიციპალიტეტი')
+    line.region = region
     line.voltage = Objects::Kml.get_property(descr, 'ფიდერის ძაბვა')
     line.linename = Objects::Kml.get_property(descr, 'ელ, გადამცემი ხაზი')
-    line.substation_number = Objects::Kml.get_property(descr, 'ქვესადგურის ნომერი')
+    line.substation_number = substation_number
+
     coords = placemark.find('MultiGeometry/LineString/coordinates').first.content
     coords = coords.split(' ')
     coords.each do |coord|
