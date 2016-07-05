@@ -30,7 +30,7 @@ class Objects::OfficesController < ApplicationController
       when '.kml' then upload_kml(params[:data].tempfile)
       when '.xlsx' then upload_xlsx(params[:data].tempfile)
       else raise 'არასწორი ფორმატი' end
-      redirect_to objects_offices_url, notice: 'მონაცემები ატვირთვა დაწყებულია. შეამოწმეთ მიმდინარე დავალებათა გვერდი.'
+      redirect_to objects_offices_url, notice: 'მონაცემების ატვირთვა დაწყებულია. შეამოწმეთ მიმდინარე დავალებათა გვერდი.'
     end
   end
 

@@ -41,7 +41,7 @@ class Objects::TpsController < ApplicationController
       when '.kml' then upload_kml(params[:data].tempfile)
       when '.xlsx' then uploadstat_xlsx(params[:data].tempfile)
       else raise 'არასწორი ფორმატი' end
-      redirect_to objects_tps_url, notice: 'მონაცემები ატვირთულია'
+      redirect_to objects_tps_url, notice: 'მონაცემების ატვირთვა დაწყებულია. შეამოწმეთ მიმდინარე დავალებათა გვერდი.'
     end
   end
 

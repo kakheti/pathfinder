@@ -35,7 +35,7 @@ class Objects::Fider04sController < ApplicationController
       when '.kmz' then upload_kmz(params[:data].tempfile)
       # when '.kml' then upload_kml(params[:data].tempfile)
       else raise 'არასწორი ფორმატი' end
-      redirect_to objects_direction04s_url, notice: 'მონაცემები ატვირთულია'
+      redirect_to objects_direction04s_url, notice: 'მონაცემების ატვირთვა დაწყებულია. შეამოწმეთ მიმდინარე დავალებათა გვერდი'
     end
   end
 

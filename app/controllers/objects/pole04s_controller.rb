@@ -47,7 +47,7 @@ class Objects::Pole04sController < ApplicationController
       when '.kml' then upload_kml(params[:data].tempfile)
       when '.txt' then upload_txt(params[:data].tempfile)
       else raise 'არასწორი ფორმატი' end
-      redirect_to objects_pole04s_url, notice: 'მონაცემები ატვირთულია'
+      redirect_to objects_pole04s_url, notice: 'მონაცემების ატვირთვა დაწყებულია. შეამოწმეთ მიმდინარე დავალებათა გვერდი'
     end
   end
 

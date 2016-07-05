@@ -25,7 +25,7 @@ class FiderExtractionWorker
     line.description = Objects::Kml.get_property(descr, 'შენიშვნა')
     line.region = region
     line.voltage = Objects::Kml.get_property(descr, 'ფიდერის ძაბვა')
-    line.linename = Objects::Kml.get_property(descr, 'ელ, გადამცემი ხაზი')
+    line.linename = Objects::Kml.get_property(descr, 'ელ, გადამცემი ხაზი').to_ka(:all)
     line.substation_number = substation_number
 
     coords = placemark.find('MultiGeometry/LineString/coordinates').first.content
@@ -38,7 +38,7 @@ class FiderExtractionWorker
     line.set_coordinate(coords[coords.size/2])
     line.calc_length!
     line.save
-    fider.linename = Objects::Kml.get_property(descr, 'ელ, გადამცემი ხაზი')
+    fider.linename = line.linename
     fider.line = Objects::Line.by_name(fider.linename)
     fider.set_coordinate(coords[coords.size/2])
     fider.region = line.region unless fider.region.present?
