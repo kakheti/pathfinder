@@ -8,7 +8,7 @@
 <%= search_form @search do |s|
   s.combo_field 'region', collection: Region.all.asc('name'), label: 'მუნიციპალიტეტი', empty: '-- ყველა მუნიციპალიტეტი --'
   s.combo_field 'substation', collection: Objects::Substation.all.asc('name'), label: 'ქ/ს', empty: '-- ყველა ქვესადგური --'
-  s.combo_field 'id', collection: Objects::Fider.all.asc('name'), label: 'დასახელება', empty: '-- ყველა --'
+  s.combo_field 'name', collection: Objects::Fider.all.asc('name').map {|f| f.id=f.name; f }, label: 'დასახელება', empty: '-- ყველა --'
 end %>
 
 <% if @fiders.any? %>
