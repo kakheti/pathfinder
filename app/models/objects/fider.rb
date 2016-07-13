@@ -37,6 +37,10 @@ class Objects::Fider
     Objects::Fider.where(name: name, substation_number: substation_number, region: region).first ||
       Objects::Fider.create(name: name, substation_number: substation_number, region: region)
   end
+  def self.by_substation_name(name, substation_name, region)
+    Objects::Fider.where(name: name, substation_name: substation_name, region: region).first ||
+      Objects::Fider.create(name: name, substation_name: substation_name, region: region)
+  end
 
   def make_summaries
     self.residential_count = self.tps.sum(:residential_count)

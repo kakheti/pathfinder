@@ -5,7 +5,7 @@ class Objects::PolesController < ApplicationController
   include Objects::Kml
 
   def index
-    rel=Objects::Pole.asc(:fider_id, :name)
+    rel=Objects::Pole.asc(:region_name, :substation_name, :fider_name, :name)
     @search = search_params
     if @search.present?
       rel = rel.where(name: @search[:name].mongonize) if @search[:name].present?

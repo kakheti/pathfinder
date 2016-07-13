@@ -18,36 +18,30 @@ end %>
   <table class="table table-bordered table-hover">
     <thead>
       <tr>
-        <th>6-10კვ საყრდენის #</th>
-        <th width="200">6-10კვ ფიდერი</th>
-        <th width="200">ქვესადგური</th>
         <th width="200">მუნიციპალიტეტი</th>
+        <th width="200">ქვესადგური</th>
+        <th width="200">6-10კვ ფიდერი</th>
+        <th>6-10კვ საყრდენის #</th>
       </tr>
     </thead>
     <% @poles.each do |pole| %>
       <tr>
-        <td><a href="<%= objects_pole_url(pole) %>">6-10კვ საყრდენი #<strong><%= pole.name %></strong></a></td>
         <td>
-          <% if pole.fider %>
-            <%= link_to pole.fider.name, objects_fider_url(pole.fider, tab: 'poles') %>
-          <% else %>
-            <span class="text-muted">(ფიდერის გარეშე)</span>
+          <% if pole.region %>
+              <%= link_to pole.region_name, region_url(pole.region, tab: 'poles') %>
           <% end %>
         </td>
         <td>
           <% if pole.substation %>
-            <%= link_to pole.substation.name, objects_substation_url(pole.substation, tab: 'poles') %>
-          <% else %>
-            <span class="text-muted">(ქვესადგურის გარეშე)</span>
+              <%= link_to pole.substation_name, objects_substation_url(pole.substation, tab: 'poles') %>
           <% end %>
         </td>
         <td>
-          <% if pole.region %>
-            <%= link_to pole.region.name, region_url(pole.region, tab: 'poles') %>
-          <% else %>
-            <span class="text-muted">(მუნიციპალიტეტის გარეშე)</span>
+          <% if pole.fider %>
+            <%= link_to pole.fider_name, objects_fider_url(pole.fider, tab: 'poles') %>
           <% end %>
         </td>
+        <td><a href="<%= objects_pole_url(pole) %>">6-10კვ საყრდენი #<strong><%= pole.name %></strong></a></td>
       </tr>
     <% end %>
   </table>

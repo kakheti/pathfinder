@@ -12,6 +12,7 @@ class PoleExtractionWorker
     # start description section
     descr = placemark.find('description').first.content
     obj.name = Objects::Kml.get_property(descr, 'ბოძის ნომერი')
+    return unless obj.name
     obj.number2 = Objects::Kml.get_property(descr, 'ბოძის პირობითი ნომერი')
     obj.height = Objects::Kml.get_property(descr, 'ბოძის სიმაღლე').to_f
     obj.pole_type = Objects::Kml.get_property(descr, 'ბოძის ტიპი')
@@ -25,11 +26,12 @@ class PoleExtractionWorker
     obj.should_be_out = Objects::Kml.get_property(descr, 'გამოსატანია')
     obj.gps = Objects::Kml.get_property(descr, 'GPS')
     obj.region_name = Objects::Kml.get_property(descr, 'მუნიციპალიტეტი').to_ka(:all)
-    obj.region = Region.get_by_name(obj.region_name) if obj.region_name.present?
+    obj.region = Region.get_by_name(obj.region_name)
     obj.substation_name = Objects::Kml.get_property(descr, 'ქვესადგური').to_ka(:all)
-    obj.substation = Objects::Substation.by_name(obj.substation_name) if obj.substation_name.present?
+    obj.substation = Objects::Substation.by_name(obj.substation_name)
     obj.fider_name = Objects::Kml.get_property(descr, 'ფიდერი').to_ka(:all)
-    obj.fider = Objects::Fider.by_name(obj.fider_name) if obj.fider_name.present?
+    return unless obj.fider_name
+    obj.fider = Objects::Fider.by_substation_name(obj.fider_name, obj.substation_name, obj.region)
     linename = Objects::Kml.get_property(descr, 'ელ. გადამცემი ხაზი')
     obj.linename = linename.to_ka(:all) if linename.present?
     description = Objects::Kml.get_property(descr, 'შენიშვნა')
