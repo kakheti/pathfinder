@@ -5,7 +5,7 @@ class Objects::TpsController < ApplicationController
   include Objects::Kml
 
   def index
-    rel=Objects::Tp.asc(:kmlid)
+    rel=Objects::Tp.asc(:region_name, :substation_name, :fider_name, :name)
     @search = search_params
     if @search.present?
       rel = rel.where(name: @search[:name].mongonize) if @search[:name].present?

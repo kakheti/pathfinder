@@ -20,6 +20,8 @@ end %>
         <th width="75" class="text-center"><i class="fa fa-image"></i></th>
         <th>6-10კვ სატრ. ჯიხური</th>
         <th width="200">მუნიციპალიტეტი</th>
+        <th width="200">ქვესადგური</th>
+        <th width="200">ფიდერი</th>
       </tr>
     </thead>
     <% @tps.each do |tp| %>
@@ -35,8 +37,16 @@ end %>
         <td>
           <% if tp.region %>
             <%= link_to tp.region.try(:name), region_url(tp.region, tab: 'tps') %>
-          <% else %>
-            <span class="text-muted">(რეგიონის გარეშე)</span>
+          <% end %>
+        </td>
+        <td>
+          <% if tp.substation %>
+            <%= link_to tp.substation.try(:name), objects_substation_url(tp.fider, tab: 'tps') %>
+          <% end %>
+        </td>
+        <td>
+          <% if tp.fider %>
+            <%= link_to tp.fider.try(:name), objects_fider_url(tp.fider, tab: 'tps') %>
           <% end %>
         </td>
       </tr>
