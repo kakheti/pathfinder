@@ -17,23 +17,15 @@ end %>
   <table class="table table-bordered table-hover">
     <thead>
       <tr>
-        <th width="75" class="text-center"><i class="fa fa-image"></i></th>
-        <th>6-10კვ სატრ. ჯიხური</th>
         <th width="200">მუნიციპალიტეტი</th>
         <th width="200">ქვესადგური</th>
         <th width="200">ფიდერი</th>
+        <th>6-10კვ სატრ. ჯიხური</th>
+        <th width="75" class="text-center"><i class="fa fa-image"></i></th>
       </tr>
     </thead>
     <% @tps.each do |tp| %>
       <tr>
-        <td class="text-center">
-          <img src="<%= tp.picture %>" style="max-height: 50px; max-width: 50px;" />
-        </td>
-        <td>
-          <a href="<%= objects_tp_url(tp) %>">6-10კვ სატრ. ჯიხური #<strong><%= tp.name %></strong></a>
-          <% if tp.owner.present? %><code><%= tp.owner %></code><% end %>
-          <span class="text-muted"><%= tp.address %></span>
-        </td>
         <td>
           <% if tp.region %>
             <%= link_to tp.region.try(:name), region_url(tp.region, tab: 'tps') %>
@@ -48,6 +40,14 @@ end %>
           <% if tp.fider %>
             <%= link_to tp.fider.try(:name), objects_fider_url(tp.fider, tab: 'tps') %>
           <% end %>
+        </td>
+        <td>
+          <a href="<%= objects_tp_url(tp) %>">6-10კვ სატრ. ჯიხური #<strong><%= tp.name %></strong></a>
+          <% if tp.owner.present? %><code><%= tp.owner %></code><% end %>
+          <span class="text-muted"><%= tp.address %></span>
+        </td>
+        <td class="text-center">
+          <img src="<%= tp.picture %>" style="max-height: 50px; max-width: 50px;" />
         </td>
       </tr>
     <% end %>
