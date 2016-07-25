@@ -7,10 +7,10 @@
 
 <%= search_form @search do |s|
   s.combo_field 'region', collection: Region.all.asc('name'), label: 'მუნიციპალიტეტი', empty: '-- ყველა მუნიციპალიტეტი --'
-  s.combo_field 'substation', collection: Objects::Substation.all.asc('name'), label: 'ქვესადგუქი', empty: '-- ყველა ქვესადგური --'
-  s.text_field 'fider', label: '6-10კვ ფიდერი'
+  s.combo_field 'substation', collection: Objects::Substation.all.asc('name'), label: 'ქვესადგური', empty: '-- ყველა ქვესადგური --'
+  s.combo_field 'fider', collection: Objects::Fider.all.asc('name'), label: '6-10კვ ფიდერი', empty: '-- ყველა ფიდერი --'
   s.text_field 'name', label: 'ჯიხურის #'
-  s.text_field 'owner', label: 'მფლობელი'
+  s.combo_field 'owner', collection: { "კედ": "კედ", "სხვა": "სხვა" }, label: 'მესაკუთრე', empty: '-- ნებისმიერი --'
 end %>
 
 <% if @tps.any? %>
