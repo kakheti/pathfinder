@@ -33,7 +33,7 @@ end %>
         </td>
         <td>
           <% if tp.substation %>
-            <%= link_to tp.substation.try(:name), objects_substation_url(tp.fider, tab: 'tps') %>
+            <%= link_to tp.substation.try(:name), objects_substation_url(tp.substation, tab: 'tps') %>
           <% end %>
         </td>
         <td>
