@@ -31,7 +31,7 @@ class TpExtractionWorker
     obj.stores = Objects::Kml.get_property(descr, 'შენობის სართულიანობა')
     obj.count_high_voltage = Objects::Kml.get_property(descr, 'მაღალი ძაბვის ამომრთველი').to_i
     obj.count_low_voltage = Objects::Kml.get_property(descr, 'დაბალი ძაბვის ამომრთველი').to_i
-    obj.owner = { "ked": "კედ", "other":"სხვა" }[Objects::Kml.get_property(descr, 'მესაკუთრე')]
+    obj.owner = { "ked" => "კედ", "other" => "სხვა" }[Objects::Kml.get_property(descr, 'მესაკუთრე')]
     obj.address_code = Objects::Kml.get_property(descr, 'საკადასტრო კოდი')
     address = Objects::Kml.get_property(descr, 'მთლიანი მისამართი')
     obj.address = address.to_ka(:all) if address
