@@ -25,6 +25,7 @@ end %>
       </tr>
     </thead>
     <% @tps.each do |tp| %>
+      <% if tp.name %>
       <tr>
         <td>
           <% if tp.region %>
@@ -50,6 +51,7 @@ end %>
           <img src="<%= tp.picture %>" style="max-height: 50px; max-width: 50px;" />
         </td>
       </tr>
+      <% end %>
     <% end %>
   </table>
   <%= will_paginate @tps %>
