@@ -54,10 +54,6 @@ class Objects::Fider04
     }[owner]
   end
 
-  def self.by_name(name)
-    Objects::Fider04.where(name: name).first || Objects::Fider04.create(name: name)
-  end
-
   def make_summaries
     self.residential_count = self.tps.sum(:residential_count)
     self.comercial_count = self.tps.sum(:comercial_count)

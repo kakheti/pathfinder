@@ -23,10 +23,6 @@ class Objects::Line
     self.name
   end
 
-  def self.by_name(name)
-    Objects::Line.where(name: name).first
-  end
-
   def set_points(points)
     self.points.destroy_all
     points.each do |p|

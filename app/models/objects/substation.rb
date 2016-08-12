@@ -36,10 +36,6 @@ class Objects::Substation
     self.save
   end
 
-  def self.by_name(name)
-    Objects::Substation.where(name: name).first || Objects::Substation.create(name: name)
-  end
-
   def self.from_kml(xml)
     parser=XML::Parser.string xml
     doc=parser.parse; root=doc.child

@@ -1,28 +1,28 @@
 source 'https://rubygems.org'
 
-gem 'rails', '~> 4.0'
+gem 'rails'
 gem 'actionpack-action_caching'
 gem 'byebug'
 gem 'pry-byebug'
 gem 'sqlite3'
-gem 'redis', '~>3.2', :require => ['redis', 'redis/connection/hiredis']
-gem 'hiredis', '~> 0.6.0'
+gem 'redis', :require => ['redis', 'redis/connection/hiredis']
+gem 'hiredis'
 gem 'sass'
 gem 'sass-rails'
-gem 'uglifier', '>= 1.3.0'
-gem 'coffee-rails', '~> 4.0.0'
+gem 'uglifier'
+gem 'coffee-rails'
 gem 'jquery-rails'
 gem 'bootstrap-sass'
 # gem 'turbolinks'
 # gem 'jquery-turbolinks'
-gem 'jbuilder', '~> 1.2'
-gem 'rubyzip', '>= 1.0.0'
+gem 'jbuilder'
+gem 'rubyzip'
 gem 'zip-zip'
 
-gem 'mongoid', '~> 5.0'
+gem 'mongoid'
 gem 'mongoid_search'
 gem 'will_paginate_mongoid'
-gem 'forma', '~>0.1'
+gem 'forma'
 gem 'bootstrap-will_paginate'
 gem 'ka'
 
@@ -36,9 +36,9 @@ gem 'geokit'
 gem 'geoutm'
 
 gem 'sidekiq'
-gem 'sinatra', '>= 1.3.0', :require => nil
+gem 'sinatra', :require => nil
 gem 'puma'
 
-gem 'browserify-rails', '~> 2.0'
+gem 'browserify-rails'
 
 gem 'materialize-sass'

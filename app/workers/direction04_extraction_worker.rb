@@ -10,7 +10,7 @@ class Direction04ExtractionWorker
     id = placemark.attributes['id']
     descr = placemark.find('description').first.content
 
-    line = Objects::Fider04.where(kmlid: id).first || Objects::Fider04.create(kmlid: id)
+    line = Objects::Fider04.find_or_create_by(kmlid: id)
 
     line.name = placemark.find('name').first.content
     line.start = Objects::Kml.get_property(descr, 'საწყისი ბოძი')
@@ -24,13 +24,13 @@ class Direction04ExtractionWorker
     line.region_name = line.region.name
 
     tr_num  = Objects::Kml.get_property(descr, 'ტრანსფორმატორის ნომერი')
-    line.tp = Objects::Tp.by_name(tr_num)
+    line.tp = Objects::Tp.find_by(name: tr_num, region: line.region)
     line.tp_name = tr_num
 
-    line.substation = line.tp.substation if line.tp.present?
-    line.fider = line.tp.fider if line.tp.present?
-    line.substation_name = line.substation.name if line.substation.present?
-    line.fider_name = line.fider.name if line.fider.present?
+    line.substation = line.tp.substation
+    line.fider = line.tp.fider
+    line.substation_name = line.substation.name
+    line.fider_name = line.fider.name
 
     dir_num = Objects::Kml.get_property(descr, 'მიმართულება')
     line.direction = Objects::Direction04.get_or_create(line.region, dir_num, line.tp, tr_num)
