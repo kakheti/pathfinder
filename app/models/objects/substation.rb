@@ -47,7 +47,7 @@ class Objects::Substation
       # description content
       descr = placemark.find('./kml:description', kmlns).first.content
       regname = Objects::Kml.get_property(descr, 'მუნიციპალიტეტი')
-      region=Region.get_by_name(regname)
+      region= Region.get_by_name(regname)
       description = Objects::Kml.get_property(descr, 'მესაკუთრე')
       number = Objects::Kml.get_property(descr, 'ქვესადგურის ნომერი')
       # end of description section

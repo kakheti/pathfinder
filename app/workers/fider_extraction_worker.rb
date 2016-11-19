@@ -5,7 +5,6 @@ class FiderExtractionWorker
 
   sidekiq_options retry: 2
 
-
   def perform(placemark_xml)
     placemark = XML::Parser.string(placemark_xml).parse.child
     descr = placemark.find('description').first.content
@@ -39,7 +38,7 @@ class FiderExtractionWorker
     line.calc_length!
     line.save
     fider.linename = line.linename
-    fider.line = Objects::Line.by_name(fider.linename)
+    fider.line = Objects::Line.where(name: fider.linename).first
     fider.set_coordinate(coords[coords.size/2])
     fider.region = line.region unless fider.region.present?
     fider.region_name = fider.region.name if fider.region.present?
