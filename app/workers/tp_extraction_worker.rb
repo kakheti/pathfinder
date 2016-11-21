@@ -42,7 +42,7 @@ class TpExtractionWorker
         return
     end
 
-    obj.substation = Objects::Substation.by_name(obj.substation_name)
+    obj.substation = Objects::Substation.where(name: obj.substation_name, region: obj.region).first
     linename = Objects::Kml.get_property(descr, 'ელექტრო გადამცემი ხაზი')
     obj.linename = linename.to_ka(:all)
     obj.description = Objects::Kml.get_property(descr, 'შენიშვნა')
@@ -53,7 +53,7 @@ class TpExtractionWorker
         return
     end
 
-    obj.fider = Objects::Fider.by_substation_name(obj.fider_name, obj.substation_name, obj.region)
+    obj.fider = Objects::Fider.find_or_create(obj.fider_name, obj.substation.number, obj.region)
     # end of description section
     coord=placemark.find('Point/coordinates').first.content
     obj.set_coordinate(coord)
