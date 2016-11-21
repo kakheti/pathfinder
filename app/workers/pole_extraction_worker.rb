@@ -28,10 +28,10 @@ class PoleExtractionWorker
     obj.region_name = Objects::Kml.get_property(descr, 'მუნიციპალიტეტი').to_ka(:all)
     obj.region = Region.get_by_name(obj.region_name)
     obj.substation_name = Objects::Kml.get_property(descr, 'ქვესადგური').to_ka(:all)
-    obj.substation = Objects::Substation.by_name(obj.substation_name)
+    obj.substation = Objects::Substation.where(name: obj.substation_name, region: obj.region).first
     obj.fider_name = Objects::Kml.get_property(descr, 'ფიდერი').to_ka(:all)
     return unless obj.fider_name
-    obj.fider = Objects::Fider.by_substation_name(obj.fider_name, obj.substation_name, obj.region)
+    obj.fider = Objects::Fider.find_or_create(obj.fider_name, obj.substation.number, obj.region)
     linename = Objects::Kml.get_property(descr, 'ელ. გადამცემი ხაზი')
     obj.linename = linename.to_ka(:all) if linename.present?
     description = Objects::Kml.get_property(descr, 'შენიშვნა')
