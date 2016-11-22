@@ -38,6 +38,7 @@ class TpExtractionWorker
     return unless obj.substation_name
 
     obj.substation = Objects::Substation.where(name: obj.substation_name, region: obj.region).first
+    return unless obj.substation
     linename = Objects::Kml.get_property(descr, 'ელექტრო გადამცემი ხაზი')
     obj.linename = linename.to_ka(:all)
     obj.description = Objects::Kml.get_property(descr, 'შენიშვნა')
