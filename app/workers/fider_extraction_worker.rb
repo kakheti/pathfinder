@@ -14,7 +14,7 @@ class FiderExtractionWorker
 
     fider = Objects::Fider.find_or_create(name, substation_number, region)
 
-    line  = Objects::FiderLine.new(fider: fider)
+    line = Objects::FiderLine.new(fider: fider)
     line.start = Objects::Kml.get_property(descr, 'საწყისი ბოძი')
     line.end = Objects::Kml.get_property(descr, 'ბოძამდე')
     line.cable_type = Objects::Kml.get_property(descr, 'სადენის ტიპი')
@@ -43,7 +43,7 @@ class FiderExtractionWorker
     fider.region = line.region unless fider.region.present?
     fider.region_name = fider.region.name if fider.region.present?
     fider.substation_number = line.substation_number unless fider.substation_number.present?
-    fider.substation = Objects::Substation.where({ number: fider.substation_number }).first
+    fider.substation = Objects::Substation.where({number: fider.substation_number}).first
     fider.substation_name = fider.substation.name if fider.substation.present?
     fider.save
   end

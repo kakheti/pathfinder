@@ -15,9 +15,8 @@ class TpExtractionWorker
     descr = placemark.find('description').first.content
 
     obj.region_name = Objects::Kml.get_property(descr, 'მუნიციპალიტეტი').to_ka(:all)
-    return unless obj.region_name
     obj.region = Region.get_by_name(obj.region_name)
-    return unless obj.region
+    return logger.error("Invalid region name #{obj.region_name} for object #{id}") unless obj.region
 
     obj.city = Objects::Kml.get_property(descr, 'ქალაქი/დაბა/საკრებულო ქალაქი/დაბა/საკრებულო')
     obj.street = Objects::Kml.get_property(descr, 'ქუჩის დასახელება')
@@ -34,17 +33,13 @@ class TpExtractionWorker
     address = Objects::Kml.get_property(descr, 'მთლიანი მისამართი')
     obj.address = address.to_ka(:all) if address
     obj.substation_name = Objects::Kml.get_property(descr, 'ქვესადგური').to_ka(:all)
-
-    return unless obj.substation_name
-
     obj.substation = Objects::Substation.where(name: obj.substation_name, region: obj.region).first
-    return unless obj.substation
+    return logger.error("Invalid substation name #{obj.substation_name} for object #{id}")  unless obj.substation
     linename = Objects::Kml.get_property(descr, 'ელექტრო გადამცემი ხაზი')
     obj.linename = linename.to_ka(:all)
     obj.description = Objects::Kml.get_property(descr, 'შენიშვნა')
     obj.fider_name = Objects::Kml.get_property(descr, 'ფიდერი').to_ka(:all)
-
-    return unless obj.fider_name
+    return logger.error("No fider name for object #{id}") unless obj.fider_name
 
     obj.fider = Objects::Fider.find_or_create(obj.fider_name, obj.substation.number, obj.region)
     # end of description section
