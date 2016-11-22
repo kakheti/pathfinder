@@ -3,12 +3,11 @@ class PoleExtractionWorker
 
   sidekiq_options retry: 2
 
-
   def perform(placemark_xml)
     placemark = XML::Parser.string(placemark_xml).parse.child
 
     id = placemark.attributes['id']
-    obj = Objects::Pole.where(kmlid: id).first || Objects::Pole.create(kmlid: id)
+    obj = Objects::Pole.where(kmlid: id).first || Objects::Pole.new(kmlid: id)
     # start description section
     descr = placemark.find('description').first.content
     obj.name = Objects::Kml.get_property(descr, 'ბოძის ნომერი')
@@ -29,6 +28,7 @@ class PoleExtractionWorker
     obj.region = Region.get_by_name(obj.region_name)
     obj.substation_name = Objects::Kml.get_property(descr, 'ქვესადგური').to_ka(:all)
     obj.substation = Objects::Substation.where(name: obj.substation_name, region: obj.region).first
+    return unless obj.substation
     obj.fider_name = Objects::Kml.get_property(descr, 'ფიდერი').to_ka(:all)
     return unless obj.fider_name
     obj.fider = Objects::Fider.find_or_create(obj.fider_name, obj.substation.number, obj.region)

@@ -32,7 +32,7 @@ class Objects::Office
       # end of description section
       region = Region.get_by_name(regname)
       coord = placemark.find('./kml:Point/kml:coordinates',kmlns).first.content
-      obj = Objects::Office.where(kmlid:id).first || Objects::Office.create(kmlid:id)
+      obj = Objects::Office.where(kmlid:id).first || Objects::Office.new(kmlid:id)
       obj.name = name.to_ka(:all)
       obj.region = region
       obj.region_name = regname

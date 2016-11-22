@@ -36,7 +36,7 @@ class Objects::Tower
       # end of description section
       if 'კახეთი' == regname
         coord=placemark.find('./kml:Point/kml:coordinates', kmlns).first.content
-        obj=Objects::Tower.where(kmlid: id).first || Objects::Tower.create(kmlid: id)
+        obj=Objects::Tower.where(kmlid: id).first || Objects::Tower.new(kmlid: id)
         obj.name = name
         obj.region = Region.get_by_name(regname)
         obj.region_name = regname

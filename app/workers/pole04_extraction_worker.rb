@@ -10,7 +10,7 @@ class Pole04ExtractionWorker
     placemark = XML::Parser.string(placemark_xml).parse.child
 
     id = placemark.attributes['id']
-    obj = Objects::Pole04.where(kmlid: id).first || Objects::Pole04.create(kmlid: id)
+    obj = Objects::Pole04.where(kmlid: id).first || Objects::Pole04.new(kmlid: id)
 
     # start description section
     descr = placemark.find('description').first.content
@@ -34,7 +34,6 @@ class Pole04ExtractionWorker
     description = Objects::Kml.get_property(descr, 'Note_')
     obj.description = description.to_ka(:all) if description.present?
 
-    region = nil
     region_name = Objects::Kml.get_property(descr, 'მუნიციპალიტეტი')
     obj.region = obj.tp.region if obj.tp.present?
     obj.region = Region.get_by_name(region_name) if obj.region.blank?
