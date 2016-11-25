@@ -27,7 +27,7 @@ class PoleExtractionWorker
     obj.region_name = Objects::Kml.get_property(descr, 'მუნიციპალიტეტი').to_ka(:all)
     obj.region = Region.get_by_name(obj.region_name)
     obj.substation_name = Objects::Kml.get_property(descr, 'ქვესადგური').to_ka(:all)
-    obj.substation = Objects::Substation.where(name: obj.substation_name, region: obj.region).first
+    obj.substation = Objects::Substation.where(name: obj.substation_name).first
     return logger.error("Invalid substation name #{obj.substation_name} for object #{id}")  unless obj.substation
     obj.fider_name = Objects::Kml.get_property(descr, 'ფიდერი').to_ka(:all)
     return logger.error("Missing fider name for object #{id}")  unless obj.fider_name

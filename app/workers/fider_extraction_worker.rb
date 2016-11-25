@@ -43,7 +43,7 @@ class FiderExtractionWorker
     fider.region = line.region unless fider.region.present?
     fider.region_name = fider.region.name if fider.region.present?
     fider.substation_number = line.substation_number unless fider.substation_number.present?
-    fider.substation = Objects::Substation.where({number: fider.substation_number}).first
+    fider.substation = Objects::Substation.where(number: fider.substation_number).first
     fider.substation_name = fider.substation.name if fider.substation.present?
     fider.save
   end

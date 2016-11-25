@@ -33,7 +33,7 @@ class TpExtractionWorker
     address = Objects::Kml.get_property(descr, 'მთლიანი მისამართი')
     obj.address = address.to_ka(:all) if address
     obj.substation_name = Objects::Kml.get_property(descr, 'ქვესადგური').to_ka(:all)
-    obj.substation = Objects::Substation.where(name: obj.substation_name, region: obj.region).first
+    obj.substation = Objects::Substation.where(name: obj.substation_name).first
     return logger.error("Invalid substation name #{obj.substation_name} for object #{id}")  unless obj.substation
     linename = Objects::Kml.get_property(descr, 'ელექტრო გადამცემი ხაზი')
     obj.linename = linename.to_ka(:all)
