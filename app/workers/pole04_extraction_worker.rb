@@ -10,7 +10,7 @@ class Pole04ExtractionWorker
     placemark = XML::Parser.string(placemark_xml).parse.child
 
     id = placemark.attributes['id']
-    obj = Objects::Pole04.where(kmlid: id).first || Objects::Pole04.new(kmlid: id)
+    obj = Objects::Pole04.new(kmlid: id)
 
     # start description section
     descr = placemark.find('description').first.content
@@ -28,7 +28,14 @@ class Pole04ExtractionWorker
     obj.street_light = Objects::Kml.get_property(descr, 'გარე განათება', '').to_ka(:all)
 
     tpnumber = Objects::Kml.get_property(descr, 'ტრანსფორმატორის ნომერი')
-    obj.tp = Objects::Tp.by_name(tpnumber) if tpnumber.present?
+
+    begin
+      obj.tp = Objects::Tp.find_by(name: tpnumber) if tpnumber.present?
+    rescue
+      logger.error("Invalid TP number #{tpnumber} for Pole04 #{id}")
+      return
+    end
+
     obj.tp_name = obj.tp.name if obj.tp.present?
 
     description = Objects::Kml.get_property(descr, 'Note_')

@@ -10,7 +10,7 @@ class Direction04ExtractionWorker
     id = placemark.attributes['id']
     descr = placemark.find('description').first.content
 
-    line = Objects::Fider04.find_or_create_by(kmlid: id)
+    line = Objects::Fider04.new(kmlid: id)
 
     line.name = placemark.find('name').first.content
     line.start = Objects::Kml.get_property(descr, 'საწყისი ბოძი')
@@ -20,11 +20,19 @@ class Direction04ExtractionWorker
     line.sip = Objects::Kml.get_property(descr, 'SIP')
     line.owner = Objects::Kml.get_property(descr, 'მესაკუთრე')
     line.state = Objects::Kml.get_property(descr, 'სადენის მდგომარეობა')
+
     line.region = Region.get_by_name(Objects::Kml.get_property(descr, 'მუნიციპალიტეტი').to_ka(:all))
     line.region_name = line.region.name
 
-    tr_num  = Objects::Kml.get_property(descr, 'ტრანსფორმატორის ნომერი')
-    line.tp = Objects::Tp.find_by(name: tr_num, region: line.region)
+    tr_num = Objects::Kml.get_property(descr, 'ტრანსფორმატორის ნომერი')
+
+    begin
+      line.tp = Objects::Tp.find_by(name: tr_num, region: line.region)
+    rescue
+      logger.error("Invalid TP number #{tr_num} for Line04 #{id} in region #{line.region_name}")
+      return
+    end
+
     line.tp_name = tr_num
 
     line.substation = line.tp.substation
