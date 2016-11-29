@@ -21,7 +21,13 @@ class Direction04ExtractionWorker
     line.owner = Objects::Kml.get_property(descr, 'მესაკუთრე')
     line.state = Objects::Kml.get_property(descr, 'სადენის მდგომარეობა')
 
-    line.region = Region.get_by_name(Objects::Kml.get_property(descr, 'მუნიციპალიტეტი').to_ka(:all))
+    region_name = Objects::Kml.get_property(descr, 'მუნიციპალიტეტი')
+    if region_name.nil? then
+      logger.error("No region name for Line04 #{id}")
+      return
+    end
+
+    line.region = Region.get_by_name(region_name.to_ka(:all))
     line.region_name = line.region.name
 
     tr_num = Objects::Kml.get_property(descr, 'ტრანსფორმატორის ნომერი')

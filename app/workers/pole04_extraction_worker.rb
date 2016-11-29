@@ -36,22 +36,22 @@ class Pole04ExtractionWorker
       return
     end
 
-    obj.tp_name = obj.tp.name if obj.tp.present?
+    obj.tp_name = obj.tp.name
 
     description = Objects::Kml.get_property(descr, 'Note_')
     obj.description = description.to_ka(:all) if description.present?
 
     region_name = Objects::Kml.get_property(descr, 'მუნიციპალიტეტი')
-    obj.region = obj.tp.region if obj.tp.present?
+    obj.region = obj.tp.region
     obj.region = Region.get_by_name(region_name) if obj.region.blank?
     obj.region_name = obj.region.name if obj.region.present?
 
     dir_num = Objects::Kml.get_property(descr, 'მიმართულება')
     obj.direction = Objects::Direction04.get_or_create(obj.region, dir_num, obj.tp, tpnumber)
 
-    obj.substation = obj.tp.substation if obj.tp.present?
+    obj.substation = obj.tp.substation
     obj.substation_name = obj.substation.name if obj.substation.present?
-    obj.fider = obj.tp.fider if obj.tp.present?
+    obj.fider = obj.tp.fider
     obj.fider_name = obj.fider.name if obj.fider.present?
     # end of description section
 
