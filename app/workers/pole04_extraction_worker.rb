@@ -47,7 +47,7 @@ class Pole04ExtractionWorker
     obj.region_name = obj.region.name if obj.region.present?
 
     dir_num = Objects::Kml.get_property(descr, 'მიმართულება')
-    obj.direction = Objects::Direction04.get_or_create(obj.region, dir_num, obj.tp, tpnumber)
+    obj.direction = Objects::Direction04.get_or_create(obj.region, dir_num, obj.tp)
 
     obj.substation = obj.tp.substation
     obj.substation_name = obj.substation.name if obj.substation.present?

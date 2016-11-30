@@ -22,7 +22,7 @@ class Direction04ExtractionWorker
     line.state = Objects::Kml.get_property(descr, 'სადენის მდგომარეობა')
 
     region_name = Objects::Kml.get_property(descr, 'მუნიციპალიტეტი')
-    if region_name.nil? then
+    if region_name.nil?
       logger.error("No region name for Line04 #{id}")
       return
     end
@@ -47,7 +47,7 @@ class Direction04ExtractionWorker
     line.fider_name = line.fider.name
 
     dir_num = Objects::Kml.get_property(descr, 'მიმართულება')
-    line.direction = Objects::Direction04.get_or_create(line.region, dir_num, line.tp, tr_num)
+    line.direction = Objects::Direction04.get_or_create(line.region, dir_num, line.tp)
 
     coords = placemark.find('MultiGeometry/LineString/coordinates').first.content
     coords = coords.split(' ')

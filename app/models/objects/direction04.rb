@@ -38,15 +38,16 @@ class Objects::Direction04
     self.save
   end
 
-  def self.get_or_create(region, number, tp, tp_name)
+  def self.get_or_create(region, number, tp)
     number = decode(number)
-    existing = self.where(region_id: region.id,
+    existing = self.where(region: region,
                           number: number,
-                          tp_name: tp_name).first
+                          tp: tp).first
+    puts("Direction04 for region #{region} num #{number} tp #{tp.name} not found") unless existing
     return existing if existing
     self.create(number: number,
                 tp: tp,
-                tp_name: tp_name,
+                tp_name: tp.name,
                 region: region,
                 fider:  tp.try(:fider),
                 substation: tp.try(:substation))
