@@ -14,39 +14,25 @@ end %>
   <table class="table table-bordered table-hover">
     <thead>
       <tr>
-        <th>0.4კვ ხაზი</th>
-        <th width="300">6-10კვ სატრ. ჯიხური</th>
         <th width="200">მუნიციპალიტეტი</th>
+        <th width="300">6-10კვ სატრ. ჯიხური</th>
+        <th>0.4კვ ხაზი</th>
       </tr>
     </thead>
     <% @fiders.each do |fider| %>
       <tr>
         <td>
+          <%= link_to fider.region.name, region_url(fider.region, tab: 'fiders') %>
+        </td>
+        <td>
+          <%= link_to fider.tp.name, objects_tps_url(fider.tp, tab: 'fider04s') %>
+        </td>
+        <td>
           <strong>
-            <a href="<%= objects_fider04_url(fider) %>">
-              <% if fider.name.present? %>
-                <%= fider.name %>
-              <% else %>
-                <span class="text-muted">(დასახელების გარეშე)</span>
-              <% end %>
-            </a>
+            <%= link_to fider.name, objects_fider04_url(fider) %>
           </strong>
           &mdash;
           <code><%= number_with_precision fider.length %></code> კმ
-        </td>
-        <td>
-          <% if fider.tp %>
-            <%= link_to fider.tp.name, objects_tps_url(fider.tp, tab: 'fider04s') %>
-          <% else %>
-            <span class="text-muted">(0-6კვ სატრ. ჯიხურის გარეშე)</span>
-          <% end %>
-        </td>
-        <td>
-          <% if fider.region %>
-            <%= link_to fider.region.name, region_url(fider.region, tab: 'fiders') %>
-          <% else %>
-            <span class="text-muted">(მუნიციპალიტეტის გარეშე)</span>
-          <% end %>
         </td>
       </tr>
     <% end %>
