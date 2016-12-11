@@ -13,11 +13,11 @@ class Objects::Pole04sController < ApplicationController
       rel = rel.where(substation_id: @search[:substation]) if @search[:substation].present?
       rel = rel.where(fider_id: @search[:fider]) if @search[:fider].present?
 
-      if @search[:tp].present? then
-        tp = Objects::Tp.by_name(@search[:tp])
+      if @search[:tp].present?
+        tp = Objects::Tp.where(name: @search[:tp]).first
         rel = rel.where(tp_id: tp.id ) unless tp.nil?
       end
-      if @search[:direction].present? then
+      if @search[:direction].present?
         direction_ids = Objects::Direction04.where(number: @search[:direction]).pluck(:id)
         rel = rel.where(:direction_id.in => direction_ids ) unless direction_ids.nil?
       end

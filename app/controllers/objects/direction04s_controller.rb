@@ -12,8 +12,8 @@ class Objects::Direction04sController < ApplicationController
       rel = rel.where(region_id: @search[:region]) if @search[:region].present?
       rel = rel.where(number: @search[:number]) if @search[:number].present?
 
-      if @search[:tp].present? then
-        tp = Objects::Tp.by_name(@search[:tp])
+      if @search[:tp].present?
+        tp = Objects::Tp.where(name: @search[:tp]).first
         rel = rel.where(tp_id: tp.id ) unless tp.nil?
       end
     end
