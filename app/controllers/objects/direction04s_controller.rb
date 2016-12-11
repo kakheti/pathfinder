@@ -5,7 +5,7 @@ class Objects::Direction04sController < ApplicationController
   include Objects::Kml
 
   def index
-    rel = Objects::Direction04.asc(:tp)
+    rel = Objects::Direction04.asc(:region_name, :tp_name, :number)
     @search = search_params
     if @search.present?
       rel = rel.where(name: @search[:name].mongonize) if @search[:name].present?
