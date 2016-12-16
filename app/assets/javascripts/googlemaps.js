@@ -1,8 +1,8 @@
 var Promise = require('bluebird'),
-_ = require('lodash'),
-clusterer = require('./lib/markerclusterer'),
-api = require('./api'),
-objectTypes = require('./object-types');
+  _ = require('lodash'),
+  clusterer = require('./lib/markerclusterer'),
+  api = require('./api'),
+  objectTypes = require('./object-types');
 
 var API_URL = 'https://maps.googleapis.com/maps/api/js';
 var DEFAULT_ZOOM = 9;
@@ -13,9 +13,9 @@ var map;
 var markerClusterers = {};
 var infoWindow;
 
-var styleFunction = function(f) {
+var styleFunction = function (f) {
   var clazz = f.getProperty('class');
-  switch(clazz) {
+  switch (clazz) {
     case 'Objects::FiderLine':
       return {
         strokeColor: '#FFA504',
@@ -37,23 +37,23 @@ var styleFunction = function(f) {
   }
 };
 
-var markerZoomer = function() {
+var markerZoomer = function () {
   var zoom = map.getZoom();
-  for(type in objectTypes) {
+  for (var type in objectTypes) {
     var clust = markerClusterers[type];
     var min_zoom = objectTypes[type].zoom;
     if (min_zoom <= zoom) {
-      $("#checkbox-"+type).prop('disabled', false);
+      $("#checkbox-" + type).prop('disabled', false);
       if (clust && clust.savedMarkers) {
         clust.addMarkers(clust.savedMarkers);
         clust.savedMarkers = null;
       }
     } else {
-      $("#checkbox-"+type).prop('disabled', true);
-      if(type == 'fider') {
+      $("#checkbox-" + type).prop('disabled', true);
+      if (type == 'fider') {
         map.clearFiders();
       }
-      if(type == 'fider04') {
+      if (type == 'fider04') {
         map.clear04Fiders();
       }
       if (clust && !clust.savedMarkers) {
@@ -64,43 +64,43 @@ var markerZoomer = function() {
   }
 };
 
-var loadAPI = function(opts) {
-  return new Promise(function(resolve, reject) {
+var loadAPI = function (opts) {
+  return new Promise(function (resolve) {
     var script = document.createElement('script');
     script.type = 'text/javascript';
     var baseUrl = API_URL + '?v=3.23&callback=onGoogleMapLoaded&libraries=geometry';
 
-    if ( opts && opts.apikey ) {
-      script.src = baseUrl+'&key=' + opts.apikey;
+    if (opts && opts.apikey) {
+      script.src = baseUrl + '&key=' + opts.apikey;
     } else {
       script.src = baseUrl;
     }
 
     document.body.appendChild(script);
-    window.onGoogleMapLoaded = resolve ;
+    window.onGoogleMapLoaded = resolve;
   });
 };
 
-var createMap = function(opts) {
+var createMap = function (opts) {
   var zoom = ( opts && opts.zoom ) || DEFAULT_ZOOM;
-  var lat  = ( opts && opts.center && opts.center.lat ) || DEFAULT_LAT;
-  var lng  = ( opts && opts.center && opts.center.lng ) || DEFAULT_LNG;
+  var lat = ( opts && opts.center && opts.center.lat ) || DEFAULT_LAT;
+  var lng = ( opts && opts.center && opts.center.lng ) || DEFAULT_LNG;
   var mapOptions = {
     zoom: zoom,
     center: new google.maps.LatLng(lat, lng),
-    mapTypeId: google.maps.MapTypeId.ROADMAP,
+    mapTypeId: google.maps.MapTypeId.ROADMAP
   };
-  var mapElement=document.getElementById(( opts && opts.mapid ) || 'mapregion');
+  var mapElement = document.getElementById(( opts && opts.mapid ) || 'mapregion');
 
-  map = new google.maps.Map( mapElement, mapOptions );
-  infoWindow = new google.maps.InfoWindow({ content: '' });
+  map = new google.maps.Map(mapElement, mapOptions);
+  infoWindow = new google.maps.InfoWindow({content: ''});
 
   ///////////////////////////////////////////////////////////////////////////////
 
   map.objects = [];
 
-  var markerClickListener = function() {
-    var contentToString = function(content) {
+  var markerClickListener = function () {
+    var contentToString = function (content) {
       if (typeof content === 'string') {
         return content
       } else if (typeof content.error === 'string') {
@@ -114,7 +114,7 @@ var createMap = function(opts) {
       infoWindow.setContent(contentToString(marker.content));
       infoWindow.open(map, marker);
     } else {
-      api.loadObjectInfo(marker.id, marker.type).then(function(content) {
+      api.loadObjectInfo(marker.id, marker.type).then(function (content) {
         marker.content = content;
         infoWindow.setContent(contentToString(marker.content));
         infoWindow.open(map, marker);
@@ -122,11 +122,11 @@ var createMap = function(opts) {
     }
   };
 
-  var lineInfo =  new google.maps.InfoWindow();
+  var lineInfo = new google.maps.InfoWindow();
 
-  var lineClickListener = function(event) {
-    var contentToString = function(content) {
-      if(!content) return "";
+  var lineClickListener = function (event) {
+    var contentToString = function (content) {
+      if (!content) return "";
 
       if (typeof content === 'string') {
         return content
@@ -140,7 +140,7 @@ var createMap = function(opts) {
     var line = event.feature;
     var type;
 
-    switch(line.getProperty('class')) {
+    switch (line.getProperty('class')) {
       case "Objects::Line":
         type = "line";
         break;
@@ -158,20 +158,20 @@ var createMap = function(opts) {
       lineInfo.setContent(contentToString(line.content));
       lineInfo.open(map);
     } else {
-      api.loadObjectInfo(line.getId(), type).then(function(content) {
+      api.loadObjectInfo(line.getId(), type).then(function (content) {
         lineInfo.setContent(contentToString(content));
         lineInfo.open(map);
       });
     }
   };
 
-  var hoverWindow =  new google.maps.InfoWindow();
+  var hoverWindow = new google.maps.InfoWindow();
 
-  var lineHoverListener = function(event) {
+  var lineHoverListener = function (event) {
     var line = event.feature;
     var type;
 
-    if(line.getProperty('class') == "Objects::Line") {
+    if (line.getProperty('class') == "Objects::Line") {
       type = "line";
     } else {
       type = "fiderline";
@@ -182,28 +182,28 @@ var createMap = function(opts) {
     hoverWindow.open(map);
   };
 
-  var lineHoverOverListener = function(event) {
+  var lineHoverOverListener = function () {
     hoverWindow.close();
   };
 
   map.loadedMarkers = [];
 
-  map.showObjects = function(objects) {
+  map.showObjects = function (objects) {
     var markers = [];
-    _.forEach(objects, function(obj){
-      if(map.loadedMarkers.indexOf(obj.id) > -1
-      || !window.visibleTypes[obj.type]
-      || map.zoom < objectTypes[obj.type].zoom) return;
+    _.forEach(objects, function (obj) {
+      if (map.loadedMarkers.indexOf(obj.id) > -1
+        || !window.visibleTypes[obj.type]
+        || map.zoom < objectTypes[obj.type].zoom) return;
 
       var latLng = new google.maps.LatLng(obj.lat, obj.lng);
-      var icon = "/map/"+obj.type +'.png';
-      var marker = new google.maps.Marker({ position: latLng, icon: icon, title: obj.name });
+      var icon = "/map/" + obj.type + '.png';
+      var marker = new google.maps.Marker({position: latLng, icon: icon, title: obj.name});
       marker.id = obj.id;
       marker.type = obj.type;
       marker.name = obj.name;
       map.loadedMarkers.push(obj.id);
       google.maps.event.addListener(marker, 'click', markerClickListener);
-      if ( !markerClusterers[obj.type] ) {
+      if (!markerClusterers[obj.type]) {
         markerClusterers[obj.type] = new clusterer.MarkerClusterer(map);
         markerClusterers[obj.type].setMinimumClusterSize(objectTypes[obj.type].cluster);
       }
@@ -217,7 +217,7 @@ var createMap = function(opts) {
     return markers;
   };
 
-  map.setLayerVisible = function(layer, visible) {
+  map.setLayerVisible = function (layer, visible) {
     var clust = markerClusterers[layer];
     if (visible) {
       if (clust && clust.msavedMarkers) {
@@ -232,17 +232,17 @@ var createMap = function(opts) {
     }
   };
 
-  map.clearAll = function(){
+  map.clearAll = function () {
     map.objects = [];
     map.loadedMarkers = [];
-    for(i in markerClusterers) {
+    for (i in markerClusterers) {
       markerClusterers[i].clearMarkers();
     }
   };
 
-  map.clearLines = function(){
+  map.clearLines = function () {
     map.linesLoaded = false;
-    map.data.forEach(function(a){
+    map.data.forEach(function (a) {
       var clazz = a.getProperty('class');
       if (clazz === 'Objects::Line') {
         map.data.remove(a);
@@ -250,8 +250,8 @@ var createMap = function(opts) {
     });
   };
 
-  map.clearFiders = function(){
-    map.data.forEach(function(a){
+  map.clearFiders = function () {
+    map.data.forEach(function (a) {
       var clazz = a.getProperty('class');
       if (clazz === 'Objects::FiderLine') {
         map.data.remove(a);
@@ -259,8 +259,8 @@ var createMap = function(opts) {
     });
   };
 
-  map.clear04Fiders = function(){
-    map.data.forEach(function(a){
+  map.clear04Fiders = function () {
+    map.data.forEach(function (a) {
       var clazz = a.getProperty('class');
       if (clazz === 'Objects::Fider04') {
         map.data.remove(a);
@@ -268,27 +268,27 @@ var createMap = function(opts) {
     });
   };
 
-  map.loadLines = function() {
-    return new Promise(function(resolve){
+  map.loadLines = function () {
+    return new Promise(function (resolve) {
       var types = [];
-      if(map.showLines && !map.linesLoaded) {
+      if (map.showLines && !map.linesLoaded) {
         types.push('line');
       }
-      if(map.showFiders && map.zoom >= objectTypes.fider.zoom) {
+      if (map.showFiders && map.zoom >= objectTypes.fider.zoom) {
         types.push('fider-line');
       }
-      if(map.show04Fiders && map.zoom >= objectTypes.fider04.zoom) {
+      if (map.show04Fiders && map.zoom >= objectTypes.fider04.zoom) {
         types.push('fider04');
       }
-      if(types.length) {
-        map.data.loadGeoJson(api.getUrl('/api/lines/?'+ $.param({
+      if (types.length) {
+        map.data.loadGeoJson(api.getUrl('/api/lines/?' + $.param({
             type: types,
             bounds: window.map.getBounds().toUrlValue(),
             region: $("#search-region").val()
           })), null, function () {
-            map.linesLoaded = true;
-            resolve();
-          });
+          map.linesLoaded = true;
+          resolve();
+        });
       } else {
         resolve();
       }
@@ -296,7 +296,7 @@ var createMap = function(opts) {
   };
 
   google.maps.event.addListener(map, 'zoom_changed', markerZoomer);
-  google.maps.event.addListener(map, 'click', function(){
+  google.maps.event.addListener(map, 'click', function () {
     $('#search-output').hide();
   });
 
@@ -313,6 +313,6 @@ var createMap = function(opts) {
 };
 
 module.exports = {
-  start  : loadAPI,
-  create : createMap
+  start: loadAPI,
+  create: createMap
 };
