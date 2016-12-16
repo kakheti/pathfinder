@@ -36,7 +36,7 @@ class Objects::Pole04
   belongs_to :direction, class_name: 'Objects::Direction04'
   belongs_to :substation, class_name: 'Objects::Substation'
 
-  search_in :name, :description, :fider, :tp => 'name'
+  search_in :name, :direction_name, :fider, :tp_name
 
   index({name: 1})
   index({region_id: 1})

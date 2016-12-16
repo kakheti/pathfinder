@@ -27,7 +27,7 @@ class Objects::Fider
   has_many :direction04s, class_name: 'Objects::Direction04'
   has_many :pole04s, class_name: 'Objects::Pole04'
 
-  search_in :name, :description, :poles, :substation => 'name'
+  search_in :name, :linename, :substation_name
 
   index({ name: 1 })
   index({ region_id: 1 })

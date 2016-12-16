@@ -22,7 +22,7 @@ class Objects::Direction04
   has_many :pole04s, class_name: 'Objects::Pole04'
   has_many :fider04s, class_name: 'Objects::Fider04'
 
-  search_in :name, :description, :fider, :tp => 'name'
+  search_in :name, :fider_name, :tp_name
 
   index({number: 1})
   index({region_id: 1})

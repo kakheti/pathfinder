@@ -23,7 +23,7 @@ class Objects::Substation
   has_many :direction04s, class_name: 'Objects::Direction04'
   has_many :pole04s, class_name: 'Objects::Pole04'
 
-  search_in :name, :description, :number
+  search_in :name, :number
 
   def to_s;
     self.name

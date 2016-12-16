@@ -38,7 +38,7 @@ class Objects::Fider04
 
   embeds_many :points, class_name: 'Objects::Fider04Point'
 
-  search_in :name, :description, :tp => :name
+  search_in :name, :tp_name, :direction
 
   index({name: 1})
   index({region_id: 1})
