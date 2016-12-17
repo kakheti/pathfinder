@@ -1,4 +1,4 @@
-/* global require, $, Materialize */
+/* global require, $, Materialize, google */
 
 var googlemaps = require('./googlemaps'),
   api = require('./api'),
@@ -15,7 +15,7 @@ var logger = function (message, duration) {
 };
 
 var loadAll = function (types) {
-  if(!types) types = _.keys(objectTypes);
+  if (!types) types = _.keys(objectTypes);
   var shouldLoad = [];
 
   for (var type in objectTypes) {
@@ -58,6 +58,9 @@ var adjustVisibility = function () {
   var types = getVisibleLayers();
 
   for (var type in types) {
+    if(!types.hasOwnProperty(type))
+      continue;
+
     var enabled = types[type];
     var lastEnabled = visibleTypes[type];
     var needToLoad = [];
@@ -66,7 +69,7 @@ var adjustVisibility = function () {
 
     switch (type) {
       case "line":
-        if(enabled && lastEnabled) {
+        if (enabled && lastEnabled) {
 
         } else if (enabled) {
           map.showLines = true;
@@ -77,7 +80,7 @@ var adjustVisibility = function () {
         }
         break;
       case "fider":
-        if(enabled && lastEnabled) {
+        if (enabled && lastEnabled) {
 
         } else if (enabled) {
           map.showFiders = true;
@@ -88,7 +91,7 @@ var adjustVisibility = function () {
         }
         break;
       case "fider04":
-        if(enabled && lastEnabled) {
+        if (enabled && lastEnabled) {
 
         } else if (enabled) {
           map.load04Fiders();
@@ -99,7 +102,7 @@ var adjustVisibility = function () {
         }
         break;
       default:
-        if(enabled && !lastEnabled) {
+        if (enabled && !lastEnabled) {
           needToLoad.push(type);
         }
     }
@@ -123,16 +126,11 @@ googlemaps.start().then(googlemaps.create).then(function (map) {
   map.show04Fiders = true;
 
   google.maps.event.addListener(map, 'idle', function () {
-    //if (window.loadTimeout) clearTimeout(window.loadTimeout);
-    //
-    //window.loadTimeout = setTimeout(function () {
-      window.visibleTypes = getVisibleLayers();
-      Promise.all([
-        loadAll(),
-        map.loadLines()
-      ]).then(function () {
-      });
-    //}, 500);
+    window.visibleTypes = getVisibleLayers();
+    Promise.all([
+      loadAll(),
+      map.loadLines()
+    ]);
   });
 
   $("#search-type").find("input").on('change', adjustVisibility);

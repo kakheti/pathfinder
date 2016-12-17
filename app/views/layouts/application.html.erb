@@ -10,9 +10,6 @@
   <%= stylesheet_link_tag "application", media: "all" %>
   <link href="//maxcdn.bootstrapcdn.com/bootswatch/3.3.1/cosmo/bootstrap.min.css" rel="stylesheet">
   <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
-  <%= javascript_include_tag "application" %>
-  <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=true"></script>
-  <script type="text/javascript" src="/map/markerwithlabel.js"></script>
   <%= csrf_meta_tags %>
 </head>
 <body>
@@ -25,5 +22,9 @@
       <%= render partial: 'layouts/footer' %>
     </div>
   </div>
+
+  <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=true&key=AIzaSyAHnzMNzJ-YzRFCiYgEbWt8DHX0RkGm8yo"></script>
+  <script type="text/javascript" src="/map/markerwithlabel.js"></script>
+  <%= javascript_include_tag "application" %>
 </body>
 </html>

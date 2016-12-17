@@ -4,25 +4,29 @@ class Api::LinesController < ApiController
     {
       type: 'FeatureCollection',
       features: lines.map do |line|
-        unless line.is_a?(Hash)
+        if line.is_a?(Hash)
+          if line['type'] == 'FeatureCollection'
+            line['features']
+          else
+            line
+          end
+        else
           name = line.class.name == 'Objects::FiderLine' ? line.fider.name : line.name
           {
             type: 'Feature',
             geometry: {
               type: 'LineString',
-              coordinates: line.points.map{|p| [p.lng,p.lat] }
+              coordinates: line.points.map { |p| [p.lng, p.lat] }
             },
             id: line.id.to_s,
             properties: {
               class: line.class.name,
               name: name,
-              latLng: { lat: line.lat, lng: line.lng }
+              latLng: {lat: line.lat, lng: line.lng}
             }
           }
-        else
-          line
         end
-      end
+      end.flatten
     }
   end
 

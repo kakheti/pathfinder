@@ -68,7 +68,7 @@ var loadAPI = function (opts) {
   return new Promise(function (resolve) {
     var script = document.createElement('script');
     script.type = 'text/javascript';
-    var baseUrl = API_URL + '?v=3.23&callback=onGoogleMapLoaded&libraries=geometry';
+    var baseUrl = API_URL + '?v=3&callback=onGoogleMapLoaded&libraries=geometry&key=AIzaSyAHnzMNzJ-YzRFCiYgEbWt8DHX0RkGm8yo';
 
     if (opts && opts.apikey) {
       script.src = baseUrl + '&key=' + opts.apikey;

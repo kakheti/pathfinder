@@ -33,7 +33,9 @@ class Api::SearchController < ApiController
 
   def self.to_jsonable(objects)
     objects.map do |object|
-      unless object.is_a? Hash
+      if object.is_a? Hash
+        object
+      else
         type = @@object_types.invert[object.class]
 
         region = {name: object.region_name, id: object.region_id.to_s} if object.respond_to?(:region) && !object.region_id.nil?
@@ -55,14 +57,12 @@ class Api::SearchController < ApiController
           fider: fider,
           tp: tp,
           type: type}
-      else
-        object
       end
     end
   end
 
   def self.search(params, geojson = false)
-    types = ( params['type'] || @@object_types.keys ) & @@object_types.keys
+    types = (params['type'] || @@object_types.keys) & @@object_types.keys
 
     all_objects = []
 
@@ -123,7 +123,7 @@ class Api::SearchController < ApiController
       all_objects.push(*objects)
     end
 
-    return all_objects
+    return all_objects.flatten
   end
 
   def self.search_by_name(params)
@@ -131,7 +131,7 @@ class Api::SearchController < ApiController
       %w(region_id).include?(key) && value.length > 0
     }
 
-    types = ( params['type'] || @@object_types.keys ) & @@object_types.keys
+    types = (params['type'] || @@object_types.keys) & @@object_types.keys
 
     all_objects = []
 
