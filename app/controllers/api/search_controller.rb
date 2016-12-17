@@ -79,7 +79,7 @@ class Api::SearchController < ApiController
         cached = $redis.get(key)
         data = JSON.parse(cached) rescue nil
         if data
-          if params['region_id']
+          if params['region_id'].present?
             data.select! { |obj|
               obj['region'] && obj['region']['id'] == params['region_id']
             }
@@ -114,7 +114,7 @@ class Api::SearchController < ApiController
         $redis.expire(key, 1.hour)
       end
 
-      if params['region_id']
+      if params['region_id'].present?
         objects.select! { |obj|
           obj.region_id && obj.region_id.to_s == params['region_id']
         }
@@ -123,7 +123,7 @@ class Api::SearchController < ApiController
       all_objects.push(*objects)
     end
 
-    return all_objects.flatten
+    return all_objects
   end
 
   def self.search_by_name(params)
