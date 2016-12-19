@@ -1,9 +1,6 @@
 class SubstationUploadWorker
   include Sidekiq::Worker
 
-
-  sidekiq_options retry: 2
-
   def perform(file)
     Zip::File.open file do |zip_file|
       zip_file.each do |entry|
@@ -12,12 +9,11 @@ class SubstationUploadWorker
     end
   end
 
-private
+  private
 
   def upload_kml(file)
     Objects::Substation.delete_all
     kml = file.get_input_stream.read
     Objects::Substation.from_kml(kml)
   end
-
 end

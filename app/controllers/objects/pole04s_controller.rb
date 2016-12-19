@@ -75,7 +75,6 @@ class Objects::Pole04sController < ApplicationController
 
 
   def upload_txt(file)
-    txt = file.read
-    Objects::Pole04.from_csv(txt)
+    Pole04sTxtUploadWorker.perform_async(file.path)
   end
 end

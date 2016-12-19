@@ -3,8 +3,6 @@ require 'xml'
 class TpExtractionWorker
   include Sidekiq::Worker
 
-  sidekiq_options retry: 2
-
   def perform(placemark_xml)
     placemark = XML::Parser.string(placemark_xml).parse.child
 
@@ -34,7 +32,7 @@ class TpExtractionWorker
     obj.address = address.to_ka(:all) if address
     obj.substation_name = Objects::Kml.get_property(descr, 'ქვესადგური').to_ka(:all)
     obj.substation = Objects::Substation.where(name: obj.substation_name).first
-    return logger.error("Invalid substation name #{obj.substation_name} for object #{id}")  unless obj.substation
+    return logger.error("Invalid substation name #{obj.substation_name} for object #{id}") unless obj.substation
     linename = Objects::Kml.get_property(descr, 'ელექტრო გადამცემი ხაზი')
     obj.linename = linename.to_ka(:all)
     obj.description = Objects::Kml.get_property(descr, 'შენიშვნა')
@@ -47,5 +45,4 @@ class TpExtractionWorker
     obj.set_coordinate(coord)
     obj.save
   end
-
 end

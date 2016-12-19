@@ -1,9 +1,6 @@
 class FidersUploadWorker
   include Sidekiq::Worker
 
-  sidekiq_options retry: 2
-
-
   def perform(file)
     Zip::File.open file do |zip_file|
       zip_file.each do |entry|
@@ -12,8 +9,7 @@ class FidersUploadWorker
     end
   end
 
-
-private
+  private
 
   def upload_kml(file)
     Objects::Fider.delete_all

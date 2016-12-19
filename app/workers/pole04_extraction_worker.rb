@@ -3,9 +3,6 @@ require 'xml'
 class Pole04ExtractionWorker
   include Sidekiq::Worker
 
-  sidekiq_options retry: 2
-
-
   def perform(placemark_xml)
     placemark = XML::Parser.string(placemark_xml).parse.child
 

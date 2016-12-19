@@ -1,9 +1,6 @@
 class Pole04sUploadWorker
   include Sidekiq::Worker
 
-  sidekiq_options retry: 2
-
-
   def perform(file)
     Zip::File.open file do |zip_file|
       zip_file.each do |entry|
@@ -12,7 +9,7 @@ class Pole04sUploadWorker
     end
   end
 
-private
+  private
 
   def upload_kml(file)
     Objects::Pole04.delete_all

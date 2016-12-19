@@ -1,9 +1,6 @@
 class TpsUploadWorker
   include Sidekiq::Worker
 
-  sidekiq_options retry: 2
-
-
   def perform(file)
     Zip::File.open file do |zip_file|
       zip_file.each do |entry|
@@ -12,12 +9,11 @@ class TpsUploadWorker
     end
   end
 
-private
+  private
 
   def upload_kml(file)
     Objects::Tp.destroy_all
     kml = file.get_input_stream.read
     Objects::Tp.from_kml(kml)
   end
-
 end
