@@ -14,17 +14,19 @@ var logger = function (message, duration) {
   Materialize.toast(message, duration || 2000)
 };
 
-var loadAll = function (types) {
+var loadAll = function (types, message) {
+  message = message || 'იტვირთება...';
   if (!types) types = _.keys(objectTypes);
   var shouldLoad = [];
 
   for (var type in objectTypes) {
     var objType = objectTypes[type];
-    if (types.indexOf(type) > -1 && objType.marker !== false && map.zoom >= objType.zoom && visibleTypes[type]) {
+    if (types.indexOf(type) > -1 && objType.marker !== false && map.zoom >= objType.zoom) {
       shouldLoad.push(type);
     }
   }
-  return api.loadObjects(shouldLoad).then(map.showObjects);
+
+  return api.loadObjects(shouldLoad, message).then(map.showObjects);
 };
 
 var typeOrder = ['office', 'substation', 'line', 'tower', 'fider', 'pole', 'tp', 'fider04', 'pole04'];
@@ -52,19 +54,20 @@ var getVisibleLayers = function () {
   $("#search-type").find("input[type=checkbox]").each(function () {
     types[$(this).val()] = $(this).is(":checked");
   });
+
   return types;
 };
 
 var adjustVisibility = function () {
-  var types = getVisibleLayers();
+  var types = getVisibleLayers(),
+    needToLoad = [];
 
   for (var type in types) {
-    if(!types.hasOwnProperty(type))
+    if (!types.hasOwnProperty(type))
       continue;
 
-    var enabled = types[type];
-    var lastEnabled = visibleTypes[type];
-    var needToLoad = [];
+    var enabled = types[type],
+      lastEnabled = window.visibleTypes[type];
 
     map.setLayerVisible(type, enabled);
 
@@ -85,7 +88,7 @@ var adjustVisibility = function () {
 
         } else if (enabled) {
           map.showFiders = true;
-          map.loadFiders();
+          map.loadLines();
         } else {
           map.showFiders = false;
           map.clearFiders();
@@ -95,7 +98,7 @@ var adjustVisibility = function () {
         if (enabled && lastEnabled) {
 
         } else if (enabled) {
-          map.load04Fiders();
+          map.loadLines();
           map.show04Fiders = true;
         } else {
           map.clear04Fiders();
@@ -113,8 +116,6 @@ var adjustVisibility = function () {
   window.visibleTypes = types;
 };
 
-logger('იტვირთება...', 6000);
-
 googlemaps.start().then(googlemaps.create).then(function (map) {
   // setting loggers
   map.logger = api.logger = search.logger = logger;
@@ -127,9 +128,8 @@ googlemaps.start().then(googlemaps.create).then(function (map) {
   map.show04Fiders = true;
 
   google.maps.event.addListener(map, 'idle', function () {
-    window.visibleTypes = getVisibleLayers();
     Promise.all([
-      loadAll(),
+      adjustVisibility(),
       map.loadLines()
     ]);
   });
@@ -140,7 +140,7 @@ googlemaps.start().then(googlemaps.create).then(function (map) {
     map.clearAll();
     map.clearFiders();
     map.clear04Fiders();
-    loadAll();
+    adjustVisibility();
     map.loadLines();
   });
 });
