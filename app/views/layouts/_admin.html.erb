@@ -11,5 +11,13 @@
         <label class="label label-info"><%= Sys::User.count %></label>
       </p>
     </div>
+
+    <div class="col-sm-6">
+      <p>
+        <i class="fa fa-sys"></i>
+        <a href="/sidekiq" target="_blank">მიმდინარე დავალებები</a>
+        <label class="label label-info"><%= Sidekiq::Stats.new.workers_size %></label>
+      </p>
+    </div>
   </div>
 </div>
