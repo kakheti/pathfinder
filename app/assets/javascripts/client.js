@@ -29,13 +29,14 @@ var loadAll = function (types) {
 
 var typeOrder = ['office', 'substation', 'line', 'tower', 'fider', 'pole', 'tp', 'fider04', 'pole04'];
 var tp = _.template(
-  '<div><input type="checkbox" checked value="<%= type %>" id="checkbox-<%= type %>">'
+  '<div><input type="checkbox" <%= checked %> value="<%= type %>" id="checkbox-<%= type %>">'
   + '<label for="checkbox-<%= type %>"><%= name %></label></div>');
 var container = $("#search-type");
 typeOrder.forEach(function (type) {
   container.append(tp({
     type: type,
-    name: objectTypes[type].plural
+    name: objectTypes[type].plural,
+    checked: objectTypes[type].active ? "checked" : ""
   }));
 });
 
