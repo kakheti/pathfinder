@@ -1,3 +1,5 @@
+/* global require */
+
 var Promise = require('bluebird'),
   _ = require('lodash'),
   clusterer = require('./lib/markerclusterer'),
@@ -43,13 +45,13 @@ var markerZoomer = function () {
     var clust = markerClusterers[type];
     var min_zoom = objectTypes[type].zoom;
     if (min_zoom <= zoom) {
-      $("#checkbox-" + type).prop('disabled', false);
+      $("#visible-type-" + type).prop('disabled', false);
       if (clust && clust.savedMarkers) {
         clust.addMarkers(clust.savedMarkers);
         clust.savedMarkers = null;
       }
     } else {
-      $("#checkbox-" + type).prop('disabled', true);
+      $("#visible-type-" + type).prop('disabled', true);
       if (type == 'fider') {
         map.clearFiders();
       }
@@ -284,7 +286,7 @@ var createMap = function (opts) {
         map.data.loadGeoJson(api.getUrl('/api/lines/?' + $.param({
             type: types,
             bounds: window.map.getBounds().toUrlValue(),
-            region: $("#search-region").val()
+            region: $("#visible-region").val()
           })), null, function () {
           map.linesLoaded = true;
           resolve();

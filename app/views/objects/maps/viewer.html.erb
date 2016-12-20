@@ -5,7 +5,7 @@
 <div class="search">
   <div class="card">
     <form id="search-form">
-      <input type="text" id="search-query" autofocus autocomplete="off">
+      <input type="text" id="search-query" autocomplete="off">
       <button class="waves-effect waves-light btn btn-flat red accent-2 white-text">
         <i class="material-icons">search</i>
 
@@ -24,13 +24,27 @@
     </form>
   </div>
 
-  <div class="output" id="search-output">
-    <div class="card-panel small-padding">
-      <div class="summary"></div>
+  <div class="scrollable">
+    <div class="card filters" id="search-filters">
+      <div class="regions">
+        <select class="browser-default" id="search-region">
+          <option value="" selected>მუნიციპალიტეტი</option>
+        </select>
+      </div>
+
+      <div id="search-types" class="small-padding types">
+
+      </div>
     </div>
 
-    <div class="card-panel no-padding">
-      <div class="collection"></div>
+    <div class="output" id="search-output">
+      <div class="card-panel small-padding">
+        <div class="summary"></div>
+      </div>
+
+      <div class="card-panel no-padding">
+        <div class="collection"></div>
+      </div>
     </div>
   </div>
 </div>
@@ -43,12 +57,12 @@
   <div class="card-panel no-padding">
 
     <div class="regions">
-      <select class="browser-default" id="search-region">
+      <select class="browser-default" id="visible-region">
         <option value="" selected>მუნიციპალიტეტი</option>
       </select>
     </div>
 
-    <div id="search-type" class="small-padding">
+    <div id="visible-types" class="small-padding">
       
     </div>
   </div>

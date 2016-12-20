@@ -1,11 +1,15 @@
 @import "materialize/components/color";
+
 $primary-color: color("materialize-red", "lighten-2");
 @import "materialize";
 @import url("https://fonts.googleapis.com/icon?family=Material+Icons");
 
 #mapwrapper {
   position: absolute;
-  left: 0; right: 0; top: 0; bottom: 0;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
 }
 
 .search {
@@ -61,16 +65,28 @@ $primary-color: color("materialize-red", "lighten-2");
 
   .card-panel, .card {
     margin-bottom: 0;
+    position: static;
+  }
+
+  .filters {
+    display: none;
+
+    .types {
+      column-count: 2;
+    }
+  }
+
+  .scrollable {
+    max-height: 500px;
+    overflow-y: auto;
   }
 
   .output {
     display: none;
 
     .collection {
-      max-height: 400px;
       border: none;
       margin: 0;
-      overflow-y: auto;
 
       .collection-item {
         cursor: pointer;
@@ -80,8 +96,8 @@ $primary-color: color("materialize-red", "lighten-2");
         }
 
         .moreinfo {
-           color: #666;
-           font-size: .8em;
+          color: #666;
+          font-size: .8em;
         }
       }
     }
@@ -104,7 +120,6 @@ $primary-color: color("materialize-red", "lighten-2");
   }
 }
 
-
 .no-padding {
   padding: 0;
 }
@@ -115,9 +130,11 @@ $primary-color: color("materialize-red", "lighten-2");
 
 #mapregion {
   position: absolute;
-  left: 0; right: 0; top: 0; bottom: 0;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
 }
-
 
 .gm-style {
   h3 {
@@ -145,4 +162,35 @@ $primary-color: color("materialize-red", "lighten-2");
   &.show {
     opacity: 1;
   }
+}
+
+@mixin checkbox-custom($checked, $unchecked) {
+  [type="checkbox"] + label:before, [type="checkbox"]:not(.filled-in) + label:after {
+    content: $unchecked;
+    font-family: "Material Icons";
+    margin: 0;
+    border: none !important;
+    font-size: 18px;
+    background: none !important;
+    color: #b71c1c;
+  }
+  [type="checkbox"]:checked + label:before {
+    top: 0;
+    left: 0;
+    transform: none;
+    content: $checked;
+    color: #33691e;
+  }
+
+  [type="checkbox"]:disabled + label:before {
+    color: grey;
+  }
+}
+
+.checkbox-eye {
+  @include checkbox-custom('visibility', 'visibility_off');
+}
+
+.checkbox-search {
+  @include checkbox-custom('label', 'label_outline');
 }

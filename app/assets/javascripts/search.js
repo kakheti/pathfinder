@@ -1,4 +1,4 @@
-/* global google */
+/* global require, google */
 
 var _ = require('lodash'),
   objectTypes = require('./object-types'),
@@ -9,12 +9,8 @@ var data = {};
 var $output = $("#search-output");
 
 var view = {
-  showSearch: function () {
-    $('#search-query').focus();
-  },
-
   resizeOutput: function () {
-    $output.find(".collection").css("max-height", $(window).innerHeight() - 125)
+    $(".search .scrollable").css("max-height", $(window).innerHeight() - 50)
   },
 
   initSearch: function () {
@@ -49,7 +45,6 @@ var view = {
         $btn.prop("disabled", false).removeClass("loading");
         view.displayMarkers(q, data);
       }).error(function () {
-
         $btn.removeProp("disabled", false).removeClass("loading");
       });
     });
@@ -132,7 +127,7 @@ var view = {
 module.exports = {
   initialize: function (map) {
     data.map = map;
-    view.showSearch();
     view.initSearch();
+    view.resizeOutput();
   }
 };

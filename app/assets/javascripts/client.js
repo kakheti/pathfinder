@@ -29,29 +29,48 @@ var loadAll = function (types, message) {
   return api.loadObjects(shouldLoad, message).then(map.showObjects);
 };
 
-var typeOrder = ['office', 'substation', 'line', 'tower', 'fider', 'pole', 'tp', 'fider04', 'pole04'];
-var tp = _.template(
-  '<div><input type="checkbox" <%= checked %> value="<%= type %>" id="checkbox-<%= type %>">'
-  + '<label for="checkbox-<%= type %>"><%= name %></label></div>');
-var container = $("#search-type");
+var typeOrder = ['office', 'substation', 'line', 'tower', 'fider', 'pole', 'tp', 'fider04', 'pole04'],
+  tp = _.template('<div class="checkbox-eye"><input type="checkbox" <%= checked %> value="<%= type %>" id="visible-type-<%= type %>">'
+    + '<label for="visible-type-<%= type %>"><%= name %></label></div>'),
+  searchTp = _.template('<div class="checkbox-search"><input type="checkbox" checked value="<%= type %>" id="search-type-<%= type %>">'
+    + '<label for="search-type-<%= type %>"><%= name %></label></div>'),
+  $visibleTypes = $("#visible-types"),
+  $searchTypes = $("#search-types");
+
 typeOrder.forEach(function (type) {
-  container.append(tp({
+  $visibleTypes.append(tp({
     type: type,
     name: objectTypes[type].plural,
     checked: objectTypes[type].active ? "checked" : ""
+  }));
+  $searchTypes.append(searchTp({
+    type: type,
+    name: objectTypes[type].plural
   }));
 });
 
 api.loadRegions().then(function (regions) {
   var option_tp = _.template("<option value='<%=id%>'><%=name%></option>");
   regions.forEach(function (region) {
-    $("#search-region").append(option_tp(region));
+    $("#visible-region, #search-region").append(option_tp(region));
   });
+});
+
+var searchQuery = $("#search-query"),
+  searchFilters = $("#search-filters");
+searchQuery.on('focus', function () {
+  searchFilters.show();
+});
+$('body').on('click', function () {
+  searchFilters.hide();
+});
+$(".search").on('click', function (event) {
+  event.stopPropagation();
 });
 
 var getVisibleLayers = function () {
   var types = {};
-  $("#search-type").find("input[type=checkbox]").each(function () {
+  $("#visible-types").find("input[type=checkbox]").each(function () {
     types[$(this).val()] = $(this).is(":checked");
   });
 
@@ -134,9 +153,9 @@ googlemaps.start().then(googlemaps.create).then(function (map) {
     ]);
   });
 
-  $("#search-type").find("input").on('change', adjustVisibility);
+  $("#visible-types").find("input").on('change', adjustVisibility);
 
-  $("#search-region").on('change', function () {
+  $("#visible-region").on('change', function () {
     map.clearAll();
     map.clearFiders();
     map.clear04Fiders();
