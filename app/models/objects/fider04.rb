@@ -9,6 +9,8 @@ class Objects::Fider04
   include Objects::LengthProperty
   include Objects::Kml
 
+  field :_id, type: String
+
   field :name, type: String
   field :description, type: String
 

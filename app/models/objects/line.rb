@@ -8,6 +8,8 @@ class Objects::Line
   include Objects::LengthProperty
   include Objects::Coordinate
 
+  field :_id, type: String
+
   field :kmlid, type: String
   field :name, type: String
   field :direction, type: String
@@ -51,7 +53,7 @@ class Objects::Line
       # end of description section
       if regname == 'კახეთი'
         region = Region.get_by_name(regname)
-        line = Objects::Line.where(kmlid: id).first || Objects::Line.new(kmlid: id)
+        line = Objects::Line.where(kmlid: id).first || Objects::Line.new(kmlid: id, _id: id)
         line.direction = direction
         line.region = region
         line.region_name = regname

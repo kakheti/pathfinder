@@ -1,11 +1,14 @@
 # -*- encoding : utf-8 -*-
 require 'xml'
 require 'csv'
+require 'digest/sha1'
 
 class Objects::Direction04
   include Mongoid::Document
   include Mongoid::Search
   include Objects::Coordinate
+
+  field :_id, type: String
 
   field :number, type: String
   field :length, type: Float
@@ -45,11 +48,13 @@ class Objects::Direction04
                           tp: tp).first
     puts("Direction04 for region #{region} num #{number} tp #{tp.name} not found") unless existing
     return existing if existing
-    self.create(number: number,
+    id = Digest::SHA1.hexdigest(region.name + number + tp.name)
+    self.create(_id: id,
+                number: number,
                 tp: tp,
                 tp_name: tp.name,
                 region: region,
-                fider:  tp.try(:fider),
+                fider: tp.try(:fider),
                 substation: tp.try(:substation))
   end
 

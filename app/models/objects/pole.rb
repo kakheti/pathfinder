@@ -7,6 +7,8 @@ class Objects::Pole
   include Objects::Coordinate
   include Objects::Kml
 
+  field :_id, type: String
+
   field :kmlid, type: String
   field :name, type: String
   field :height, type: Float

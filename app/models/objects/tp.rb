@@ -7,6 +7,8 @@ class Objects::Tp
   include Objects::Coordinate
   include Objects::Kml
 
+  field :_id, type: String
+
   field :kmlid, type: String
   field :name, type: String
   field :description, type: String

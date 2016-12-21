@@ -7,7 +7,7 @@ class TpExtractionWorker
     placemark = XML::Parser.string(placemark_xml).parse.child
 
     id = placemark.attributes['id']
-    obj = Objects::Tp.where(kmlid: id).first || Objects::Tp.new(kmlid: id)
+    obj = Objects::Tp.where(kmlid: id).first || Objects::Tp.new(kmlid: id, _id: id)
     # name=placemark.find('name').first.content
     # start description section
     descr = placemark.find('description').first.content

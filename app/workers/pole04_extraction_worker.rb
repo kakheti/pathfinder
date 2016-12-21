@@ -7,7 +7,7 @@ class Pole04ExtractionWorker
     placemark = XML::Parser.string(placemark_xml).parse.child
 
     id = placemark.attributes['id']
-    obj = Objects::Pole04.new(kmlid: id)
+    obj = Objects::Pole04.new(kmlid: id, _id: id)
 
     # start description section
     descr = placemark.find('description').first.content

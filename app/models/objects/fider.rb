@@ -8,6 +8,8 @@ class Objects::Fider
   include Objects::Coordinate
   include Objects::Kml
 
+  field :_id, type: String
+
   field :name, type: String
   field :description, type: String
   field :residential_count, type: Float
@@ -31,17 +33,6 @@ class Objects::Fider
 
   index({ name: 1 })
   index({ region_id: 1 })
-
-  def self.find_or_create(name, substation_number, region)
-    existing = self.where(region: region,
-                          substation_number: substation_number,
-                          name: name).first
-    return existing if existing
-    self.create(name: name,
-                region: region,
-                substation_number: substation_number,
-                substation: Objects::Substation.where(number: substation_number, region: region).first)
-  end
 
   def to_s; self.name end
 

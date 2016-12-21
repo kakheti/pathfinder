@@ -7,6 +7,8 @@ class Objects::Tower
   include Objects::Coordinate
   include Objects::Kml
 
+  field :_id, type: String
+
   field :kmlid, type: String
   field :name, type: String
   field :category, type: String
@@ -36,13 +38,13 @@ class Objects::Tower
       # end of description section
       if 'კახეთი' == regname
         coord=placemark.find('./kml:Point/kml:coordinates', kmlns).first.content
-        obj=Objects::Tower.where(kmlid: id).first || Objects::Tower.new(kmlid: id)
+        obj=Objects::Tower.where(kmlid: id).first || Objects::Tower.new(kmlid: id, _id: id)
         obj.name = name
         obj.region = Region.get_by_name(regname)
         obj.region_name = regname
         obj.set_coordinate(coord)
         obj.category = category
-        obj.line = Objects::Line.by_name(linename)
+        obj.line = Objects::Line.where(name: linename).first
         obj.linename = linename
         obj.save
       end

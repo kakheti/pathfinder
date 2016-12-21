@@ -1,4 +1,5 @@
 require 'xml'
+require 'digest/sha1'
 
 class FiderExtractionWorker
   include Sidekiq::Worker
@@ -8,9 +9,12 @@ class FiderExtractionWorker
     descr = placemark.find('description').first.content
     name = Objects::Kml.get_property(descr, 'ფიდერი').to_ka(:all)
     substation_number = Objects::Kml.get_property(descr, 'ქვესადგურის ნომერი')
-    region = Region.get_by_name(Objects::Kml.get_property(descr, 'მუნიციპალიტეტი'))
+    region_name = Objects::Kml.get_property(descr, 'მუნიციპალიტეტი').to_ka(:all)
+    region = Region.get_by_name(region_name)
 
-    fider = Objects::Fider.find_or_create(name, substation_number, region)
+    id = Digest::SHA1.hexdigest(name + substation_number + region_name)
+
+    fider = Objects::Fider.where(name: name, substation_number: substation_number, region: region).first || Objects::Fider.new(_id: id)
 
     line = Objects::FiderLine.new(fider: fider)
     line.start = Objects::Kml.get_property(descr, 'საწყისი ბოძი')
@@ -35,11 +39,13 @@ class FiderExtractionWorker
     line.set_coordinate(coords[coords.size/2])
     line.calc_length!
     line.save
+
+    fider.name = name
     fider.linename = line.linename
     fider.line = Objects::Line.where(name: fider.linename).first
     fider.set_coordinate(coords[coords.size/2])
     fider.region = line.region unless fider.region.present?
-    fider.region_name = fider.region.name if fider.region.present?
+    fider.region_name = region_name
     fider.substation_number = line.substation_number unless fider.substation_number.present?
     fider.substation = Objects::Substation.where(number: fider.substation_number).first
     fider.substation_name = fider.substation.name if fider.substation.present?

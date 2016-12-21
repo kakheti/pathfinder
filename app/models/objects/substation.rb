@@ -7,6 +7,8 @@ class Objects::Substation
   include Objects::Coordinate
   include Objects::Kml
 
+  field :_id, type: String
+
   field :kmlid, type: String
   field :number, type: String
   field :name, type: String
@@ -52,7 +54,7 @@ class Objects::Substation
       number = Objects::Kml.get_property(descr, 'ქვესადგურის ნომერი')
       # end of description section
       coord = placemark.find('./kml:Point/kml:coordinates', kmlns).first.content
-      obj = Objects::Substation.where(kmlid: id).first || Objects::Substation.new(kmlid: id)
+      obj = Objects::Substation.where(kmlid: id).first || Objects::Substation.new(kmlid: id, _id: id)
       obj.name = name.to_ka(:all)
       obj.region = region
       obj.region_name = regname

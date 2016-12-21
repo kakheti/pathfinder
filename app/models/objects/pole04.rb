@@ -8,6 +8,8 @@ class Objects::Pole04
   include Objects::Coordinate
   include Objects::Kml
 
+  field :_id, type: String
+
   field :kmlid, type: String
   field :name, type: String
   field :number, type: String

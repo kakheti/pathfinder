@@ -5,7 +5,7 @@ class PoleExtractionWorker
     placemark = XML::Parser.string(placemark_xml).parse.child
 
     id = placemark.attributes['id']
-    obj = Objects::Pole.where(kmlid: id).first || Objects::Pole.new(kmlid: id)
+    obj = Objects::Pole.where(kmlid: id).first || Objects::Pole.new(kmlid: id, _id: id)
     # start description section
     descr = placemark.find('description').first.content
     obj.name = Objects::Kml.get_property(descr, 'ბოძის ნომერი')

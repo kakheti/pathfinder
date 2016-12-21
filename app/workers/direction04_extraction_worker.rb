@@ -7,7 +7,7 @@ class Direction04ExtractionWorker
     id = placemark.attributes['id']
     descr = placemark.find('description').first.content
 
-    line = Objects::Fider04.new(kmlid: id)
+    line = Objects::Fider04.new(kmlid: id, _id: id)
 
     line.name = placemark.find('name').first.content
     line.start = Objects::Kml.get_property(descr, 'საწყისი ბოძი')
