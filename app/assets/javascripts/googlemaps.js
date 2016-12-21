@@ -171,13 +171,6 @@ var createMap = function (opts) {
 
   var lineHoverListener = function (event) {
     var line = event.feature;
-    var type;
-
-    if (line.getProperty('class') == "Objects::Line") {
-      type = "line";
-    } else {
-      type = "fiderline";
-    }
 
     hoverWindow.setPosition(event.latLng);
     hoverWindow.setContent(line.getProperty('name'));

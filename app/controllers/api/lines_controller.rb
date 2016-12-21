@@ -11,7 +11,14 @@ class Api::LinesController < ApiController
             line
           end
         else
-          name = line.class.name == 'Objects::FiderLine' ? line.fider.name : line.name
+          name = case line.class.name
+                   when 'Objects::FiderLine'
+                     line.fider.name
+                   when 'Objects::Fider04'
+                     "#{line.direction} - ს/ჯ ##{line.tp_name}"
+                   else
+                     line.name
+                 end
           {
             type: 'Feature',
             geometry: {

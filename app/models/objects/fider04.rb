@@ -34,7 +34,7 @@ class Objects::Fider04
   belongs_to :substation, class_name: 'Objects::Substation'
   belongs_to :tp, class_name: 'Objects::Tp'
   belongs_to :fider, class_name: 'Objects::Fider'
-  belongs_to :direction, class_name: 'Objects::Direction04'
+  belongs_to :direction04, class_name: 'Objects::Direction04'
 
   embeds_many :points, class_name: 'Objects::Fider04Point'
 
