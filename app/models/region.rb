@@ -1,10 +1,12 @@
 # -*- encoding : utf-8 -*-
+require 'digest/sha1'
+
 class Region
   include Mongoid::Document
   include Mongoid::Timestamps
   include Sys::Userstamps
 
-  field :_id, type: String, default: ->{ name }
+  field :_id, type: String
 
   field :name, type: String
   field :description, type: String
@@ -28,7 +30,7 @@ class Region
 
   def self.get_by_name(name)
     name = name.to_ka(:all)
-    Region.where(name: name).first || Region.create(name: name, _id: name)
+    Region.where(name: name).first || Region.create(name: name, _id: Digest::SHA1.hexdigest(name))
   end
 
   def can_delete?
