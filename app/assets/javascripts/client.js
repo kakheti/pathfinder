@@ -52,7 +52,8 @@ typeOrder.forEach(function (type) {
 api.loadRegions().then(function (regions) {
   var option_tp = _.template("<option value='<%=id%>'><%=name%></option>");
   regions.forEach(function (region) {
-    $("#visible-region, #search-region").append(option_tp(region));
+    // $("#visible-region, #search-region").append(option_tp(region));
+    $("#search-region").append(option_tp(region));
   });
 });
 
@@ -155,11 +156,11 @@ googlemaps.start().then(googlemaps.create).then(function (map) {
 
   $("#visible-types").find("input").on('change', adjustVisibility);
 
-  $("#visible-region").on('change', function () {
-    map.clearAll();
-    map.clearFiders();
-    map.clear04Fiders();
-    adjustVisibility();
-    map.loadLines();
-  });
+  // $("#visible-region").on('change', function () {
+  //   map.clearAll();
+  //   map.clearFiders();
+  //   map.clear04Fiders();
+  //   adjustVisibility();
+  //   map.loadLines();
+  // });
 });

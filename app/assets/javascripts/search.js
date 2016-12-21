@@ -15,7 +15,7 @@ var view = {
 
   initSearch: function () {
     var field = $('#search-query');
-    var typeField = $('#search-type');
+    var typeField = $('#search-types');
     var regionField = $("#search-region");
     var form = $("#search-form");
 
@@ -35,7 +35,7 @@ var view = {
       var filters = {name: q, type: type};
 
       if (regionField.val() != "") {
-        filters.region_id = regionField.val();
+        filters.region = regionField.val();
       }
 
       var $btn = $("#search-form").find(".btn");
@@ -66,7 +66,6 @@ var view = {
     realMarker = _.find(markers, _.matchesProperty('id', marker.id));
 
     if (!realMarker) {
-      console.log(marker);
       markers = data.map.showObjects([marker]);
       realMarker = markers[0];
     }

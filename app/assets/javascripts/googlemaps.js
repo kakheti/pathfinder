@@ -286,7 +286,7 @@ var createMap = function (opts) {
         map.data.loadGeoJson(api.getUrl('/api/lines/?' + $.param({
             type: types,
             bounds: window.map.getBounds().toUrlValue(),
-            region: $("#visible-region").val()
+            //region: $("#visible-region").val()
           })), null, function () {
           map.linesLoaded = true;
           resolve();
