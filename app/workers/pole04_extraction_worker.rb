@@ -11,8 +11,10 @@ class Pole04ExtractionWorker
 
     # start description section
     descr = placemark.find('description').first.content
-    obj.name = Objects::Kml.get_property(descr, 'ბოძის id')
     obj.number = Objects::Kml.get_property(descr, 'ბოძის ნომერი')
+
+    #obj.name = Objects::Kml.get_property(descr, 'ბოძის id')
+    obj.name = obj.number
 
     obj.height = Objects::Kml.get_property(descr, 'ბოძის სიმაღლე').to_f
     obj.pole_type = Objects::Kml.get_property(descr, 'ბოძის ტიპი', '').to_ka(:all)
