@@ -1,39 +1,68 @@
 <table class="table table-bordered table-hover">
   <tr>
-    <td class="text-muted" width="150">0.4კვ ბოძის #</td>
+    <td width="150">0.4კვ ბოძის #</td>
     <td>
       <code><%= @pole.number %></code>
     </td>
   </tr>
   <tr>
-    <td class="text-muted">ტიპი</td>
+    <td>ტიპი</td>
     <td><%= @pole.pole_type %></td>
   </tr>
   <tr>
-    <td class="text-muted">სიმაღლე</td>
-    <td><code><%= number_with_precision @pole.height, precision: 2 %></code> მეტრი</td>
+    <td>ანკერული</td>
+    <td><%= @pole.ankeruli %></td>
   </tr>
   <tr>
-    <td class="text-muted">ვერტიკალური მდგომარეობა</td>
+    <td>ვერტიკალური მდგომარეობა</td>
     <td>
       <%= @pole.vertical_position %>
     </td>
   </tr>
   <tr>
-    <td class="text-muted">ცვეთის ხარისხი</td>
+    <td>ხარისხობრივი მდგომარეობა</td>
     <td>
       <%= @pole.oldness %>
     </td>
   </tr>
   <tr>
-    <td class="text-muted">შენიშვნა</td>
-    <td><%= @pole.description%></td>
+    <td>მესაკუთრე</td>
+    <td>
+      <%= @pole.owner %>
+    </td>
   </tr>
   <tr>
-    <td class="text-muted">კოორდინატები</td>
+    <td>0.4კვ ხაზის მიმართულება</td>
     <td>
-      E: <code><%= @pole.easting %></code>,
-      N: <code><%= @pole.northing %></code>
+      <%= @pole.direction %>
     </td>
+  </tr>
+  <tr>
+    <td>სატრ. ჯიხური</td>
+    <td>
+      <%= @pole.tp_name %>
+    </td>
+  </tr>
+  <tr>
+    <td>6-10კვ ფიდერი</td>
+    <td>
+      <%= @pole.fider_name %>
+    </td>
+  </tr>
+  <tr>
+    <td>ქვესადგური</td>
+    <td>
+      <%= @pole.substation_name %>
+    </td>
+  </tr>
+  <tr>
+    <td>მუნიციპალიტეტი</td>
+    <td>
+      <%= @pole.region_name %>
+    </td>
+  </tr>
+  <tr>
+    <td>სიმაღლე</td>
+    <td><code><%= number_with_precision @pole.height, precision: 2 %></code> მეტრი</td>
   </tr>
 </table>

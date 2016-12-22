@@ -14,6 +14,7 @@ class Objects::Pole04
   field :name, type: String
   field :number, type: String
   field :height, type: Float
+  field :direction, type: String
   field :pole_type, type: String
   field :description, type: String
   field :vertical_position, type: String
@@ -29,13 +30,12 @@ class Objects::Pole04
   field :region_name, type: String
   field :substation_name, type: String
   field :fider_name, type: String
-  field :direction_name, type: String
   field :tp_name, type: String
 
   belongs_to :region
   belongs_to :tp, class_name: 'Objects::Tp'
   belongs_to :fider, class_name: 'Objects::Fider'
-  belongs_to :direction, class_name: 'Objects::Direction04'
+  belongs_to :direction04, class_name: 'Objects::Direction04'
   belongs_to :substation, class_name: 'Objects::Substation'
 
   search_in :name, :direction_name, :fider, :tp_name

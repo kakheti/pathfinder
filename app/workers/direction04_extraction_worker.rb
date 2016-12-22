@@ -44,7 +44,8 @@ class Direction04ExtractionWorker
     line.fider_name = line.fider.name
 
     dir_num = Objects::Kml.get_property(descr, 'მიმართულება')
-    line.direction = Objects::Direction04.get_or_create(line.region, dir_num, line.tp)
+    line.direction = dir_num
+    line.direction04 = Objects::Direction04.get_or_create(line.region, dir_num, line.tp)
 
     coords = placemark.find('MultiGeometry/LineString/coordinates').first.content
     coords = coords.split(' ')

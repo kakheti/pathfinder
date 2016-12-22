@@ -44,7 +44,8 @@ class Pole04ExtractionWorker
     obj.region_name = obj.region.name if obj.region.present?
 
     dir_num = Objects::Kml.get_property(descr, 'მიმართულება')
-    obj.direction = Objects::Direction04.get_or_create(obj.region, dir_num, obj.tp)
+    obj.direction = dir_num
+    obj.direction04 = Objects::Direction04.get_or_create(obj.region, dir_num, obj.tp)
 
     obj.substation = obj.tp.substation
     obj.substation_name = obj.substation.name if obj.substation.present?
@@ -56,11 +57,10 @@ class Pole04ExtractionWorker
     obj.set_coordinate(coord)
     obj.save
 
-    # XXX: removing some stange data
-    return unless ['xazi miwiqveSa', 'ხაზი მიწისქვეშა'].include?(obj.name)
-    obj.direction.destroy
-    obj.destroy
-
+    # # XXX: removing some stange data
+    # return unless ['xazi miwiqveSa', 'ხაზი მიწისქვეშა'].include?(obj.name)
+    # obj.direction.destroy
+    # obj.destroy
   end
 
 end

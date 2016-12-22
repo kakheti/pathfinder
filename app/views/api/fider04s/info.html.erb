@@ -1,27 +1,33 @@
 <table class="table table-bordered table-hover">
   <tr>
-    <td class="text-muted" width="150">დასახელება</td>
-    <td>
-      <% if @fider.name.present? %>
-        <%= @fider.name %>
-      <% else %>
-        <span class="text-muted">(დასახელების გარეშე)</span>
-      <% end %>
-    </td>
+    <td width="150">მიმართულება</td>
+    <td><%= @fider.direction %></td>
   </tr>
   <tr>
     <td class="text-muted">შენიშვნა</td>
     <td><%= @fider.description %></td>
   </tr>
   <tr>
+    <td class="text-muted">სატრ. ჯიხური</td>
+    <td><%= @fider.tp_name %></td>
+  </tr>
+  <tr>
+    <td class="text-muted">6-10კვ ფიდერი</td>
+    <td><%= @fider.fider_name %></td>
+  </tr>
+  <tr>
+    <td class="text-muted">ქვესადგური</td>
+    <td><%= @fider.substation_name %></td>
+  </tr>
+  <tr>
     <td class="text-muted">მუნიციპალიტეტი</td>
     <td>
-      <% if @fider.region %>
-        <%= link_to @fider.region.name, region_url(@fider.region, tab: 'fiders') %>
-      <% else %>
-        <span class="text-muted">(მუნიციპალიტეტის გარეშე)</span>
-      <% end %>
+      <%= @fider.region_name %>
     </td>
+  </tr>
+  <tr>
+    <td class="text-muted">ხაზების რაოდ.</td>
+    <td><%= @fider.direction04.fider04s.size %></td>
   </tr>
   <tr>
     <td class="text-muted">სიგრძე</td>
