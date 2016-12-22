@@ -86,16 +86,13 @@ var adjustVisibility = function () {
     if (!types.hasOwnProperty(type))
       continue;
 
-    var enabled = types[type],
-      lastEnabled = window.visibleTypes[type];
+    var enabled = types[type];
 
     map.setLayerVisible(type, enabled);
 
     switch (type) {
       case "line":
-        if (enabled && lastEnabled) {
-
-        } else if (enabled) {
+        if (enabled) {
           map.showLines = true;
           map.loadLines();
         } else {
@@ -104,9 +101,7 @@ var adjustVisibility = function () {
         }
         break;
       case "fider":
-        if (enabled && lastEnabled) {
-
-        } else if (enabled) {
+        if (enabled) {
           map.showFiders = true;
           map.loadLines();
         } else {
@@ -115,9 +110,7 @@ var adjustVisibility = function () {
         }
         break;
       case "fider04":
-        if (enabled && lastEnabled) {
-
-        } else if (enabled) {
+        if (enabled) {
           map.loadLines();
           map.show04Fiders = true;
         } else {
@@ -126,7 +119,7 @@ var adjustVisibility = function () {
         }
         break;
       default:
-        if (enabled && !lastEnabled) {
+        if (enabled) {
           needToLoad.push(type);
         }
     }
@@ -148,10 +141,8 @@ googlemaps.start().then(googlemaps.create).then(function (map) {
   map.show04Fiders = true;
 
   google.maps.event.addListener(map, 'idle', function () {
-    Promise.all([
-      adjustVisibility(),
-      map.loadLines()
-    ]);
+    adjustVisibility();
+    map.loadLines();
   });
 
   $("#visible-types").find("input").on('change', adjustVisibility);
