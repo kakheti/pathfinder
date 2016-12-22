@@ -12,7 +12,7 @@
     <% fiders.each do |fider| %>
       <tr>
         <td>
-          <strong><%= link_to "მიმართულება #{fider.direction.number} - ს/ჯ \##{fider.tp.name}", objects_fider04_url(fider) %></strong> &mdash;
+          <strong><%= link_to "მიმართულება #{fider.direction} - ს/ჯ \##{fider.tp.name}", objects_fider04_url(fider) %></strong> &mdash;
           <code><%= fider.start %></code>-<code><%= fider.end %></code>&mdash;
           <code><%= number_with_precision(fider.length * 1000, precision: 0) %></code> მ
         </td>
