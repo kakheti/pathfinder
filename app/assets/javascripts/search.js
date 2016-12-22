@@ -87,7 +87,7 @@ var view = {
       if (data.map.zoom < zoom) data.map.setZoom(zoom);
       if (marker.lat && marker.lng) data.map.setCenter({lat: marker.lat, lng: marker.lng});
 
-      if(view.oldSearchMarker)
+      if (view.oldSearchMarker)
         view.oldSearchMarker.setMap(null);
 
       view.oldSearchMarker = new google.maps.Marker({
@@ -95,10 +95,11 @@ var view = {
         map: map
       });
 
-      setTimeout(function () {
-        realMarker.setVisible(true);
-        google.maps.event.trigger(realMarker, 'click');
-      }, 500);
+      if (realMarker)
+        setTimeout(function () {
+          realMarker.setVisible(true);
+          google.maps.event.trigger(realMarker, 'click');
+        }, 500);
     });
     return el;
   },
