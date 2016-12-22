@@ -39,7 +39,7 @@ class TpExtractionWorker
     obj.fider_name = Objects::Kml.get_property(descr, 'ფიდერი').to_ka(:all)
     return logger.error("No fider name for object #{id}") unless obj.fider_name
 
-    obj.fider = Objects::Fider.find_or_create(obj.fider_name, obj.substation.number, obj.region)
+    obj.fider = Objects::Fider.where(name: obj.fider_name, substation: obj.substation, region: obj.region).first
     # end of description section
     coord = placemark.find('Point/coordinates').first.content
     obj.set_coordinate(coord)

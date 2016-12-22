@@ -57,7 +57,7 @@ class Direction04ExtractionWorker
     line.set_coordinate(coords[coords.size/2])
     line.calc_length!
 
-    line.direction.calculate! unless line.direction.nil?
+    line.direction04.calculate! unless line.direction04.nil?
 
     line.save
   end
