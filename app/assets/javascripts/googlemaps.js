@@ -167,7 +167,8 @@ var createMap = function (opts) {
     }
   };
 
-  var hoverWindow = new google.maps.InfoWindow();
+  var hoverWindow = new google.maps.InfoWindow(),
+    infowindow = new google.maps.InfoWindow();
 
   var lineHoverListener = function (event) {
     var line = event.feature;
@@ -203,6 +204,16 @@ var createMap = function (opts) {
         markerClusterers[obj.type].setMinimumClusterSize(objectTypes[obj.type].cluster);
       }
       markerClusterers[obj.type].addMarker(marker);
+
+      marker.addListener('mouseover', function() {
+        infowindow.setContent(obj.name);
+        infowindow.open(map, this);
+      });
+
+      marker.addListener('mouseout', function() {
+        infowindow.close();
+      });
+
       markers.push(marker);
     });
 
