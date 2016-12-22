@@ -30,6 +30,10 @@ class Objects::Direction04
   index({number: 1})
   index({region_id: 1})
 
+  def info
+    "ჯიხურის #: #{tp_name};"
+  end
+
   def calculate!
     length = 0
 

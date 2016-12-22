@@ -21,6 +21,10 @@ class Objects::Tower
 
   search_in :name, :linename
 
+  def info
+    "გადამცემი ხაზი: #{linename};"
+  end
+
   def self.from_kml(xml)
     parser=XML::Parser.string xml
     doc=parser.parse

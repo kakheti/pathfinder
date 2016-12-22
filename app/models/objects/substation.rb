@@ -27,7 +27,7 @@ class Objects::Substation
 
   search_in :name, :number
 
-  def to_s;
+  def to_s
     self.name
   end
 

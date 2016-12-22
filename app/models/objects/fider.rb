@@ -36,6 +36,10 @@ class Objects::Fider
 
   def to_s; self.name end
 
+  def info
+    "ქვესადგური: #{substation_name}"
+  end
+
   def make_summaries
     self.residential_count = self.tps.sum(:residential_count)
     self.comercial_count = self.tps.sum(:comercial_count)
@@ -99,6 +103,10 @@ class Objects::FiderLine
   belongs_to :region
   embedded_in :fider,  class_name: 'Objects::Fider'
   embeds_many :points, class_name: 'Objects::FiderPoint'
+
+  def info
+    "ქვესადგური: #{substation_number}"
+  end
 
   def cable_type_s
     {

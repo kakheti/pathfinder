@@ -45,6 +45,10 @@ class Objects::Fider04
   index({name: 1})
   index({region_id: 1})
 
+  def info
+    "ჯიხურის #: #{tp_name};"
+  end
+
   def to_s
     self.name
   end

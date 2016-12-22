@@ -70,27 +70,16 @@ var view = {
       realMarker = markers[0];
     }
 
-    var moreinfo = _.template(" მუნიციპალიტეტი: <%=name%>;")(marker.region);
-
-    for (var i in objectTypes) {
-      if(!objectTypes.hasOwnProperty(i))
-        continue;
-
-      if (marker[i]) moreinfo += _.template(' <%=type%>: <%=name%>;')({
-        type: objectTypes[i].name,
-        name: marker[i].name
-      });
-    }
-
     var m = _.template('<a class="search-marker collection-item">'
       + '<span class="type"><%=type%></span> '
       + '<span class="name"><%=name%></span> '
-      + '<span class="moreinfo"><%=moreinfo%></span>'
+      + '<span class="moreinfo"><%=moreinfo%> მუნიციპალიტეტი: <%=region%></span>'
       + '</a>');
     var el = $(m({
       name: marker.name,
+      region: marker.region.name,
       type: (objectTypes[marker.type].name || marker.type),
-      moreinfo: moreinfo
+      moreinfo: marker.info
     }));
     el.click(function () {
       var zoom = objectTypes[marker.type].zoom;

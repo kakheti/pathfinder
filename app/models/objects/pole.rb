@@ -40,6 +40,10 @@ class Objects::Pole
   index({fider_id: 1})
   index({substation_id: 1})
 
+  def info
+    "ფიდერის დასახელება: #{fider_name}; ქვესადგური: #{substation_name}"
+  end
+
   def self.from_kml(xml)
     parser=XML::Parser.string xml
     doc=parser.parse

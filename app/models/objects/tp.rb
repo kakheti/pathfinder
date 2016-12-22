@@ -45,6 +45,10 @@ class Objects::Tp
   index({substation_id: 1})
   index({fider_id: 1})
 
+  def info
+    "ფიდერის დასახელება: #{fider_name}; ქვესადგური: #{substation_name}"
+  end
+
   def picture;
     "/tps/#{self.picture_id}.jpg"
   end

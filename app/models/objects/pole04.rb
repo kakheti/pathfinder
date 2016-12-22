@@ -43,6 +43,10 @@ class Objects::Pole04
   index({name: 1})
   index({region_id: 1})
 
+  def info
+    "მიმართულება: #{direction}; ჯიხურის #: #{tp_name};"
+  end
+
   def traverse_s
     str = []
     str.push "კაუჭისებრი #{traverse[1]}" unless traverse[1].nil?
