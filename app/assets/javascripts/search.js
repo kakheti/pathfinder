@@ -87,6 +87,14 @@ var view = {
       if (data.map.zoom < zoom) data.map.setZoom(zoom);
       if (marker.lat && marker.lng) data.map.setCenter({lat: marker.lat, lng: marker.lng});
 
+      if(view.oldSearchMarker)
+        view.oldSearchMarker.setMap(null);
+
+      view.oldSearchMarker = new google.maps.Marker({
+        position: {lat: marker.lat, lng: marker.lng},
+        map: map
+      });
+
       setTimeout(function () {
         realMarker.setVisible(true);
         google.maps.event.trigger(realMarker, 'click');
