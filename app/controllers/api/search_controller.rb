@@ -37,6 +37,7 @@ class Api::SearchController < ApiController
         object
       else
         type = @@object_types.invert[object.class]
+        type = 'fider' if type == 'fider-line'
 
         region = {name: object.region_name, id: object.region_id.to_s} if object.respond_to?(:region) && !object.region_id.nil?
 
