@@ -10,6 +10,7 @@ class Objects::Pole04
 
   field :_id, type: String
 
+  field :poleid, type: String
   field :kmlid, type: String
   field :name, type: String
   field :number, type: String
@@ -94,7 +95,7 @@ class Objects::Pole04
   def self.from_csv(csv)
     CSV.parse(csv, :headers => true) do |row|
       id = row['Pole_id'].gsub(',', '')
-      pole = Objects::Pole04.where(name: id).first
+      pole = Objects::Pole04.where(poleid: id).first
 
       next unless pole
       quantity = row['Quantity'].to_i
