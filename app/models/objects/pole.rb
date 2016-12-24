@@ -40,6 +40,8 @@ class Objects::Pole
   index({fider_id: 1})
   index({substation_id: 1})
 
+  index({region_name: 1, substation_name: 1, fider_name: 1, name: 1})
+
   def info
     "ფიდერის დასახელება: #{fider_name}; ქვესადგური: #{substation_name}"
   end
