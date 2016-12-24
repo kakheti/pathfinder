@@ -40,8 +40,7 @@ class Objects::Pole04
 
   search_in :name, :direction_name, :fider, :tp_name
 
-  index({name: 1})
-  index({region_id: 1})
+  index({region_name: 1, tp_name: 1, fider_id: 1, name: 1})
 
   def info
     "მიმართულება: #{direction}; ჯიხურის #: #{tp_name};"

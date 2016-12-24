@@ -28,8 +28,7 @@ class Objects::Direction04
 
   search_in :name, :fider_name, :tp_name
 
-  index({number: 1})
-  index({region_id: 1})
+  index({region_name: 1, tp_name: 1, number: 1})
 
   def info
     "ჯიხურის #: #{tp_name};"
