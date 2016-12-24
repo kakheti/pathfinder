@@ -187,7 +187,7 @@ var createMap = function (opts) {
   map.showObjects = function (objects) {
     var markers = [];
     _.forEach(objects, function (obj) {
-      if (map.loadedMarkers.indexOf(obj.id) > -1
+      if (map.loadedMarkers.indexOf(obj.type+obj.id) > -1
         || !window.visibleTypes[obj.type]
         || map.zoom < objectTypes[obj.type].zoom) return;
 
@@ -197,7 +197,7 @@ var createMap = function (opts) {
       marker.id = obj.id;
       marker.type = obj.type;
       marker.name = obj.name;
-      map.loadedMarkers.push(obj.id);
+      map.loadedMarkers.push(obj.type+obj.id);
       google.maps.event.addListener(marker, 'click', markerClickListener);
       if (!markerClusterers[obj.type]) {
         markerClusterers[obj.type] = new clusterer.MarkerClusterer(map);
