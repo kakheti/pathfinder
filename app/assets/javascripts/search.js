@@ -96,10 +96,7 @@ var view = {
       });
 
       if (realMarker)
-        setTimeout(function () {
-          realMarker.setVisible(true);
-          google.maps.event.trigger(realMarker, 'click');
-        }, 500);
+        realMarker.setVisible(true);
     });
     return el;
   },
