@@ -10,6 +10,7 @@ class Objects::Direction04
 
   field :_id, type: String
 
+  field :name, type: String
   field :number, type: String
   field :length, type: Float
 
@@ -54,6 +55,7 @@ class Objects::Direction04
     return existing if existing
     id = Digest::SHA1.hexdigest(region.name + number + tp.name)
     self.create(_id: id,
+                name: number,
                 number: number,
                 tp: tp,
                 tp_name: tp.name,
