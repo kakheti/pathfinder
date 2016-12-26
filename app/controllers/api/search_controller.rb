@@ -96,7 +96,7 @@ class Api::SearchController < ApiController
         objects = objects.map { |obj| obj.lines }.flatten
       elsif type == 'fider04' && params['bounds']
         objects = objects.where({points: {'$elemMatch' => within_bounds(bounds)}})
-      elsif type != 'line' && params['bounds']
+      elsif %w(line substation office).include?(type) && params['bounds']
         objects = objects.where(within_bounds(bounds))
       end
 

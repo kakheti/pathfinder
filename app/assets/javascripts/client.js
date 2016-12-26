@@ -20,13 +20,21 @@ var loadAll = function (types, message) {
   var shouldLoad = [];
 
   for (var type in objectTypes) {
-    var objType = objectTypes[type];
-    if (types.indexOf(type) > -1 && objType.marker !== false && map.zoom >= objType.zoom) {
+    var objType = objectTypes[type],
+      loadable = types.indexOf(type) > -1 && objType.marker !== false && map.zoom >= objType.zoom,
+      allLoaded = objType.zoom === 0 && objType.loaded;
+    if (loadable && !allLoaded) {
       shouldLoad.push(type);
     }
   }
 
-  return api.loadObjects(shouldLoad, message).then(map.showObjects);
+  return api.loadObjects(shouldLoad, message).then(function (objects) {
+    shouldLoad.forEach(function (type) {
+      objectTypes[type].loaded = true;
+    });
+
+    return map.showObjects(objects);
+  });
 };
 
 var typeOrder = ['office', 'substation', 'line', 'tower', 'fider', 'pole', 'tp', 'fider04', 'pole04'],
