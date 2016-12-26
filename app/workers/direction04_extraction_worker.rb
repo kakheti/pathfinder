@@ -9,7 +9,6 @@ class Direction04ExtractionWorker
 
     line = Objects::Fider04.new(kmlid: id, _id: id)
 
-    line.name = placemark.find('name').first.content
     line.start = Objects::Kml.get_property(descr, 'საწყისი ბოძი')
     line.end = Objects::Kml.get_property(descr, 'ბოძამდე')
     line.cable_type = Objects::Kml.get_property(descr, 'სადენის ტიპი').to_ka(:all)
@@ -45,6 +44,7 @@ class Direction04ExtractionWorker
 
     dir_num = Objects::Kml.get_property(descr, 'მიმართულება')
     line.direction = Objects::Direction04.decode(dir_num)
+    line.name = line.direction
     line.direction04 = Objects::Direction04.get_or_create(line.region, dir_num, line.tp)
 
     coords = placemark.find('MultiGeometry/LineString/coordinates').first.content
