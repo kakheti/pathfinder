@@ -18,5 +18,4 @@ class Direction04sUploadWorker
     Objects::Fider04.from_kml(kml)
   end
 
-
 end

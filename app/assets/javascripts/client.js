@@ -15,7 +15,6 @@ var logger = function (message, duration) {
 };
 
 var loadAll = function (types, message) {
-  message = message || 'იტვირთება...';
   if (!types) types = _.keys(objectTypes);
   var shouldLoad = [];
 
