@@ -1,14 +1,28 @@
 /* global require, google */
 
+/**
+ * Imports
+ */
+
 var _ = require('lodash'),
   objectTypes = require('./object-types'),
   api = require('./api');
 
-var data = {};
+/**
+ * Local variables
+ */
 
-var $output = $("#search-output");
+var data = {},
+  $output = $("#search-output"),
+  $searchBtn = $("#search-form").find(".btn"),
+  searchResultTp = _.template('<a class="search-marker collection-item">'
+    + '<span class="type"><%=type%></span> '
+    + '<span class="name"><%=name%></span> '
+    + '<span class="moreinfo"><%=moreInfo%> მუნიციპალიტეტი: <%=region%></span>'
+    + '</a>'),
+  summaryTp = _.template('ნაპოვნია: <strong><%=length%></strong> ობიექტი');
 
-var view = {
+var search = {
   resizeOutput: function () {
     $(".search .scrollable").css("max-height", $(window).innerHeight() - 50)
   },
@@ -20,32 +34,30 @@ var view = {
     var form = $("#search-form");
 
     form.submit(function (event) {
+      var query = field.val(),
+        type = [];
+
       event.preventDefault();
 
-      var q = field.val();
-
-      if (q.length < 2) return;
-
-      var type = [];
+      if (query.length < 2) return;
 
       typeField.find("input[type=checkbox]:checked").each(function () {
         type.push($(this).val());
       });
 
-      var filters = {name: q, type: type};
+      var filters = {name: query, type: type};
 
       if (regionField.val() != "") {
         filters.region = regionField.val();
       }
 
-      var $btn = $("#search-form").find(".btn");
-      $btn.prop("disabled", "disabled").addClass("loading");
+      $searchBtn.prop("disabled", "disabled").addClass("loading");
 
       $.get(api.getUrl("/api/search/by_name"), filters).done(function (data) {
-        $btn.prop("disabled", false).removeClass("loading");
-        view.displayMarkers(q, data);
+        $searchBtn.prop("disabled", false).removeClass("loading");
+        search.displayMarkers(query, data);
       }).error(function () {
-        $btn.removeProp("disabled", false).removeClass("loading");
+        $searchBtn.removeProp("disabled", false).removeClass("loading");
       });
     });
 
@@ -55,42 +67,36 @@ var view = {
       }
     });
 
-    $(window).on('resize', view.resizeOutput);
-    view.resizeOutput();
+    $(window).on('resize', search.resizeOutput);
+    search.resizeOutput();
   },
 
   renderMarker: function (marker) {
-    var realMarker;
-    var markers = data.map.objects;
-
-    realMarker = _.find(markers, _.matchesProperty('id', marker.id));
+    var markers = data.map.objects,
+      realMarker = _.find(markers, _.matchesProperty('id', marker.id));
 
     if (!realMarker) {
       markers = data.map.showObjects([marker]);
       realMarker = markers[0];
     }
 
-    var m = _.template('<a class="search-marker collection-item">'
-      + '<span class="type"><%=type%></span> '
-      + '<span class="name"><%=name%></span> '
-      + '<span class="moreinfo"><%=moreinfo%> მუნიციპალიტეტი: <%=region%></span>'
-      + '</a>');
-    var el = $(m({
+    var el = $(searchResultTp({
       name: marker.name,
       region: marker.region.name,
       type: (objectTypes[marker.type].name || marker.type),
-      moreinfo: marker.info
+      moreInfo: marker.info
     }));
+
     el.click(function () {
       var zoom = objectTypes[marker.type].zoom;
 
       if (data.map.zoom < zoom) data.map.setZoom(zoom);
       if (marker.lat && marker.lng) data.map.setCenter({lat: marker.lat, lng: marker.lng});
 
-      if (view.oldSearchMarker)
-        view.oldSearchMarker.setMap(null);
+      if (search.oldSearchMarker)
+        search.oldSearchMarker.setMap(null);
 
-      view.oldSearchMarker = new google.maps.Marker({
+      search.oldSearchMarker = new google.maps.Marker({
         position: {lat: marker.lat, lng: marker.lng},
         map: map
       });
@@ -103,15 +109,14 @@ var view = {
 
   displayMarkers: function (q, markers) {
     var renderCollection = function (array, output) {
-      _.forEach(array, function (item) {
-        var element = view.renderMarker(item);
+      array.forEach(function (item) {
+        var element = search.renderMarker(item);
         output.append(element);
       });
     };
 
     $output.show();
-    var summary = _.template('ნაპოვნია: <strong><%=length%></strong> ობიექტი');
-    $output.find(".summary").html(summary({length: markers.length}));
+    $output.find(".summary").html(summaryTp({length: markers.length}));
     var output = $output.find('.collection');
     output.html('');
     renderCollection(markers, output);
@@ -121,7 +126,7 @@ var view = {
 module.exports = {
   initialize: function (map) {
     data.map = map;
-    view.initSearch();
-    view.resizeOutput();
+    search.initSearch();
+    search.resizeOutput();
   }
 };

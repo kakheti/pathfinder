@@ -1,17 +1,23 @@
 /* global require, $, Materialize, google */
 
+/**
+ * Imports
+ */
+
 var googlemaps = require('./googlemaps'),
   api = require('./api'),
   search = require('./search'),
   _ = require('lodash'),
-  Promise = require('bluebird'),
   objectTypes = require('./object-types');
-window.visibleTypes = {};
+
+/**
+ * Local functions
+ */
 
 var logger = function (message, duration) {
   if (!message) return;
   console.log(message);
-  Materialize.toast(message, duration || 2000)
+  Materialize.toast(message, duration || 2000);
 };
 
 var loadAll = function (types, message) {
@@ -36,16 +42,29 @@ var loadAll = function (types, message) {
   });
 };
 
+/**
+ * Local variables
+ */
+
 var typeOrder = ['office', 'substation', 'line', 'tower', 'fider', 'pole', 'tp', 'fider04', 'pole04'],
-  tp = _.template('<div class="checkbox-eye"><input type="checkbox" <%= checked %> value="<%= type %>" id="visible-type-<%= type %>">'
+  checkboxTp = _.template('<div class="checkbox-eye"><input type="checkbox" <%= checked %> value="<%= type %>" id="visible-type-<%= type %>">'
     + '<label for="visible-type-<%= type %>"><%= name %></label></div>'),
   searchTp = _.template('<div class="checkbox-search"><input type="checkbox" checked value="<%= type %>" id="search-type-<%= type %>">'
     + '<label for="search-type-<%= type %>"><%= name %></label></div>'),
   $visibleTypes = $("#visible-types"),
-  $searchTypes = $("#search-types");
+  $searchTypes = $("#search-types"),
+  $searchQuery = $("#search-query"),
+  $searchFilters = $("#search-filters");
+
+/**
+ * Code
+ */
+
+
+window.visibleTypes = {};
 
 typeOrder.forEach(function (type) {
-  $visibleTypes.append(tp({
+  $visibleTypes.append(checkboxTp({
     type: type,
     name: objectTypes[type].plural,
     checked: objectTypes[type].active ? "checked" : ""
@@ -57,20 +76,18 @@ typeOrder.forEach(function (type) {
 });
 
 api.loadRegions().then(function (regions) {
-  var option_tp = _.template("<option value='<%=id%>'><%=name%></option>");
+  var regionTp = _.template("<option value='<%=id%>'><%=name%></option>");
   regions.forEach(function (region) {
-    // $("#visible-region, #search-region").append(option_tp(region));
-    $("#search-region").append(option_tp(region));
+    // $("#visible-region, #search-region").append(regionTp(region));
+    $("#search-region").append(regionTp(region));
   });
 });
 
-var searchQuery = $("#search-query"),
-  searchFilters = $("#search-filters");
-searchQuery.on('focus', function () {
-  searchFilters.show();
+$searchQuery.on('focus', function () {
+  $searchFilters.show();
 });
 $('body').on('click', function () {
-  searchFilters.hide();
+  $searchFilters.hide();
 });
 $(".search").on('click', function (event) {
   event.stopPropagation();
@@ -78,6 +95,7 @@ $(".search").on('click', function (event) {
 
 var getVisibleLayers = function () {
   var types = {};
+
   $("#visible-types").find("input[type=checkbox]").each(function () {
     types[$(this).val()] = $(this).is(":checked");
   });
@@ -136,7 +154,7 @@ var adjustVisibility = function () {
   window.visibleTypes = types;
 };
 
-googlemaps.start().then(googlemaps.create).then(function (map) {
+googlemaps.create().then(function (map) {
   // setting loggers
   map.logger = api.logger = search.logger = logger;
 

@@ -1,4 +1,4 @@
-/* global require */
+/* global require, google */
 
 var Promise = require('bluebird'),
   _ = require('lodash'),
@@ -6,14 +6,21 @@ var Promise = require('bluebird'),
   api = require('./api'),
   objectTypes = require('./object-types');
 
-var API_URL = 'https://maps.googleapis.com/maps/api/js';
-var DEFAULT_ZOOM = 9;
-var DEFAULT_LAT = 41.9;
-var DEFAULT_LNG = 45.8;
+var DEFAULT_ZOOM = 9,
+  DEFAULT_LAT = 41.9,
+  DEFAULT_LNG = 45.8,
+  markerClusterers = {},
+  map;
 
-var map;
-var markerClusterers = {};
-var infoWindow;
+var contentToString = function (content) {
+  if (typeof content === 'string') {
+    return content
+  } else if (typeof content.error === 'string') {
+    return content.error;
+  } else {
+    return content.toString();
+  }
+};
 
 var styleFunction = function (f) {
   var clazz = f.getProperty('class');
@@ -41,77 +48,56 @@ var styleFunction = function (f) {
 
 var markerZoomer = function () {
   var zoom = map.getZoom();
+
   for (var type in objectTypes) {
-    var clust = markerClusterers[type];
-    var min_zoom = objectTypes[type].zoom;
-    if (min_zoom <= zoom) {
+    var clusterer = markerClusterers[type],
+      minZoom = objectTypes[type].zoom;
+
+    if (minZoom <= zoom) {
       $("#visible-type-" + type).prop('disabled', false);
-      if (clust && clust.savedMarkers) {
-        clust.addMarkers(clust.savedMarkers);
-        clust.savedMarkers = null;
+
+      if (clusterer && clusterer.savedMarkers) {
+        clusterer.addMarkers(clusterer.savedMarkers);
+        clusterer.savedMarkers = null;
       }
     } else {
       $("#visible-type-" + type).prop('disabled', true);
+
       if (type == 'fider') {
         map.clearFiders();
       }
       if (type == 'fider04') {
         map.clear04Fiders();
       }
-      if (clust && !clust.savedMarkers) {
-        clust.savedMarkers = clust.getMarkers();
-        clust.clearMarkers();
+
+      if (clusterer && !clusterer.savedMarkers) {
+        clusterer.savedMarkers = clusterer.getMarkers();
+        clusterer.clearMarkers();
       }
     }
   }
 };
 
-var loadAPI = function (opts) {
-  return new Promise(function (resolve) {
-    var script = document.createElement('script');
-    script.type = 'text/javascript';
-    var baseUrl = API_URL + '?v=3&callback=onGoogleMapLoaded&libraries=geometry&key=AIzaSyAHnzMNzJ-YzRFCiYgEbWt8DHX0RkGm8yo';
-
-    if (opts && opts.apikey) {
-      script.src = baseUrl + '&key=' + opts.apikey;
-    } else {
-      script.src = baseUrl;
-    }
-
-    document.body.appendChild(script);
-    window.onGoogleMapLoaded = resolve;
-  });
-};
-
 var createMap = function (opts) {
-  var zoom = ( opts && opts.zoom ) || DEFAULT_ZOOM;
-  var lat = ( opts && opts.center && opts.center.lat ) || DEFAULT_LAT;
-  var lng = ( opts && opts.center && opts.center.lng ) || DEFAULT_LNG;
-  var mapOptions = {
-    zoom: zoom,
-    center: new google.maps.LatLng(lat, lng),
-    mapTypeId: google.maps.MapTypeId.ROADMAP
-  };
-  var mapElement = document.getElementById(( opts && opts.mapid ) || 'mapregion');
+  var zoom = ( opts && opts.zoom ) || DEFAULT_ZOOM,
+    lat = ( opts && opts.center && opts.center.lat ) || DEFAULT_LAT,
+    lng = ( opts && opts.center && opts.center.lng ) || DEFAULT_LNG,
+    mapOptions = {
+      zoom: zoom,
+      center: new google.maps.LatLng(lat, lng),
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    },
+    mapElement = document.getElementById(( opts && opts.mapid ) || 'mapregion'),
+    infoWindow = new google.maps.InfoWindow(),
+    hoverWindow = new google.maps.InfoWindow(),
+    lineInfo = new google.maps.InfoWindow();
 
   map = new google.maps.Map(mapElement, mapOptions);
-  infoWindow = new google.maps.InfoWindow({content: ''});
-
-  ///////////////////////////////////////////////////////////////////////////////
-
   map.objects = [];
 
   var markerClickListener = function () {
-    var contentToString = function (content) {
-      if (typeof content === 'string') {
-        return content
-      } else if (typeof content.error === 'string') {
-        return content.error;
-      } else {
-        return content.toString();
-      }
-    };
     var marker = this;
+
     if (marker.content) {
       infoWindow.setContent(contentToString(marker.content));
       infoWindow.open(map, marker);
@@ -124,23 +110,10 @@ var createMap = function (opts) {
     }
   };
 
-  var lineInfo = new google.maps.InfoWindow();
-
   var lineClickListener = function (event) {
-    var contentToString = function (content) {
-      if (!content) return "";
+    var type,
+      line = event.feature;
 
-      if (typeof content === 'string') {
-        return content
-      } else if (typeof content.error === 'string') {
-        return content.error;
-      } else {
-        return content.toString();
-      }
-    };
-
-    var line = event.feature;
-    var type;
 
     switch (line.getProperty('class')) {
       case "Objects::Line":
@@ -167,14 +140,9 @@ var createMap = function (opts) {
     }
   };
 
-  var hoverWindow = new google.maps.InfoWindow(),
-    infowindow = new google.maps.InfoWindow();
-
   var lineHoverListener = function (event) {
-    var line = event.feature;
-
     hoverWindow.setPosition(event.latLng);
-    hoverWindow.setContent(line.getProperty('name'));
+    hoverWindow.setContent(event.feature.getProperty('name'));
     hoverWindow.open(map);
   };
 
@@ -186,8 +154,9 @@ var createMap = function (opts) {
 
   map.showObjects = function (objects) {
     var markers = [];
-    _.forEach(objects, function (obj) {
-      if (map.loadedMarkers.indexOf(obj.type+obj.id) > -1
+
+    objects.forEach(function (obj) {
+      if (map.loadedMarkers.indexOf(obj.type + obj.id) > -1
         || !window.visibleTypes[obj.type]
         || map.zoom < objectTypes[obj.type].zoom) return;
 
@@ -197,7 +166,7 @@ var createMap = function (opts) {
       marker.id = obj.id;
       marker.type = obj.type;
       marker.name = obj.name;
-      map.loadedMarkers.push(obj.type+obj.id);
+      map.loadedMarkers.push(obj.type + obj.id);
       google.maps.event.addListener(marker, 'click', markerClickListener);
       if (!markerClusterers[obj.type]) {
         markerClusterers[obj.type] = new clusterer.MarkerClusterer(map);
@@ -205,13 +174,13 @@ var createMap = function (opts) {
       }
       markerClusterers[obj.type].addMarker(marker);
 
-      marker.addListener('mouseover', function() {
-        infowindow.setContent(obj.name);
-        infowindow.open(map, this);
+      marker.addListener('mouseover', function () {
+        infoWindow.setContent(obj.name);
+        infoWindow.open(map, this);
       });
 
-      marker.addListener('mouseout', function() {
-        infowindow.close();
+      marker.addListener('mouseout', function () {
+        infoWindow.close();
       });
 
       markers.push(marker);
@@ -224,16 +193,16 @@ var createMap = function (opts) {
   };
 
   map.setLayerVisible = function (layer, visible) {
-    var clust = markerClusterers[layer];
+    var clusterer = markerClusterers[layer];
     if (visible) {
-      if (clust && clust.msavedMarkers) {
-        clust.addMarkers(clust.msavedMarkers);
-        clust.msavedMarkers = null;
+      if (clusterer && clusterer.msavedMarkers) {
+        clusterer.addMarkers(clusterer.msavedMarkers);
+        clusterer.msavedMarkers = null;
       }
     } else {
-      if (clust && !clust.msavedMarkers) {
-        clust.msavedMarkers = clust.getMarkers();
-        clust.clearMarkers();
+      if (clusterer && !clusterer.msavedMarkers) {
+        clusterer.msavedMarkers = clusterer.getMarkers();
+        clusterer.clearMarkers();
       }
     }
   };
@@ -241,7 +210,7 @@ var createMap = function (opts) {
   map.clearAll = function () {
     map.objects = [];
     map.loadedMarkers = [];
-    for (i in markerClusterers) {
+    for (var i in markerClusterers) {
       markerClusterers[i].clearMarkers();
     }
   };
@@ -258,8 +227,7 @@ var createMap = function (opts) {
 
   map.clearFiders = function () {
     map.data.forEach(function (a) {
-      var clazz = a.getProperty('class');
-      if (clazz === 'Objects::FiderLine') {
+      if (a.getProperty('class') === 'Objects::FiderLine') {
         map.data.remove(a);
       }
     });
@@ -267,8 +235,7 @@ var createMap = function (opts) {
 
   map.clear04Fiders = function () {
     map.data.forEach(function (a) {
-      var clazz = a.getProperty('class');
-      if (clazz === 'Objects::Fider04') {
+      if (a.getProperty('class') === 'Objects::Fider04') {
         map.data.remove(a);
       }
     });
@@ -313,12 +280,9 @@ var createMap = function (opts) {
 
   markerZoomer();
 
-  ///////////////////////////////////////////////////////////////////////////////
-
   return map;
 };
 
 module.exports = {
-  start: loadAPI,
   create: createMap
 };

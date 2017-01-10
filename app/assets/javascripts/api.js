@@ -1,8 +1,14 @@
+/**
+ * Imports
+ */
+
 var _ = require('lodash'),
   Promise = require('bluebird'),
   config = require('config');
 
-var API = {};
+/**
+ * Local functions
+ */
 
 var logger = function (message) {
   if (API.logger) {
@@ -10,63 +16,64 @@ var logger = function (message) {
   }
 };
 
-API.getUrl = function (url) {
-  return config.url + url;
-};
+/**
+ * Local variables
+ */
+var $searchRegion = $("#search-region"),
+  //paramsTp = _.template('bounds=<%=bounds%>&region_id=<%=region%>'),
+  paramsTp = _.template('bounds=<%=bounds%>'),
+  objectInfoTp = _.template('/api/<%=type%>s/<%=id%>');
 
-API.getParams = function () {
-  var bounds = window.map.getBounds().toUrlValue();
-  var region = $("#search-region").val();
-  var tp = _.template('bounds=<%=bounds%>&region_id=<%=region%>');
-  return tp({bounds: bounds, region: region});
-};
+var API = {
+  getUrl: function (url) {
+    return config.url + url;
+  },
+  getParams: function () {
+    var bounds = window.map.getBounds().toUrlValue(),
+      region = $searchRegion.val();
 
-API.loadObjects = function (types, message) {
-  if (types.length < 1)
-    return Promise.resolve([]);
+    return paramsTp({bounds: bounds /*, region: region*/});
+  },
+  loadObjects: function (types, message) {
+    if (types.length < 1)
+      return Promise.resolve([]);
 
-  if (message)
-    logger(message);
+    if (message) logger(message);
 
-  var bounds = window.map.getBounds().toUrlValue();
-  var region = $("#search-region").val();
-  return new Promise(function (resolve, reject) {
-    $.get(API.getUrl('/api/search'), {bounds: bounds, region_id: region, type: types})
-      .done(function (data) {
-        logger();
+    var bounds = window.map.getBounds().toUrlValue(),
+      region = $searchRegion.val();
+
+    return new Promise(function (resolve, reject) {
+      $.get(API.getUrl('/api/search'), {bounds: bounds, /*region_id: region,*/ type: types})
+        .done(function (data) {
+          if (message) logger();
+          resolve(data);
+        })
+        .fail(function (err) {
+          if (message) logger();
+          reject(err);
+        });
+    });
+  },
+  loadObjectInfo: function (id, type) {
+    logger('იტვირთება...');
+    return new Promise(function (resolve, reject) {
+      $.get(API.getUrl(objectInfoTp({type: type, id: id}))).done(function (data) {
         resolve(data);
-      })
-      .fail(function (err) {
-        logger();
+      }).fail(function (err) {
         reject(err);
       });
-  });
-};
-
-API.loadObjectInfo = function (id, type) {
-  logger('იტვირთება...');
-  return new Promise(function (resolve, reject) {
-    var tp = _.template('/api/<%=type%>s/<%=id%>');
-    $.get(API.getUrl(tp({type: type, id: id}))).done(function (data) {
-      logger();
-      resolve(data);
-    }).fail(function (err) {
-      logger();
-      reject(err);
     });
-  });
-};
-
-API.loadRegions = function () {
-  return new Promise(function (resolve, reject) {
-    $.get(API.getUrl("/api/regions")).done(function (data) {
-      logger();
-      resolve(data);
-    }).fail(function (err) {
-      logger();
-      reject(err);
+  },
+  loadRegions: function () {
+    return new Promise(function (resolve, reject) {
+      $.get(API.getUrl("/api/regions")).done(function (data) {
+        resolve(data);
+      }).fail(function (err) {
+        reject(err);
+      });
     });
-  });
+  }
 };
 
 module.exports = API;
