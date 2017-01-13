@@ -33,6 +33,7 @@ class Objects::Tower
     placemarks.each do |placemark|
       id=placemark.attributes['id']
       name=placemark.find('./kml:name', kmlns).first.content
+
       # description content
       descr=placemark.find('./kml:description', kmlns).first.content
       regname = Objects::Kml.get_property(descr, 'რეგიონი')
@@ -40,18 +41,17 @@ class Objects::Tower
       category = nil if category == '&lt;Null&gt;'
       linename = Objects::Kml.get_property(descr, 'გადამცემი ხაზი')
       # end of description section
-      if 'კახეთი' == regname
-        coord=placemark.find('./kml:Point/kml:coordinates', kmlns).first.content
-        obj=Objects::Tower.where(kmlid: id).first || Objects::Tower.new(kmlid: id, _id: id)
-        obj.name = name
-        obj.region = Region.get_by_name(regname)
-        obj.region_name = regname
-        obj.set_coordinate(coord)
-        obj.category = category
-        obj.line = Objects::Line.where(name: linename).first
-        obj.linename = linename
-        obj.save
-      end
+
+      coord=placemark.find('./kml:Point/kml:coordinates', kmlns).first.content
+      obj=Objects::Tower.where(kmlid: id).first || Objects::Tower.new(kmlid: id, _id: id)
+      obj.name = name
+      obj.region = Region.get_by_name(regname)
+      obj.region_name = regname
+      obj.set_coordinate(coord)
+      obj.category = category
+      obj.line = Objects::Line.where(name: linename).first
+      obj.linename = linename
+      obj.save
     end
   end
 

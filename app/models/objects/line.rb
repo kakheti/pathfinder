@@ -51,27 +51,26 @@ class Objects::Line
       regname = Objects::Kml.get_property(descr, 'რეგიონი')
       direction = Objects::Kml.get_property(descr, 'მიმართულება')
       # end of description section
-      if regname == 'კახეთი'
-        region = Region.get_by_name(regname)
-        line = Objects::Line.where(kmlid: id).first || Objects::Line.new(kmlid: id, _id: id)
-        line.direction = direction
-        line.region = region
-        line.region_name = regname
-        line.name = name.to_ka(:all) if name.present?
-        line.save
-        line.points.destroy_all
-        coords = coords.split(' ')
-        coords.each do |coord|
-          point = line.points.new(line: line)
-          point.set_coordinate(coord)
-          point.save
-        end
-        line.set_coordinate(coords[coords.size/2])
-        line.calc_length!
-        line.save
-        # rejoin relations
-        Objects::Tower.rejoin_line(line)
+
+      region = Region.get_by_name(regname)
+      line = Objects::Line.where(kmlid: id).first || Objects::Line.new(kmlid: id, _id: id)
+      line.direction = direction
+      line.region = region
+      line.region_name = regname
+      line.name = name.to_ka(:all) if name.present?
+      line.save
+      line.points.destroy_all
+      coords = coords.split(' ')
+      coords.each do |coord|
+        point = line.points.new(line: line)
+        point.set_coordinate(coord)
+        point.save
       end
+      line.set_coordinate(coords[coords.size/2])
+      line.calc_length!
+      line.save
+      # rejoin relations
+      Objects::Tower.rejoin_line(line)
     end
   end
 end

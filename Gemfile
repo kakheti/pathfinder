@@ -5,7 +5,7 @@ gem 'actionpack-action_caching'
 gem 'byebug'
 gem 'pry-byebug'
 gem 'sqlite3'
-gem 'redis', :require => ['redis', 'redis/connection/hiredis']
+gem 'redis', :require => %w(redis redis/connection/hiredis)
 gem 'hiredis'
 gem 'sass'
 gem 'sass-rails'
