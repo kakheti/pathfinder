@@ -19,6 +19,8 @@ class Objects::Tower
   belongs_to :line, class_name: 'Objects::Line'
   field :linename, type: String
 
+  index({ linename: 1, name: 1 })
+
   search_in :name, :linename
 
   def info

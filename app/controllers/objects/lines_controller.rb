@@ -6,7 +6,8 @@ class Objects::LinesController < ApplicationController
   include Objects::Kml
 
   def index
-    rel = Objects::Line ; @search = search_params
+    rel = Objects::Line.asc(:name)
+    @search = search_params
     if @search.present?
       rel = rel.where(name: @search[:name].mongonize) if @search[:name].present?
       rel = rel.where(region_id: @search[:region]) if @search[:region].present?

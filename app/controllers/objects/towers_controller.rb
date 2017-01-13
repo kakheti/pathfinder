@@ -5,7 +5,7 @@ class Objects::TowersController < ApplicationController
   include Objects::Kml
 
   def index
-    rel = Objects::Tower
+    rel = Objects::Tower.asc(:linename, :name)
     @search = search_params
     if @search.present?
       rel = rel.where(name: @search[:name].mongonize) if @search[:name].present?
