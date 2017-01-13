@@ -49,7 +49,7 @@ class Objects::Tower
       obj.region_name = regname
       obj.set_coordinate(coord)
       obj.category = category
-      obj.line = Objects::Line.where(name: linename).first
+      obj.line = Objects::Line.where(name: linename, region: obj.region).first
       obj.linename = linename
       obj.save
     end
