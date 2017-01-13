@@ -32,10 +32,10 @@ class Objects::Tower
     placemarks=doc.child.find '//kml:Placemark', kmlns
     placemarks.each do |placemark|
       id=placemark.attributes['id']
-      name=placemark.find('./kml:name', kmlns).first.content
 
       # description content
-      descr=placemark.find('./kml:description', kmlns).first.content
+      descr = placemark.find('./kml:description', kmlns).first.content
+      name = Objects::Kml.get_property(descr, 'ანძის_N')
       regname = Objects::Kml.get_property(descr, 'რეგიონი')
       category = Objects::Kml.get_property(descr, 'ანძის_ტიპი')
       category = nil if category == '&lt;Null&gt;'
