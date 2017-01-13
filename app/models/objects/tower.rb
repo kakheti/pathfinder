@@ -37,9 +37,9 @@ class Objects::Tower
       # description content
       descr=placemark.find('./kml:description', kmlns).first.content
       regname = Objects::Kml.get_property(descr, 'რეგიონი')
-      category = Objects::Kml.get_property(descr, 'ანძის ტიპი')
+      category = Objects::Kml.get_property(descr, 'ანძის_ტიპი')
       category = nil if category == '&lt;Null&gt;'
-      linename = Objects::Kml.get_property(descr, 'გადამცემი ხაზი')
+      linename = Objects::Kml.get_property(descr, 'გადამცემი_ხაზი')
       # end of description section
 
       coord=placemark.find('./kml:Point/kml:coordinates', kmlns).first.content
