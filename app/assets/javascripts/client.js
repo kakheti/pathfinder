@@ -154,29 +154,29 @@ var adjustVisibility = function () {
   window.visibleTypes = types;
 };
 
-googlemaps.create().then(function (map) {
-  // setting loggers
-  map.logger = api.logger = search.logger = logger;
+var map = googlemaps.create();
 
-  window.map = map;
-  search.initialize(map);
+// setting loggers
+map.logger = api.logger = search.logger = logger;
 
-  map.showLines = true;
-  map.showFiders = true;
-  map.show04Fiders = true;
+window.map = map;
+search.initialize(map);
 
-  google.maps.event.addListener(map, 'idle', function () {
-    adjustVisibility();
-    map.loadLines();
-  });
+map.showLines = true;
+map.showFiders = true;
+map.show04Fiders = true;
 
-  $("#visible-types").find("input").on('change', adjustVisibility);
-
-  // $("#visible-region").on('change', function () {
-  //   map.clearAll();
-  //   map.clearFiders();
-  //   map.clear04Fiders();
-  //   adjustVisibility();
-  //   map.loadLines();
-  // });
+google.maps.event.addListener(map, 'idle', function () {
+  adjustVisibility();
+  map.loadLines();
 });
+
+$visibleTypes.find("input").on('change', adjustVisibility);
+
+// $("#visible-region").on('change', function () {
+//   map.clearAll();
+//   map.clearFiders();
+//   map.clear04Fiders();
+//   adjustVisibility();
+//   map.loadLines();
+// });
