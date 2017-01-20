@@ -35,6 +35,8 @@ gem 'roo'
 gem 'geokit'
 gem 'geoutm'
 
+gem 'polylines'
+
 gem 'sidekiq'
 gem 'sinatra', :require => nil
 gem 'puma'
