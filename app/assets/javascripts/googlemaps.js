@@ -26,23 +26,23 @@ var styleFunction = function (f) {
   var clazz = f.getProperty('class');
   switch (clazz) {
     case 'Objects::FiderLine':
-      return {
-        strokeColor: '#FFA504',
-        strokeWeight: 4,
-        strokeOpacity: 0.5
-      };
+      return map.showFiders ? {
+          strokeColor: '#FFA504',
+          strokeWeight: 4,
+          strokeOpacity: 0.5
+        } : {visible: false};
     case 'Objects::Fider04':
-      return {
-        strokeColor: '#2196F3',
-        strokeWeight: 4,
-        strokeOpacity: 0.5
-      };
+      return map.show04Fiders ? {
+          strokeColor: '#2196F3',
+          strokeWeight: 4,
+          strokeOpacity: 0.5
+        } : {visible: false};
     case 'Objects::Line':
-      return {
-        strokeColor: '#FF0000',
-        strokeWeight: 5,
-        strokeOpacity: 0.5
-      };
+      return map.showLines ? {
+          strokeColor: '#FF0000',
+          strokeWeight: 5,
+          strokeOpacity: 0.5
+        } : {visible: false};
   }
 };
 
@@ -113,7 +113,6 @@ var createMap = function (opts) {
   var lineClickListener = function (event) {
     var type,
       line = event.feature;
-
 
     switch (line.getProperty('class')) {
       case "Objects::Line":
@@ -254,12 +253,14 @@ var createMap = function (opts) {
         types.push('fider04');
       }
       if (types.length) {
-        map.data.loadGeoJson(api.getUrl('/api/lines/?' + $.param({
-            type: types,
-            bounds: window.map.getBounds().toUrlValue()
-            //region: $("#visible-region").val()
-          })), null, function () {
-          map.linesLoaded = true;
+        $.get(api.getUrl('/api/lines'), {
+          type: types,
+          bounds: window.map.getBounds().toUrlValue()
+          //region: $("#visible-region").val()
+        }).done(function (geojson) {
+          if (map.showLines)
+            map.linesLoaded = true;
+          map.data.addGeoJson(geojson);
           resolve();
         });
       } else {
@@ -268,12 +269,17 @@ var createMap = function (opts) {
     });
   };
 
+  map.updateStyle = function () {
+    map.data.setStyle(styleFunction);
+  };
+
+  map.updateStyle();
+
   google.maps.event.addListener(map, 'zoom_changed', markerZoomer);
   google.maps.event.addListener(map, 'click', function () {
     $('#search-output').hide();
   });
 
-  map.data.setStyle(styleFunction);
   map.data.addListener('click', lineClickListener);
   map.data.addListener('mouseover', lineHoverListener);
   map.data.addListener('mouseout', lineHoverOverListener);

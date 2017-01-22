@@ -117,31 +117,13 @@ var adjustVisibility = function () {
 
     switch (type) {
       case "line":
-        if (enabled) {
-          map.showLines = true;
-          map.loadLines();
-        } else {
-          map.showLines = false;
-          map.clearLines();
-        }
+        map.showLines = enabled;
         break;
       case "fider":
-        if (enabled) {
-          map.showFiders = true;
-          map.loadLines();
-        } else {
-          map.showFiders = false;
-          map.clearFiders();
-        }
+        map.showFiders = enabled;
         break;
       case "fider04":
-        if (enabled) {
-          map.loadLines();
-          map.show04Fiders = true;
-        } else {
-          map.clear04Fiders();
-          map.show04Fiders = false;
-        }
+        map.show04Fiders = enabled;
         break;
       default:
         if (enabled) {
@@ -150,7 +132,10 @@ var adjustVisibility = function () {
     }
   }
 
+  map.updateStyle();
+
   loadAll(needToLoad);
+  map.loadLines();
   window.visibleTypes = types;
 };
 
@@ -166,10 +151,7 @@ map.showLines = true;
 map.showFiders = true;
 map.show04Fiders = true;
 
-google.maps.event.addListener(map, 'idle', function () {
-  adjustVisibility();
-  map.loadLines();
-});
+google.maps.event.addListener(map, 'idle', adjustVisibility);
 
 $visibleTypes.find("input").on('change', adjustVisibility);
 
