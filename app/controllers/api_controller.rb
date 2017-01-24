@@ -5,8 +5,9 @@ class ApiController < ActionController::Base
   rescue_from Exception, with: :api_error
 
   protected
+
   def authenticate
-    user=Sys::User.authenticate(params[:username], params[:password])
+    user = Sys::User.authenticate(params[:username], params[:password])
     if user and user.active
       yield user
     else
@@ -14,7 +15,7 @@ class ApiController < ActionController::Base
     end
   end
 
-  def self.within_bounds bounds
+  def self.within_bounds(bounds)
     locs = [bounds[1].to_f, bounds[0].to_f], [bounds[3].to_f, bounds[2].to_f]
     return {location: {'$within' => {'$box' => locs}}}
   end
@@ -22,7 +23,7 @@ class ApiController < ActionController::Base
   private
 
   def api_error(ex)
-    render json: { error: ex.to_s }
+    render json: {error: ex.to_s}
   end
 
   def set_access_control_headers
