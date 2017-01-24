@@ -57,12 +57,15 @@ class Api::SearchController < ApiController
   end
 
   def self.search(params, geojson = false)
+    # Types we are searching in
     types = (params['type'] || @@object_types.keys) & @@object_types.keys
 
     all_objects = []
 
     types.each do |type|
+      # Key for caching
       key = nil
+      # Only cache if searching within bounds (and not by name)
       if params['bounds'] && !params['name']
         square = self.to_square(params['bounds'])
         bounds = square[1]
@@ -74,12 +77,14 @@ class Api::SearchController < ApiController
         cached = $redis.get(key)
         data = JSON.parse(cached) rescue nil
         if data
+          # Filter data by region if specified
           if params['region'].present?
             data.select! { |obj|
               obj['region'] && obj['region']['id'] == params['region']
             }
           end
 
+          # Append to output if array
           if data.kind_of? Array
             all_objects.push(*data)
           else
@@ -90,31 +95,39 @@ class Api::SearchController < ApiController
         end
       end
 
+      # Find all objects of type
       objects = @@object_types[type].all
-      if type == 'fider-line' && params['bounds']
-        objects = objects.where({lines: {'$elemMatch' => {points: {'$elemMatch' => within_bounds(bounds)}}}})
-        objects = objects.map { |obj| obj.lines }.flatten
-      elsif type == 'fider04' && params['bounds']
+
+      # Geo Filtering (within bounds)
+      if type == 'fider04' || type == 'fider-line' && params['bounds']
+        # Find lines where any point is inside bounds
         objects = objects.where({points: {'$elemMatch' => within_bounds(bounds)}})
-      elsif %w(line substation office).include?(type) && params['bounds']
+      elsif !%w(line substation office).include?(type) && params['bounds']
+        # Find objects within bounds
         objects = objects.where(within_bounds(bounds))
       end
 
+      # Caching to Redis
       unless key.nil?
         if geojson
+          # Store lines as GeoJSON
           $redis.set(key, Api::LinesController.to_geojson(objects).to_json)
         else
+          # Store objects as JSON representation
           $redis.set(key, Api::SearchController.to_jsonable(objects).to_json)
         end
+        # Expire cache in a hour
         $redis.expire(key, 1.hour)
       end
 
+      # Filter by region (not doing this in db to allow caching all objects regardless of region)
       if params['region'].present?
         objects.select! { |obj|
           obj.region_id && obj.region_id.to_s == params['region']
         }
       end
 
+      # Append all objects to output
       all_objects.push(*objects)
     end
 
