@@ -31,10 +31,8 @@ class Objects::Fider
 
   search_in :name, :linename, :substation_name
 
-  index({ name: 1 })
-  index({ region_id: 1 })
-
-  def to_s; self.name end
+  index({name: 1})
+  index({region_id: 1})
 
   def info
     "ქვესადგური: #{substation_name}"
@@ -48,10 +46,9 @@ class Objects::Fider
   end
 
   def self.from_kml(xml)
-    parser = XML::Parser.string xml
-    doc = parser.parse
+    doc = XML::Parser.string(xml).parse
     kmlns = "kml:#{KMLNS}"
-    placemarks = doc.child.find '//kml:Placemark',kmlns
+    placemarks = doc.child.find('//kml:Placemark', kmlns)
 
     placemarks.each do |placemark|
       # FiderExtractionWorker.perform_async(placemark.to_s)
@@ -79,5 +76,7 @@ class Objects::Fider
     # end
   end
 
-  def length; self.lines.sum(:length) end
+  def length
+    self.lines.sum(:length)
+  end
 end

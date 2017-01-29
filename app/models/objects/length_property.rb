@@ -18,7 +18,6 @@ module Objects::LengthProperty
 
   def calc_length!
     self.length = calc_length
-    self.save
   end
 
   private

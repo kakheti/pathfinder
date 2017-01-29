@@ -13,6 +13,7 @@ class FidersUploadWorker
 
   def upload_kml(file)
     Objects::Fider.delete_all
+    Objects::FiderLine.delete_all
     kml = file.get_input_stream.read
     Objects::Fider.from_kml(kml)
   end
