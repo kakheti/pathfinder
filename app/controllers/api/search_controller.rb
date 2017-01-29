@@ -8,7 +8,7 @@ class Api::SearchController < ApiController
     'tp' => Objects::Tp,
     'fider' => Objects::Fider,
     'office' => Objects::Office,
-    'fider-line' => Objects::Fider,
+    'fider-line' => Objects::FiderLine,
     'fider04' => Objects::Fider04,
     'pole04' => Objects::Pole04,
   }
