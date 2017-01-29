@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '>=5.0'
+gem 'rails'
 gem 'actionpack-action_caching'
 gem 'byebug'
 gem 'pry-byebug'
