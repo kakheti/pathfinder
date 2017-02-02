@@ -99,7 +99,7 @@ class Api::SearchController < ApiController
       objects = @@object_types[type].all
 
       # Geo Filtering (within bounds)
-      if type == 'fider04' || type == 'fider-line' && params['bounds']
+      if %w(fider04 fider-line).include?(type) && params['bounds']
         # Find lines where any point is inside bounds
         objects = objects.where({points: {'$elemMatch' => within_bounds(bounds)}})
       elsif !%w(line substation office).include?(type) && params['bounds']

@@ -13,7 +13,7 @@ class Api::LinesController < ApiController
         else
           name = case line.class.name
                    when 'Objects::FiderLine'
-                     line.fider.name
+                     line.fider_name
                    when 'Objects::Fider04'
                      "#{line.direction} - ს/ჯ ##{line.tp_name}"
                    else
