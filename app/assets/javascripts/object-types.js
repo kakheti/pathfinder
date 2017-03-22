@@ -1,6 +1,6 @@
 var objectTypes = {
   tower: {
-    zoom: 13,
+    zoom: 18,
     name: 'ანძა',
     plural: 'ანძები',
     cluster: 30,
@@ -14,7 +14,7 @@ var objectTypes = {
     active: true
   },
   pole: {
-    zoom: 14,
+    zoom: 18,
     name: '6-10კვ საყრდენი',
     plural: '6-10კვ საყრდენები',
     cluster: 50,
@@ -59,7 +59,7 @@ var objectTypes = {
     active: true
   },
   pole04: {
-    zoom: 16,
+    zoom: 18,
     name: '0.4კვ ბოძი',
     plural: '0.4კვ ბოძები',
     cluster: 50,
