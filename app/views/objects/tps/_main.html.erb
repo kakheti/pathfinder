@@ -32,7 +32,7 @@
         <td class="text-muted">6-10კვ ფიდერი</td>
         <td>
           <% if @tp.fider %>
-            <%= link_to @tp.fider, objects_fider_url(@tp.fider, tab: 'tps') %>
+            <%= link_to @tp.fider_name, objects_fider_url(@tp.fider, tab: 'tps') %>
           <% else %>
             <span class="text-muted">(ფიდერის გარეშე)</span>
           <% end %>
