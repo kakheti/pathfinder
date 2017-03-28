@@ -95,17 +95,17 @@ var createMap = function (opts) {
   map = new google.maps.Map(mapElement, mapOptions);
   map.objects = [];
 
+  var info = $('#info');
+
   var markerClickListener = function () {
     var marker = this;
 
     if (marker.content) {
-      infoWindow.setContent(contentToString(marker.content));
-      infoWindow.open(map, marker);
+      info.html(contentToString(marker.content));
     } else {
       api.loadObjectInfo(marker.id, marker.type).then(function (content) {
         marker.content = content;
-        infoWindow.setContent(contentToString(marker.content));
-        infoWindow.open(map, marker);
+        info.html(contentToString(marker.content));
       });
     }
   };
@@ -126,15 +126,12 @@ var createMap = function (opts) {
         break;
     }
 
-    lineInfo.setPosition(line.getProperty('latLng'));
-
     if (line.content) {
-      lineInfo.setContent(contentToString(line.content));
-      lineInfo.open(map);
+      info.html(contentToString(line.content));
     } else {
       api.loadObjectInfo(line.getId(), type).then(function (content) {
-        lineInfo.setContent(contentToString(content));
-        lineInfo.open(map);
+        line.content = content;
+        info.html(contentToString(content));
       });
     }
   };
