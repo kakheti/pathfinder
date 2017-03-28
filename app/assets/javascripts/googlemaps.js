@@ -27,22 +27,22 @@ var styleFunction = function (f) {
   switch (clazz) {
     case 'Objects::FiderLine':
       return map.showFiders ? {
-          strokeColor: '#FFA504',
-          strokeWeight: 4,
-          strokeOpacity: 0.5
-        } : {visible: false};
+        strokeColor: '#FFA504',
+        strokeWeight: 4,
+        strokeOpacity: 0.5
+      } : {visible: false};
     case 'Objects::Fider04':
       return map.show04Fiders ? {
-          strokeColor: '#2196F3',
-          strokeWeight: 4,
-          strokeOpacity: 0.5
-        } : {visible: false};
+        strokeColor: '#2196F3',
+        strokeWeight: 4,
+        strokeOpacity: 0.5
+      } : {visible: false};
     case 'Objects::Line':
       return map.showLines ? {
-          strokeColor: '#FF0000',
-          strokeWeight: 5,
-          strokeOpacity: 0.5
-        } : {visible: false};
+        strokeColor: '#FF0000',
+        strokeWeight: 5,
+        strokeOpacity: 0.5
+      } : {visible: false};
   }
 };
 
@@ -95,17 +95,25 @@ var createMap = function (opts) {
   map = new google.maps.Map(mapElement, mapOptions);
   map.objects = [];
 
-  var info = $('#info');
+  var info = $('#info'),
+    closeInfo = $('.info .close-info');
+
+  closeInfo.on('click', function () {
+    info.html('');
+    closeInfo.hide();
+  });
 
   var markerClickListener = function () {
     var marker = this;
 
     if (marker.content) {
       info.html(contentToString(marker.content));
+      closeInfo.show();
     } else {
       api.loadObjectInfo(marker.id, marker.type).then(function (content) {
         marker.content = content;
         info.html(contentToString(marker.content));
+        closeInfo.show();
       });
     }
   };
@@ -128,9 +136,11 @@ var createMap = function (opts) {
 
     if (line.content) {
       info.html(contentToString(line.content));
+      closeInfo.show();
     } else {
       api.loadObjectInfo(line.getId(), type).then(function (content) {
         line.content = content;
+        closeInfo.show();
         info.html(contentToString(content));
       });
     }

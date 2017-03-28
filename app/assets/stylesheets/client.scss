@@ -34,6 +34,15 @@ $sidebar-width: 20em;
     flex-grow: 1;
     padding: 10px;
 
+    .close-info {
+      font-weight: bold;
+      font-size: 30px;
+      position: absolute;
+      right: 15px;
+      top: 0;
+      display: none;
+    }
+
     h3 {
       font-size: 20px;
     }
