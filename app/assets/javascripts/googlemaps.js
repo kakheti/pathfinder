@@ -90,30 +90,35 @@ var createMap = function (opts) {
     mapElement = document.getElementById(( opts && opts.mapid ) || 'mapregion'),
     infoWindow = new google.maps.InfoWindow(),
     hoverWindow = new google.maps.InfoWindow(),
-    lineInfo = new google.maps.InfoWindow();
+    $info = $('#info'),
+    $closeInfo = $('.info .close-info'),
+    $sidebar = $('.sidebar');
 
   map = new google.maps.Map(mapElement, mapOptions);
   map.objects = [];
 
-  var info = $('#info'),
-    closeInfo = $('.info .close-info');
+  var openInfo = function (content) {
+    $info.html(content);
+    $closeInfo.show();
+    $sidebar.removeClass('closed');
+  };
+  var closeInfo = function () {
+    $info.html('');
+    $closeInfo.hide();
+    $sidebar.addClass('closed');
+  };
 
-  closeInfo.on('click', function () {
-    info.html('');
-    closeInfo.hide();
-  });
+  $closeInfo.on('click', closeInfo);
 
   var markerClickListener = function () {
     var marker = this;
 
     if (marker.content) {
-      info.html(contentToString(marker.content));
-      closeInfo.show();
+      openInfo(contentToString(marker.content));
     } else {
       api.loadObjectInfo(marker.id, marker.type).then(function (content) {
         marker.content = content;
-        info.html(contentToString(marker.content));
-        closeInfo.show();
+        openInfo(contentToString(marker.content));
       });
     }
   };
@@ -135,13 +140,11 @@ var createMap = function (opts) {
     }
 
     if (line.content) {
-      info.html(contentToString(line.content));
-      closeInfo.show();
+      openInfo(contentToString(line.content));
     } else {
       api.loadObjectInfo(line.getId(), type).then(function (content) {
         line.content = content;
-        closeInfo.show();
-        info.html(contentToString(content));
+        openInfo(contentToString(content));
       });
     }
   };

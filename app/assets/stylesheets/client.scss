@@ -36,11 +36,12 @@ $sidebar-width: 20em;
 
     .close-info {
       font-weight: bold;
-      font-size: 30px;
+      font-size: 50px;
       position: absolute;
       right: 15px;
       top: 0;
       display: none;
+      line-height: 1;
     }
 
     h3 {
@@ -236,4 +237,58 @@ $sidebar-width: 20em;
 
 .checkbox-search {
   @include checkbox-custom('label', 'label_outline');
+}
+
+.open-sidebar {
+  position: absolute;
+  right: 15px;
+  top: 9px;
+  display: none;
+}
+
+@media (max-width: 60em) {
+  .map {
+    right: 0;
+  }
+
+  .search {
+    right: 100px;
+
+    input {
+      width: auto;
+    }
+
+    button {
+      display: none;
+    }
+
+    &.open {
+      left: 10px;
+      right: 15px;
+
+      button {
+        display: inline-block;
+      }
+    }
+  }
+
+  .sidebar {
+    left: 0;
+    right: 0;
+    width: 100%;
+    background: #fff;
+    z-index: 99;
+
+    &.closed {
+      display: none;
+    }
+
+    .close-info {
+      display: block !important;
+    }
+  }
+
+  .open-sidebar {
+    display: block;
+  }
 }

@@ -54,12 +54,17 @@ var typeOrder = ['office', 'substation', 'line', 'tower', 'fider', 'pole', 'tp',
   $visibleTypes = $("#visible-types"),
   $searchTypes = $("#search-types"),
   $searchQuery = $("#search-query"),
-  $searchFilters = $("#search-filters");
+  $searchFilters = $("#search-filters"),
+  $sidebar = $('.sidebar')
+  $openSidebar = $('.open-sidebar');
 
 /**
  * Code
  */
 
+$openSidebar.on('click', function () {
+  $sidebar.removeClass('closed');
+});
 
 window.visibleTypes = {};
 

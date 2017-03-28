@@ -13,6 +13,7 @@ var _ = require('lodash'),
  */
 
 var data = {},
+  $search = $('.search'),
   $output = $("#search-output"),
   $searchBtn = $("#search-form").find(".btn"),
   searchResultTp = _.template('<a class="search-marker collection-item">'
@@ -28,27 +29,27 @@ var search = {
   },
 
   initSearch: function () {
-    var field = $('#search-query');
-    var typeField = $('#search-types');
-    var regionField = $("#search-region");
-    var form = $("#search-form");
+    var $field = $('#search-query'),
+     $typeField = $('#search-types'),
+     $regionField = $("#search-region"),
+     $form = $("#search-form");
 
-    form.submit(function (event) {
-      var query = field.val(),
+    $form.submit(function (event) {
+      var query = $field.val(),
         type = [];
 
       event.preventDefault();
 
       if (query.length < 2) return;
 
-      typeField.find("input[type=checkbox]:checked").each(function () {
+      $typeField.find("input[type=checkbox]:checked").each(function () {
         type.push($(this).val());
       });
 
       var filters = {name: query, type: type};
 
-      if (regionField.val() != "") {
-        filters.region = regionField.val();
+      if ($regionField.val() != "") {
+        filters.region = $regionField.val();
       }
 
       $searchBtn.prop("disabled", "disabled").addClass("loading");
@@ -61,10 +62,14 @@ var search = {
       });
     });
 
-    field.on('click', function () {
+    $field.on('click', function () {
       if ($output.find(".collection .collection-item").length > 0) {
         $output.show();
       }
+    });
+
+    $field.on('focus', function () {
+      $search.addClass('open');
     });
 
     $(window).on('resize', search.resizeOutput);
