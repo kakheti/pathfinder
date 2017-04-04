@@ -58,11 +58,6 @@ class Pole04ExtractionWorker
     coord = placemark.find('Point/coordinates').first.content
     obj.set_coordinate(coord)
     obj.save
-
-    # # XXX: removing some stange data
-    # return unless ['xazi miwiqveSa', 'ხაზი მიწისქვეშა'].include?(obj.name)
-    # obj.direction.destroy
-    # obj.destroy
   end
 
 end
