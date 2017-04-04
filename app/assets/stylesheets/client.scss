@@ -136,6 +136,10 @@ $sidebar-width: 20em;
     }
   }
 
+  &.open .filters {
+    display: block;
+  }
+
   .scrollable {
     max-height: 500px;
     overflow-y: auto;

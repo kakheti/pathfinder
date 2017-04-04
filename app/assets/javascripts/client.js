@@ -88,16 +88,6 @@ api.loadRegions().then(function (regions) {
   });
 });
 
-$searchQuery.on('focus', function () {
-  $searchFilters.show();
-});
-$('body').on('click', function () {
-  $searchFilters.hide();
-});
-$(".search").on('click', function (event) {
-  event.stopPropagation();
-});
-
 var getVisibleLayers = function () {
   var types = {};
 
