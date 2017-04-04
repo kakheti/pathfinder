@@ -13,8 +13,8 @@ class Objects::SubstationsController < ApplicationController
       rel = rel.where(kmlid: @search[:kmlid].mongonize) if @search[:kmlid].present?
     end
     respond_to do |format|
-      format.html { @title='ქვესადგურები' ; @substations = rel.asc(:kmlid).paginate(per_page:10, page: params[:page]) }
-      format.xlsx{ @substations = rel.asc(:kmlid) }
+      format.html { @title='ქვესადგურები'; @substations = rel.asc(:kmlid).paginate(per_page: 10, page: params[:page]) }
+      format.xlsx { @substations = rel.asc(:kmlid) }
       format.kmz do
         @substations=rel
         kml = kml_document do |xml|
@@ -30,12 +30,18 @@ class Objects::SubstationsController < ApplicationController
   def upload
     @title='ფაილის ატვირთვა'
     if request.post?
-      f=params[:data].original_filename
+      f = params[:data].original_filename
+      delete_old = params[:delete_old]
       case File.extname(f).downcase
-      when '.kmz' then upload_kmz(params[:data].tempfile)
-      when '.kml' then upload_kml(params[:data].tempfile)
-      when '.xlsx' then upload_xlsx(params[:data].tempfile)
-      else raise 'არასწორი ფორმატი' end
+        when '.kmz' then
+          upload_kmz(params[:data].tempfile, delete_old)
+        when '.kml' then
+          upload_kml(params[:data].tempfile, delete_old)
+        when '.xlsx' then
+          upload_xlsx(params[:data].tempfile)
+        else
+          raise 'არასწორი ფორმატი'
+      end
       redirect_to objects_substations_url, notice: 'მონაცემების ატვირთვა დაწყებულია. შეამოწმეთ მიმდინარე დავალებათა გვერდი.'
     end
   end
@@ -48,26 +54,31 @@ class Objects::SubstationsController < ApplicationController
   protected
   def nav
     @nav=super
-    @nav['ქვესადგურები']=objects_substations_url
+    @nav['ქვესადგურები'] = objects_substations_url
     @nav[@title]=nil unless ['index'].include?(action_name)
   end
 
-  def login_required; true end
-  def permission_required; not current_user.admin? end
+  def login_required;
+    true
+  end
+
+  def permission_required;
+    not current_user.admin?
+  end
 
   private
 
-  def upload_kmz(file)
-    SubstationUploadWorker.perform_async(file.path)
+  def upload_kmz(file, delete_old)
+    SubstationUploadWorker.perform_async(file.path, delete_old)
   end
 
   def upload_xlsx(file)
     sheet=Roo::Spreadsheet.open(file.path, extension: 'xlsx')
     (2..sheet.last_row).each do |row|
-      id = sheet.cell('A',row) ; substation = Objects::Substation.find(id)
-      name = sheet.cell('B',row).to_s ; substation.name = name
-      regionname = sheet.cell('C',row).to_s ; substation.region = Region.get_by_name(regionname)
-      description = sheet.cell('D', row).to_s ; substation.description = description
+      id = sheet.cell('A', row); substation = Objects::Substation.find(id)
+      name = sheet.cell('B', row).to_s; substation.name = name
+      regionname = sheet.cell('C', row).to_s; substation.region = Region.get_by_name(regionname)
+      description = sheet.cell('D', row).to_s; substation.description = description
       substation.save
     end
   end

@@ -12,8 +12,8 @@ class Objects::Fider04sController < ApplicationController
       rel = rel.where(region_id: @search[:region]) if @search[:region].present?
     end
     respond_to do |format|
-      format.html{ @title = '0.4კვ ხაზები'; @fiders = rel.paginate(per_page:10, page: params[:page]) }
-      format.xlsx{ @fiders = rel }
+      format.html { @title = '0.4კვ ხაზები'; @fiders = rel.paginate(per_page: 10, page: params[:page]) }
+      format.xlsx { @fiders = rel }
       format.kmz do
         @fiders = rel
         kml = kml_document do |xml|
@@ -26,15 +26,17 @@ class Objects::Fider04sController < ApplicationController
     end
   end
 
-  # DEPRECATED
   def upload
     @title='ფაილის ატვირთვა: 0.4კვ ხაზები'
     if request.post?
-      f=params[:data].original_filename
+      f = params[:data].original_filename
+      delete_old = params[:delete_old]
       case File.extname(f).downcase
-      when '.kmz' then upload_kmz(params[:data].tempfile)
-      # when '.kml' then upload_kml(params[:data].tempfile)
-      else raise 'არასწორი ფორმატი' end
+        when '.kmz' then
+          upload_kmz(params[:data].tempfile, delete_old)
+        else
+          raise 'არასწორი ფორმატი'
+      end
       redirect_to objects_direction04s_url, notice: 'მონაცემების ატვირთვა დაწყებულია. შეამოწმეთ მიმდინარე დავალებათა გვერდი'
     end
   end
@@ -62,12 +64,17 @@ class Objects::Fider04sController < ApplicationController
     @nav[@title]=nil unless ['index'].include?(action_name)
   end
 
-  def login_required; true end
-  def permission_required; not current_user.admin? end
+  def login_required;
+    true
+  end
 
-private
+  def permission_required;
+    not current_user.admin?
+  end
 
-  def upload_kmz(file)
-    Direction04sUploadWorker.perform_async(file.path)
+  private
+
+  def upload_kmz(file, delete_old)
+    Direction04sUploadWorker.perform_async(file.path, delete_old)
   end
 end

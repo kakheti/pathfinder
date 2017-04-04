@@ -15,8 +15,8 @@ class Objects::TowersController < ApplicationController
       # rel = rel.where(linename: @search[:linename].mongonize) if @search[:linename].present?
     end
     respond_to do |format|
-      format.html { @title='ანძები' ; @towers=rel.asc(:line_id, :name).paginate(per_page:10, page: params[:page]) }
-      format.xlsx{ @towers= rel.asc(:line_id, :name) }
+      format.html { @title='ანძები'; @towers=rel.asc(:line_id, :name).paginate(per_page: 10, page: params[:page]) }
+      format.xlsx { @towers= rel.asc(:line_id, :name) }
       format.kmz do
         @towers=rel
         kml = kml_document do |xml|
@@ -33,12 +33,18 @@ class Objects::TowersController < ApplicationController
     @title='ფაილის ატვირთვა'
     if request.post?
       f = params[:data].original_filename
+      delete_old = params[:delete_old]
       case File.extname(f).downcase
-      when '.kmz' then upload_kmz(params[:data].tempfile)
-      when '.kml' then upload_kml(params[:data].tempfile)
-      when '.xlsx' then upload_xlsx(params[:data].tempfile)
-      else raise 'არასწორი ფორმატი' end
-        redirect_to objects_towers_url, notice: 'მონაცემების ატვირთვა დაწყებულია. შეამოწმეთ მიმდინარე დავალებათა გვერდი.'
+        when '.kmz' then
+          upload_kmz(params[:data].tempfile, delete_old)
+        when '.kml' then
+          upload_kml(params[:data].tempfile, delete_old)
+        when '.xlsx' then
+          upload_xlsx(params[:data].tempfile)
+        else
+          raise 'არასწორი ფორმატი'
+      end
+      redirect_to objects_towers_url, notice: 'მონაცემების ატვირთვა დაწყებულია. შეამოწმეთ მიმდინარე დავალებათა გვერდი.'
     end
   end
 
@@ -74,15 +80,19 @@ class Objects::TowersController < ApplicationController
     @nav[@title]=nil unless ['index'].include?(action_name)
   end
 
-  def login_required; true end
-  def permission_required; not current_user.admin? end
-
-private
-
-  def upload_kmz(file)
-    TowersUploadWorker.perform_async(file.path)
+  def login_required;
+    true
   end
 
+  def permission_required;
+    not current_user.admin?
+  end
+
+  private
+
+  def upload_kmz(file, delete_old)
+    TowersUploadWorker.perform_async(file.path, delete_old)
+  end
 
   def upload_xlsx(file)
     XLSConverter.perform_async('Objects::Tower', file.path.to_s)

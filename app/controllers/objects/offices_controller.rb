@@ -7,8 +7,8 @@ class Objects::OfficesController < ApplicationController
   def index
     rel = Objects::Office.asc(:kmlid)
     respond_to do |format|
-      format.html{ @title = 'ოფისები'; @offices = rel.paginate(per_page:15, page: params[:page]) }
-      format.xlsx{ @offices = rel }
+      format.html { @title = 'ოფისები'; @offices = rel.paginate(per_page: 15, page: params[:page]) }
+      format.xlsx { @offices = rel }
       format.kmz do
         @offices = rel
         kml = kml_document do |xml|
@@ -25,11 +25,17 @@ class Objects::OfficesController < ApplicationController
     @title = 'ფაილის ატვირთვა: ოფისები'
     if request.post?
       f = params[:data].original_filename
+      delete_old = params[:delete_old]
       case File.extname(f).downcase
-      when '.kmz' then upload_kmz(params[:data].tempfile)
-      when '.kml' then upload_kml(params[:data].tempfile)
-      when '.xlsx' then upload_xlsx(params[:data].tempfile)
-      else raise 'არასწორი ფორმატი' end
+        when '.kmz' then
+          upload_kmz(params[:data].tempfile, delete_old)
+        when '.kml' then
+          upload_kml(params[:data].tempfile, delete_old)
+        when '.xlsx' then
+          upload_xlsx(params[:data].tempfile)
+        else
+          raise 'არასწორი ფორმატი'
+      end
       redirect_to objects_offices_url, notice: 'მონაცემების ატვირთვა დაწყებულია. შეამოწმეთ მიმდინარე დავალებათა გვერდი.'
     end
   end
@@ -39,7 +45,7 @@ class Objects::OfficesController < ApplicationController
     @office=Objects::Office.find(params[:id])
   end
 
-protected
+  protected
 
   def nav
     @nav=super
@@ -47,27 +53,29 @@ protected
     @nav[@title]=nil unless ['index'].include?(action_name)
   end
 
-
-  def login_required; true end
-  def permission_required; not current_user.admin? end
-
-
-private
-
-
-  def upload_kmz(file)
-    OfficeUploadWorker.perform_async(file.path)
+  def login_required;
+    true
   end
 
+  def permission_required;
+    not current_user.admin?
+  end
+
+  private
+
+
+  def upload_kmz(file, delete_old)
+    OfficeUploadWorker.perform_async(file.path, delete_old)
+  end
 
   def upload_xlsx(file)
     sheet=Roo::Spreadsheet.open(file.path, extension: 'xlsx')
     (2..sheet.last_row).each do |row|
-      id = sheet.cell('A',row) ; office = Objects::Office.find(id)
-      name = sheet.cell('B',row) ; office.name = name
-      regionname = sheet.cell('C',row).to_s ; region = Region.get_by_name(regionname) ; office.region = region
-      address = sheet.cell('D',row) ; office.address = address
-      description = sheet.cell('E',row) ; office.description = description
+      id = sheet.cell('A', row); office = Objects::Office.find(id)
+      name = sheet.cell('B', row); office.name = name
+      regionname = sheet.cell('C', row).to_s; region = Region.get_by_name(regionname); office.region = region
+      address = sheet.cell('D', row); office.address = address
+      description = sheet.cell('E', row); office.description = description
       office.save
     end
   end

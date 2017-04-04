@@ -15,8 +15,8 @@ class Objects::FidersController < ApplicationController
       rel = rel.where(substation_id: @search[:substation]) if @search[:substation].present?
     end
     respond_to do |format|
-      format.html{ @title = '6-10კვ ფიდერები'; @fiders = rel.paginate(per_page:10, page: params[:page]) }
-      format.xlsx{ @fiders = rel }
+      format.html { @title = '6-10კვ ფიდერები'; @fiders = rel.paginate(per_page: 10, page: params[:page]) }
+      format.xlsx { @fiders = rel }
       format.kmz do
         @fiders = rel
         kml = kml_document do |xml|
@@ -32,12 +32,18 @@ class Objects::FidersController < ApplicationController
   def upload
     @title='ფაილის ატვირთვა: 6-10კვ ფიდერები'
     if request.post?
-      f=params[:data].original_filename
+      f = params[:data].original_filename
+      delete_old = params[:delete_old]
       case File.extname(f).downcase
-      when '.kmz' then upload_kmz(params[:data].tempfile)
-      when '.kml' then upload_kml(params[:data].tempfile)
-      when '.xlsx' then upload_xlsx(params[:data].tempfile)
-      else raise 'არასწორი ფორმატი' end
+        when '.kmz' then
+          upload_kmz(params[:data].tempfile, delete_old)
+        when '.kml' then
+          upload_kml(params[:data].tempfile, delete_old)
+        when '.xlsx' then
+          upload_xlsx(params[:data].tempfile)
+        else
+          raise 'არასწორი ფორმატი'
+      end
       redirect_to objects_fiders_url, notice: 'მონაცემების ატვირთვა დაწყებულია. შეამოწმეთ მიმდინარე დავალებათა გვერდი'
     end
   end
@@ -60,17 +66,22 @@ class Objects::FidersController < ApplicationController
   protected
   def nav
     @nav=super
-    @nav['6-10კვ ფიდერები']=objects_fiders_url
-    @nav[@title]=nil unless ['index'].include?(action_name)
+    @nav['6-10კვ ფიდერები'] = objects_fiders_url
+    @nav[@title] = nil unless ['index'].include?(action_name)
   end
 
-  def login_required; true end
-  def permission_required; not current_user.admin? end
+  def login_required;
+    true
+  end
+
+  def permission_required;
+    not current_user.admin?
+  end
 
   private
 
-  def upload_kmz(file)
-    FidersUploadWorker.perform_async(file.path)
+  def upload_kmz(file, delete_old)
+    FidersUploadWorker.perform_async(file.path, delete_old)
   end
 
   def upload_xlsx(file)

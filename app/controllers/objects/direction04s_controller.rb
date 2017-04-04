@@ -17,6 +17,7 @@ class Objects::Direction04sController < ApplicationController
         rel = rel.where(tp_id: tp.id ) unless tp.nil?
       end
     end
+
     respond_to do |format|
       format.html{ @title = '0.4კვ ხაზები'; @fiders = rel.paginate(per_page:10, page: params[:page]) }
       format.xlsx{ @fiders = rel }
@@ -30,20 +31,6 @@ class Objects::Direction04sController < ApplicationController
         send_data kml_to_kmz(kml), filename: 'fiders.kmz'
       end
     end
-  end
-
-  # DEPRECATED
-  def upload
-    render text: 'not supported'
-    # @title='ფაილის ატვირთვა: 0.4კვ ხაზები'
-    # if request.post?
-    #   f=params[:data].original_filename
-    #   case File.extname(f).downcase
-    #     when '.kmz' then upload_kmz(params[:data].tempfile)
-    #     when '.kml' then upload_kml(params[:data].tempfile)
-    #     else raise 'არასწორი ფორმატი' end
-    #   redirect_to objects_fider04s_url, notice: 'მონაცემები ატვირთულია'
-    # end
   end
 
   def show
@@ -71,12 +58,5 @@ class Objects::Direction04sController < ApplicationController
 
   def login_required; true end
   def permission_required; not current_user.admin? end
-
-private
-
-  # DEPRECATED
-  # def upload_kmz(file)
-  #   Direction04sUploadWorker.perform_async(file.path)
-  # end
 
 end
