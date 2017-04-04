@@ -3,6 +3,7 @@ class PolesUploadWorker
 
   def perform(file, delete_old)
     if delete_old
+      logger.info('Deleting Poles')
       Objects::Pole.delete_all
     end
     Zip::File.open file do |zip_file|

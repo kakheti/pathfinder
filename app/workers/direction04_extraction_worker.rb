@@ -5,6 +5,9 @@ class Direction04ExtractionWorker
     placemark = XML::Parser.string(placemark_xml).parse.child
 
     id = placemark.attributes['id']
+
+    logger.info("Uploading Fider04 #{id}")
+
     descr = placemark.find('description').first.content
 
     line = Objects::Fider04.new(kmlid: id, _id: id)

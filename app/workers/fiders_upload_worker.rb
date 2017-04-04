@@ -3,7 +3,9 @@ class FidersUploadWorker
 
   def perform(file, delete_old)
     if delete_old
+      logger.info('Deleting Fiders')
       Objects::Fider.delete_all
+      logger.info('Deleting FiderLines')
       Objects::FiderLine.delete_all
     end
 

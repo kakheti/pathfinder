@@ -45,6 +45,7 @@ class Objects::Line
     placemarks.each do |placemark|
       id = placemark.attributes['id']
       name = placemark.find('./kml:name', kmlns).first.content
+      logger.info("Uploading Line #{id} #{name}")
       coords = placemark.find('./kml:MultiGeometry/kml:LineString/kml:coordinates', kmlns).first.content
       # description content
       descr = placemark.find('./kml:description', kmlns).first.content

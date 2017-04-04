@@ -40,12 +40,15 @@ class Objects::Substation
 
   def self.from_kml(xml)
     parser=XML::Parser.string xml
-    doc=parser.parse; root=doc.child
+    doc=parser.parse
     kmlns="kml:#{KMLNS}"
     placemarks=doc.child.find '//kml:Placemark', kmlns
     placemarks.each do |placemark|
       id = placemark.attributes['id']
       name = placemark.find('./kml:name', kmlns).first.content
+
+      logger.info("Uploading Substation #{id} #{name}")
+
       # description content
       descr = placemark.find('./kml:description', kmlns).first.content
       regname = Objects::Kml.get_property(descr, 'მუნიციპალიტეტი').to_ka(:all)

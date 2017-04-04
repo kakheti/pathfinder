@@ -8,6 +8,9 @@ class TpExtractionWorker
 
     id = placemark.attributes['id']
     obj = Objects::Tp.where(kmlid: id).first || Objects::Tp.new(kmlid: id, _id: id)
+
+    logger.info("Uploading TP #{id}")
+
     # name=placemark.find('name').first.content
     # start description section
     descr = placemark.find('description').first.content

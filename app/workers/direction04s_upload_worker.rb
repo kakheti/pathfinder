@@ -3,7 +3,9 @@ class Direction04sUploadWorker
 
   def perform(file, delete_old)
     if delete_old
+      logger.info('Deleting Fider04s')
       Objects::Fider04.delete_all
+      logger.info('Deleting Direction04s')
       Objects::Direction04.delete_all
     end
 

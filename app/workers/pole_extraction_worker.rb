@@ -5,6 +5,9 @@ class PoleExtractionWorker
     placemark = XML::Parser.string(placemark_xml).parse.child
 
     id = placemark.attributes['id']
+
+    logger.info("Uploading Pole #{id}")
+
     obj = Objects::Pole.where(kmlid: id).first || Objects::Pole.new(kmlid: id, _id: id)
     # start description section
     descr = placemark.find('description').first.content

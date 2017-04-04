@@ -3,6 +3,7 @@ class OfficeUploadWorker
 
   def perform(file, delete_old)
     if delete_old
+      logger.info('Deleting Offices')
       Objects::Office.delete_all
     end
     Zip::File.open file do |zip_file|

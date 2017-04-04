@@ -26,6 +26,7 @@ class Objects::Office
     placemarks.each do |placemark|
       id = placemark.attributes['id']
       name = placemark.find('./kml:name', kmlns).first.content
+      logger.info("Uploading Office #{id} #{name}")
       # description content
       descr = placemark.find('./kml:description', kmlns).first.content
       regname = Objects::Kml.get_property(descr, 'მუნიციპალიტეტი').to_ka(:all)
