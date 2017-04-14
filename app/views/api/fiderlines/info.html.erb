@@ -1,4 +1,4 @@
-<h3><%= @line.fider %> → <%= @line.start %> - <%= @line.end %></h3>
+<h3><%= @line.fider_name %> → <%= @line.start %> - <%= @line.end %></h3>
 <table class="table">
   <tr>
     <td><strong>სადენის ტიპი</strong></td>
@@ -26,11 +26,11 @@
   </tr>
   <tr>
     <td><strong>6-10კვ ფიდერი</strong></td>
-    <td><%= @line.fider %></td>
+    <td><%= @line.fider_name %></td>
   </tr>
   <tr>
     <td><strong>ქვესადგური</strong></td>
-    <td><%= @line.fider.substation.name %></td>
+    <td><%= @line.fider.substation_name %></td>
   </tr>
   <tr>
     <td><strong>მუნიციპალიტეტი</strong></td>
