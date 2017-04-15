@@ -120,6 +120,7 @@ var search = {
 
             if (realMarker)
                 realMarker.setVisible(true);
+            map.showInfo(marker);
         });
         return el;
     },

@@ -1,7 +1,6 @@
 /* global require, google */
 
 var Promise = require('bluebird'),
-    _ = require('lodash'),
     clusterer = require('./lib/markerclusterer'),
     api = require('./api'),
     objectTypes = require('./object-types');
@@ -111,9 +110,7 @@ var createMap = function (opts) {
 
     $closeInfo.on('click', closeInfo);
 
-    var markerClickListener = function () {
-        var marker = this;
-
+    map.showInfo = function(marker) {
         if (marker.content) {
             openInfo(contentToString(marker.content));
         } else {
@@ -122,6 +119,12 @@ var createMap = function (opts) {
                 openInfo(contentToString(marker.content));
             });
         }
+    };
+
+    var markerClickListener = function () {
+        var marker = this;
+
+        map.showInfo(marker);
     };
 
     var lineClickListener = function (event) {
