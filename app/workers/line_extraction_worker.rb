@@ -3,6 +3,7 @@ require 'digest/sha1'
 
 class LineExtractionWorker
   include Sidekiq::Worker
+  include Objects::Kml
 
   def perform(placemark_xml)
     parser = XML::Parser.string(placemark_xml)
@@ -10,18 +11,17 @@ class LineExtractionWorker
     kmlns = "kml:#{KMLNS}"
     placemarks = doc.child.find '//kml:Placemark', kmlns
     placemarks.each do |placemark|
-      id = placemark.attributes['id']
       name = placemark.find('./kml:name', kmlns).first.content
-      logger.info("Uploading Line #{id} #{name}")
       coords = placemark.find('./kml:MultiGeometry/kml:LineString/kml:coordinates', kmlns).first.content
-      # description content
       descr = placemark.find('./kml:description', kmlns).first.content
       regname = Objects::Kml.get_property(descr, 'რეგიონი')
       direction = Objects::Kml.get_property(descr, 'მიმართულება')
-      # end of description section
-
       region = Region.get_by_name(regname)
-      line = Objects::Line.where(kmlid: id).first || Objects::Line.new(kmlid: id, _id: id)
+      id = Digest::SHA1.hexdigest(name + direction + regname)
+
+      logger.info("Uploading Line #{id} #{name}")
+
+      line = Objects::Line.where(_id: id).first || Objects::Line.new(kmlid: id, _id: id)
       line.direction = direction
       line.region = region
       line.region_name = regname

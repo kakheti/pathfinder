@@ -13,7 +13,7 @@ class TpExtractionWorker
     name = Objects::Kml.get_property(descr, 'ტრანსფორმატორის ნომერი')
 
     id = Digest::SHA1.hexdigest(name + substation_name + region_name)
-    obj = Objects::Tp.where(id: id).first
+    obj = Objects::Tp.where(_id: id).first
     if obj
       logger.info("Updating existing TP #{id} #{region_name} #{substation_name} \##{name}")
     else

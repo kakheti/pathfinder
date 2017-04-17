@@ -1,5 +1,6 @@
 class FidersUploadWorker
   include Sidekiq::Worker
+  include Objects::Kml
 
   def perform(file, delete_old)
     if delete_old
