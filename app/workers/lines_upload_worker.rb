@@ -17,7 +17,7 @@ class LinesUploadWorker
 
   def upload_kml(file)
     kml = file.get_input_stream.read
-    Objects::Line.from_kml(kml)
+    LineExtractionWorker.new.perform(kml)
   end
 
 end

@@ -20,7 +20,13 @@ class FidersUploadWorker
 
   def upload_kml(file)
     kml = file.get_input_stream.read
-    Objects::Fider.from_kml(kml)
+    doc = XML::Parser.string(kml).parse
+    kmlns = "kml:#{KMLNS}"
+    placemarks = doc.child.find('//kml:Placemark', kmlns)
+
+    placemarks.each do |placemark|
+      FiderExtractionWorker.new.perform(placemark.to_s)
+    end
   end
 
 end
