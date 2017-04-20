@@ -17,7 +17,7 @@ class Direction04ExtractionWorker
 
     logger.info("Uploading Fider04 #{id}")
 
-    line = Objects::Fider04.find(_id: id).first || Objects::Fider04.new(_id: id)
+    line = Objects::Fider04.where(_id: id).first || Objects::Fider04.new(_id: id)
 
     line.start = Objects::Kml.get_property(descr, 'საწყისი ბოძი')
     line.end = Objects::Kml.get_property(descr, 'ბოძამდე')
