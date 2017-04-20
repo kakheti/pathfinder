@@ -9,15 +9,15 @@ class Direction04ExtractionWorker
 
     linestart = Objects::Kml.get_property(descr, 'საწყისი ბოძი') || ""
     lineend = Objects::Kml.get_property(descr, 'ბოძამდე') || ""
-    region_name = Objects::Kml.get_property(descr, 'მუნიციპალიტეტი') || ""
-    tr_num = Objects::Kml.get_property(descr, 'ტრანსფორმატორის ნომერი') || ""
     dir_num = Objects::Kml.get_property(descr, 'მიმართულება') || ""
+    tr_num = Objects::Kml.get_property(descr, 'ტრანსფორმატორის ნომერი') || ""
+    region_name = Objects::Kml.get_property(descr, 'მუნიციპალიტეტი') || ""
 
     id = Digest::SHA1.hexdigest(linestart + lineend + dir_num + tr_num + region_name)
 
     logger.info("Uploading Fider04 #{id}")
 
-    line = Objects::Fider04.new(_id: id)
+    line = Objects::Fider04.find(_id: id).first || Objects::Fider04.new(_id: id)
 
     line.start = Objects::Kml.get_property(descr, 'საწყისი ბოძი')
     line.end = Objects::Kml.get_property(descr, 'ბოძამდე')
