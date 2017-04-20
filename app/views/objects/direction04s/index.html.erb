@@ -26,7 +26,8 @@ end %>
           <%= link_to fider.region.name, region_url(fider.region, tab: 'fider04s') %>
         </td>
         <td>
-          <%= link_to fider.tp.name, objects_tp_url(fider.tp, tab: 'fider04s') %>
+          <%= link_to fider.tp_name, objects_tp_url(fider.tp, tab: 'fider04s') if fider.tp.present? %>
+          <%= fider.tp_name unless fider.tp.present? %>
         </td>
         <td>
           <strong>
