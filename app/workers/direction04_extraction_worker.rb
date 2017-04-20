@@ -1,16 +1,23 @@
+require 'digest/sha1'
+
 class Direction04ExtractionWorker
   include Sidekiq::Worker
 
   def perform(placemark_xml)
     placemark = XML::Parser.string(placemark_xml).parse.child
+    descr = placemark.find('description').first.content
 
-    id = placemark.attributes['id']
+    linestart = Objects::Kml.get_property(descr, 'საწყისი ბოძი')
+    lineend = Objects::Kml.get_property(descr, 'ბოძამდე')
+    region_name = Objects::Kml.get_property(descr, 'მუნიციპალიტეტი')
+    tr_num = Objects::Kml.get_property(descr, 'ტრანსფორმატორის ნომერი')
+    dir_num = Objects::Kml.get_property(descr, 'მიმართულება')
+
+    id = Digest::SHA1.hexdigest(linestart + lineend + dir_num + tr_num + region_name)
 
     logger.info("Uploading Fider04 #{id}")
 
-    descr = placemark.find('description').first.content
-
-    line = Objects::Fider04.new(kmlid: id, _id: id)
+    line = Objects::Fider04.new(_id: id)
 
     line.start = Objects::Kml.get_property(descr, 'საწყისი ბოძი')
     line.end = Objects::Kml.get_property(descr, 'ბოძამდე')
@@ -20,7 +27,6 @@ class Direction04ExtractionWorker
     line.owner = Objects::Kml.get_property(descr, 'მესაკუთრე')
     line.state = Objects::Kml.get_property(descr, 'სადენის მდგომარეობა')
 
-    region_name = Objects::Kml.get_property(descr, 'მუნიციპალიტეტი')
     if region_name.nil?
       logger.error("No region name for Line04 #{id}")
       return
@@ -28,8 +34,6 @@ class Direction04ExtractionWorker
 
     line.region = Region.get_by_name(region_name.to_ka(:all))
     line.region_name = line.region.name
-
-    tr_num = Objects::Kml.get_property(descr, 'ტრანსფორმატორის ნომერი')
 
     begin
       line.tp = Objects::Tp.find_by(name: tr_num, region: line.region)
@@ -45,7 +49,6 @@ class Direction04ExtractionWorker
     line.substation_name = line.substation.name
     line.fider_name = line.fider.name
 
-    dir_num = Objects::Kml.get_property(descr, 'მიმართულება')
     line.direction = Objects::Direction04.decode(dir_num)
     line.name = line.direction
     line.direction04 = Objects::Direction04.get_or_create(line.region, dir_num, line.tp)

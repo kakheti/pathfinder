@@ -1,5 +1,6 @@
 # -*- encoding : utf-8 -*-
 require 'xml'
+require 'digest/sha1'
 
 class Objects::Office
   include Mongoid::Document
@@ -9,7 +10,6 @@ class Objects::Office
 
   field :_id, type: String
 
-  field :kmlid, type: String
   field :name, type: String
   field :description, type: String
   field :address, type: String
@@ -24,18 +24,21 @@ class Objects::Office
     kmlns = "kml:#{KMLNS}"
     placemarks = doc.child.find '//kml:Placemark', kmlns
     placemarks.each do |placemark|
-      id = placemark.attributes['id']
       name = placemark.find('./kml:name', kmlns).first.content
-      logger.info("Uploading Office #{id} #{name}")
+      logger.info("Uploading Office #{name}")
+
       # description content
       descr = placemark.find('./kml:description', kmlns).first.content
       regname = Objects::Kml.get_property(descr, 'მუნიციპალიტეტი').to_ka(:all)
       address = Objects::Kml.get_property(descr, 'ოფისის მისამართები')
       description = Objects::Kml.get_property(descr, 'შენიშვნა')
       # end of description section
+
+      id = Digest::SHA1.hexdigest(regname + name)
+
       region = Region.get_by_name(regname)
       coord = placemark.find('./kml:Point/kml:coordinates', kmlns).first.content
-      obj = Objects::Office.where(kmlid: id).first || Objects::Office.new(kmlid: id, _id: id)
+      obj = Objects::Office.where(_id: id).first || Objects::Office.new(_id: id)
       obj.name = name.to_ka(:all)
       obj.region = region
       obj.region_name = regname

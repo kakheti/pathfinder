@@ -10,7 +10,6 @@ class Objects::Line
 
   field :_id, type: String
 
-  field :kmlid, type: String
   field :name, type: String
   field :direction, type: String
   field :description, type: String

@@ -18,7 +18,7 @@ class TpExtractionWorker
       logger.info("Updating existing TP #{id} #{region_name} #{substation_name} \##{name}")
     else
       logger.info("Uploading new TP #{id} #{region_name} #{substation_name} \##{name}")
-      obj = Objects::Tp.new(kmlid: id, _id: id)
+      obj = Objects::Tp.new(_id: id)
     end
 
     obj.region_name = region_name

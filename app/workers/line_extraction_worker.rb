@@ -21,7 +21,7 @@ class LineExtractionWorker
 
       logger.info("Uploading Line #{id} #{name}")
 
-      line = Objects::Line.where(_id: id).first || Objects::Line.new(kmlid: id, _id: id)
+      line = Objects::Line.where(_id: id).first || Objects::Line.new(_id: id)
       line.direction = direction
       line.region = region
       line.region_name = regname

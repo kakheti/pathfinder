@@ -34,6 +34,8 @@ class FiderExtractionWorker
     line.linename = Objects::Kml.get_property(descr, 'ელ, გადამცემი ხაზი').to_ka(:all)
     line.substation_number = substation_number
 
+    line._id = Digest::SHA1.hexdigest(name + line.start + line.end + substation_number + region_name)
+
     coords = placemark.find('MultiGeometry/LineString/coordinates').first.content
     coords = coords.split(' ')
 

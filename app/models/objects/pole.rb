@@ -9,7 +9,6 @@ class Objects::Pole
 
   field :_id, type: String
 
-  field :kmlid, type: String
   field :name, type: String
   field :height, type: Float
   field :number2, type: String

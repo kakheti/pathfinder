@@ -11,7 +11,6 @@ class Objects::Pole04
   field :_id, type: String
 
   field :poleid, type: String
-  field :kmlid, type: String
   field :name, type: String
   field :number, type: String
   field :height, type: Float

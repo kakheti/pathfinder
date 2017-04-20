@@ -9,7 +9,6 @@ class Objects::Tp
 
   field :_id, type: String
 
-  field :kmlid, type: String
   field :name, type: String
   field :description, type: String
   field :city, type: String

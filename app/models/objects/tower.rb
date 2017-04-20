@@ -1,5 +1,6 @@
 # -*- encoding : utf-8 -*-
 require 'xml'
+require 'digest/sha1'
 
 class Objects::Tower
   include Mongoid::Document
@@ -9,7 +10,6 @@ class Objects::Tower
 
   field :_id, type: String
 
-  field :kmlid, type: String
   field :name, type: String
   field :category, type: String
   field :description, type: String
@@ -28,13 +28,11 @@ class Objects::Tower
   end
 
   def self.from_kml(xml)
-    parser=XML::Parser.string xml
-    doc=parser.parse
-    kmlns="kml:#{KMLNS}"
-    placemarks=doc.child.find '//kml:Placemark', kmlns
+    parser = XML::Parser.string xml
+    doc = parser.parse
+    kmlns = "kml:#{KMLNS}"
+    placemarks = doc.child.find '//kml:Placemark', kmlns
     placemarks.each do |placemark|
-      id=placemark.attributes['id']
-
       # description content
       descr = placemark.find('./kml:description', kmlns).first.content
       name = Objects::Kml.get_property(descr, 'ანძის_N')
@@ -44,8 +42,10 @@ class Objects::Tower
       linename = Objects::Kml.get_property(descr, 'გადამცემი_ხაზი')
       # end of description section
 
-      coord=placemark.find('./kml:Point/kml:coordinates', kmlns).first.content
-      obj=Objects::Tower.where(kmlid: id).first || Objects::Tower.new(kmlid: id, _id: id)
+      id = Digest::SHA1.hexdigest(name + linename + regname)
+
+      coord = placemark.find('./kml:Point/kml:coordinates', kmlns).first.content
+      obj = Objects::Tower.where(_id: id).first || Objects::Tower.new(_id: id)
       obj.name = name
       obj.region = Region.get_by_name(regname)
       obj.region_name = regname

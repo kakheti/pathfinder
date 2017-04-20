@@ -1,5 +1,6 @@
 # -*- encoding : utf-8 -*-
 require 'xml'
+require 'digest/sha1'
 
 class Objects::Substation
   include Mongoid::Document
@@ -9,7 +10,6 @@ class Objects::Substation
 
   field :_id, type: String
 
-  field :kmlid, type: String
   field :number, type: String
   field :name, type: String
   field :description, type: String
@@ -44,20 +44,22 @@ class Objects::Substation
     kmlns="kml:#{KMLNS}"
     placemarks=doc.child.find '//kml:Placemark', kmlns
     placemarks.each do |placemark|
-      id = placemark.attributes['id']
       name = placemark.find('./kml:name', kmlns).first.content
 
-      logger.info("Uploading Substation #{id} #{name}")
+      logger.info("Uploading Substation #{name}")
 
       # description content
       descr = placemark.find('./kml:description', kmlns).first.content
       regname = Objects::Kml.get_property(descr, 'მუნიციპალიტეტი').to_ka(:all)
-      region= Region.get_by_name(regname)
+      region = Region.get_by_name(regname)
       description = Objects::Kml.get_property(descr, 'მესაკუთრე')
       number = Objects::Kml.get_property(descr, 'ქვესადგურის ნომერი')
       # end of description section
+
+      id = Digest::SHA1.hexdigest(regname + number + name)
+
       coord = placemark.find('./kml:Point/kml:coordinates', kmlns).first.content
-      obj = Objects::Substation.where(kmlid: id).first || Objects::Substation.new(kmlid: id, _id: id)
+      obj = Objects::Substation.where(_id: id).first || Objects::Substation.new(_id: id)
       obj.name = name.to_ka(:all)
       obj.region = region
       obj.region_name = regname

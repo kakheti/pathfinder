@@ -6,7 +6,7 @@ class Objects::FiderLine
   include Objects::LengthProperty
   include Objects::Coordinate
 
-  field :kmlid, type: String
+  field :_id, type: String
   field :description, type: String
   field :start, type: String
   field :end, type: String

@@ -18,7 +18,6 @@ class Objects::Fider04
   field :comercial_count, type: Float
   field :usage_average, type: Float
 
-  field :kmlid, type: String
   field :description, type: String
   field :start, type: String
   field :end, type: String
