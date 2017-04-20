@@ -31,8 +31,34 @@ var search = {
     initSearch: function () {
         var $field = $('#search-query'),
             $typeField = $('#search-types'),
+            $typeCheckboxes = $typeField.find("input[type=checkbox]"),
             $regionField = $("#search-region"),
-            $form = $("#search-form");
+            $form = $("#search-form"),
+            $searchTypeAll = $("#search-type-all");
+
+        $searchTypeAll.on('click', function () {
+            $(this).prop('checked', !this.checked);
+            if (this.checked) {
+                $typeCheckboxes.removeProp('checked');
+            } else {
+                $typeCheckboxes.prop('checked', true);
+            }
+        });
+
+        $typeCheckboxes.on('click', function () {
+            if (this.value === "*")
+                return;
+            if (!this.checked) {
+                $searchTypeAll.prop('checked', false);
+            } else {
+                var allChecked = true;
+                $typeCheckboxes.each(function () {
+                    if (!this.checked && this.value !== "*")
+                        allChecked = false;
+                });
+                $searchTypeAll.prop('checked', allChecked);
+            }
+        });
 
         $form.submit(function (event) {
             var query = $field.val(),
@@ -43,12 +69,13 @@ var search = {
             if (query.length < 2) return;
 
             $typeField.find("input[type=checkbox]:checked").each(function () {
-                type.push($(this).val());
+                if (this.value !== "*")
+                    type.push($(this).val());
             });
 
-            var filters = { name: query, type: type };
+            var filters = {name: query, type: type};
 
-            if ($regionField.val() != "") {
+            if ($regionField.val() !== "") {
                 filters.region = $regionField.val();
             }
 
