@@ -13,17 +13,20 @@ class FiderExtractionWorker
     substation_number = Objects::Kml.get_property(descr, 'ქვესადგურის ნომერი')
     region_name = Objects::Kml.get_property(descr, 'მუნიციპალიტეტი').to_ka(:all)
     region = Region.get_by_name(region_name)
+    linestart = Objects::Kml.get_property(descr, 'საწყისი ბოძი')
+    lineend = Objects::Kml.get_property(descr, 'ბოძამდე')
 
     id = Digest::SHA1.hexdigest(name + substation_number + region_name)
+    line_id = Digest::SHA1.hexdigest(name + linestart + lineend + id + substation_number + region_name)
 
-    logger.info("Processing line for fider #{id}")
+    logger.info("Processing line #{line_id} for fider #{id}")
 
-    fider = Objects::Fider.where(name: name, substation_number: substation_number, region: region).first || Objects::Fider.new(_id: id)
+    fider = Objects::Fider.where(_id: id).first || Objects::Fider.new(_id: id)
 
-    line = Objects::FiderLine.new(fider: fider)
+    line = Objects::FiderLine.where(_id: line_id).first || Objects::FiderLine.new(fider: fider, _id: line_id)
     line.fider_name = name
-    line.start = Objects::Kml.get_property(descr, 'საწყისი ბოძი')
-    line.end = Objects::Kml.get_property(descr, 'ბოძამდე')
+    line.start = linestart
+    line.end = lineend
     line.cable_type = Objects::Kml.get_property(descr, 'სადენის ტიპი')
     line.cable_area = Objects::Kml.get_property(descr, 'სადენის კვეთი')
     line.underground = Objects::Kml.get_property(descr, 'მიწისქვეშა კაბელი')
@@ -33,8 +36,6 @@ class FiderExtractionWorker
     line.voltage = Objects::Kml.get_property(descr, 'ფიდერის ძაბვა')
     line.linename = Objects::Kml.get_property(descr, 'ელ, გადამცემი ხაზი').to_ka(:all)
     line.substation_number = substation_number
-
-    line._id = Digest::SHA1.hexdigest(name + line.start + line.end + substation_number + region_name)
 
     coords = placemark.find('MultiGeometry/LineString/coordinates').first.content
     coords = coords.split(' ')
