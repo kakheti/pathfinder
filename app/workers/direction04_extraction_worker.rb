@@ -13,6 +13,11 @@ class Direction04ExtractionWorker
     tr_num = Objects::Kml.get_property(descr, 'ტრანსფორმატორის ნომერი') || ""
     region_name = Objects::Kml.get_property(descr, 'მუნიციპალიტეტი') || ""
 
+    if region_name.blank?
+      logger.error("No region name for Line04 #{id}")
+      return
+    end
+
     id = Digest::SHA1.hexdigest(linestart + lineend + dir_num + tr_num + region_name)
 
     logger.info("Uploading Fider04 #{id}")
@@ -27,10 +32,6 @@ class Direction04ExtractionWorker
     line.owner = Objects::Kml.get_property(descr, 'მესაკუთრე')
     line.state = Objects::Kml.get_property(descr, 'სადენის მდგომარეობა')
 
-    if region_name.blank?
-      logger.error("No region name for Line04 #{id}")
-      return
-    end
 
     line.region = Region.get_by_name(region_name.to_ka(:all))
     line.region_name = line.region.name
@@ -46,8 +47,8 @@ class Direction04ExtractionWorker
 
     line.substation = line.tp.substation
     line.fider = line.tp.fider
-    line.substation_name = line.substation.name
-    line.fider_name = line.fider.name
+    line.substation_name = line.substation.name if line.substation.present?
+    line.fider_name = line.fider.name if line.fider.present?
 
     line.direction = Objects::Direction04.decode(dir_num)
     line.name = line.direction
