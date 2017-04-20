@@ -14,7 +14,7 @@
 
 <div>
   <div class="row">
-    <div class="col-xs-3">
+    <div class="col-md-3">
       <h4 class="page-header">ადმინისტრაციული</h4>
       <p>
         <%=link_to 'მუნიციპალიტეტები', regions_url%>
@@ -25,7 +25,7 @@
         <span class="label label-info"><%= Objects::Office.count %></span>
       </p>
     </div>
-    <div class="col-xs-3">
+    <div class="col-md-3">
       <h4 class="page-header">35-110-220 კვ</h4>
       <p>
         <%=link_to 'ქვესადგურები', objects_substations_url%>
@@ -40,7 +40,7 @@
         <span class="label label-info"><%= Objects::Tower.count %></span>
       </p>
     </div>
-    <div class="col-xs-3">
+    <div class="col-md-3">
       <h4 class="page-header">6-10 კვ</h4>
       <p>
         <%=link_to '6-10კვ ფიდერები', objects_fiders_url%>
@@ -55,7 +55,7 @@
         <span class="label label-info"><%= Objects::Tp.count %></span>
       </p>
     </div>
-    <div class="col-xs-3">
+    <div class="col-md-3">
       <h4 class="page-header">0.4 კვ</h4>
       <p>
         <%=link_to '0.4კვ ხაზები', objects_direction04s_url%>
