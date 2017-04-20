@@ -7,10 +7,10 @@ class PoleExtractionWorker
     placemark = XML::Parser.string(placemark_xml).parse.child
     descr = placemark.find('description').first.content
 
-    name = Objects::Kml.get_property(descr, 'ბოძის ნომერი')
-    substation_name = Objects::Kml.get_property(descr, 'ქვესადგური').to_ka(:all)
-    region_name = Objects::Kml.get_property(descr, 'მუნიციპალიტეტი').to_ka(:all)
-    fider_name = Objects::Kml.get_property(descr, 'ფიდერი').to_ka(:all)
+    name = Objects::Kml.get_property(descr, 'ბოძის ნომერი') || ""
+    substation_name = (Objects::Kml.get_property(descr, 'ქვესადგური')  || "").to_ka(:all)
+    region_name = (Objects::Kml.get_property(descr, 'მუნიციპალიტეტი')  || "").to_ka(:all)
+    fider_name = (Objects::Kml.get_property(descr, 'ფიდერი')  || "").to_ka(:all)
 
     id = Digest::SHA1.hexdigest(name + fider_name + substation_name + region_name)
 
@@ -20,7 +20,7 @@ class PoleExtractionWorker
 
     # start description section
     obj.name = name
-    return logger.error("Missing name for object #{id}") unless obj.name
+    return logger.error("Missing name for object #{id}") if obj.name.blank?
     obj.number2 = Objects::Kml.get_property(descr, 'ბოძის პირობითი ნომერი')
     obj.height = Objects::Kml.get_property(descr, 'ბოძის სიმაღლე').to_f
     obj.pole_type = Objects::Kml.get_property(descr, 'ბოძის ტიპი')
@@ -39,7 +39,7 @@ class PoleExtractionWorker
     obj.substation = Objects::Substation.where(name: obj.substation_name).first
     return logger.error("Invalid substation name #{obj.substation_name} for object #{id}") unless obj.substation
     obj.fider_name = fider_name
-    return logger.error("Missing fider name for object #{id}") unless obj.fider_name
+    return logger.error("Missing fider name for object #{id}") if obj.fider_name.blank?
     obj.fider = Objects::Fider.where(name: obj.fider_name, substation: obj.substation, region: obj.region).first
     linename = Objects::Kml.get_property(descr, 'ელ. გადამცემი ხაზი')
     obj.linename = linename.to_ka(:all) if linename.present?

@@ -7,11 +7,11 @@ class Direction04ExtractionWorker
     placemark = XML::Parser.string(placemark_xml).parse.child
     descr = placemark.find('description').first.content
 
-    linestart = Objects::Kml.get_property(descr, 'საწყისი ბოძი')
-    lineend = Objects::Kml.get_property(descr, 'ბოძამდე')
-    region_name = Objects::Kml.get_property(descr, 'მუნიციპალიტეტი')
-    tr_num = Objects::Kml.get_property(descr, 'ტრანსფორმატორის ნომერი')
-    dir_num = Objects::Kml.get_property(descr, 'მიმართულება')
+    linestart = Objects::Kml.get_property(descr, 'საწყისი ბოძი') || ""
+    lineend = Objects::Kml.get_property(descr, 'ბოძამდე') || ""
+    region_name = Objects::Kml.get_property(descr, 'მუნიციპალიტეტი') || ""
+    tr_num = Objects::Kml.get_property(descr, 'ტრანსფორმატორის ნომერი') || ""
+    dir_num = Objects::Kml.get_property(descr, 'მიმართულება') || ""
 
     id = Digest::SHA1.hexdigest(linestart + lineend + dir_num + tr_num + region_name)
 
@@ -27,7 +27,7 @@ class Direction04ExtractionWorker
     line.owner = Objects::Kml.get_property(descr, 'მესაკუთრე')
     line.state = Objects::Kml.get_property(descr, 'სადენის მდგომარეობა')
 
-    if region_name.nil?
+    if region_name.blank?
       logger.error("No region name for Line04 #{id}")
       return
     end

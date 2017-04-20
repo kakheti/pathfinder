@@ -8,11 +8,11 @@ class Pole04ExtractionWorker
     placemark = XML::Parser.string(placemark_xml).parse.child
     descr = placemark.find('description').first.content
 
-    number = Objects::Kml.get_property(descr, 'ბოძის ნომერი')
-    poleid = Objects::Kml.get_property(descr, 'ბოძის id')
-    tpnumber = Objects::Kml.get_property(descr, 'ტრანსფორმატორის ნომერი')
-    region_name = Objects::Kml.get_property(descr, 'მუნიციპალიტეტი')
-    dir_num = Objects::Kml.get_property(descr, 'მიმართულება')
+    number = Objects::Kml.get_property(descr, 'ბოძის ნომერი') || ""
+    poleid = Objects::Kml.get_property(descr, 'ბოძის id') || ""
+    tpnumber = Objects::Kml.get_property(descr, 'ტრანსფორმატორის ნომერი') || ""
+    region_name = Objects::Kml.get_property(descr, 'მუნიციპალიტეტი') || ""
+    dir_num = Objects::Kml.get_property(descr, 'მიმართულება') || ""
 
     id = Digest::SHA1.hexdigest(dir_num + number + poleid + tpnumber + region_name)
     logger.info("Uploading Pole04 #{id}")
@@ -36,7 +36,7 @@ class Pole04ExtractionWorker
     obj.street_light = Objects::Kml.get_property(descr, 'გარე განათება', '').to_ka(:all)
 
     begin
-      obj.tp = Objects::Tp.find_by(name: tpnumber) if tpnumber.present?
+      obj.tp = Objects::Tp.find_by(name: tpnumber) unless tpnumber.blank?
     rescue
       logger.error("Invalid TP number #{tpnumber} for Pole04 #{id}")
       return

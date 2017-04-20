@@ -9,12 +9,12 @@ class FiderExtractionWorker
 
     descr = placemark.find('description').first.content
 
-    name = Objects::Kml.get_property(descr, 'ფიდერი').to_ka(:all)
-    substation_number = Objects::Kml.get_property(descr, 'ქვესადგურის ნომერი')
-    region_name = Objects::Kml.get_property(descr, 'მუნიციპალიტეტი').to_ka(:all)
-    region = Region.get_by_name(region_name)
-    linestart = Objects::Kml.get_property(descr, 'საწყისი ბოძი')
-    lineend = Objects::Kml.get_property(descr, 'ბოძამდე')
+    name = Objects::Kml.get_property(descr, 'ფიდერი').to_ka(:all) || ""
+    substation_number = Objects::Kml.get_property(descr, 'ქვესადგურის ნომერი') || ""
+    region_name = Objects::Kml.get_property(descr, 'მუნიციპალიტეტი').to_ka(:all) || ""
+    region = Region.get_by_name(region_name) || ""
+    linestart = Objects::Kml.get_property(descr, 'საწყისი ბოძი') || ""
+    lineend = Objects::Kml.get_property(descr, 'ბოძამდე') || ""
 
     id = Digest::SHA1.hexdigest(name + substation_number + region_name)
     line_id = Digest::SHA1.hexdigest(name + linestart + lineend + id + substation_number + region_name)

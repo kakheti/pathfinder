@@ -11,11 +11,11 @@ class LineExtractionWorker
     kmlns = "kml:#{KMLNS}"
     placemarks = doc.child.find '//kml:Placemark', kmlns
     placemarks.each do |placemark|
-      name = placemark.find('./kml:name', kmlns).first.content
+      name = placemark.find('./kml:name', kmlns).first.content || ""
       coords = placemark.find('./kml:MultiGeometry/kml:LineString/kml:coordinates', kmlns).first.content
       descr = placemark.find('./kml:description', kmlns).first.content
-      regname = Objects::Kml.get_property(descr, 'რეგიონი')
-      direction = Objects::Kml.get_property(descr, 'მიმართულება')
+      regname = Objects::Kml.get_property(descr, 'რეგიონი') || ""
+      direction = Objects::Kml.get_property(descr, 'მიმართულება') || ""
       region = Region.get_by_name(regname)
       id = Digest::SHA1.hexdigest(name + direction + regname)
 
