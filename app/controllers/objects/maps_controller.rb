@@ -3,7 +3,6 @@ class Objects::MapsController < ApplicationController
   def editor; @title='ობიექტების რედაქტირება' ; render layout: 'map' end
   def viewer
    @title='ობიექტების რუკა'
-   @regions = Region.all
    render layout: 'map'
   end
 

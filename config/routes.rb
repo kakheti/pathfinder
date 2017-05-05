@@ -10,6 +10,8 @@ Pathfinder::Application.routes.draw do
     get '/logout', action: 'logout'
   end
 
+  get '/map', to: 'objects/maps#viewer'
+
   namespace 'account' do
     scope '/profile', controller: 'profile' do
       get '/', action: 'index', as: 'profile'
